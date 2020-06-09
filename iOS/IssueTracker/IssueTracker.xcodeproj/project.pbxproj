@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
 		AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 			path = Supports;
 			sourceTree = "<group>";
 		};
+		AE8CA33F248F75D00076507B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AE8CA340248F75DE0076507B /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		AEAEA983248E0EDF005F4582 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				AE8CA33F248F75D00076507B /* Login */,
 				AE8CA33E248F755F0076507B /* Supports */,
 				AEAEA995248E0EDF005F4582 /* Main.storyboard */,
 				AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */,
@@ -208,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
 				AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */,
