@@ -15,19 +15,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7q-Ue-kGq">
-                                <rect key="frame" x="142.5" y="331" width="129" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7q-Ue-kGq" customClass="LoginButton" customModule="IssueTracker" customModuleProvider="target">
+                                <rect key="frame" x="40" y="331" width="334" height="27"/>
                                 <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Sign in with Github">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrH-7H-7i3">
-                                <rect key="frame" x="145.5" y="393" width="123" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Sign in with Apple">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="conerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue Tracker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dw-dE-FUQ">
                                 <rect key="frame" x="71.5" y="92" width="271" height="119"/>
@@ -39,14 +38,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5dw-dE-FUQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="44E-o0-Q1W"/>
-                            <constraint firstItem="zrH-7H-7i3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SPq-3W-b5p"/>
                             <constraint firstItem="e7q-Ue-kGq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZD2-B7-f09"/>
-                            <constraint firstItem="zrH-7H-7i3" firstAttribute="top" secondItem="e7q-Ue-kGq" secondAttribute="bottom" constant="32" id="cFl-Wr-l9v"/>
+                            <constraint firstItem="e7q-Ue-kGq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="o90-Re-tqo"/>
                             <constraint firstItem="5dw-dE-FUQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oeU-Mp-Anr"/>
                             <constraint firstItem="e7q-Ue-kGq" firstAttribute="top" secondItem="5dw-dE-FUQ" secondAttribute="bottom" constant="120" id="u9X-gw-5CH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="signinGitHubButton" destination="e7q-Ue-kGq" id="WTe-Ya-ycs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
