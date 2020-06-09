@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
 		AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */; };
-		AEAEA994248E0EDF005F4582 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA993248E0EDF005F4582 /* ViewController.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
 		AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */; };
 		AEAEA99C248E0EE1005F4582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99B248E0EE1005F4582 /* Assets.xcassets */; };
@@ -31,7 +30,6 @@
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AEAEA993248E0EDF005F4582 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AEAEA996248E0EDF005F4582 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AEAEA999248E0EDF005F4582 /* IssueTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IssueTracker.xcdatamodel; sourceTree = "<group>"; };
 		AEAEA99B248E0EE1005F4582 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,6 +58,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE8CA33E248F755F0076507B /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */,
+				AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */,
+				AEAEA99B248E0EE1005F4582 /* Assets.xcassets */,
+				AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */,
+				AEAEA9A0248E0EE1005F4582 /* Info.plist */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
 		AEAEA983248E0EDF005F4582 = {
 			isa = PBXGroup;
 			children = (
@@ -81,13 +91,8 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */,
-				AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */,
-				AEAEA993248E0EDF005F4582 /* ViewController.swift */,
+				AE8CA33E248F755F0076507B /* Supports */,
 				AEAEA995248E0EDF005F4582 /* Main.storyboard */,
-				AEAEA99B248E0EE1005F4582 /* Assets.xcassets */,
-				AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */,
-				AEAEA9A0248E0EE1005F4582 /* Info.plist */,
 				AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */,
 			);
 			path = IssueTracker;
@@ -203,7 +208,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEAEA994248E0EDF005F4582 /* ViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
 				AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */,
@@ -368,7 +372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6HG325P9V2;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/Supports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -386,7 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6HG325P9V2;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/Supports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
