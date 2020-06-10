@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */,
 				AEAEA9A0248E0EE1005F4582 /* Info.plist */,
 				AE8CA344248F7D4B0076507B /* Dependency.swift */,
+				ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */,
+				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
@@ -409,7 +413,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cLoud.IssueTrackerab;
+				PRODUCT_BUNDLE_IDENTIFIER = cLoud.IssueTracker.codesquad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -430,7 +434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cLoud.IssueTrackerab;
+				PRODUCT_BUNDLE_IDENTIFIER = cLoud.IssueTracker.codesquad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
