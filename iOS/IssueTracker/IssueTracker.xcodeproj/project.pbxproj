@@ -12,6 +12,7 @@
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
 		AE8CA348248F7D6E0076507B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AE8CA347248F7D6E0076507B /* SnapKit */; };
+		AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3512490E0C60076507B /* UIControlSubscription.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
 		AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		AE8CA349248FA7490076507B /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
+		AE8CA3512490E0C60076507B /* UIControlSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlSubscription.swift; path = IssueTracker/Supports/UIControlSubscription.swift; sourceTree = SOURCE_ROOT; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 				AE8CA342248F77920076507B /* LoginButton.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		AE8CA3502490E09F0076507B /* Publisher */ = {
+			isa = PBXGroup;
+			children = (
+				AE8CA3512490E0C60076507B /* UIControlSubscription.swift */,
+			);
+			path = Publisher;
 			sourceTree = "<group>";
 		};
 		AEAEA983248E0EDF005F4582 = {
@@ -240,6 +250,7 @@
 			files = (
 				AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
+				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
