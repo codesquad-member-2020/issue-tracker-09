@@ -20,12 +20,15 @@ struct KeychainItem {
     // MARK: - Properties
     static var currentUserIdentifier: String {
         do {
-            let storedIdentifier = try KeychainItem(service: "cLoud.IssueTracker.codesquad", account: "userIdentifier").readItem()
+            let storedIdentifier = try KeychainItem(service: KeychainItem.service,
+                                                    account: "userIdentifier").readItem()
+            
             return storedIdentifier
         } catch {
             return ""
         }
     }
+    static let service: String = "cLoud.IssueTracker.codesquad"
     let service: String
     let accessGroup: String?
     private(set) var account: String
@@ -40,7 +43,8 @@ struct KeychainItem {
     // MARK: - Methods
     static func deleteUserIdentifierFromKeychain() {
         do {
-            try KeychainItem(service: "cLoud.IssueTracker.codesquad", account: "userIdentifier").deleteItem()
+            try KeychainItem(service: KeychainItem.service,
+                             account: "userIdentifier").deleteItem()
         } catch {
             print("Unable to delete userIdentifier from keychain")
         }
@@ -61,7 +65,9 @@ struct KeychainItem {
     }
     
     func readItem() throws -> String {
-        var query = KeychainItem.keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+        var query = KeychainItem.keychainQuery(withService: service,
+                                               account: account,
+                                               accessGroup: accessGroup)
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnAttributes as String] = kCFBooleanTrue
         query[kSecReturnData as String] = kCFBooleanTrue
@@ -73,7 +79,8 @@ struct KeychainItem {
         guard status == noErr else { throw KeychainError.unhandledError }
         guard let existingItem = queryResult as? [String: AnyObject],
             let passwordData = existingItem[kSecValueData as String] as? Data,
-            let password = String(data: passwordData, encoding: String.Encoding.utf8)
+            let password = String(data: passwordData,
+                                  encoding: String.Encoding.utf8)
             else {
                 throw KeychainError.unexpectedPasswordData
         }
@@ -87,11 +94,15 @@ struct KeychainItem {
             try _ = readItem()
             var attributesToUpdate = [String: AnyObject]()
             attributesToUpdate[kSecValueData as String] = encodedPassword as AnyObject?
-            let query = KeychainItem.keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+            let query = KeychainItem.keychainQuery(withService: service,
+                                                   account: account,
+                                                   accessGroup: accessGroup)
             let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
             guard status == noErr else { throw KeychainError.unhandledError }
         } catch KeychainError.noPassword {
-            var newItem = KeychainItem.keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+            var newItem = KeychainItem.keychainQuery(withService: service,
+                                                     account: account,
+                                                     accessGroup: accessGroup)
             newItem[kSecValueData as String] = encodedPassword as AnyObject?
             let status = SecItemAdd(newItem as CFDictionary, nil)
             guard status == noErr else { throw KeychainError.unhandledError }
@@ -99,7 +110,9 @@ struct KeychainItem {
     }
     
     func deleteItem() throws {
-        let query = KeychainItem.keychainQuery(withService: service, account: account, accessGroup: accessGroup)
+        let query = KeychainItem.keychainQuery(withService: service,
+                                               account: account,
+                                               accessGroup: accessGroup)
         let status = SecItemDelete(query as CFDictionary)
         guard status == noErr || status == errSecItemNotFound else { throw KeychainError.unhandledError }
     }
