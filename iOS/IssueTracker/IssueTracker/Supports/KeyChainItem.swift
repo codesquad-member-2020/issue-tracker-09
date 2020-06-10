@@ -21,7 +21,7 @@ struct KeychainItem {
     static var currentUserIdentifier: String {
         do {
             let storedIdentifier = try KeychainItem(service: KeychainItem.service,
-                                                    account: "userIdentifier").readItem()
+                                                    account: KeychainItem.account).readItem()
             
             return storedIdentifier
         } catch {
@@ -29,6 +29,7 @@ struct KeychainItem {
         }
     }
     static let service: String = "cLoud.IssueTracker.codesquad"
+    static let account: String = "userIdentifier"
     let service: String
     let accessGroup: String?
     private(set) var account: String
@@ -44,7 +45,7 @@ struct KeychainItem {
     static func deleteUserIdentifierFromKeychain() {
         do {
             try KeychainItem(service: KeychainItem.service,
-                             account: "userIdentifier").deleteItem()
+                             account: KeychainItem.account).deleteItem()
         } catch {
             print("Unable to delete userIdentifier from keychain")
         }
@@ -89,7 +90,7 @@ struct KeychainItem {
     }
     
     func saveItem(_ password: String) throws {
-        let encodedPassword = password.data(using: String.Encoding.utf8)!
+        guard let encodedPassword = password.data(using: .utf8) else { throw KeychainError.unexpectedPasswordData }
         do {
             try _ = readItem()
             var attributesToUpdate = [String: AnyObject]()
