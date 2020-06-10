@@ -12,9 +12,10 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var signinGitHubButton: UIButton!
     
-    // MARK:  - Properties
+    // MARK: - Properties
     private var authorizationButton: ASAuthorizationAppleIDButton!
     
     // MARK: - Lifecycle
@@ -25,19 +26,20 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Methods
+    // MARK: Configure
     func configure() {
         configureAppleLoginButton()
     }
     
     func configureAppleLoginButton() {
         authorizationButton = ASAuthorizationAppleIDButton()
-        authorizationButton
-            .addTarget(self,
-                       action: #selector(handleAuthorizationAppleIDButtonPress),
-                       for: .touchUpInside)
+        authorizationButton.addTarget(self,
+                                      action: #selector(handleAuthorizationAppleIDButtonPress),
+                                      for: .touchUpInside)
         view.addSubview(authorizationButton)
     }
     
+    // MARK: Constraints
     func makeConstraints() {
         makeConstraintsAppleLoginButton()
     }
@@ -64,6 +66,8 @@ final class LoginViewController: UIViewController {
     
 }
 
+// MARK: - Extension
+// MARK: ASAuthorizationControllerDelegate
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
@@ -97,6 +101,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
 }
 
+// MARK: ASAuthorizationControllerPresentationContextProviding
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         guard let window = view.window else { return UIWindow() }

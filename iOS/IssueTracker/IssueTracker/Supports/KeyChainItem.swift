@@ -30,9 +30,9 @@ struct KeychainItem {
     }
     static let service: String = "cLoud.IssueTracker.codesquad"
     static let account: String = "userIdentifier"
-    let service: String
-    let accessGroup: String?
-    private(set) var account: String
+    private let service: String
+    private let accessGroup: String?
+    private var account: String
     
     // MARK: - LifeCycle
     init(service: String, account: String, accessGroup: String? = nil) {
@@ -74,7 +74,8 @@ struct KeychainItem {
         query[kSecReturnData as String] = kCFBooleanTrue
         var queryResult: AnyObject?
         let status = withUnsafeMutablePointer(to: &queryResult) {
-            SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
+            SecItemCopyMatching(query as CFDictionary,
+                                UnsafeMutablePointer($0))
         }
         guard status != errSecItemNotFound else { throw KeychainError.noPassword }
         guard status == noErr else { throw KeychainError.unhandledError }
@@ -82,9 +83,7 @@ struct KeychainItem {
             let passwordData = existingItem[kSecValueData as String] as? Data,
             let password = String(data: passwordData,
                                   encoding: String.Encoding.utf8)
-            else {
-                throw KeychainError.unexpectedPasswordData
-        }
+            else { throw KeychainError.unexpectedPasswordData }
         
         return password
     }
@@ -117,5 +116,4 @@ struct KeychainItem {
         let status = SecItemDelete(query as CFDictionary)
         guard status == noErr || status == errSecItemNotFound else { throw KeychainError.unhandledError }
     }
-    
 }
