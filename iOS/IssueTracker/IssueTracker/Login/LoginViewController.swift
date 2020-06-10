@@ -69,23 +69,30 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            
-            
-        case let passwordCredential as ASPasswordCredential:
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-            
+            saveUserInKeychain(userIdentifier)
         default:
             break
         }
     }
     
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        let alertController = UIAlertController(title: "Fail Authentication",
+                                                message: "Apple ID 인증에 실패하였습니다.",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Done",
+                                                style: .cancel,
+                                                handler: nil))
+        present(alertController,
+                animated: true,
+                completion: nil)
+    }
+    
     private func saveUserInKeychain(_ userIdentifier: String) {
         do {
-            
+            try KeychainItem(service: KeychainItem.service,
+                             account: KeychainItem.account).saveItem(userIdentifier)
+        } catch {
+            print("Unable to save userIdentifier to keychain.")
         }
     }
 }
