@@ -9,7 +9,7 @@
 import UIKit
 
 class ReusableTableViewController: UITableViewController {
-
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
