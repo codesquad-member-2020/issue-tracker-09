@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
+		ABAF6DFD2491F99300E69418 /* ReusableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* ReusableTableViewController.swift */; };
+		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
+		ABAF6E042492038A00E69418 /* ReusableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* ReusableLabel.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
@@ -15,6 +18,8 @@
 		AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3512490E0C60076507B /* UIControlSubscription.swift */; };
 		AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3532490E2150076507B /* UIControlPublisher.swift */; };
 		AE8CA3562490E2700076507B /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3552490E2700076507B /* UIControl.swift */; };
+		AE8CA35824920F6E0076507B /* ReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */; };
+		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
 		AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
@@ -36,13 +41,17 @@
 
 /* Begin PBXFileReference section */
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
+		ABAF6DFC2491F99300E69418 /* ReusableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewController.swift; sourceTree = "<group>"; };
+		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		ABAF6E032492038A00E69418 /* ReusableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableLabel.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
-		AE8CA349248FA7490076507B /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		AE8CA3512490E0C60076507B /* UIControlSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlSubscription.swift; path = IssueTracker/Supports/UIControlSubscription.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA3532490E2150076507B /* UIControlPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlPublisher.swift; path = IssueTracker/Supports/UIControlPublisher.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA3552490E2700076507B /* UIControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControl.swift; path = IssueTracker/Supports/UIControl.swift; sourceTree = SOURCE_ROOT; };
+		AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReusableHeaderView.swift; path = IssueTracker/Supports/ReusableHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		AE8CA35924921E1B0076507B /* LabelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelTableViewController.swift; path = IssueTracker/Supports/LabelTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +84,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ABAF6DF92491F8E600E69418 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				ABAF6DFC2491F99300E69418 /* ReusableTableViewController.swift */,
+				ABAF6E032492038A00E69418 /* ReusableLabel.swift */,
+				AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		ABAF6DFE2491FE7200E69418 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */,
+				AE8CA35924921E1B0076507B /* LabelTableViewController.swift */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		AE8CA33E248F755F0076507B /* Supports */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +158,8 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				AE8CA349248FA7490076507B /* IssueTracker.entitlements */,
+				ABAF6DF92491F8E600E69418 /* Reusable */,
+				ABAF6DFE2491FE7200E69418 /* Badge */,
 				AE8CA33F248F75D00076507B /* Login */,
 				AE8CA33E248F755F0076507B /* Supports */,
 				AEAEA995248E0EDF005F4582 /* Main.storyboard */,
@@ -257,9 +286,14 @@
 			files = (
 				AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */,
 				AE8CA3562490E2700076507B /* UIControl.swift in Sources */,
+				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
 				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
+				ABAF6E042492038A00E69418 /* ReusableLabel.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
+				ABAF6DFD2491F99300E69418 /* ReusableTableViewController.swift in Sources */,
+				AE8CA35824920F6E0076507B /* ReusableHeaderView.swift in Sources */,
+				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
