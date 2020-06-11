@@ -29,6 +29,12 @@ final class LabelTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
+    func apply(title: String, description: String, backgroundColor: UIColor) {
+        label.text = title
+        label.backgroundColor = backgroundColor
+        labelDescription.text = description
+    }
+    
     // MARK: Configure
     private func configure() {
         configureLabel()
@@ -39,13 +45,13 @@ final class LabelTableViewCell: UITableViewCell {
     
     private func configureLabel() {
         label = ReusableLabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .boldSystemFont(ofSize: 13)
         addSubview(label)
     }
     
     private func configureLabelDescription() {
         labelDescription = UILabel()
-        labelDescription.font = .systemFont(ofSize: 15)
+        labelDescription.font = .systemFont(ofSize: 17)
         labelDescription.textColor = .systemGray
         addSubview(labelDescription)
     }
@@ -67,6 +73,7 @@ final class LabelTableViewCell: UITableViewCell {
         labelDescription.snp.makeConstraints { make in
             make.top.equalTo(label.snp.bottom).offset(8)
             make.leading.equalTo(label.snp.leading)
+            make.bottom.equalToSuperview().inset(8)
         }
     }
 }

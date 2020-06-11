@@ -18,8 +18,8 @@ final class ReusableLabel: UILabel {
         return CGSize(width: width,
                       height: height)
     }
-    private let padding: CGSize = CGSize(width: 4, height: 2)
-    private let cornerRadius: CGFloat = 6.0
+    private let padding: CGSize = CGSize(width: 16, height: 6)
+    private let cornerRadius: CGFloat = 8.0
     
     // MARK: - LifeCycle
     override init(frame: CGRect) {
@@ -41,5 +41,7 @@ final class ReusableLabel: UILabel {
     // MARK: Configure
     private func configure() {
         layer.cornerRadius = cornerRadius
+        textAlignment = .center
+        clipsToBounds = true
     }
 }
