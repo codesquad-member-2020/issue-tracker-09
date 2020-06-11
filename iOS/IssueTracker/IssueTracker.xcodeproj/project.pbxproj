@@ -19,6 +19,7 @@
 		AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3532490E2150076507B /* UIControlPublisher.swift */; };
 		AE8CA3562490E2700076507B /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3552490E2700076507B /* UIControl.swift */; };
 		AE8CA35824920F6E0076507B /* ReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */; };
+		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
 		AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		AE8CA3532490E2150076507B /* UIControlPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlPublisher.swift; path = IssueTracker/Supports/UIControlPublisher.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA3552490E2700076507B /* UIControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControl.swift; path = IssueTracker/Supports/UIControl.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReusableHeaderView.swift; path = IssueTracker/Supports/ReusableHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		AE8CA35924921E1B0076507B /* LabelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelTableViewController.swift; path = IssueTracker/Supports/LabelTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */,
+				AE8CA35924921E1B0076507B /* LabelTableViewController.swift */,
 			);
 			path = Badge;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
 				ABAF6DFD2491F99300E69418 /* ReusableTableViewController.swift in Sources */,
 				AE8CA35824920F6E0076507B /* ReusableHeaderView.swift in Sources */,
+				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
