@@ -33,7 +33,7 @@ final class LabelTableViewController: ReusableTableViewController {
         cell.apply(title: "feature",
                    description: "기능에 대한 레이블입니다.",
                    backgroundColor: backgroundColor)
-        
+
         return cell
     }
     
