@@ -19,14 +19,27 @@ final class ReusableLabel: UILabel {
                       height: height)
     }
     private let padding: CGSize = CGSize(width: 4, height: 2)
+    private let cornerRadius: CGFloat = 6.0
     
-    // MARK: - Methods
-    func apply(cornerRadius: CGFloat) {
-        layer.cornerRadius = cornerRadius
+    // MARK: - LifeCycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    // MARK: - Methods
     func apply(borderColor: CGColor, borderWidth: CGFloat) {
         layer.borderColor = borderColor
         layer.borderWidth = borderWidth
+    }
+    
+    // MARK: Configure
+    private func configure() {
+        layer.cornerRadius = cornerRadius
     }
 }
