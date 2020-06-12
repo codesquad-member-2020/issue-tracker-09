@@ -1,7 +1,10 @@
 package kr.codesquad.issuetracker09.web.milestone.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.time.LocalDate;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetListResponseDTO {
     private Long id;
     private String title;
@@ -66,8 +69,6 @@ public class GetListResponseDTO {
         private Integer numberOfOpenIssue;
         private Integer numberOfClosedIssue;
 
-        public Builder() {}
-
         public Builder id(Long val) {
             id = val;
             return this;
@@ -106,7 +107,7 @@ public class GetListResponseDTO {
     private GetListResponseDTO(Builder builder) {
         id = builder.id;
         title = builder.title;
-        contents = builder.title;
+        contents = builder.contents;
         dueOn = builder.dueOn;
         numberOfOpenIssue = builder.numberOfOpenIssue;
         numberOfClosedIssue = builder.numberOfClosedIssue;

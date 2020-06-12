@@ -42,13 +42,37 @@ public class MockMilestoneController {
 
     @PostMapping()
     public void create(@RequestBody PostRequestDTO request, HttpServletResponse response) {
-        log.debug("[*] request : {}", request);
+        log.debug("[*] create - request : {}", request);
         response.setStatus(HttpStatus.OK.value());
     }
 
     @PutMapping("/{issueId}")
     public void edit(@PathVariable long issueId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
-        log.debug("[*] issueId : {}, request : {}", issueId, request);
+        log.debug("[*] edit - issueId : {}, request : {}", issueId, request);
         response.setStatus(HttpStatus.OK.value());
+    }
+
+    @DeleteMapping("/{issueId}")
+    public void delete(@PathVariable long issueId, HttpServletResponse response) {
+        log.debug("[*] delete - issueId : {}", issueId);
+        response.setStatus(HttpStatus.OK.value());
+    }
+
+    @GetMapping("/picker")
+    public List<GetListResponseDTO> picker() {
+        List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
+        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+                .id(1L)
+                .title("1 WEEK")
+                .build());
+        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+                .id(2L)
+                .title("2 WEEK")
+                .build());
+        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+                .id(3L)
+                .title("3 WEEK")
+                .build());
+        return getListResponseDTOList;
     }
 }
