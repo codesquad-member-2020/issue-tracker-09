@@ -1,12 +1,13 @@
 package kr.codesquad.issuetracker09.mock;
 
 import kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.PostRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,5 +38,17 @@ public class MockMilestoneController {
                 .build());
 
         return getListResponseDTOList;
+    }
+
+    @PostMapping()
+    public void create(@RequestBody PostRequestDTO request, HttpServletResponse response) {
+        log.debug("[*] request : {}", request);
+        response.setStatus(HttpStatus.OK.value());
+    }
+
+    @PutMapping("/{issueId}")
+    public void edit(@PathVariable long issueId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
+        log.debug("[*] issueId : {}, request : {}", issueId, request);
+        response.setStatus(HttpStatus.OK.value());
     }
 }
