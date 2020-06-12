@@ -5,7 +5,7 @@
 
 - 스크럼 시간 : 오전 11시 (유동적으로 조정)
 - 스크럼 마스터 : 스크럼 HackMD 링크 공유 및 wiki 업로드
-- 링크 : [9팀 그라운드룰](https://github.com/codesquad-member-2020/issue-tracker-09/wiki/%EC%8A%A4%ED%81%AC%EB%9F%BC)
+- 링크 : [9팀 그라운드룰](https://github.com/codesquad-member-2020/issue-tracker-09/wiki/%EC%8A%A4%ED%81%AC%EB%9F%BC) , [BE - 요구사항 기술서](https://docs.google.com/spreadsheets/d/1kR8xTf31N9dRLI5Jf-A0xH6b5_vAceIPOU2kl4YK0AY/edit?usp=sharing), [API 명세서](https://github.com/codesquad-member-2020/issue-tracker-09/wiki/API-명세서), [API 포맷](https://docs.google.com/spreadsheets/d/1wi9wreNqXpQay3zbV8c5xKfuwmqc34AqN-yhB3a_tmE/edit#gid=0)
 
 <br />
 
@@ -19,7 +19,7 @@
 | refactor | 코드 리팩토링                                |
 | style    | 코드 포맷팅 (코드 변경이 없는 경우)          |
 | test     | 테스트 코드 작성                             |
-| chore    | 소스 코드를 건들지 않는 작업(빌드 업무 수정) |
+| chore    | 소스 코드를 건들지 않는 작업 |
 
 ```
 [#issue] Feat : API 개발
