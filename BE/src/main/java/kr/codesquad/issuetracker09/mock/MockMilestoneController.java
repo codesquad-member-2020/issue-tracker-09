@@ -46,14 +46,14 @@ public class MockMilestoneController {
         response.setStatus(HttpStatus.OK.value());
     }
 
-    @PutMapping("/{issueId}")
-    public void edit(@PathVariable long issueId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
+    @PutMapping("/{issue-id}")
+    public void edit(@PathVariable(name = "issue-id") long issueId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
         log.debug("[*] edit - issueId : {}, request : {}", issueId, request);
         response.setStatus(HttpStatus.OK.value());
     }
 
-    @DeleteMapping("/{issueId}")
-    public void delete(@PathVariable long issueId, HttpServletResponse response) {
+    @DeleteMapping("/{issue-id}")
+    public void delete(@PathVariable(name = "issue-id") long issueId, HttpServletResponse response) {
         log.debug("[*] delete - issueId : {}", issueId);
         response.setStatus(HttpStatus.OK.value());
     }
