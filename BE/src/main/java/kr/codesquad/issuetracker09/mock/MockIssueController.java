@@ -1,10 +1,7 @@
 package kr.codesquad.issuetracker09.mock;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import kr.codesquad.issuetracker09.web.issue.dto.GetListResponseDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PatchCloseIssueRequestDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PostRequestDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -49,6 +46,39 @@ public class MockIssueController {
 
     @GetMapping()
     public List<GetListResponseDTO> list() {
+        List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
+        GetListResponseDTO getListResponseDTO = GetListResponseDTO.builder()
+                .issueId(1L)
+                .title("[TEAM] API 논의")
+                .contents("### API\n" +
+                        "\n" +
+                        "- 필요한 API\n" +
+                        "- API 포맷\n" +
+                        "\n" +
+                        "---\n" +
+                        "- [HackMD-01](https://hackmd.io/4PN9hfp7T4ihSYCPO4LkLw?edit)")
+                .build();
+        List<kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO> labels = new ArrayList<>();
+        labels.add(kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO.builder()
+                .title("iOS")
+                .colorCode("#74d10a")
+                .build());
+        labels.add(kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO.builder()
+                .title("BE")
+                .colorCode("#008672")
+                .build());
+        kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO milestone = new kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO
+                .Builder().title("1 week").build();
+        getListResponseDTO.setMilestone(milestone);
+        getListResponseDTO.setLabels(labels);
+        getListResponseDTOList.add(getListResponseDTO);
+        return getListResponseDTOList;
+    }
+
+    @GetMapping("/filter")
+    public List<GetListResponseDTO> list(FilterDTO filterDTO) {
+        log.debug("[*] filter : {}", filterDTO);
+
         List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
         GetListResponseDTO getListResponseDTO = GetListResponseDTO.builder()
                 .issueId(1L)
