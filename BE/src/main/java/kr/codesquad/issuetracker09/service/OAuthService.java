@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.codesquad.issuetracker09.domain.GithubToken;
 import kr.codesquad.issuetracker09.domain.User;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -50,16 +47,16 @@ public class OAuthService {
         return (GithubToken) response.getBody();
     }
 
-    public User getSocialUser(String code) throws JsonProcessingException {
+    public User getSocialUser(String code) {
         GithubToken accessToken = getAccessToken(code);
-        ResponseEntity<String> response = new RestTemplate().exchange(USER_DATA_API, HttpMethod.GET,
-                getHttpEntityWithAuthorization(accessToken), String.class);
-        JsonNode jsonNode = objectMapper.readTree(response.getBody());
-        return User.builder()
-                .socialId(jsonNode.required("id").asLong())
-                .name(jsonNode.required("name").asText())
-                .email(jsonNode.required("email").asText())
-                .build();
+        ResponseEntity<User> response = new RestTemplate().exchange(USER_DATA_API, HttpMethod.GET,
+                getHttpEntityWithAuthorization(accessToken), User.class);
+
+        if(response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        }
+
+        return null;
     }
 
     private HttpEntity<String> getHttpEntityWithAuthorization(GithubToken githubToken) {
