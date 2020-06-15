@@ -71,8 +71,7 @@ public class MockIssueController {
                 .title("BE")
                 .colorCode("#008672")
                 .build());
-        GetMilestoneListResponseDTO milestone = new GetMilestoneListResponseDTO
-                .Builder().title("1 week").build();
+        GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder().title("1 week").build();
         getIssueListResponseDTO.setMilestone(milestone);
         getIssueListResponseDTO.setLabels(labels);
         getListResponseDTOIssueList.add(getIssueListResponseDTO);
@@ -104,8 +103,7 @@ public class MockIssueController {
                 .title("BE")
                 .colorCode("#008672")
                 .build());
-        GetMilestoneListResponseDTO milestone = new GetMilestoneListResponseDTO
-                .Builder().title("1 week").build();
+        GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder().title("1 week").build();
         getIssueListResponseDTO.setMilestone(milestone);
         getIssueListResponseDTO.setLabels(labels);
         getIssueListResponseDTOList.add(getIssueListResponseDTO);
