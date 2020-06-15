@@ -15,16 +15,36 @@ final class DetailFormContentView: UIView {
     private var seperatorLine: UIView!
     private var resetButton: UIButton!
     private var saveButton: UIButton!
+//    private var contentView: DetailFormStackView!
     
-    // MARK: - Methods
-    func addContentView(view: UIView) {
-        addSubview(view)
-        view.snp.makeConstraints { make in
-            make.top.equalTo(seperatorLine.snp.bottom)
-            make.bottom.equalTo(saveButton.snp.top)
-            make.leading.trailing.equalToSuperview()
-        }
+    init(subtitle: String, placeHolder: String? = nil) {
+        super.init(frame: .zero)
+        configure()
+        makeConstraints()
+//        contentView = DetailFormStackView(subtitle: subtitle, placeHolder: placeHolder)
+//        contentView.snp.makeConstraints { make in
+//            make.top.equalTo(seperatorLine.snp.bottom)
+//            make.bottom.equalTo(saveButton.snp.top)
+//            make.leading.trailing.equalToSuperview()
+//        }
     }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+//        contentView = DetailFormStackView(subtitle: "")
+        configure()
+        makeConstraints()
+    }
+    
+//    // MARK: - Methods
+//    func addContentView(view: UIView) {
+//        addSubview(view)
+//        view.snp.makeConstraints { make in
+//            make.top.equalTo(seperatorLine.snp.bottom)
+//            make.bottom.equalTo(saveButton.snp.top)
+//            make.leading.trailing.equalToSuperview()
+//        }
+//    }
     
     // MARK: Configure
     private func configure() {
@@ -95,8 +115,8 @@ final class DetailFormContentView: UIView {
     
     private func makeConstraintsSaveButton() {
         saveButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(8)
-            make.centerX.equalTo(resetButton.snp.centerX)
+            make.trailing.equalToSuperview().inset(-8)
+            make.centerY.equalTo(resetButton.snp.centerY)
         }
     }
 }

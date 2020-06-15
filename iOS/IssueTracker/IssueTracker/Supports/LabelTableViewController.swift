@@ -37,10 +37,15 @@ final class LabelTableViewController: CategoryTableViewController {
         return cell
     }
     
+    @objc private func presentCreateLabelViewController() {
+        present(CategoryFormViewController(), animated: true)
+    }
+    
     // MARK: Delegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeaderView.identifier) as? TitleHeaderView
         headerView?.apply(title: headerViewTitle)
+        headerView?.addButton.addTarget(self, action: #selector(presentCreateLabelViewController), for: .touchUpInside)
         
         return headerView
     }

@@ -31,10 +31,12 @@ class CategoryFormViewController: UIViewController {
     private func configureDimmedView() {
         dimmedView = UIView()
         dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.66)
+        view.addSubview(dimmedView)
     }
     
     private func configureContentView() {
-        contentView = DetailFormContentView()
+        contentView = DetailFormContentView(subtitle: "설명")
+        view.addSubview(contentView)
     }
     
     // MARK: Constraints
@@ -45,7 +47,7 @@ class CategoryFormViewController: UIViewController {
     
     private func makeConstraintsDimmedView() {
         dimmedView.snp.makeConstraints { make in
-            make.centerX.centerY.width.height.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
