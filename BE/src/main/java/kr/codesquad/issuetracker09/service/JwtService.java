@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import kr.codesquad.issuetracker09.domain.User;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -15,8 +16,13 @@ import java.util.Map;
 @Service
 public class JwtService {
 
-    //TODO: 시크릿 키 암호화, 키 내용 확인
-    SecretKey key = Keys.hmacShaKeyFor("".getBytes());
+    private final String JWT_KEY;
+    private SecretKey key;
+
+    public JwtService(Environment env) {
+        JWT_KEY = env.getProperty("JWT_KEY");
+        key = Keys.hmacShaKeyFor(JWT_KEY.getBytes());
+    }
 
     public String buildJwt(User user) {
         return Jwts.builder()
