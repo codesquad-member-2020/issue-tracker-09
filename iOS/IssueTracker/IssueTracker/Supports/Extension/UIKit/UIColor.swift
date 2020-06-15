@@ -12,6 +12,20 @@ extension UIColor {
     static let mask: Int = 0x000000FF
     static let colorPalette: CGFloat = 255.0
     
+    var hexString: String {
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var alpha: CGFloat = 1.0
+        getRed(&red,
+               green: &green,
+               blue: &blue,
+               alpha: &alpha)
+        let rgb = (Int)(red * Self.colorPalette) << 16 | (Int)(green * Self.colorPalette) << 8 | Int(blue * Self.colorPalette)
+        
+        return String(format: "#%06x", rgb)
+    }
+    
     convenience init?(hex: String, alpha: CGFloat = 1) {
         var color: UInt64 = 0
         guard hex.hasPrefix("#") else { return nil }
@@ -27,19 +41,5 @@ extension UIColor {
                   green: green,
                   blue: blue,
                   alpha: alpha)
-    }
-    
-    func hexColorToString() -> String {
-        var red: CGFloat = 0.0
-        var green: CGFloat = 0.0
-        var blue: CGFloat = 0.0
-        var alpha: CGFloat = 1.0
-        getRed(&red,
-               green: &green,
-               blue: &blue,
-               alpha: &alpha)
-        let rgb = (Int)(red * Self.colorPalette) << 16 | (Int)(green * Self.colorPalette) << 8 | Int(blue * Self.colorPalette)
-        
-        return String(format: "#%06x", rgb)
     }
 }
