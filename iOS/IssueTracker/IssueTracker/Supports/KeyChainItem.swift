@@ -42,13 +42,9 @@ struct KeychainItem {
     }
     
     // MARK: - Methods
-    static func deleteUserIdentifierFromKeychain() {
-        do {
-            try KeychainItem(service: KeychainItem.service,
-                             account: KeychainItem.account).deleteItem()
-        } catch {
-            print("Unable to delete userIdentifier from keychain")
-        }
+    static func deleteUserIdentifierFromKeychain() throws {
+        try KeychainItem(service: KeychainItem.service,
+                         account: KeychainItem.account).deleteItem()
     }
     
     private static func keychainQuery(withService service: String, account: String? = nil, accessGroup: String? = nil) -> [String: AnyObject] {
