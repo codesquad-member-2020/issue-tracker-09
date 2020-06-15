@@ -1,5 +1,5 @@
 //
-//  ReusableDetailContentView.swift
+//  DetailFormContentView.swift
 //  IssueTracker
 //
 //  Created by 임승혁 on 2020/06/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ReusableDetailContentView: UIView {
+final class DetailFormContentView: UIView {
     
     // MARK: - Properties
     private var dismissButton: UIButton!

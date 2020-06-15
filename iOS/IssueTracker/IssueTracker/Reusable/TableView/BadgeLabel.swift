@@ -1,5 +1,5 @@
 //
-//  ReusableLabel.swift
+//  BadgeLabel.swift
 //  IssueTracker
 //
 //  Created by 임승혁 on 2020/06/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ReusableLabel: UILabel {
+final class BadgeLabel: UILabel {
     
     // MARK: - Properties
     override var intrinsicContentSize: CGSize {

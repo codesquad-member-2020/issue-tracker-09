@@ -1,5 +1,5 @@
 //
-//  ReusableDetailViewController.swift
+//  CategoryFormViewController.swift
 //  IssueTracker
 //
 //  Created by 임승혁 on 2020/06/11.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ReusableDetailViewController: UIViewController {
+class CategoryFormViewController: UIViewController {
     
     // MARK: - Properties
     private var dimmedView: UIView!
-    private var contentView: ReusableDetailContentView!
+    private var contentView: DetailFormContentView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class ReusableDetailViewController: UIViewController {
     }
     
     private func configureContentView() {
-        contentView = ReusableDetailContentView()
+        contentView = DetailFormContentView()
     }
     
     // MARK: Constraints
