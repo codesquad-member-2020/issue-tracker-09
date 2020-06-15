@@ -1,8 +1,6 @@
 package kr.codesquad.issuetracker09.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +9,8 @@ import javax.persistence.Id;
 
 @ToString
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class User {
@@ -21,8 +21,5 @@ public class User {
     private String name;
     private Long socialId;
     private String email;
-
-    protected User() {
-    }
 
 }
