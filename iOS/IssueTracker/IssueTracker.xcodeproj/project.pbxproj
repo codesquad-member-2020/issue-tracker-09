@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB58CF1B249246C6003A86AC /* ReusableDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1A249246C6003A86AC /* ReusableDetailViewController.swift */; };
-		AB58CF1D249248BE003A86AC /* ReusableDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1C249248BE003A86AC /* ReusableDetailContentView.swift */; };
+		AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */; };
+		AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */; };
 		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
-		ABAF6DFD2491F99300E69418 /* ReusableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* ReusableTableViewController.swift */; };
+		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
-		ABAF6E042492038A00E69418 /* ReusableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* ReusableLabel.swift */; };
+		ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* BadgeLabel.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
@@ -20,7 +20,7 @@
 		AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3512490E0C60076507B /* UIControlSubscription.swift */; };
 		AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3532490E2150076507B /* UIControlPublisher.swift */; };
 		AE8CA3562490E2700076507B /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3552490E2700076507B /* UIControl.swift */; };
-		AE8CA35824920F6E0076507B /* ReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */; };
+		AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* TitleHeaderView.swift */; };
 		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AE8CA35D249224560076507B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35C249224560076507B /* UIColor.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
@@ -43,19 +43,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB58CF1A249246C6003A86AC /* ReusableDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableDetailViewController.swift; sourceTree = "<group>"; };
-		AB58CF1C249248BE003A86AC /* ReusableDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableDetailContentView.swift; sourceTree = "<group>"; };
+		AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewController.swift; sourceTree = "<group>"; };
+		AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormContentView.swift; sourceTree = "<group>"; };
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
-		ABAF6DFC2491F99300E69418 /* ReusableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewController.swift; sourceTree = "<group>"; };
+		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
-		ABAF6E032492038A00E69418 /* ReusableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableLabel.swift; sourceTree = "<group>"; };
+		ABAF6E032492038A00E69418 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		AE8CA3512490E0C60076507B /* UIControlSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlSubscription.swift; path = IssueTracker/Supports/UIControlSubscription.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA3532490E2150076507B /* UIControlPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlPublisher.swift; path = IssueTracker/Supports/UIControlPublisher.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA3552490E2700076507B /* UIControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControl.swift; path = IssueTracker/Supports/UIControl.swift; sourceTree = SOURCE_ROOT; };
-		AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReusableHeaderView.swift; path = IssueTracker/Reusable/TableView/ReusableHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		AE8CA35724920F6E0076507B /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TitleHeaderView.swift; path = IssueTracker/Reusable/TableView/TitleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35924921E1B0076507B /* LabelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelTableViewController.swift; path = IssueTracker/Supports/LabelTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35C249224560076507B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = IssueTracker/Supports/Extension/UIKit/UIColor.swift; sourceTree = SOURCE_ROOT; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,9 +93,9 @@
 		AB58CF18249246A6003A86AC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				ABAF6DFC2491F99300E69418 /* ReusableTableViewController.swift */,
-				ABAF6E032492038A00E69418 /* ReusableLabel.swift */,
-				AE8CA35724920F6E0076507B /* ReusableHeaderView.swift */,
+				ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */,
+				ABAF6E032492038A00E69418 /* BadgeLabel.swift */,
+				AE8CA35724920F6E0076507B /* TitleHeaderView.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -103,8 +103,8 @@
 		AB58CF19249246B4003A86AC /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
-				AB58CF1A249246C6003A86AC /* ReusableDetailViewController.swift */,
-				AB58CF1C249248BE003A86AC /* ReusableDetailContentView.swift */,
+				AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */,
+				AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -325,18 +325,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB58CF1B249246C6003A86AC /* ReusableDetailViewController.swift in Sources */,
+				AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */,
 				AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */,
 				AE8CA3562490E2700076507B /* UIControl.swift in Sources */,
 				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
 				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
-				AB58CF1D249248BE003A86AC /* ReusableDetailContentView.swift in Sources */,
-				ABAF6E042492038A00E69418 /* ReusableLabel.swift in Sources */,
+				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,
+				ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
-				ABAF6DFD2491F99300E69418 /* ReusableTableViewController.swift in Sources */,
-				AE8CA35824920F6E0076507B /* ReusableHeaderView.swift in Sources */,
+				ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */,
+				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
 				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,

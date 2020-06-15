@@ -1,5 +1,5 @@
 //
-//  ReusableTableViewController.swift
+//  CategoryTableViewController.swift
 //  IssueTracker
 //
 //  Created by 임승혁 on 2020/06/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReusableTableViewController: UITableViewController {
+class CategoryTableViewController: UITableViewController {
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -19,7 +19,7 @@ class ReusableTableViewController: UITableViewController {
     // MARK: - Methods
     // MARK: DataSource
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return ReusableHeaderView.height
+        return TitleHeaderView.height
     }
     
     func registerCell(anyClass: AnyClass, identifier: String) {
@@ -34,7 +34,7 @@ class ReusableTableViewController: UITableViewController {
     }
     
     private func registerHeaderView() {
-        tableView.register(ReusableHeaderView.self,
-                           forHeaderFooterViewReuseIdentifier: ReusableHeaderView.identifier)
+        tableView.register(TitleHeaderView.self,
+                           forHeaderFooterViewReuseIdentifier: TitleHeaderView.identifier)
     }
 }

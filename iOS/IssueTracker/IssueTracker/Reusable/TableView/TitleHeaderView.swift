@@ -1,5 +1,5 @@
 //
-//  ReusableHeaderView.swift
+//  TitleHeaderView.swift
 //  IssueTracker
 //
 //  Created by Cloud on 2020/06/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ReusableHeaderView: UITableViewHeaderFooterView {
+final class TitleHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     static let identifier: String = "ReusableHeaderView"

@@ -12,7 +12,7 @@ final class LabelTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     static let identifier: String = "LabelTableViewCell"
-    private var label: ReusableLabel!
+    private var label: BadgeLabel!
     private var labelDescription: UILabel!
     
     // MARK: - LifeCycle
@@ -44,7 +44,7 @@ final class LabelTableViewCell: UITableViewCell {
     }
     
     private func configureLabel() {
-        label = ReusableLabel()
+        label = BadgeLabel()
         label.font = .boldSystemFont(ofSize: 13)
         addSubview(label)
     }
