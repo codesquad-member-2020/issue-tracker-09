@@ -111,4 +111,40 @@ public class MockIssueController {
         getIssueListResponseDTOList.add(getIssueListResponseDTO);
         return getIssueListResponseDTOList;
     }
+
+    @GetMapping("/{issue-id}/comments")
+    public List<GetCommentListResponseDTO> list(@PathVariable(name = "issue-id") long issueId) {
+        List<GetCommentListResponseDTO> getCommentListResponseDTO = new ArrayList<>();
+        getCommentListResponseDTO.add(GetCommentListResponseDTO.builder()
+                .id(1L)
+                .author("poogle")
+                .contents("댓글 테스트1")
+                .created(LocalDate.parse("2020-06-20"))
+                .build());
+        getCommentListResponseDTO.add(GetCommentListResponseDTO.builder()
+                .id(2L)
+                .author("solar")
+                .contents("댓글 테스트2")
+                .created(LocalDate.parse("2020-06-21"))
+                .build());
+        return getCommentListResponseDTO;
+    }
+
+    @PostMapping("/{issue-id}/comments")
+    public void create(@PathVariable(name = "issue-id") long issueId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
+        log.debug("[*] create - issueId : {}, request : {}", issueId, request);
+        response.setStatus(HttpStatus.OK.value());
+    }
+
+    @PutMapping("/{issue-id}/comments/{comment-id}")
+    public void edit(@PathVariable(name = "issue-id") long issueId, @PathVariable(name = "comment-id") long commentId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
+        log.debug("[*] edit - issueId : {}, commentId : {}, request : {}", commentId, issueId, request);
+        response.setStatus(HttpStatus.OK.value());
+    }
+
+    @DeleteMapping("/{issue-id}/comments/{comment-id}")
+    public void edit(@PathVariable(name = "issue-id") long issueId, @PathVariable(name = "comment-id") long commentId, HttpServletResponse response) {
+        log.debug("[*] delete - issueId : {}, commentId : {}", commentId, issueId);
+        response.setStatus(HttpStatus.OK.value());
+    }
 }
