@@ -70,13 +70,8 @@ final class LoginViewController: UIViewController {
 // MARK: ASAuthorizationControllerDelegate
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-            saveUserInKeychain(userIdentifier)
-        default:
-            break
-        }
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        saveUserInKeychain(appleIDCredential.user)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
