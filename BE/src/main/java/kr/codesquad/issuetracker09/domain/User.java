@@ -2,11 +2,10 @@ package kr.codesquad.issuetracker09.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Getter
 @NoArgsConstructor
@@ -16,10 +15,13 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "social_id")
     private Long socialId;
+    @Column(name = "email")
     private String email;
 
 }
