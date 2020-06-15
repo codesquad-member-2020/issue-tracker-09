@@ -39,9 +39,9 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
-        Long id = (Long) claims.get("id");
+        Long id = claims.get("id", Long.class);
         String name = (String) claims.get("name");
-        Long socialId = (Long) claims.get("socialId");
+        Long socialId = claims.get("socialId", Long.class);
         String email = (String) claims.get("email");
         return User.builder()
                 .id(id)

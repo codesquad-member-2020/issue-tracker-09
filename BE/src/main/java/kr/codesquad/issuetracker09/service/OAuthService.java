@@ -47,13 +47,18 @@ public class OAuthService {
         return (GithubToken) response.getBody();
     }
 
-    public User getSocialUser(String code) {
+    public User getSocialUser(String code) throws JsonProcessingException {
         GithubToken accessToken = getAccessToken(code);
-        ResponseEntity<User> response = new RestTemplate().exchange(USER_DATA_API, HttpMethod.GET,
-                getHttpEntityWithAuthorization(accessToken), User.class);
+        ResponseEntity<String> response = new RestTemplate().exchange(USER_DATA_API, HttpMethod.GET,
+                getHttpEntityWithAuthorization(accessToken), String.class);
 
-        if(response.getStatusCode() == HttpStatus.OK) {
-            return response.getBody();
+        if (response.getStatusCode() == HttpStatus.OK) {
+            JsonNode jsonNode = objectMapper.readTree(response.getBody());
+            return User.builder()
+                    .socialId(jsonNode.required("id").asLong())
+                    .name(jsonNode.required("name").asText())
+                    .email(jsonNode.required("email").asText())
+                    .build();
         }
 
         return null;
