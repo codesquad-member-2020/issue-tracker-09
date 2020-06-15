@@ -1,6 +1,6 @@
 package kr.codesquad.issuetracker09.mock;
 
-import kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.PostRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +12,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("/mock/milestone")
+@RequestMapping("/mock/milestones")
 @RestController
 public class MockMilestoneController {
     private static final Logger log = LoggerFactory.getLogger(MockMilestoneController.class);
     
     @GetMapping()
-    public List<GetListResponseDTO> list() {
-        List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
-        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+    public List<GetMilestoneListResponseDTO> list() {
+        List<GetMilestoneListResponseDTO> getListResponseDTOMilestoneList = new ArrayList<>();
+        getListResponseDTOMilestoneList.add(new GetMilestoneListResponseDTO.Builder()
                 .id(1L)
                 .title("1 WEEK")
                 .contents("1주차 목표입니다.")
@@ -28,7 +28,7 @@ public class MockMilestoneController {
                 .numberOfOpenIssue(5)
                 .numberOfClosedIssue(6)
                 .build());
-        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+        getListResponseDTOMilestoneList.add(new GetMilestoneListResponseDTO.Builder()
                 .id(2L)
                 .title("2 WEEK")
                 .contents("2주차 목표입니다.")
@@ -37,7 +37,7 @@ public class MockMilestoneController {
                 .numberOfClosedIssue(1)
                 .build());
 
-        return getListResponseDTOList;
+        return getListResponseDTOMilestoneList;
     }
 
     @PostMapping()
@@ -59,20 +59,20 @@ public class MockMilestoneController {
     }
 
     @GetMapping("/picker")
-    public List<GetListResponseDTO> picker() {
-        List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
-        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+    public List<GetMilestoneListResponseDTO> picker() {
+        List<GetMilestoneListResponseDTO> getListResponseDTOMilestoneList = new ArrayList<>();
+        getListResponseDTOMilestoneList.add(new GetMilestoneListResponseDTO.Builder()
                 .id(1L)
                 .title("1 WEEK")
                 .build());
-        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+        getListResponseDTOMilestoneList.add(new GetMilestoneListResponseDTO.Builder()
                 .id(2L)
                 .title("2 WEEK")
                 .build());
-        getListResponseDTOList.add(new GetListResponseDTO.Builder()
+        getListResponseDTOMilestoneList.add(new GetMilestoneListResponseDTO.Builder()
                 .id(3L)
                 .title("3 WEEK")
                 .build());
-        return getListResponseDTOList;
+        return getListResponseDTOMilestoneList;
     }
 }

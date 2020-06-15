@@ -1,18 +1,22 @@
 package kr.codesquad.issuetracker09.mock;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.*;
+import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@RequestMapping("/mock/issue")
+@RequestMapping("/mock/issues")
 @RestController
 public class MockIssueController {
     private static final Logger log = LoggerFactory.getLogger(MockIssueController.class);
@@ -45,9 +49,9 @@ public class MockIssueController {
     }
 
     @GetMapping()
-    public List<GetListResponseDTO> list() {
-        List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
-        GetListResponseDTO getListResponseDTO = GetListResponseDTO.builder()
+    public List<GetIssueListResponseDTO> list() {
+        List<GetIssueListResponseDTO> getListResponseDTOIssueList = new ArrayList<>();
+        GetIssueListResponseDTO getIssueListResponseDTO = GetIssueListResponseDTO.builder()
                 .issueId(1L)
                 .title("[TEAM] API 논의")
                 .contents("### API\n" +
@@ -58,29 +62,29 @@ public class MockIssueController {
                         "---\n" +
                         "- [HackMD-01](https://hackmd.io/4PN9hfp7T4ihSYCPO4LkLw?edit)")
                 .build();
-        List<kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO> labels = new ArrayList<>();
-        labels.add(kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO.builder()
+        List<GetLabelListResponseDTO> labels = new ArrayList<>();
+        labels.add(GetLabelListResponseDTO.builder()
                 .title("iOS")
                 .colorCode("#74d10a")
                 .build());
-        labels.add(kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO.builder()
+        labels.add(GetLabelListResponseDTO.builder()
                 .title("BE")
                 .colorCode("#008672")
                 .build());
-        kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO milestone = new kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO
+        GetMilestoneListResponseDTO milestone = new GetMilestoneListResponseDTO
                 .Builder().title("1 week").build();
-        getListResponseDTO.setMilestone(milestone);
-        getListResponseDTO.setLabels(labels);
-        getListResponseDTOList.add(getListResponseDTO);
-        return getListResponseDTOList;
+        getIssueListResponseDTO.setMilestone(milestone);
+        getIssueListResponseDTO.setLabels(labels);
+        getListResponseDTOIssueList.add(getIssueListResponseDTO);
+        return getListResponseDTOIssueList;
     }
 
     @GetMapping("/filter")
-    public List<GetListResponseDTO> list(FilterDTO filterDTO) {
+    public List<GetIssueListResponseDTO> list(FilterDTO filterDTO) {
         log.debug("[*] filter : {}", filterDTO);
 
-        List<GetListResponseDTO> getListResponseDTOList = new ArrayList<>();
-        GetListResponseDTO getListResponseDTO = GetListResponseDTO.builder()
+        List<GetIssueListResponseDTO> getIssueListResponseDTOList = new ArrayList<>();
+        GetIssueListResponseDTO getIssueListResponseDTO = GetIssueListResponseDTO.builder()
                 .issueId(1L)
                 .title("[TEAM] API 논의")
                 .contents("### API\n" +
@@ -91,20 +95,20 @@ public class MockIssueController {
                         "---\n" +
                         "- [HackMD-01](https://hackmd.io/4PN9hfp7T4ihSYCPO4LkLw?edit)")
                 .build();
-        List<kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO> labels = new ArrayList<>();
-        labels.add(kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO.builder()
+        List<GetLabelListResponseDTO> labels = new ArrayList<>();
+        labels.add(GetLabelListResponseDTO.builder()
                 .title("iOS")
                 .colorCode("#74d10a")
                 .build());
-        labels.add(kr.codesquad.issuetracker09.web.label.dto.GetListResponseDTO.builder()
+        labels.add(GetLabelListResponseDTO.builder()
                 .title("BE")
                 .colorCode("#008672")
                 .build());
-        kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO milestone = new kr.codesquad.issuetracker09.web.milestone.dto.GetListResponseDTO
+        GetMilestoneListResponseDTO milestone = new GetMilestoneListResponseDTO
                 .Builder().title("1 week").build();
-        getListResponseDTO.setMilestone(milestone);
-        getListResponseDTO.setLabels(labels);
-        getListResponseDTOList.add(getListResponseDTO);
-        return getListResponseDTOList;
+        getIssueListResponseDTO.setMilestone(milestone);
+        getIssueListResponseDTO.setLabels(labels);
+        getIssueListResponseDTOList.add(getIssueListResponseDTO);
+        return getIssueListResponseDTOList;
     }
 }

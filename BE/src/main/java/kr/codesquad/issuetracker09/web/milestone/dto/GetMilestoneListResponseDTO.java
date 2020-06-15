@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDate;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetListResponseDTO {
+public class GetMilestoneListResponseDTO {
     private Long id;
     private String title;
     private String contents;
@@ -99,12 +99,12 @@ public class GetListResponseDTO {
             return this;
         }
 
-        public GetListResponseDTO build() {
-            return new GetListResponseDTO(this);
+        public GetMilestoneListResponseDTO build() {
+            return new GetMilestoneListResponseDTO(this);
         }
     }
 
-    private GetListResponseDTO(Builder builder) {
+    private GetMilestoneListResponseDTO(Builder builder) {
         id = builder.id;
         title = builder.title;
         contents = builder.contents;
