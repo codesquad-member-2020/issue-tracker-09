@@ -27,6 +27,55 @@ public class MockIssueController {
         response.setStatus(HttpStatus.OK.value());
     }
 
+    @GetMapping("/{issue-id}/detail")
+    public GetIssueDetailResponseDTO detail(@PathVariable(name = "issue-id") long issueId) {
+        log.debug("[*] get detaul - issueId : {}", issueId);
+        new GetIssueDetailResponseDTO();
+        GetIssueDetailResponseDTO issueDetail = GetIssueDetailResponseDTO.builder()
+                .issueId(1L)
+                .title("[TEAM] API 논의")
+                .contents("### API\\n\\n- 필요한 API\\n- API 포맷\\n\\n---\\n- [HackMD-01](https://hackmd.io/4PN9hfp7T4ihSYCPO4LkLw?edit)")
+                .author("Poogle")
+                .open(true)
+                .build();
+        List<GetCommentListResponseDTO> comments = new ArrayList<>();
+        comments.add(GetCommentListResponseDTO.builder()
+                .id(1L)
+                .author("Solar")
+                .contents("좋아좋아")
+                .build());
+        comments.add(GetCommentListResponseDTO.builder()
+                .id(2L)
+                .author("Poogle")
+                .contents("그래그래")
+                .build());
+        issueDetail.setComments(comments);
+
+        List<GetLabelListResponseDTO> labels = new ArrayList<>();
+        labels.add(GetLabelListResponseDTO.builder()
+                .id(1L)
+                .title("BE")
+                .colorCode("#008672")
+                .build());
+        labels.add(GetLabelListResponseDTO.builder()
+                .id(2L)
+                .title("iOS")
+                .colorCode("#74d10a")
+                .build());
+        issueDetail.setLabels(labels);
+
+        GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder()
+                .id(1L)
+                .title("1 WEEK")
+                .dueOn(LocalDate.parse("2020-06-13"))
+                .numberOfOpenIssue(5)
+                .numberOfClosedIssue(6)
+                .build();
+        issueDetail.setMilestones(milestone);
+
+        return issueDetail;
+    }
+
     @PutMapping("/{issue-id}")
     public void edit(@PathVariable(name = "issue-id") long issueId,
             @RequestBody PostRequestDTO request, HttpServletResponse response) {
