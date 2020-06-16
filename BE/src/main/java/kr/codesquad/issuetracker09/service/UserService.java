@@ -1,11 +1,13 @@
 package kr.codesquad.issuetracker09.service;
 
-import kr.codesquad.issuetracker09.data.UserRepository;
+import kr.codesquad.issuetracker09.domain.UserRepository;
 import kr.codesquad.issuetracker09.domain.User;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +19,11 @@ public class UserService {
     public UserService(JwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
+    }
+
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>(userRepository.findAll());
+        return users;
     }
 
     public User findUser(Long id) {
