@@ -52,6 +52,28 @@ final class DetailFormStackView: UIStackView {
         configureSubtitleView()
     }
     
+    private func configureTitleLabel(title: String? = nil, fontSize font: CGFloat) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.font = .systemFont(ofSize: font)
+        
+        return label
+    }
+    
+    private func configureTextField(fontSize font: CGFloat) -> UITextField {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: font)
+        
+        return textField
+    }
+    
+    private func configureSeperatorView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = .systemGray
+        
+        return view
+    }
+    
     private func configureTitleView() {
         titleView = UIView()
         configureInnerTitleLabel()
@@ -61,21 +83,17 @@ final class DetailFormStackView: UIStackView {
     }
     
     private func configureInnerTitleLabel() {
-        innerTitleLabel = UILabel()
-        innerTitleLabel.text = "제목"
-        innerTitleLabel.font = .systemFont(ofSize: 14)
+        innerTitleLabel = configureTitleLabel(title: "제목", fontSize: 14)
         titleView.addSubview(innerTitleLabel)
     }
     
     private func configureInnerTextField() {
-        innerTitleTextField = UITextField()
-        innerTitleTextField.font = .systemFont(ofSize: 14)
+        innerTitleTextField = configureTextField(fontSize: 14)
         titleView.addSubview(innerTitleTextField)
     }
     
     private func configureTitleSeperatorLine() {
-        titleSeperatorLine = UIView()
-        titleSeperatorLine.backgroundColor = .lightGray
+        titleSeperatorLine = configureSeperatorView()
         titleView.addSubview(titleSeperatorLine)
     }
     
@@ -88,20 +106,17 @@ final class DetailFormStackView: UIStackView {
     }
     
     private func configureSubtitleLabel() {
-        innerSubtitleLabel = UILabel()
-        innerSubtitleLabel.font = .systemFont(ofSize: 14)
+        innerSubtitleLabel = configureTitleLabel(fontSize: 14)
         subTitleView.addSubview(innerSubtitleLabel)
     }
     
     private func configureSubtitleTextField() {
-        innerSubtitleTextField = UITextField()
-        innerSubtitleTextField.font = .systemFont(ofSize: 14)
+        innerSubtitleTextField = configureTextField(fontSize: 14)
         subTitleView.addSubview(innerSubtitleTextField)
     }
     
     private func configureSubtitleSeperatorLine() {
-        subtitleSeperatorLine = UIView()
-        subtitleSeperatorLine.backgroundColor = .lightGray
+        subtitleSeperatorLine = configureSeperatorView()
         subTitleView.addSubview(subtitleSeperatorLine)
     }
     

@@ -26,6 +26,7 @@ final class ColorView: UIView {
         super.init(frame: frame)
         configure()
         makeConstraints()
+        bindViewModelToView()
     }
     
     required init?(coder: NSCoder) {
@@ -33,26 +34,31 @@ final class ColorView: UIView {
         super.init(coder: coder)
         configure()
         makeConstraints()
+        bindViewModelToView()
     }
     
+    // MARK: Methods
     func resetColorView() {
         hexLabel.text = ""
         colorPreView.backgroundColor = .clear
     }
     
-    // MARK: Methods
+    private func bindViewModelToView() {
+        subscriber = $color.sink(receiveCompletion: { _ in
+            self.subscriber?.cancel()
+        }) { [weak self] color in
+            guard let self = self else { return }
+            self.hexLabel.text = color.hexString
+            self.colorPreView.backgroundColor = color
+        }
+    }
+    
     private func configure() {
         configureTitleLabel()
         configureHexLabel()
         configureColorPreView()
         configureGenerateButton()
         configureSepertorLine()
-        subscriber = $color.sink(receiveCompletion: { _ in
-            self.subscriber?.cancel()
-        }) { color in
-            self.hexLabel.text = color.hexString
-            self.colorPreView.backgroundColor = color
-        }
     }
     
     private func configureTitleLabel() {
@@ -80,7 +86,9 @@ final class ColorView: UIView {
         generateButton.setImage(UIImage(systemName: "arrow.clockwise"),
                                 for: .normal)
         generateButton.tintColor = .black
-        generateButton.addTarget(self, action: #selector(generateRandomColor), for: .touchUpInside)
+        generateButton.addTarget(self,
+                                 action: #selector(generateRandomColor),
+                                 for: .touchUpInside)
         addSubview(generateButton)
     }
     
