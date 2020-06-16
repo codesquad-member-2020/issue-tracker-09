@@ -10,7 +10,6 @@
 		AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */; };
 		AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */; };
 		AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */; };
-		AB6CA8BF2497911900FE8AE4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CA8BE2497911900FE8AE4 /* File.swift */; };
 		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
 		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
@@ -51,7 +50,6 @@
 		AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewController.swift; sourceTree = "<group>"; };
 		AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormContentView.swift; sourceTree = "<group>"; };
 		AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormStackView.swift; sourceTree = "<group>"; };
-		AB6CA8BE2497911900FE8AE4 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
 		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				AE8CA35C249224560076507B /* UIColor.swift */,
-				AB6CA8BE2497911900FE8AE4 /* File.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				AE8CA3562490E2700076507B /* UIControl.swift in Sources */,
 				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
-				AB6CA8BF2497911900FE8AE4 /* File.swift in Sources */,
 				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
 				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,

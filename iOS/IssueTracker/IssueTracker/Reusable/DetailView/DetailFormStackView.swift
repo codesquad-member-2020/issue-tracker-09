@@ -49,7 +49,6 @@ final class DetailFormStackView: UIStackView {
         titleView = UIView()
         configureInnerTitleLabel()
         configureInnerTextField()
-        titleView.addSeperatorLayer()
         addArrangedSubview(titleView)
     }
     
@@ -62,6 +61,7 @@ final class DetailFormStackView: UIStackView {
     
     private func configureInnerTextField() {
         innerTitleTextField = UITextField()
+        innerTitleTextField.font = .systemFont(ofSize: 14)
         titleView.addSubview(innerTitleTextField)
     }
     
@@ -69,7 +69,6 @@ final class DetailFormStackView: UIStackView {
         subTitleView = UIView()
         configureSubtitleLabel()
         configureSubtitleTextField()
-        subTitleView.addSeperatorLayer()
         addArrangedSubview(subTitleView)
     }
     
@@ -81,7 +80,7 @@ final class DetailFormStackView: UIStackView {
     
     private func configureSubtitleTextField() {
         innerSubtitleTextField = UITextField()
-        innerSubtitleTextField.backgroundColor = .red
+        innerSubtitleTextField.font = .systemFont(ofSize: 14)
         subTitleView.addSubview(innerSubtitleTextField)
     }
     

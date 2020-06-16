@@ -40,11 +40,13 @@ final class ColorView: UIView {
     private func configureTitleLabel() {
         titleLabel = UILabel()
         titleLabel.text = "색상"
+        titleLabel.font = .systemFont(ofSize: 14)
         addSubview(titleLabel)
     }
     
     private func configureHexLabel() {
         hexLabel = UILabel()
+        hexLabel.font = .systemFont(ofSize: 14)
         hexLabel.textAlignment = .center
         addSubview(hexLabel)
     }
@@ -59,6 +61,7 @@ final class ColorView: UIView {
         generateButton = UIButton()
         generateButton.setImage(UIImage(systemName: "arrow.clockwise"),
                                 for: .normal)
+        generateButton.tintColor = .black
         addSubview(generateButton)
     }
     
