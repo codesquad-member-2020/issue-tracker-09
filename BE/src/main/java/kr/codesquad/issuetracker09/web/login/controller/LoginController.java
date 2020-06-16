@@ -44,11 +44,12 @@ public class LoginController {
     @PostMapping("/applelogin")
     public ResponseEntity<String> appleLogin(@RequestBody User user) {
         log.debug("[*] Apple user info : {}", user);
-        String jwt = "test";
+        userService.insertOrUpdateUser(user);
+        String jwt = jwtService.buildJwt(user);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setBearerAuth(jwt);
         return ResponseEntity.ok()
                 .headers(responseHeaders)
-                .body("logined");
+                .body("login");
     }
 }
