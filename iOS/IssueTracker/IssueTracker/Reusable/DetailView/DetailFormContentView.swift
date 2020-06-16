@@ -14,50 +14,42 @@ final class DetailFormContentView: UIView {
     private var dismissButton: UIButton!
     private var seperatorLine: UIView!
     private var resetButton: UIButton!
-    private var saveButton: UIButton!
-//    private var contentView: DetailFormStackView!
+    private var saveButton: SaveButton!
+    private var contentView: DetailFormStackView!
     
-    init(subtitle: String, placeHolder: String? = nil) {
-        super.init(frame: .zero)
+    // MARK: - Lifecycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
         makeConstraints()
-//        contentView = DetailFormStackView(subtitle: subtitle, placeHolder: placeHolder)
-//        contentView.snp.makeConstraints { make in
-//            make.top.equalTo(seperatorLine.snp.bottom)
-//            make.bottom.equalTo(saveButton.snp.top)
-//            make.leading.trailing.equalToSuperview()
-//        }
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-//        contentView = DetailFormStackView(subtitle: "")
         configure()
         makeConstraints()
     }
     
-//    // MARK: - Methods
-//    func addContentView(view: UIView) {
-//        addSubview(view)
-//        view.snp.makeConstraints { make in
-//            make.top.equalTo(seperatorLine.snp.bottom)
-//            make.bottom.equalTo(saveButton.snp.top)
-//            make.leading.trailing.equalToSuperview()
-//        }
-//    }
+    // MARK: - Methods
+    func apply(subtitle: String) {
+        contentView.apply(subtitle: subtitle)
+    }
     
     // MARK: Configure
     private func configure() {
+        backgroundColor = .systemBackground
         configureDismissButton()
         configureSeperatorLine()
         configureResetButton()
         configureSaveButton()
+        configureContentView()
     }
     
     private func configureDismissButton() {
         dismissButton = UIButton()
         dismissButton.tintColor = .black
-        dismissButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        dismissButton.setImage(UIImage(systemName: "xmark"),
+                               for: .normal)
         addSubview(dismissButton)
     }
     
@@ -69,17 +61,22 @@ final class DetailFormContentView: UIView {
     
     private func configureResetButton() {
         resetButton = UIButton()
-        resetButton.setTitleColor(.systemGray, for: .normal)
-        resetButton.setTitle("reset", for: .normal)
+        resetButton.setTitleColor(.systemGray,
+                                  for: .normal)
+        resetButton.setTitle("reset",
+                             for: .normal)
         resetButton.titleLabel?.font = .systemFont(ofSize: 13)
         addSubview(resetButton)
     }
     
     private func configureSaveButton() {
-        saveButton = UIButton()
-        saveButton.setTitleColor(.white, for: .normal)
-        saveButton.setTitle("save", for: .normal)
-        saveButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        saveButton = SaveButton()
+        addSubview(saveButton)
+    }
+    
+    private func configureContentView() {
+        contentView = DetailFormStackView()
+        addSubview(contentView)
     }
     
     // MARK: Constraints
@@ -88,6 +85,7 @@ final class DetailFormContentView: UIView {
         makeConstraintsSeperatorLine()
         makeConstraintsResetButton()
         makeConstraintsSaveButton()
+        makeConstratinsContentView()
     }
     
     private func makeConstraintsDismissButton() {
@@ -100,7 +98,7 @@ final class DetailFormContentView: UIView {
     
     private func makeConstraintsSeperatorLine() {
         seperatorLine.snp.makeConstraints { make in
-            make.top.equalTo(dismissButton.snp.bottom).inset(12)
+            make.top.equalTo(dismissButton.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
@@ -115,8 +113,17 @@ final class DetailFormContentView: UIView {
     
     private func makeConstraintsSaveButton() {
         saveButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(-8)
+            make.trailing.equalToSuperview().inset(8)
             make.centerY.equalTo(resetButton.snp.centerY)
+        }
+    }
+    
+    private func makeConstratinsContentView() {
+        contentView.snp.makeConstraints { make in
+            make.top.equalTo(seperatorLine.snp.bottom)
+            make.bottom.equalTo(saveButton.snp.top)
+            make.leading.trailing.equalToSuperview()
+            
         }
     }
 }

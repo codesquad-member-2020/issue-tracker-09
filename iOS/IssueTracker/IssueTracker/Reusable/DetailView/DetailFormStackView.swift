@@ -9,6 +9,8 @@
 import UIKit
 
 final class DetailFormStackView: UIStackView {
+    
+    // MARK: - Properties
     private var titleView: UIView!
     private var innerTitleLabel: UILabel!
     private var innerTitleTextField: UITextField!
@@ -16,25 +18,26 @@ final class DetailFormStackView: UIStackView {
     private var innerSubtitleLabel: UILabel!
     private var innerSubtitleTextField: UITextField!
     
-    init(subtitle: String, placeHolder: String? = nil) {
-        super.init(frame: .zero)
+    // MARK: - Lifecycle
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
         makeConstraints()
-        apply(subtitle: subtitle, placeHolder: placeHolder)
     }
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
         configure()
         makeConstraints()
-        apply(subtitle: "")
     }
     
-    private func apply(subtitle: String, placeHolder: String? = nil) {
+    // MARK: - Methods
+    func apply(subtitle: String, placeHolder: String? = nil) {
         innerSubtitleLabel.text = subtitle
         innerSubtitleTextField.placeholder = placeHolder
     }
     
+    // MARK: Configure
     private func configure() {
         axis = .vertical
         distribution = .fillEqually
@@ -45,9 +48,7 @@ final class DetailFormStackView: UIStackView {
     private func configureTitleView() {
         titleView = UIView()
         configureInnerTitleLabel()
-        innerTitleTextField = UITextField()
-        titleView.addSubview(innerTitleLabel)
-        titleView.addSubview(innerTitleTextField)
+        configureInnerTextField()
         titleView.addSeperatorLayer()
         addArrangedSubview(titleView)
     }
@@ -56,14 +57,18 @@ final class DetailFormStackView: UIStackView {
         innerTitleLabel = UILabel()
         innerTitleLabel.text = "제목"
         innerTitleLabel.font = .systemFont(ofSize: 14)
+        titleView.addSubview(innerTitleLabel)
+    }
+    
+    private func configureInnerTextField() {
+        innerTitleTextField = UITextField()
+        titleView.addSubview(innerTitleTextField)
     }
     
     private func configureSubtitleView() {
         subTitleView = UIView()
         configureSubtitleLabel()
-        innerSubtitleTextField = UITextField()
-        subTitleView.addSubview(innerSubtitleLabel)
-        subTitleView.addSubview(innerSubtitleTextField)
+        configureSubtitleTextField()
         subTitleView.addSeperatorLayer()
         addArrangedSubview(subTitleView)
     }
@@ -71,8 +76,16 @@ final class DetailFormStackView: UIStackView {
     private func configureSubtitleLabel() {
         innerSubtitleLabel = UILabel()
         innerSubtitleLabel.font = .systemFont(ofSize: 14)
+        subTitleView.addSubview(innerSubtitleLabel)
     }
     
+    private func configureSubtitleTextField() {
+        innerSubtitleTextField = UITextField()
+        innerSubtitleTextField.backgroundColor = .red
+        subTitleView.addSubview(innerSubtitleTextField)
+    }
+    
+    // MARK: Constratins
     private func makeConstraints() {
         makeConstraintsTitleView()
         makeConstraintsSubtitleView()
@@ -90,7 +103,8 @@ final class DetailFormStackView: UIStackView {
     
     private func makeConstraintsInnerTitleLabel() {
         innerTitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(24)
+            make.width.equalTo(innerTitleLabel.snp.height)
             make.centerY.equalToSuperview()
         }
     }
@@ -98,13 +112,15 @@ final class DetailFormStackView: UIStackView {
     private func makeConstraintsInnerTitleTextField() {
         innerTitleTextField.snp.makeConstraints { make in
             make.leading.equalTo(innerTitleLabel.snp.trailing).offset(16)
-            make.trailing.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
     
     private func makeConstraintsInnerSubtitleLabel() {
         innerSubtitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(24)
+            make.width.equalTo(innerSubtitleLabel.snp.height)
             make.centerY.equalToSuperview()
         }
     }
@@ -112,7 +128,8 @@ final class DetailFormStackView: UIStackView {
     private func makeConstraintsInnerSubtitleTextField() {
         innerSubtitleTextField.snp.makeConstraints { make in
             make.leading.equalTo(innerSubtitleLabel.snp.trailing).offset(16)
-            make.trailing.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
 }

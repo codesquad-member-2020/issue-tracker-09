@@ -32,6 +32,8 @@
 		AEAEA99C248E0EE1005F4582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99B248E0EE1005F4582 /* Assets.xcassets */; };
 		AEAEA99F248E0EE1005F4582 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */; };
 		AEAEA9AA248E0EE1005F4582 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA9A9248E0EE1005F4582 /* IssueTrackerTests.swift */; };
+		AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */; };
+		AEE597362498925100F5C622 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE597352498925100F5C622 /* SaveButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		AEAEA9A5248E0EE1005F4582 /* IssueTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA9A9248E0EE1005F4582 /* IssueTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTests.swift; sourceTree = "<group>"; };
 		AEAEA9AB248E0EE1005F4582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLabelViewController.swift; sourceTree = "<group>"; };
+		AEE597352498925100F5C622 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */,
-				ABAF6E032492038A00E69418 /* BadgeLabel.swift */,
 				AE8CA35724920F6E0076507B /* TitleHeaderView.swift */,
 			);
 			path = TableView;
@@ -117,6 +120,8 @@
 		ABAF6DF92491F8E600E69418 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				ABAF6E032492038A00E69418 /* BadgeLabel.swift */,
+				AEE597352498925100F5C622 /* SaveButton.swift */,
 				AB58CF19249246B4003A86AC /* DetailView */,
 				AB58CF18249246A6003A86AC /* TableView */,
 			);
@@ -126,6 +131,7 @@
 		ABAF6DFE2491FE7200E69418 /* Badge */ = {
 			isa = PBXGroup;
 			children = (
+				AEE5973024988C5000F5C622 /* CreateBadge */,
 				ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */,
 				AE8CA35924921E1B0076507B /* LabelTableViewController.swift */,
 			);
@@ -222,6 +228,14 @@
 				AEAEA9AB248E0EE1005F4582 /* Info.plist */,
 			);
 			path = IssueTrackerTests;
+			sourceTree = "<group>";
+		};
+		AEE5973024988C5000F5C622 /* CreateBadge */ = {
+			isa = PBXGroup;
+			children = (
+				AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */,
+			);
+			path = CreateBadge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,8 +360,10 @@
 				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
 				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
+				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
+				AEE597362498925100F5C622 /* SaveButton.swift in Sources */,
 				AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */,
 				AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,

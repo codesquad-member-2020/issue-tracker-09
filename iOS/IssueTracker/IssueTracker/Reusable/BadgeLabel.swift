@@ -18,7 +18,7 @@ final class BadgeLabel: UILabel {
         return CGSize(width: width,
                       height: height)
     }
-    private let padding: CGSize = CGSize(width: 16, height: 6)
+    private let padding: CGSize = CGSize(width: 16, height: 0)
     private let cornerRadius: CGFloat = 8.0
     
     // MARK: - LifeCycle

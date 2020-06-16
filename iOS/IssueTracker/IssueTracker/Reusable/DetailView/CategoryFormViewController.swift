@@ -12,7 +12,7 @@ class CategoryFormViewController: UIViewController {
     
     // MARK: - Properties
     private var dimmedView: UIView!
-    private var contentView: DetailFormContentView!
+    var contentView: DetailFormContentView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,8 +34,8 @@ class CategoryFormViewController: UIViewController {
         view.addSubview(dimmedView)
     }
     
-    private func configureContentView() {
-        contentView = DetailFormContentView(subtitle: "설명")
+    func configureContentView() {
+        contentView = DetailFormContentView()
         view.addSubview(contentView)
     }
     
@@ -51,7 +51,7 @@ class CategoryFormViewController: UIViewController {
         }
     }
     
-    private func makeConstraintsContentView() {
+    func makeConstraintsContentView() {
         contentView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
