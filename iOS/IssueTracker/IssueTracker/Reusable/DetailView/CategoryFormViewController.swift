@@ -27,7 +27,7 @@ class CategoryFormViewController: UIViewController {
         configureDimmedView()
         configureContentView()
     }
-    
+
     private func configureDimmedView() {
         dimmedView = UIView()
         dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.66)
@@ -37,6 +37,9 @@ class CategoryFormViewController: UIViewController {
     func configureContentView() {
         contentView = DetailFormContentView()
         view.addSubview(contentView)
+        contentView.dismissButton.addTarget(self,
+                                            action: #selector(dismissContentView),
+                                            for: .touchUpInside)
     }
     
     // MARK: Constraints
@@ -55,5 +58,9 @@ class CategoryFormViewController: UIViewController {
         contentView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    @objc private func dismissContentView() {
+        dismiss(animated: true)
     }
 }

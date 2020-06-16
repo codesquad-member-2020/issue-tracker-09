@@ -11,11 +11,11 @@ import UIKit
 final class DetailFormContentView: UIView {
     
     // MARK: - Properties
-    private var dismissButton: UIButton!
     private var seperatorLine: UIView!
-    private var resetButton: UIButton!
     private var saveButton: SaveButton!
     private var contentView: DetailFormStackView!
+    var dismissButton: UIButton!
+    var resetButton: UIButton!
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -37,6 +37,10 @@ final class DetailFormContentView: UIView {
     
     func addArrangedSubview(_ view: UIView) {
         contentView.addArrangedSubview(view)
+    }
+    
+    func resetContentView() {
+        contentView.resetDetailForm()
     }
     
     // MARK: Configure

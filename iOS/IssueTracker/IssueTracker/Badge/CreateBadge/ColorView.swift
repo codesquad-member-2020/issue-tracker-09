@@ -29,6 +29,11 @@ final class ColorView: UIView {
         makeConstraints()
     }
     
+    func resetColorView() {
+        hexLabel.text = ""
+        colorPreView.backgroundColor = .clear
+    }
+    
     // MARK: Methods
     private func configure() {
         configureTitleLabel()

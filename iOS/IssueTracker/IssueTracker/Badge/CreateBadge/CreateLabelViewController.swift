@@ -25,6 +25,8 @@ final class CreateLabelViewController: CategoryFormViewController {
     override func configureContentView() {
         super.configureContentView()
         contentView.apply(subtitle: "설명")
+        
+        contentView.resetButton.addTarget(self, action: #selector(resetLabelContentView), for: .touchUpInside)
     }
     
     override func makeConstraintsContentView() {
@@ -32,5 +34,10 @@ final class CreateLabelViewController: CategoryFormViewController {
         contentView.snp.makeConstraints { make in
             make.width.height.equalTo(300)
         }
+    }
+    
+    @objc private func resetLabelContentView() {
+        contentView.resetContentView()
+        colorView.resetColorView()
     }
 }

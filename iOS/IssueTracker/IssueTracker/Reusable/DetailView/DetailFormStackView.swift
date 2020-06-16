@@ -37,6 +37,11 @@ final class DetailFormStackView: UIStackView {
         innerSubtitleTextField.placeholder = placeHolder
     }
     
+    func resetDetailForm() {
+        innerTitleTextField.text = ""
+        innerSubtitleTextField.text = ""
+    }
+    
     // MARK: Configure
     private func configure() {
         axis = .vertical
