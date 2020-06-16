@@ -44,12 +44,16 @@ final class ColorView: UIView {
     }
     
     private func bindViewModelToView() {
-        subscriber = $color.sink(receiveCompletion: { _ in
-            self.subscriber?.cancel()
-        }) { [weak self] color in
-            guard let self = self else { return }
-            self.hexLabel.text = color.hexString
-            self.colorPreView.backgroundColor = color
+        subscriber = $color
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in
+                self.subscriber?.cancel()
+            }) { [weak self] color in
+                guard let self = self else { return }
+                self.hexLabel.text = color.hexString
+                UIView.animate(withDuration: 0.2) {
+                    self.colorPreView.backgroundColor = color
+                }
         }
     }
     

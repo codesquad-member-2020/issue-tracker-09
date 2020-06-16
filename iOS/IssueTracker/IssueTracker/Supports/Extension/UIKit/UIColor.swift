@@ -18,17 +18,14 @@ extension UIColor {
                        alpha: 1.0)
     }
     var hexString: String {
-        var red: CGFloat = 0.0
-        var green: CGFloat = 0.0
-        var blue: CGFloat = 0.0
-        var alpha: CGFloat = 1.0
-        getRed(&red,
-               green: &green,
-               blue: &blue,
-               alpha: &alpha)
-        let rgb = (Int)(red * Self.colorPalette) << 16 | (Int)(green * Self.colorPalette) << 8 | Int(blue * Self.colorPalette)
+        guard let components = cgColor.components else { return "" }
+        var result = components
+            .map { Int($0 * 255) }
+            .reduce("") { $0 + String(format: "%02X", $1) }
+        result.insert("#", at: result.startIndex)
+        result.removeLast(2)
         
-        return String(format: "#%06X", rgb)
+        return result
     }
     
     convenience init?(hex: String, alpha: CGFloat = 1) {
