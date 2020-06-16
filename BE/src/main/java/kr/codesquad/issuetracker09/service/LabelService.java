@@ -20,4 +20,8 @@ public class LabelService {
         labelRepository.findAll().forEach(e -> labels.add(e));
         return labels;
     }
+
+    public Label save(Label label) {
+        return labelRepository.save(label);
+    }
 }
