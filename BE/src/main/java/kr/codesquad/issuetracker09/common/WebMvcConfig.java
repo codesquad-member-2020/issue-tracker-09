@@ -28,7 +28,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(authCheckInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/githublogin")
-                .excludePathPatterns("/applelogin");
+                .excludePathPatterns("/applelogin")
+                .excludePathPatterns("/mock/**");
     }
 
 }
