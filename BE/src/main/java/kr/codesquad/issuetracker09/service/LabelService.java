@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LabelService {
@@ -23,5 +24,9 @@ public class LabelService {
 
     public Label save(Label label) {
         return labelRepository.save(label);
+    }
+
+    public Optional<Label> findById(Long id) {
+        return labelRepository.findById(id);
     }
 }
