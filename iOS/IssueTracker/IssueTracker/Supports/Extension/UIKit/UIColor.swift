@@ -11,7 +11,12 @@ import UIKit
 extension UIColor {
     static let mask: Int = 0x000000FF
     static let colorPalette: CGFloat = 255.0
-    
+    static var random: UIColor {
+        return UIColor(red: .random(in: 0...1),
+                       green: .random(in: 0...1),
+                       blue: .random(in: 0...1),
+                       alpha: 1.0)
+    }
     var hexString: String {
         var red: CGFloat = 0.0
         var green: CGFloat = 0.0
@@ -41,18 +46,5 @@ extension UIColor {
                   green: green,
                   blue: blue,
                   alpha: alpha)
-    }
-    
-    static var random: UIColor {
-        let randomRed: CGFloat = CGFloat(drand48())
-        let randomGreen: CGFloat = CGFloat(drand48())
-        let randomBlue: CGFloat = CGFloat(drand48())
-        
-        let color = self.init(red: randomRed,
-                              green: randomGreen,
-                              blue: randomBlue,
-                              alpha: 1.0)
-        
-        return color
     }
 }
