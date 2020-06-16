@@ -11,19 +11,21 @@ import UIKit
 extension UIColor {
     static let mask: Int = 0x000000FF
     static let colorPalette: CGFloat = 255.0
-    
+    static var random: UIColor {
+        return UIColor(red: .random(in: 0...1),
+                       green: .random(in: 0...1),
+                       blue: .random(in: 0...1),
+                       alpha: 1.0)
+    }
     var hexString: String {
-        var red: CGFloat = 0.0
-        var green: CGFloat = 0.0
-        var blue: CGFloat = 0.0
-        var alpha: CGFloat = 1.0
-        getRed(&red,
-               green: &green,
-               blue: &blue,
-               alpha: &alpha)
-        let rgb = (Int)(red * Self.colorPalette) << 16 | (Int)(green * Self.colorPalette) << 8 | Int(blue * Self.colorPalette)
+        guard let components = cgColor.components else { return "" }
+        var result = components
+            .map { Int($0 * 255) }
+            .reduce("") { $0 + String(format: "%02X", $1) }
+        result.insert("#", at: result.startIndex)
+        result.removeLast(2)
         
-        return String(format: "#%06X", rgb)
+        return result
     }
     
     convenience init?(hex: String, alpha: CGFloat = 1) {
@@ -41,18 +43,5 @@ extension UIColor {
                   green: green,
                   blue: blue,
                   alpha: alpha)
-    }
-    
-    static var random: UIColor {
-        let randomRed: CGFloat = CGFloat(drand48())
-        let randomGreen: CGFloat = CGFloat(drand48())
-        let randomBlue: CGFloat = CGFloat(drand48())
-        
-        let color = self.init(red: randomRed,
-                              green: randomGreen,
-                              blue: randomBlue,
-                              alpha: 1.0)
-        
-        return color
     }
 }

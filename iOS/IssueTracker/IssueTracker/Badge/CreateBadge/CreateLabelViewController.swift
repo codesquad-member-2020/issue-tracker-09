@@ -25,8 +25,9 @@ final class CreateLabelViewController: CategoryFormViewController {
     override func configureContentView() {
         super.configureContentView()
         contentView.apply(subtitle: "설명")
-        
-        contentView.resetButton.addTarget(self, action: #selector(resetLabelContentView), for: .touchUpInside)
+        contentView.resetButton.addTarget(self,
+                                          action: #selector(resetLabelContentView),
+                                          for: .touchUpInside)
     }
     
     override func makeConstraintsContentView() {

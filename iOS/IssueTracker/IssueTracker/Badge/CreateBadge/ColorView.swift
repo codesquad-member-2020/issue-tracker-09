@@ -15,6 +15,7 @@ final class ColorView: UIView {
     private var titleLabel: UILabel!
     private var hexLabel: UILabel!
     private var colorPreView: UIView!
+    private var sepertorLine: UIView!
     var generateButton: UIButton!
     @Published var color: UIColor
     private var subscriber: AnyCancellable?
@@ -25,6 +26,7 @@ final class ColorView: UIView {
         super.init(frame: frame)
         configure()
         makeConstraints()
+        bindViewModelToView()
     }
     
     required init?(coder: NSCoder) {
@@ -32,25 +34,35 @@ final class ColorView: UIView {
         super.init(coder: coder)
         configure()
         makeConstraints()
+        bindViewModelToView()
     }
     
+    // MARK: Methods
     func resetColorView() {
         hexLabel.text = ""
         colorPreView.backgroundColor = .clear
     }
     
-    // MARK: Methods
+    private func bindViewModelToView() {
+        subscriber = $color
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in
+                self.subscriber?.cancel()
+            }) { [weak self] color in
+                guard let self = self else { return }
+                self.hexLabel.text = color.hexString
+                UIView.animate(withDuration: 0.2) {
+                    self.colorPreView.backgroundColor = color
+                }
+        }
+    }
+    
     private func configure() {
         configureTitleLabel()
         configureHexLabel()
         configureColorPreView()
         configureGenerateButton()
-        subscriber = $color.sink(receiveCompletion: { _ in
-            self.subscriber?.cancel()
-        }) { color in
-            self.hexLabel.text = color.hexString
-            self.colorPreView.backgroundColor = color
-        }
+        configureSepertorLine()
     }
     
     private func configureTitleLabel() {
@@ -78,8 +90,16 @@ final class ColorView: UIView {
         generateButton.setImage(UIImage(systemName: "arrow.clockwise"),
                                 for: .normal)
         generateButton.tintColor = .black
-        generateButton.addTarget(self, action: #selector(generateRandomColor), for: .touchUpInside)
+        generateButton.addTarget(self,
+                                 action: #selector(generateRandomColor),
+                                 for: .touchUpInside)
         addSubview(generateButton)
+    }
+    
+    private func configureSepertorLine() {
+        sepertorLine = UIView()
+        sepertorLine.backgroundColor = .lightGray
+        addSubview(sepertorLine)
     }
     
     private func makeConstraints() {
@@ -87,6 +107,7 @@ final class ColorView: UIView {
         makeConstraintsHexLabel()
         makeConstraintsColorPreView()
         makeConstraintsGenerateButton()
+        makeConstraintsSeperatorLine()
     }
     
     private func makeConstraintsTitleLabel() {
@@ -107,7 +128,7 @@ final class ColorView: UIView {
     private func makeConstraintsColorPreView() {
         colorPreView.snp.makeConstraints { make in
             make.leading.equalTo(hexLabel.snp.trailing).offset(8)
-            make.height.equalTo(hexLabel.snp.height)
+            make.height.equalTo(hexLabel.snp.height).multipliedBy(1.2)
             make.width.equalTo(hexLabel.snp.width)
             make.centerY.equalToSuperview()
         }
@@ -115,10 +136,18 @@ final class ColorView: UIView {
     
     private func makeConstraintsGenerateButton() {
         generateButton.snp.makeConstraints { make in
-            make.leading.equalTo(colorPreView.snp.trailing).offset(8)
+            make.leading.equalTo(colorPreView.snp.trailing).offset(16)
             make.trailing.equalToSuperview().inset(16)
             make.width.equalTo(generateButton.snp.height)
             make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func makeConstraintsSeperatorLine() {
+        sepertorLine.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(1)
         }
     }
     

@@ -128,8 +128,8 @@ final class DetailFormContentView: UIView {
     
     private func makeConstratinsContentView() {
         contentView.snp.makeConstraints { make in
-            make.top.equalTo(seperatorLine.snp.bottom)
-            make.bottom.equalTo(saveButton.snp.top)
+            make.top.equalTo(seperatorLine.snp.bottom).offset(16)
+            make.bottom.equalTo(saveButton.snp.top).offset(-16)
             make.leading.trailing.equalToSuperview()
             
         }
