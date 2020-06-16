@@ -23,7 +23,7 @@ extension UIColor {
                alpha: &alpha)
         let rgb = (Int)(red * Self.colorPalette) << 16 | (Int)(green * Self.colorPalette) << 8 | Int(blue * Self.colorPalette)
         
-        return String(format: "#%06x", rgb)
+        return String(format: "#%06X", rgb)
     }
     
     convenience init?(hex: String, alpha: CGFloat = 1) {
@@ -41,5 +41,18 @@ extension UIColor {
                   green: green,
                   blue: blue,
                   alpha: alpha)
+    }
+    
+    static var random: UIColor {
+        let randomRed: CGFloat = CGFloat(drand48())
+        let randomGreen: CGFloat = CGFloat(drand48())
+        let randomBlue: CGFloat = CGFloat(drand48())
+        
+        let color = self.init(red: randomRed,
+                              green: randomGreen,
+                              blue: randomBlue,
+                              alpha: 1.0)
+        
+        return color
     }
 }

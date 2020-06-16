@@ -14,7 +14,7 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
     static let identifier: String = "ReusableHeaderView"
     static let height: CGFloat = 100
     private var titleLabel: UILabel!
-    private var addButton: UIButton!
+    var addButton: UIButton!
     
     // MARK: - Lifecycle
     override init(reuseIdentifier: String?) {
