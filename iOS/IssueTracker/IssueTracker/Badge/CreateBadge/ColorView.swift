@@ -15,6 +15,7 @@ final class ColorView: UIView {
     private var titleLabel: UILabel!
     private var hexLabel: UILabel!
     private var colorPreView: UIView!
+    private var sepertorLine: UIView!
     var generateButton: UIButton!
     @Published var color: UIColor
     private var subscriber: AnyCancellable?
@@ -45,6 +46,7 @@ final class ColorView: UIView {
         configureHexLabel()
         configureColorPreView()
         configureGenerateButton()
+        configureSepertorLine()
         subscriber = $color.sink(receiveCompletion: { _ in
             self.subscriber?.cancel()
         }) { color in
@@ -82,11 +84,18 @@ final class ColorView: UIView {
         addSubview(generateButton)
     }
     
+    private func configureSepertorLine() {
+        sepertorLine = UIView()
+        sepertorLine.backgroundColor = .lightGray
+        addSubview(sepertorLine)
+    }
+    
     private func makeConstraints() {
         makeConstraintsTitleLabel()
         makeConstraintsHexLabel()
         makeConstraintsColorPreView()
         makeConstraintsGenerateButton()
+        makeConstraintsSeperatorLine()
     }
     
     private func makeConstraintsTitleLabel() {
@@ -107,7 +116,7 @@ final class ColorView: UIView {
     private func makeConstraintsColorPreView() {
         colorPreView.snp.makeConstraints { make in
             make.leading.equalTo(hexLabel.snp.trailing).offset(8)
-            make.height.equalTo(hexLabel.snp.height)
+            make.height.equalTo(hexLabel.snp.height).multipliedBy(1.2)
             make.width.equalTo(hexLabel.snp.width)
             make.centerY.equalToSuperview()
         }
@@ -115,10 +124,18 @@ final class ColorView: UIView {
     
     private func makeConstraintsGenerateButton() {
         generateButton.snp.makeConstraints { make in
-            make.leading.equalTo(colorPreView.snp.trailing).offset(8)
+            make.leading.equalTo(colorPreView.snp.trailing).offset(16)
             make.trailing.equalToSuperview().inset(16)
             make.width.equalTo(generateButton.snp.height)
             make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func makeConstraintsSeperatorLine() {
+        sepertorLine.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(1)
         }
     }
     

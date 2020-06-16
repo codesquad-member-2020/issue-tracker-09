@@ -14,9 +14,11 @@ final class DetailFormStackView: UIStackView {
     private var titleView: UIView!
     private var innerTitleLabel: UILabel!
     private var innerTitleTextField: UITextField!
+    private var titleSeperatorLine: UIView!
     private var subTitleView: UIView!
     private var innerSubtitleLabel: UILabel!
     private var innerSubtitleTextField: UITextField!
+    private var subtitleSeperatorLine: UIView!
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -54,6 +56,7 @@ final class DetailFormStackView: UIStackView {
         titleView = UIView()
         configureInnerTitleLabel()
         configureInnerTextField()
+        configureTitleSeperatorLine()
         addArrangedSubview(titleView)
     }
     
@@ -70,10 +73,17 @@ final class DetailFormStackView: UIStackView {
         titleView.addSubview(innerTitleTextField)
     }
     
+    private func configureTitleSeperatorLine() {
+        titleSeperatorLine = UIView()
+        titleSeperatorLine.backgroundColor = .lightGray
+        titleView.addSubview(titleSeperatorLine)
+    }
+    
     private func configureSubtitleView() {
         subTitleView = UIView()
         configureSubtitleLabel()
         configureSubtitleTextField()
+        configureSubtitleSeperatorLine()
         addArrangedSubview(subTitleView)
     }
     
@@ -89,6 +99,12 @@ final class DetailFormStackView: UIStackView {
         subTitleView.addSubview(innerSubtitleTextField)
     }
     
+    private func configureSubtitleSeperatorLine() {
+        subtitleSeperatorLine = UIView()
+        subtitleSeperatorLine.backgroundColor = .lightGray
+        subTitleView.addSubview(subtitleSeperatorLine)
+    }
+    
     // MARK: Constratins
     private func makeConstraints() {
         makeConstraintsTitleView()
@@ -98,11 +114,13 @@ final class DetailFormStackView: UIStackView {
     private func makeConstraintsTitleView() {
         makeConstraintsInnerTitleLabel()
         makeConstraintsInnerTitleTextField()
+        makeConstraintsTitleSeperatorLine()
     }
     
     private func makeConstraintsSubtitleView() {
         makeConstraintsInnerSubtitleLabel()
         makeConstraintsInnerSubtitleTextField()
+        makeConstraintsSubtitleSeperatorLine()
     }
     
     private func makeConstraintsInnerTitleLabel() {
@@ -121,6 +139,14 @@ final class DetailFormStackView: UIStackView {
         }
     }
     
+    private func makeConstraintsTitleSeperatorLine() {
+        titleSeperatorLine.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(1)
+        }
+    }
+    
     private func makeConstraintsInnerSubtitleLabel() {
         innerSubtitleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(24)
@@ -134,6 +160,14 @@ final class DetailFormStackView: UIStackView {
             make.leading.equalTo(innerSubtitleLabel.snp.trailing).offset(16)
             make.trailing.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func makeConstraintsSubtitleSeperatorLine() {
+        subtitleSeperatorLine.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(1)
         }
     }
 }
