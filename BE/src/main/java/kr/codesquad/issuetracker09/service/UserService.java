@@ -6,6 +6,7 @@ import kr.codesquad.issuetracker09.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -24,9 +25,13 @@ public class UserService {
 
     @Transactional
     public void insertOrUpdateUser(User user) {
-        if (userRepository.findUserBySocialId(user.getSocialId()).orElse(null) == null) {
-            User newUser = User.insert(user.getId(), user.getName(), user.getSocialId(), user.getEmail());
-            userRepository.save(newUser);
+        Optional<User> currentUser = userRepository.findUserBySocialId(user.getSocialId());
+        if (currentUser.isPresent()) {
+            currentUser.get().setName(user.getName());
+            currentUser.get().setEmail(user.getEmail());
+            userRepository.save(currentUser.get());
+        } else {
+            userRepository.save(user);
         }
     }
 }
