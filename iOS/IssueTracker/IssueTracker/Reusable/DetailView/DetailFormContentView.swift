@@ -35,6 +35,10 @@ final class DetailFormContentView: UIView {
         contentView.apply(subtitle: subtitle)
     }
     
+    func addArrangedSubview(_ view: UIView) {
+        contentView.addArrangedSubview(view)
+    }
+    
     // MARK: Configure
     private func configure() {
         backgroundColor = .systemBackground

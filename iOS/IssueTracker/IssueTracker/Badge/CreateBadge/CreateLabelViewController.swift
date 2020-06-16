@@ -10,8 +10,16 @@ import UIKit
 
 final class CreateLabelViewController: CategoryFormViewController {
     
+    private var colorView: ColorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
+    }
+    
+    private func configure() {
+        colorView = ColorView()
+        contentView.addArrangedSubview(colorView)
     }
     
     override func configureContentView() {
