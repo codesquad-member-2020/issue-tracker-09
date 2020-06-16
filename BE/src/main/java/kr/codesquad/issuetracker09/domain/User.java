@@ -1,28 +1,28 @@
 package kr.codesquad.issuetracker09.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @ToString
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "social_id")
     private Long socialId;
+    @Column(name = "email")
     private String email;
 
-    protected User() {
+    public static User insert(Long id, String name, Long socialId, String email) {
+        return new User(id, name, socialId, email);
     }
-
 }
