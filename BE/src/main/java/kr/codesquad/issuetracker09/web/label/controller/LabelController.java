@@ -47,4 +47,11 @@ public class LabelController {
         }
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
+
+    @DeleteMapping("/{label-id}")
+    public void delete(@PathVariable(name = "label-id") long labelId, HttpServletResponse response) {
+        log.debug("[*] delete - labelId: {}", labelId);
+        labelService.delete(labelId);
+        response.setStatus(HttpStatus.NO_CONTENT.value());
+    }
 }

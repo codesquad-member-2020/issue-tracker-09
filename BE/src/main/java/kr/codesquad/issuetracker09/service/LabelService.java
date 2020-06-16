@@ -29,4 +29,8 @@ public class LabelService {
     public Optional<Label> findById(Long id) {
         return labelRepository.findById(id);
     }
+
+    public void delete(Long id) {
+        labelRepository.deleteById(id);
+    }
 }
