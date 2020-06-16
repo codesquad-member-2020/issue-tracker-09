@@ -12,7 +12,7 @@ class CategoryFormViewController: UIViewController {
     
     // MARK: - Properties
     private var dimmedView: UIView!
-    private var contentView: DetailFormContentView!
+    var contentView: DetailFormContentView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -27,14 +27,19 @@ class CategoryFormViewController: UIViewController {
         configureDimmedView()
         configureContentView()
     }
-    
+
     private func configureDimmedView() {
         dimmedView = UIView()
         dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.66)
+        view.addSubview(dimmedView)
     }
     
-    private func configureContentView() {
+    func configureContentView() {
         contentView = DetailFormContentView()
+        view.addSubview(contentView)
+        contentView.dismissButton.addTarget(self,
+                                            action: #selector(dismissContentView),
+                                            for: .touchUpInside)
     }
     
     // MARK: Constraints
@@ -45,13 +50,17 @@ class CategoryFormViewController: UIViewController {
     
     private func makeConstraintsDimmedView() {
         dimmedView.snp.makeConstraints { make in
-            make.centerX.centerY.width.height.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
-    private func makeConstraintsContentView() {
+    func makeConstraintsContentView() {
         contentView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    @objc private func dismissContentView() {
+        dismiss(animated: true)
     }
 }
