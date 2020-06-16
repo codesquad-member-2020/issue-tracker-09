@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 final class ColorView: UIView {
     
@@ -15,15 +16,19 @@ final class ColorView: UIView {
     private var hexLabel: UILabel!
     private var colorPreView: UIView!
     var generateButton: UIButton!
+    @Published var color: UIColor
+    private var subscriber: AnyCancellable?
     
     // MARK: Lifecycle
     override init(frame: CGRect) {
+        color = UIColor.random
         super.init(frame: frame)
         configure()
         makeConstraints()
     }
     
     required init?(coder: NSCoder) {
+        color = UIColor.random
         super.init(coder: coder)
         configure()
         makeConstraints()
@@ -40,6 +45,12 @@ final class ColorView: UIView {
         configureHexLabel()
         configureColorPreView()
         configureGenerateButton()
+        subscriber = $color.sink(receiveCompletion: { _ in
+            self.subscriber?.cancel()
+        }) { color in
+            self.hexLabel.text = color.hexString
+            self.colorPreView.backgroundColor = color
+        }
     }
     
     private func configureTitleLabel() {
@@ -67,6 +78,7 @@ final class ColorView: UIView {
         generateButton.setImage(UIImage(systemName: "arrow.clockwise"),
                                 for: .normal)
         generateButton.tintColor = .black
+        generateButton.addTarget(self, action: #selector(generateRandomColor), for: .touchUpInside)
         addSubview(generateButton)
     }
     
@@ -108,5 +120,9 @@ final class ColorView: UIView {
             make.width.equalTo(generateButton.snp.height)
             make.centerY.equalToSuperview()
         }
+    }
+    
+    @objc private func generateRandomColor() {
+        color = UIColor.random
     }
 }

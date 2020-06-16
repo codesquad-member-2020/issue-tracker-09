@@ -23,7 +23,7 @@ extension UIColor {
                alpha: &alpha)
         let rgb = (Int)(red * Self.colorPalette) << 16 | (Int)(green * Self.colorPalette) << 8 | Int(blue * Self.colorPalette)
         
-        return String(format: "#%06x", rgb)
+        return String(format: "#%06X", rgb)
     }
     
     convenience init?(hex: String, alpha: CGFloat = 1) {
