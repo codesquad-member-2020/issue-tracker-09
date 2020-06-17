@@ -49,4 +49,13 @@ public class MilestoneController {
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
 
+    @DeleteMapping("/{milestone-id}")
+    public void delete(@PathVariable(name = "milestone-id") Long milestoneId, HttpServletResponse response) {
+        log.debug("[*] delete - milestoneId: {}", milestoneId);
+        if (!milestoneService.findById(milestoneId).isPresent()) {
+            throw new NotFoundException("Milestone doesn't exist");
+        }
+        milestoneService.delete(milestoneId);
+        response.setStatus(HttpStatus.NO_CONTENT.value());
+    }
 }
