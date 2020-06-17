@@ -7,38 +7,65 @@
 //
 
 import UIKit
+import Combine
 
 final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
     private let headerViewTitle: String = "Label"
+    private let dataSource: LabelTableViewDataSource = .init()
+    private var subscriptions: Set<AnyCancellable> = .init()
+    var abc: AnyCancellable?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        tableView.dataSource = dataSource
+        abc = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                self.fetch(provider: IssueTrackerNetworkimpl(),
+                           endpoint: Endpoint(path: .labels))
+        }
+        bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
     }
     
     // MARK: - Methods
-    // MARK: DataSource
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+    private func fetch(provider: IssueTrackerNetwork, endpoint: RequestPorviding) {
+        var subscriber: AnyCancellable?
+        subscriber = provider.requeset([Label].self,
+                                       providing: endpoint)
+            .sink(receiveCompletion: {
+                guard case .failure(let error) = $0 else { return }
+                self.errorAlert(message: error.message)
+                subscriber?.cancel()
+            }) { self.dataSource.labels = $0 }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier, for: indexPath) as? LabelTableViewCell else { return LabelTableViewCell() }
-        
-        guard let backgroundColor = UIColor(hex: "#e1f7d5") else { return cell }
-        cell.apply(title: "feature",
-                   description: "기능에 대한 레이블입니다.",
-                   backgroundColor: backgroundColor)
-
-        return cell
+    private func bindViewModelToView() {
+        var subscriber: AnyCancellable?
+        subscriber = dataSource.$labels
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in subscriber?.cancel() }) { _ in
+                self.tableView.reloadData()
+        }
+    }
+    
+    private func errorAlert(message: String) {
+        let alert = UIAlertController(title: "Error",
+                                      message: message,
+                                      preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "close",
+                                   style: .cancel)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     
     @objc private func presentCreateLabelViewController() {
-        present(CreateLabelViewController(), animated: true)
+        present(CreateLabelViewController(),
+                animated: true)
     }
     
     // MARK: Delegate

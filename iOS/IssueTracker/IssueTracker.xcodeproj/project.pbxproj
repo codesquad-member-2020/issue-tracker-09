@@ -12,6 +12,8 @@
 		AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */; };
 		ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */; };
 		ABAD309C2499FCE000618753 /* IssueTrackerNetworkimpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */; };
+		ABAD309F249A008B00618753 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD309E249A008B00618753 /* Label.swift */; };
+		ABAD30A1249A00F600618753 /* LabelTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD30A0249A00F600618753 /* LabelTableViewDataSource.swift */; };
 		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
 		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
@@ -55,6 +57,8 @@
 		AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormStackView.swift; sourceTree = "<group>"; };
 		ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerNetwork.swift; sourceTree = "<group>"; };
 		ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerNetworkimpl.swift; sourceTree = "<group>"; };
+		ABAD309E249A008B00618753 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		ABAD30A0249A00F600618753 /* LabelTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewDataSource.swift; sourceTree = "<group>"; };
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
 		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
@@ -123,6 +127,14 @@
 			path = DetailView;
 			sourceTree = "<group>";
 		};
+		ABAD309D249A007F00618753 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABAD309E249A008B00618753 /* Label.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		ABAF6DF92491F8E600E69418 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +152,7 @@
 				AEE5973024988C5000F5C622 /* CreateBadge */,
 				ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */,
 				AE8CA35924921E1B0076507B /* LabelTableViewController.swift */,
+				ABAD30A0249A00F600618753 /* LabelTableViewDataSource.swift */,
 			);
 			path = Badge;
 			sourceTree = "<group>";
@@ -147,6 +160,7 @@
 		AE5371232499F79C00269F6B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				ABAD309D249A007F00618753 /* Model */,
 				AE5371242499F7AB00269F6B /* Endpoint.swift */,
 				ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */,
 				ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */,
@@ -366,6 +380,7 @@
 				AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */,
 				AE8CA3562490E2700076507B /* UIControl.swift in Sources */,
 				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
+				ABAD30A1249A00F600618753 /* LabelTableViewDataSource.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
 				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
 				ABAD309C2499FCE000618753 /* IssueTrackerNetworkimpl.swift in Sources */,
@@ -380,6 +395,7 @@
 				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
+				ABAD309F249A008B00618753 /* Label.swift in Sources */,
 				AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */,
 				AEE597362498925100F5C622 /* SaveButton.swift in Sources */,
 				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
