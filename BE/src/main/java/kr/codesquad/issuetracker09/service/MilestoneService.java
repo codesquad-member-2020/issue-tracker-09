@@ -32,7 +32,11 @@ public class MilestoneService {
         return milestoneRepository.save(milestone);
     }
 
-    public Optional<Milestone> findById(Long id) {
-        return milestoneRepository.findById(id);
+    public Optional<Milestone> findById(Long milestoneId) {
+        return milestoneRepository.findById(milestoneId);
+    }
+
+    public void delete(Long milestoneId) {
+        milestoneRepository.deleteById(milestoneId);
     }
 }
