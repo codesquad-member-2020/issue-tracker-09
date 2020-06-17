@@ -20,4 +20,8 @@ public class MilestoneService {
         List<Milestone> milestones = new ArrayList<>(milestoneRepository.findAll());
         return milestones;
     }
+
+    public Milestone save(Milestone milestone) {
+        return milestoneRepository.save(milestone);
+    }
 }
