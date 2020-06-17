@@ -1,4 +1,4 @@
-package kr.codesquad.issuetracker09.data;
+package kr.codesquad.issuetracker09.domain;
 
 import kr.codesquad.issuetracker09.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
