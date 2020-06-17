@@ -14,6 +14,7 @@
 		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
 		ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* BadgeLabel.swift */; };
+		AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5371242499F7AB00269F6B /* Endpoint.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
@@ -54,6 +55,7 @@
 		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		ABAF6E032492038A00E69418 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		AE5371242499F7AB00269F6B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 			path = Badge;
 			sourceTree = "<group>";
 		};
+		AE5371232499F79C00269F6B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AE5371242499F7AB00269F6B /* Endpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		AE8CA33E248F755F0076507B /* Supports */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +220,7 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				AE5371232499F79C00269F6B /* Network */,
 				ABAF6DF92491F8E600E69418 /* Reusable */,
 				ABAF6DFE2491FE7200E69418 /* Badge */,
 				AE8CA33F248F75D00076507B /* Login */,
@@ -362,6 +373,7 @@
 				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
+				AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */,
 				AEE597362498925100F5C622 /* SaveButton.swift in Sources */,
 				AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */,
 				AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */,
