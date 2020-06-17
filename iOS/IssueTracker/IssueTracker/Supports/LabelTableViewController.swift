@@ -15,7 +15,7 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         registerCell(anyClass: LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
     }

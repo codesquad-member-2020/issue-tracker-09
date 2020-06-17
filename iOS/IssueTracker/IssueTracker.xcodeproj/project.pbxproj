@@ -10,10 +10,13 @@
 		AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */; };
 		AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */; };
 		AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */; };
+		ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */; };
+		ABAD309C2499FCE000618753 /* IssueTrackerNetworkimpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */; };
 		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
 		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
 		ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* BadgeLabel.swift */; };
+		AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5371242499F7AB00269F6B /* Endpoint.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
@@ -50,10 +53,13 @@
 		AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewController.swift; sourceTree = "<group>"; };
 		AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormContentView.swift; sourceTree = "<group>"; };
 		AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormStackView.swift; sourceTree = "<group>"; };
+		ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerNetwork.swift; sourceTree = "<group>"; };
+		ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerNetworkimpl.swift; sourceTree = "<group>"; };
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
 		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		ABAF6E032492038A00E69418 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		AE5371242499F7AB00269F6B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
@@ -138,6 +144,16 @@
 			path = Badge;
 			sourceTree = "<group>";
 		};
+		AE5371232499F79C00269F6B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AE5371242499F7AB00269F6B /* Endpoint.swift */,
+				ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */,
+				ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		AE8CA33E248F755F0076507B /* Supports */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +226,7 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				AE5371232499F79C00269F6B /* Network */,
 				ABAF6DF92491F8E600E69418 /* Reusable */,
 				ABAF6DFE2491FE7200E69418 /* Badge */,
 				AE8CA33F248F75D00076507B /* Login */,
@@ -351,6 +368,7 @@
 				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
 				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
+				ABAD309C2499FCE000618753 /* IssueTrackerNetworkimpl.swift in Sources */,
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
 				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,
 				ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */,
@@ -362,7 +380,9 @@
 				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
+				AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */,
 				AEE597362498925100F5C622 /* SaveButton.swift in Sources */,
+				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
 				AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */,
 				AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
