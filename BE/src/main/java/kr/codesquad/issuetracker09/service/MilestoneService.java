@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MilestoneService {
@@ -29,5 +30,9 @@ public class MilestoneService {
             throw new ValidationException("Title can't be blank");
         }
         return milestoneRepository.save(milestone);
+    }
+
+    public Optional<Milestone> findById(Long id) {
+        return milestoneRepository.findById(id);
     }
 }
