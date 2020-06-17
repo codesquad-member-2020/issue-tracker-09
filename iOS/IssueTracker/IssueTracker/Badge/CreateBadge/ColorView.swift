@@ -17,7 +17,7 @@ final class ColorView: UIView {
     private var colorPreView: UIView!
     private var sepertorLine: UIView!
     var generateButton: UIButton!
-    @Published var color: UIColor
+    @Published var color: UIColor?
     private var subscriber: AnyCancellable?
     
     // MARK: Lifecycle
@@ -50,7 +50,7 @@ final class ColorView: UIView {
                 self.subscriber?.cancel()
             }) { [weak self] color in
                 guard let self = self else { return }
-                self.hexLabel.text = color.hexString
+                self.hexLabel.text = color?.hexString
                 UIView.animate(withDuration: 0.2) {
                     self.colorPreView.backgroundColor = color
                 }
