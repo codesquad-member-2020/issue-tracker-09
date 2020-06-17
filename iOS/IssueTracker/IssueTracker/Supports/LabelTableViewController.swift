@@ -15,13 +15,13 @@ final class LabelTableViewController: CategoryTableViewController {
     private let headerViewTitle: String = "Label"
     private let dataSource: LabelTableViewDataSource = .init()
     private var subscriptions: Set<AnyCancellable> = .init()
-    var abc: AnyCancellable?
+    private var subscriber: AnyCancellable?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        abc = Timer.publish(every: 1, on: .main, in: .common)
+        subscriber = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 self.fetch(provider: IssueTrackerNetworkimpl(),
