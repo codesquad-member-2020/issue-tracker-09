@@ -33,7 +33,6 @@
 		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AE8CA35D249224560076507B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35C249224560076507B /* UIColor.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
-		AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
 		AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */; };
 		AEAEA99C248E0EE1005F4582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99B248E0EE1005F4582 /* Assets.xcassets */; };
@@ -82,7 +81,6 @@
 		AE8CA35C249224560076507B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = IssueTracker/Supports/Extension/UIKit/UIColor.swift; sourceTree = SOURCE_ROOT; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AEAEA996248E0EDF005F4582 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AEAEA999248E0EDF005F4582 /* IssueTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IssueTracker.xcdatamodel; sourceTree = "<group>"; };
 		AEAEA99B248E0EE1005F4582 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 			children = (
 				AE8CA35B249224450076507B /* Extension */,
 				AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */,
-				AEAEA991248E0EDF005F4582 /* SceneDelegate.swift */,
 				AEAEA99B248E0EE1005F4582 /* Assets.xcassets */,
 				AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */,
 				AEAEA9A0248E0EE1005F4582 /* Info.plist */,
@@ -413,7 +410,6 @@
 				AE537166249B7DB500269F6B /* AppleLoginEncoder.swift in Sources */,
 				AEE597362498925100F5C622 /* SaveButton.swift in Sources */,
 				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
-				AEAEA992248E0EDF005F4582 /* SceneDelegate.swift in Sources */,
 				AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
 				AEE597382498952300F5C622 /* ColorView.swift in Sources */,
