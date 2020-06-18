@@ -22,7 +22,6 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     }
     
     func requeset<T>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError> where T : Decodable {
-        
         guard let url = providing.url else {
             return Fail(error: .error("Invaild URL"))
                 .eraseToAnyPublisher()

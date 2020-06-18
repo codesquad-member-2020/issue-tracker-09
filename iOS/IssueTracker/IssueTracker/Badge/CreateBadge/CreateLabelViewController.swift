@@ -10,16 +10,21 @@ import UIKit
 
 final class CreateLabelViewController: CategoryFormViewController {
     
+    // MARK: - Properties
     private var colorView: ColorView!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
     
+    // MARK: - Methods
+    // MARK: Configure
     private func configure() {
         colorView = ColorView()
         contentView.addArrangedSubview(colorView)
+        configureSaveButton()
     }
     
     override func configureContentView() {
@@ -30,6 +35,11 @@ final class CreateLabelViewController: CategoryFormViewController {
                                           for: .touchUpInside)
     }
     
+    private func configureSaveButton() {
+        contentView.saveButton.addTarget(self, action: #selector(saveLabelContent), for: .touchUpInside)
+    }
+    
+    // MARK: Constraints
     override func makeConstraintsContentView() {
         super.makeConstraintsContentView()
         contentView.snp.makeConstraints { make in
@@ -40,5 +50,9 @@ final class CreateLabelViewController: CategoryFormViewController {
     @objc private func resetLabelContentView() {
         contentView.resetContentView()
         colorView.resetColorView()
+    }
+    
+    @objc private func saveLabelContent() {
+        
     }
 }
