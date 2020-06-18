@@ -8,21 +8,43 @@
 
 import UIKit
 import AuthenticationServices
-import SnapKit
+import Combine
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
     
     // MARK: - IBOutlets
     @IBOutlet weak var signinGitHubButton: UIButton!
     
     // MARK: - Properties
+    static let identifier: String = "LoginViewController"
     private var authorizationButton: ASAuthorizationAppleIDButton!
+    private var subscription: AnyCancellable?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         makeConstraints()
+    }
+    
+    @IBAction func githubLoginAction(_ sender: UIButton) {
+        guard let authURL = Endpoint.githubLogin else { return }
+        let scheme = "issuenine"
+        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { callbackURL, error in
+            guard error == nil else {
+                let alertController = UIAlertController.errorAlert(message: error?.localizedDescription ?? "")
+                DispatchQueue.main.async { self.present(alertController, animated: true) }
+                
+                return
+            }
+            guard let callbackURL = callbackURL else { return }
+            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
+            guard let token = queryItems?.filter({ $0.name == "token" }).first?.value else { return }
+            self.saveUserInKeychain(token)
+            self.dismiss(animated: true)
+        }
+        session.presentationContextProvider = self
+        session.start()
     }
     
     // MARK: - Methods
@@ -63,7 +85,6 @@ final class LoginViewController: UIViewController {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    
 }
 
 // MARK: - Extension
@@ -71,7 +92,19 @@ final class LoginViewController: UIViewController {
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        saveUserInKeychain(appleIDCredential.user)
+        IssueTrackerNetworkImpl.shared
+            .requestAppleIDJwtToken(credential: appleIDCredential,
+                                    providing: Endpoint(path: .appleLogin))
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: {
+                guard case .failure(let error) = $0 else { return }
+                let alertViewController = UIAlertController.errorAlert(message: error.message)
+                self.present(alertViewController,
+                             animated: true)
+            }, receiveValue: { response in
+                guard let response = response as? HTTPURLResponse,
+                    let key = response.allHeaderFields["Authorization"] as? String else { return }
+                self.saveUserInKeychain(key)
+            }))
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -99,6 +132,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 // MARK: ASAuthorizationControllerPresentationContextProviding
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        guard let window = view.window else { return UIWindow() }
+        return window
+    }
+    
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         guard let window = view.window else { return UIWindow() }
         return window
     }

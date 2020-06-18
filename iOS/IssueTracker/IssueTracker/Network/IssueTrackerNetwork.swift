@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AuthenticationServices
 import Combine
 
 enum IssueTrackerNetworkError: Error {
@@ -27,4 +28,5 @@ protocol IssueTrackerNetwork {
     var session: URLSession { get }
     
     func requeset<T: Decodable>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError>
+    func requestAppleIDJwtToken(credential:  ASAuthorizationAppleIDCredential, providing: RequestPorviding) -> AnyPublisher<URLResponse, IssueTrackerNetworkError>
 }

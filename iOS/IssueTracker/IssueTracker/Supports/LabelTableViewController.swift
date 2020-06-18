@@ -24,7 +24,7 @@ final class LabelTableViewController: CategoryTableViewController {
         subscriber = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
-                self.fetch(provider: IssueTrackerNetworkimpl(),
+                self.fetch(provider: IssueTrackerNetworkImpl.shared,
                            endpoint: Endpoint(path: .labels))
         }
         bindViewModelToView()
@@ -39,7 +39,9 @@ final class LabelTableViewController: CategoryTableViewController {
                                        providing: endpoint)
             .sink(receiveCompletion: {
                 guard case .failure(let error) = $0 else { return }
-                self.errorAlert(message: error.message)
+                let alertViewController = UIAlertController.errorAlert(message: error.message)
+                self.present(alertViewController,
+                             animated: true)
                 subscriber?.cancel()
             }) { self.dataSource.labels = $0 }
     }
@@ -51,16 +53,6 @@ final class LabelTableViewController: CategoryTableViewController {
             .sink(receiveCompletion: { _ in subscriber?.cancel() }) { _ in
                 self.tableView.reloadData()
         }
-    }
-    
-    private func errorAlert(message: String) {
-        let alert = UIAlertController(title: "Error",
-                                      message: message,
-                                      preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "close",
-                                   style: .cancel)
-        alert.addAction(cancel)
-        present(alert, animated: true)
     }
     
     @objc private func presentCreateLabelViewController() {

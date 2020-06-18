@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import AuthenticationServices
 import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard KeychainItem.currentUserIdentifier == "",
+            let rootViewController = window?.rootViewController as? UITabBarController else { return true }
+        DispatchQueue.main.async {
+            rootViewController.presentLoginViewController()
+        }
+    
         return true
     }
     
@@ -27,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
