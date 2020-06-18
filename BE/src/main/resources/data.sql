@@ -22,5 +22,9 @@ VALUES ("issue 1", "first issue blabla", "2020-06-18", TRUE, FALSE, 1, 1);
 INSERT INTO issue (title, contents, created, open, is_deleted, user_id, milestone_id)
 VALUES ("issue 2", "second issue blabla", "2020-06-18", TRUE, FALSE, 2, 2);
 
-INSERT INTO comment (contents, writer, created, issue_id)
-VALUES ("Good!!", 2, "2020-06-19", 1);
+INSERT INTO comment (contents, user_id, created, issue_id)
+VALUES ("Good!!", 2, "2020-06-19 13:01:23", 1);
+INSERT INTO comment (contents, user_id, created, issue_id)
+VALUES ("OKOK!!", 1, "2020-06-19 13:21:34", 1);
+INSERT INTO comment (contents, user_id, created, issue_id)
+VALUES ("Hi!!", 2, "2020-06-19 13:34:11", 1);
