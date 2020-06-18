@@ -59,6 +59,7 @@
 		ABAD309B2499FCE000618753 /* IssueTrackerNetworkimpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerNetworkimpl.swift; sourceTree = "<group>"; };
 		ABAD309E249A008B00618753 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		ABAD30A0249A00F600618753 /* LabelTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewDataSource.swift; sourceTree = "<group>"; };
+		ABAD30A3249B66FF00618753 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
 		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
@@ -240,6 +241,7 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				ABAD30A3249B66FF00618753 /* IssueTracker.entitlements */,
 				AE5371232499F79C00269F6B /* Network */,
 				ABAF6DF92491F8E600E69418 /* Reusable */,
 				ABAF6DFE2491FE7200E69418 /* Badge */,
