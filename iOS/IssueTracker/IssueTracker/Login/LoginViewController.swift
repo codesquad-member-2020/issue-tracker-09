@@ -16,6 +16,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     @IBOutlet weak var signinGitHubButton: UIButton!
     
     // MARK: - Properties
+    static let identifier: String = "LoginViewController"
     private var authorizationButton: ASAuthorizationAppleIDButton!
     private var subscription: AnyCancellable?
     
@@ -26,13 +27,17 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
         makeConstraints()
     }
     
-    @IBAction func githubLoginAction(_ sender: Any) {
+    @IBAction func githubLoginAction(_ sender: UIButton) {
         guard let authURL = URL(string: Endpoint.githubLogin) else { return }
         let scheme = "issuenine"
-        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme)
-        { callbackURL, error in
-            guard error == nil, let callbackURL = callbackURL else { return }
-            
+        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { callbackURL, error in
+            guard error == nil else {
+                let alertController = UIAlertController.errorAlert(message: error?.localizedDescription ?? "")
+                DispatchQueue.main.async { self.present(alertController, animated: true) }
+                
+                return
+            }
+            guard let callbackURL = callbackURL else { return }
             let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
             guard let token = queryItems?.filter({ $0.name == "token" }).first?.value else { return }
             self.saveUserInKeychain(token)
@@ -79,7 +84,6 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    
 }
 
 // MARK: - Extension
