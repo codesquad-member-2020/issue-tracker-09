@@ -17,8 +17,7 @@ public class LabelService {
     }
 
     public List<Label> findAll() {
-        List<Label> labels = new ArrayList<>();
-        labelRepository.findAll().forEach(e -> labels.add(e));
+        List<Label> labels = new ArrayList<>(labelRepository.findAll());
         return labels;
     }
 
