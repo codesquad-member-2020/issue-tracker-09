@@ -11,11 +11,11 @@ import Combine
 
 struct UIControlPublisher: Publisher {
 
-    typealias Output = UIControl
+    typealias Output = UITextField
     typealias Failure = Never
 
     // MARK: - Properties
-    let control: UIControl
+    let control: UITextField
     let event: UIControl.Event
     
     // MARK: - Methods

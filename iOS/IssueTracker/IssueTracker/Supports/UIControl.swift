@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-extension UIControl {
+extension UITextField {
     func publisher(for event: UIControl.Event) -> UIControlPublisher {
         return UIControlPublisher(control: self,
                                   event: event)
