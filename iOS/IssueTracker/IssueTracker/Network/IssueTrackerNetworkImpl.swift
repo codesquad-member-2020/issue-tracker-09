@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import AuthenticationServices
 import Combine
 
 struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     
     static var shared: IssueTrackerNetworkImpl = .init()
     var session: URLSession
+    var encoder: AppleIdentifierEncoder
     
-    init(session: URLSession = .shared) {
+    init(session: URLSession = .shared, encoder: AppleIdentifierEncoder = .init()) {
         self.session = session
+        self.encoder = encoder
     }
     
     func requeset<T>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError> where T : Decodable {
@@ -33,22 +36,21 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
             .eraseToAnyPublisher()
     }
     
-    func requestAppleIDJwtToken(userId: String, providing: RequestPorviding) -> AnyPublisher<URLResponse, IssueTrackerNetworkError> {
-        
+    func requestAppleIDJwtToken(credential:  ASAuthorizationAppleIDCredential, providing: RequestPorviding) -> AnyPublisher<URLResponse, IssueTrackerNetworkError> {
         guard let url = providing.url else {
             return Fail(error: .error("Invaild URL"))
                 .eraseToAnyPublisher()
         }
-        
-        guard let encodeData = try? JSONEncoder().encode(AppleLogin(name: nil, social_id: userId, email: nil)) else { return Fail(error: .error("Invaild Encode Data"))
-            .eraseToAnyPublisher()
+        guard let data = try? encoder.encode(AppleLogin(credential: credential)) else {
+            return Fail(error: .error("Invaild Encode Data"))
+                .eraseToAnyPublisher()
         }
+        var request = URLRequest(url: url)
+        request.addValue("application/json",
+                         forHTTPHeaderField: "Content-Type")
+        request.httpBody = data
         
-        var urlRequest = URLRequest(url: url)
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = encodeData
-        
-        return session.dataTaskPublisher(for: url)
+        return session.dataTaskPublisher(for: request)
             .mapError { _ in IssueTrackerNetworkError.error("IssueTracker API Error") }
             .map { $0.response }
             .eraseToAnyPublisher()

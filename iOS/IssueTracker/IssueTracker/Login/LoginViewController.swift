@@ -87,15 +87,19 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        
-        subscription = IssueTrackerNetworkImpl.shared.requestAppleIDJwtToken(userId: appleIDCredential.user, providing: Endpoint(path: .appleLogin))
-            .sink(receiveCompletion: { _ in
-                
-                self.subscription?.cancel()
-            }) { response in
-                guard let httpresponse = response as? HTTPURLResponse else { return }
-                self.saveUserInKeychain(httpresponse.allHeaderFields["Authorization"] as! String)
-        }
+        IssueTrackerNetworkImpl.shared
+            .requestAppleIDJwtToken(credential: appleIDCredential,
+                                    providing: Endpoint(path: .appleLogin))
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: {
+                guard case .failure(let error) = $0 else { return }
+                let alertViewController = UIAlertController.errorAlert(message: error.message)
+                self.present(alertViewController,
+                             animated: true)
+            }, receiveValue: { response in
+                guard let response = response as? HTTPURLResponse,
+                    let key = response.allHeaderFields["Authorization"] as? String else { return }
+                self.saveUserInKeychain(key)
+            }))
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
