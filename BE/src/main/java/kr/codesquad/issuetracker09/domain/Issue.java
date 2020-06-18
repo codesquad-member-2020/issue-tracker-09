@@ -35,8 +35,8 @@ public class Issue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    private User writer;
-    
+    private User author;
+
     @OneToMany
     @JoinColumn(name = "ISSUE_ID")
     private List<Comment> comments = new ArrayList<>();
