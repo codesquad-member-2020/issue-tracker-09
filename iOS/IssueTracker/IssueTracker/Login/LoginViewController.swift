@@ -8,7 +8,7 @@
 
 import UIKit
 import AuthenticationServices
-import SnapKit
+import Combine
 
 final class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
     
@@ -17,6 +17,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     
     // MARK: - Properties
     private var authorizationButton: ASAuthorizationAppleIDButton!
+    private var subscription: AnyCancellable?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -86,7 +87,15 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        saveUserInKeychain(appleIDCredential.user)
+        
+        subscription = IssueTrackerNetworkImpl.shared.requestAppleIDJwtToken(userId: appleIDCredential.user, providing: Endpoint(path: .appleLogin))
+            .sink(receiveCompletion: { _ in
+                
+                self.subscription?.cancel()
+            }) { response in
+                guard let httpresponse = response as? HTTPURLResponse else { return }
+                self.saveUserInKeychain(httpresponse.allHeaderFields["Authorization"] as! String)
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

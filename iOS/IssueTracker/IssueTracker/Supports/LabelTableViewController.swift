@@ -24,7 +24,7 @@ final class LabelTableViewController: CategoryTableViewController {
         subscriber = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
-                self.fetch(provider: IssueTrackerNetworkimpl(),
+                self.fetch(provider: IssueTrackerNetworkImpl.shared,
                            endpoint: Endpoint(path: .labels))
         }
         bindViewModelToView()

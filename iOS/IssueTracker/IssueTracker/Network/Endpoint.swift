@@ -16,9 +16,15 @@ struct Endpoint: RequestPorviding {
     
     enum Path: CustomStringConvertible {
         case labels
+        case appleLogin
         
         var description: String {
-            "/api/mock/labels"
+            switch self {
+            case .labels:
+                return "/api/mock/labels"
+            case .appleLogin:
+                return "/api/applelogin"
+            }
         }
     }
     
