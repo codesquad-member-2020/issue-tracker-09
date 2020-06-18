@@ -14,3 +14,9 @@ struct Label: Codable {
     let contents: String?
     let colorCode: String
 }
+
+struct PostLabel: Codable {
+    let title: String
+    let contents: String?
+    let colorCode: String
+}

@@ -14,9 +14,9 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     
     static var shared: IssueTrackerNetworkImpl = .init()
     var session: URLSession
-    var encoder: AppleIdentifierEncoder
+    var encoder: JSONEncoder
     
-    init(session: URLSession = .shared, encoder: AppleIdentifierEncoder = .init()) {
+    init(session: URLSession = .shared, encoder: JSONEncoder = .init()) {
         self.session = session
         self.encoder = encoder
     }
@@ -34,6 +34,26 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
             .map { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError { _ in .error("JSON Parsing Error") }
+            .eraseToAnyPublisher()
+    }
+    
+    func post<V: Encodable>(_ value: V, providing: RequestPorviding) -> AnyPublisher<Bool, IssueTrackerNetworkError> {
+        guard let url = providing.url else {
+            return Fail(error: .error("Invaild URL"))
+                .eraseToAnyPublisher()
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let data = try? encoder.encode(value) else {
+            return Fail(error: .error("Invaild Encode Data"))
+                .eraseToAnyPublisher()
+        }
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = data
+        
+        return session.dataTaskPublisher(for: request)
+            .mapError { _ in IssueTrackerNetworkError.error("IssueTracker API Error") }
+            .map ({ !$0.data.isEmpty })
             .eraseToAnyPublisher()
     }
     
