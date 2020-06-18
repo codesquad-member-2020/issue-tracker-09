@@ -10,7 +10,7 @@ import UIKit
 import AuthenticationServices
 import SnapKit
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
     
     // MARK: - IBOutlets
     @IBOutlet weak var signinGitHubButton: UIButton!
@@ -23,6 +23,21 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         configure()
         makeConstraints()
+    }
+    
+    @IBAction func githubLoginAction(_ sender: Any) {
+        guard let authURL = URL(string: Endpoint.githubLogin) else { return }
+        let scheme = "issuenine"
+        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme)
+        { callbackURL, error in
+            guard error == nil, let callbackURL = callbackURL else { return }
+            
+            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
+            guard let token = queryItems?.filter({ $0.name == "token" }).first?.value else { return }
+            self.saveUserInKeychain(token)
+        }
+        session.presentationContextProvider = self
+        session.start()
     }
     
     // MARK: - Methods
@@ -99,6 +114,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 // MARK: ASAuthorizationControllerPresentationContextProviding
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        guard let window = view.window else { return UIWindow() }
+        return window
+    }
+    
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         guard let window = view.window else { return UIWindow() }
         return window
     }
