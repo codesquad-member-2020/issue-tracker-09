@@ -36,7 +36,7 @@ final class CreateLabelViewController: CategoryFormViewController {
     }
     
     private func configureSaveButton() {
-        contentView.saveButton.addTarget(self, action: #selector(saveLabelContent), for: .touchUpInside)
+        
     }
     
     // MARK: Constraints

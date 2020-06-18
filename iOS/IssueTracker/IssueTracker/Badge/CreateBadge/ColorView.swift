@@ -46,8 +46,8 @@ final class ColorView: UIView {
     private func bindViewModelToView() {
         subscriber = $color
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { _ in
-                self.subscriber?.cancel()
+            .sink(receiveCompletion: { [weak self] _ in
+                self?.subscriber?.cancel()
             }) { [weak self] color in
                 guard let self = self else { return }
                 self.hexLabel.text = color?.hexString
