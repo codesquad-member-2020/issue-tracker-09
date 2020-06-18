@@ -1,6 +1,7 @@
 package kr.codesquad.issuetracker09.mock;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import kr.codesquad.issuetracker09.domain.Comment;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.*;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class MockIssueController {
 
     @GetMapping("/{issue-id}/detail")
     public GetIssueDetailResponseDTO detail(@PathVariable(name = "issue-id") long issueId) {
-        log.debug("[*] get detaul - issueId : {}", issueId);
+        log.debug("[*] get detail - issueId : {}", issueId);
         new GetIssueDetailResponseDTO();
         GetIssueDetailResponseDTO issueDetail = GetIssueDetailResponseDTO.builder()
                 .issueId(1L)
@@ -43,11 +46,13 @@ public class MockIssueController {
                 .id(1L)
                 .author("Solar")
                 .contents("좋아좋아")
+                .created(LocalDateTime.parse("2020-06-13 08:11:02", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build());
         comments.add(GetCommentListResponseDTO.builder()
                 .id(2L)
                 .author("Poogle")
                 .contents("그래그래")
+                .created(LocalDateTime.parse("2020-06-13 08:12:36", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build());
         issueDetail.setComments(comments);
 
@@ -161,20 +166,20 @@ public class MockIssueController {
 
     @GetMapping("/{issue-id}/comments")
     public List<GetCommentListResponseDTO> list(@PathVariable(name = "issue-id") long issueId) {
-        List<GetCommentListResponseDTO> getCommentListResponseDTO = new ArrayList<>();
-        getCommentListResponseDTO.add(GetCommentListResponseDTO.builder()
+        List<GetCommentListResponseDTO> comment = new ArrayList<>();
+        comment.add(GetCommentListResponseDTO.builder()
                 .id(1L)
                 .author("poogle")
                 .contents("댓글 테스트1")
-                .created(LocalDate.parse("2020-06-20"))
+                .created(LocalDateTime.now())
                 .build());
-        getCommentListResponseDTO.add(GetCommentListResponseDTO.builder()
+        comment.add(GetCommentListResponseDTO.builder()
                 .id(2L)
                 .author("solar")
                 .contents("댓글 테스트2")
-                .created(LocalDate.parse("2020-06-21"))
+                .created(LocalDateTime.now())
                 .build());
-        return getCommentListResponseDTO;
+        return comment;
     }
 
     @PostMapping("/{issue-id}/comments")
