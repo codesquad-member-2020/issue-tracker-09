@@ -9,6 +9,7 @@
 import Foundation
 
 struct Label: Codable {
+    let id: Int
     let title: String
     let contents: String?
     let colorCode: String

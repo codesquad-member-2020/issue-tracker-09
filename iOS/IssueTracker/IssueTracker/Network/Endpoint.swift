@@ -21,7 +21,7 @@ struct Endpoint: RequestPorviding {
         var description: String {
             switch self {
             case .labels:
-                return "/api/mock/labels"
+                return "/api/labels"
             case .appleLogin:
                 return "/api/applelogin"
             }

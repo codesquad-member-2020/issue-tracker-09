@@ -37,6 +37,7 @@ final class LabelTableViewController: CategoryTableViewController {
         var subscriber: AnyCancellable?
         subscriber = provider.requeset([Label].self,
                                        providing: endpoint)
+            .receive(on: RunLoop.main)
             .sink(receiveCompletion: {
                 guard case .failure(let error) = $0 else { return }
                 let alertViewController = UIAlertController.errorAlert(message: error.message)
