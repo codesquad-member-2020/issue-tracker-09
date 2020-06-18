@@ -7,9 +7,16 @@
 //
 
 import Foundation
+import AuthenticationServices
 
 struct AppleLogin: Codable {
     let name: String?
     let social_id: String
     let email: String?
+    
+    init(credential: ASAuthorizationAppleIDCredential) {
+        name = credential.fullName?.nickname
+        social_id = credential.user
+        email = credential.email
+    }
 }
