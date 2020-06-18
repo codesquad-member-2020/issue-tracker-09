@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import Combine
 
 final class DetailFormContentView: UIView {
     
     // MARK: - Properties
     private var seperatorLine: UIView!
-    private var saveButton: SaveButton!
     private var contentView: DetailFormStackView!
+    var saveButton: SaveButton!
     var dismissButton: UIButton!
     var resetButton: UIButton!
+    var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -31,6 +33,13 @@ final class DetailFormContentView: UIView {
     }
     
     // MARK: - Methods
+    func bindViewModelToView() {
+        contentView.subject
+            .sink { [weak self] bool in
+                self?.saveButton.isEnabled = bool
+        }.store(in: &subscription)
+    }
+    
     func apply(subtitle: String) {
         contentView.apply(subtitle: subtitle)
     }
@@ -51,6 +60,7 @@ final class DetailFormContentView: UIView {
         configureResetButton()
         configureSaveButton()
         configureContentView()
+        bindViewModelToView()
     }
     
     private func configureDismissButton() {

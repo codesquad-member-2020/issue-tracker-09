@@ -36,7 +36,11 @@ final class CreateLabelViewController: CategoryFormViewController {
     }
     
     private func configureSaveButton() {
-        
+        contentView.saveButton.addTarget(self, action: #selector(saveLabelContent), for: .touchUpInside)
+    }
+    
+    @objc private func saveLabelContent() {
+        dismiss(animated: true)
     }
     
     // MARK: Constraints
@@ -50,9 +54,5 @@ final class CreateLabelViewController: CategoryFormViewController {
     @objc private func resetLabelContentView() {
         contentView.resetContentView()
         colorView.resetColorView()
-    }
-    
-    @objc private func saveLabelContent() {
-        
     }
 }
