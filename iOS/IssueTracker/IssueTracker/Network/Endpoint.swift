@@ -36,7 +36,7 @@ struct Endpoint: RequestPorviding {
         
         return components.url
     }
-    static let githubLogin: String = "https://github.com/login/oauth/authorize?client_id=1aad2658e941ef024da5&scope=user%20public_repo"
+    static let githubLogin: URL? = URL(string: "https://github.com/login/oauth/authorize?client_id=1aad2658e941ef024da5&scope=user%20public_repo")
     private let baseUrl: String = "13.209.115.251"
     let path: Path
     let scheme: String = "http"

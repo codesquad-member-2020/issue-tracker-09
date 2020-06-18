@@ -28,7 +28,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     }
     
     @IBAction func githubLoginAction(_ sender: UIButton) {
-        guard let authURL = URL(string: Endpoint.githubLogin) else { return }
+        guard let authURL = Endpoint.githubLogin else { return }
         let scheme = "issuenine"
         let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { callbackURL, error in
             guard error == nil else {
@@ -41,6 +41,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
             let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
             guard let token = queryItems?.filter({ $0.name == "token" }).first?.value else { return }
             self.saveUserInKeychain(token)
+            self.dismiss(animated: true)
         }
         session.presentationContextProvider = self
         session.start()
