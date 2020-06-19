@@ -40,4 +40,7 @@ public class Issue {
     @OneToMany
     @JoinColumn(name = "ISSUE_ID")
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "issue")
+    private List<IssueHasLabel> issueHasLabelList = new ArrayList<>();
 }

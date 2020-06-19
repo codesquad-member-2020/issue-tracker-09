@@ -2,10 +2,14 @@ package kr.codesquad.issuetracker09.web.issue.controller;
 
 import kr.codesquad.issuetracker09.domain.Comment;
 import kr.codesquad.issuetracker09.domain.Issue;
+import kr.codesquad.issuetracker09.domain.Label;
 import kr.codesquad.issuetracker09.domain.Milestone;
+import kr.codesquad.issuetracker09.service.IssueLabelService;
 import kr.codesquad.issuetracker09.service.IssueService;
+import kr.codesquad.issuetracker09.service.LabelService;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.GetIssueDetailResponseDTO;
+import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
@@ -24,9 +28,13 @@ public class IssueController {
     private static final Logger log = LoggerFactory.getLogger(IssueController.class);
 
     private IssueService issueService;
+    private IssueLabelService issueLabelService;
+    private LabelService labelService;
 
-    public IssueController(IssueService issueService) {
+    public IssueController(IssueService issueService, IssueLabelService issueLabelService, LabelService labelService) {
         this.issueService = issueService;
+        this.issueLabelService = issueLabelService;
+        this.labelService = labelService;
     }
 
     @GetMapping("/{issue-id}/detail")
@@ -60,6 +68,18 @@ public class IssueController {
                 .numberOfOpenIssue(milestone.getNumberOfOpenIssue())
                 .numberOfClosedIssue(milestone.getNumberOfClosedIssue())
                 .build());
+
+        List<Label> labels = issueLabelService.findLabelsByIssueId(issueId);
+        List<GetLabelListResponseDTO> labelDTOs = new ArrayList<>();
+        for (Label label : labels) {
+            labelDTOs.add(GetLabelListResponseDTO.builder()
+                    .id(label.getId())
+                    .title(label.getTitle())
+                    .colorCode(label.getColorCode())
+                    .build());
+        }
+
+        detail.setLabels(labelDTOs);
         return detail;
     }
 

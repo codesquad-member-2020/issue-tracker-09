@@ -3,6 +3,8 @@ package kr.codesquad.issuetracker09.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Setter
@@ -21,4 +23,7 @@ public class Label {
 
     @Column(name="color_code")
     private String colorCode;
+
+    @OneToMany(mappedBy = "label")
+    private List<IssueHasLabel> issueHasLabelList = new ArrayList<>();
 }
