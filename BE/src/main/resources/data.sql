@@ -28,3 +28,9 @@ INSERT INTO comment (contents, user_id, created, issue_id)
 VALUES ("OKOK!!", 1, "2020-06-19 13:21:34", 1);
 INSERT INTO comment (contents, user_id, created, issue_id)
 VALUES ("Hi!!", 2, "2020-06-19 13:34:11", 1);
+
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 1);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 2);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 3);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (2, 2);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (2, 3);
