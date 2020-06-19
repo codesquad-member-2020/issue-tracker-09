@@ -10,6 +10,8 @@ import Foundation
 
 protocol RequestPorviding {
     var url: URL? { get }
+    
+    func request(_ method: String?, data: Data?, headers: [String: String]) throws -> URLRequest
 }
 
 struct Endpoint: RequestPorviding {
@@ -40,4 +42,17 @@ struct Endpoint: RequestPorviding {
     private let baseUrl: String = "13.209.115.251"
     let path: Path
     let scheme: String = "http"
+    
+    func request(_ method: String? = "GET", data: Data?, headers: [String: String]) throws -> URLRequest {
+        guard !KeychainItem.currentUserIdentifier.isEmpty else { throw IssueTrackerNetworkError.error("") }
+        guard let url = url else { throw IssueTrackerNetworkError.error("Invalid URL.") }
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.httpBody = data
+        headers.forEach { key, field in
+            request.addValue(key, forHTTPHeaderField: field)
+        }
+        
+        return request
+    }
 }
