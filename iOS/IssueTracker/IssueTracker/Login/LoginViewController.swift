@@ -93,16 +93,17 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
         IssueTrackerNetworkImpl.shared
-            .requestAppleIDJwtToken(credential: appleIDCredential,
-                                    providing: Endpoint(path: .appleLogin))
+        .request(AppleLogin(credential: appleIDCredential),
+                 providing: Endpoint(path: .appleLogin),
+                 method: "GET",
+                 headers: ["application/json": "Content-Type"])
             .receive(subscriber: Subscribers.Sink(receiveCompletion: {
                 guard case .failure(let error) = $0 else { return }
                 let alertViewController = UIAlertController.errorAlert(message: error.message)
                 self.present(alertViewController,
                              animated: true)
             }, receiveValue: { response in
-                guard let response = response as? HTTPURLResponse,
-                    let key = response.allHeaderFields["Authorization"] as? String else { return }
+                guard let key = response.allHeaderFields["Authorization"] as? String else { return }
                 self.saveUserInKeychain(key)
             }))
     }
