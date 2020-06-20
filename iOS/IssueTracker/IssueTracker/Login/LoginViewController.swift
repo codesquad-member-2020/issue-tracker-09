@@ -32,7 +32,11 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
         let scheme = "issuenine"
         let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { callbackURL, error in
             guard error == nil else {
-                DispatchQueue.main.async { self.present(UIAlertController(message: error?.localizedDescription ?? ""), animated: true) }
+                let alertController = UIAlertController(message: error?.localizedDescription ?? "")
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(alertController,
+                                 animated: true)
+                }
                 
                 return
             }
@@ -98,7 +102,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                      headers: ["application/json": "Content-Type"])
             .receive(subscriber: Subscribers.Sink(receiveCompletion: {
                 guard case let .failure(error) = $0 else { return }
-                self.present(UIAlertController(message: error.message),
+                let alertController = UIAlertController(message: error.message)
+                self.present(alertController,
                              animated: true)
             }, receiveValue: { response in
                 guard let key = response.allHeaderFields["Authorization"] as? String else { return }
@@ -106,24 +111,14 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }))
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        let alertController = UIAlertController(title: "Fail Authentication",
-                                                message: "Apple ID 인증에 실패하였습니다.",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Done",
-                                                style: .cancel,
-                                                handler: nil))
-        present(alertController,
-                animated: true,
-                completion: nil)
-    }
-    
     private func saveUserInKeychain(_ userIdentifier: String) {
         do {
             try KeychainItem(service: KeychainItem.service,
                              account: KeychainItem.account).saveItem(userIdentifier)
         } catch {
-            print("Unable to save userIdentifier to keychain.")
+            let alertController = UIAlertController(message: "Unable to save userIdentifier to keychain.")
+            present(alertController,
+                    animated: true)
         }
     }
 }
