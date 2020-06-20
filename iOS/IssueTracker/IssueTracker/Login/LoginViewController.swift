@@ -16,7 +16,6 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     @IBOutlet weak var signinGitHubButton: UIButton!
     
     // MARK: - Properties
-    static let identifier: String = "LoginViewController"
     private var authorizationButton: ASAuthorizationAppleIDButton!
     private var subscription: AnyCancellable?
     
@@ -35,7 +34,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
                 let alertController = UIAlertController(message: error?.localizedDescription ?? "")
                 DispatchQueue.main.async { [weak self] in
                     self?.present(alertController,
-                                 animated: true)
+                                  animated: true)
                 }
                 
                 return
@@ -51,12 +50,18 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     }
     
     // MARK: - Methods
+    func presentLabelTableViewController() {
+        guard let labelTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: LabelTableViewController.identifier) as? LabelTableViewController else { return }
+        present(labelTableViewController
+            ,animated: true)
+    }
+    
     // MARK: Configure
-    func configure() {
+    private func configure() {
         configureAppleLoginButton()
     }
     
-    func configureAppleLoginButton() {
+    private func configureAppleLoginButton() {
         authorizationButton = ASAuthorizationAppleIDButton()
         authorizationButton.addTarget(self,
                                       action: #selector(handleAuthorizationAppleIDButtonPress),
@@ -65,11 +70,11 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     }
     
     // MARK: Constraints
-    func makeConstraints() {
+    private func makeConstraints() {
         makeConstraintsAppleLoginButton()
     }
     
-    func makeConstraintsAppleLoginButton() {
+    private func makeConstraintsAppleLoginButton() {
         authorizationButton.snp.makeConstraints { make in
             make.height.equalTo(signinGitHubButton.snp.height)
             make.width.equalTo(signinGitHubButton.snp.width)
@@ -78,7 +83,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
         }
     }
     
-    @objc func handleAuthorizationAppleIDButtonPress() {
+    @objc private func handleAuthorizationAppleIDButtonPress() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]

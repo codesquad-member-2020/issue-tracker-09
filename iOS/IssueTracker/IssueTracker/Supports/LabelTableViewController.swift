@@ -12,6 +12,7 @@ import Combine
 final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
+    static let identifier: String = "LabelTableViewController"
     private let headerViewTitle: String = "Label"
     private let dataSource: LabelTableViewDataSource = .init()
     private var subscriptions: Set<AnyCancellable> = .init()
