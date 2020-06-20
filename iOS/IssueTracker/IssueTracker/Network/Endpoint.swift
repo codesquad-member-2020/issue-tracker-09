@@ -44,8 +44,7 @@ struct Endpoint: RequestPorviding {
     let scheme: String = "http"
     
     func request(_ method: String? = "GET", data: Data?, headers: [String: String]) throws -> URLRequest {
-        guard !KeychainItem.currentUserIdentifier.isEmpty else { throw IssueTrackerNetworkError.error("") }
-        guard let url = url else { throw IssueTrackerNetworkError.error("Invalid URL.") }
+        guard let url = url else { throw IssueTrackerNetworkError.urlError }
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.httpBody = data

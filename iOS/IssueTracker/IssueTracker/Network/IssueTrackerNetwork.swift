@@ -11,15 +11,23 @@ import AuthenticationServices
 import Combine
 
 enum IssueTrackerNetworkError: Error {
-    case error(String)
-    case defalutError
+    
+    case urlError
+    case urlRequestError
+    case apiError
+    case jsonEncodingError
+    case jsonDecodingError
     
     var message: String {
         switch self {
-        case let .error(msg):
-            return msg
-        case .defalutError:
-            return "잠시 후에 다시 시도해주세요"
+        case .urlError:
+            return "Invalid URL"
+        case .urlRequestError:
+            return "Invalid URL Requset"
+        case .apiError:
+            return "Invalid API"
+        case .jsonEncodingError, .jsonDecodingError:
+            return "Invalid JSON Format"
         }
     }
 }
