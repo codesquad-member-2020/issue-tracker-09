@@ -49,6 +49,7 @@ struct Endpoint: RequestPorviding {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.httpBody = data
+        request.addValue("Bearer " + KeychainItem.currentUserIdentifier, forHTTPHeaderField: "Authorization")
         headers.forEach { key, field in
             request.addValue(key, forHTTPHeaderField: field)
         }

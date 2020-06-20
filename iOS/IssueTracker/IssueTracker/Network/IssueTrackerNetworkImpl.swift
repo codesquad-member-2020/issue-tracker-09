@@ -29,7 +29,7 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
         var request = URLRequest(url: url)
         request.addValue("Bearer " + KeychainItem.currentUserIdentifier, forHTTPHeaderField: "Authorization")
         
-        return session.dataTaskPublisher(for: url)
+        return session.dataTaskPublisher(for: request)
             .mapError { _ in IssueTrackerNetworkError.error("IssueTracker API Error.") }
             .map { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
