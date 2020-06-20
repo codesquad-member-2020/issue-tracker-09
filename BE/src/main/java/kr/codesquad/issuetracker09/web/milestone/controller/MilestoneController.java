@@ -3,11 +3,14 @@ package kr.codesquad.issuetracker09.web.milestone.controller;
 import kr.codesquad.issuetracker09.domain.Milestone;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
 import kr.codesquad.issuetracker09.service.MilestoneService;
+import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.MilestonePickerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +60,10 @@ public class MilestoneController {
         }
         milestoneService.delete(milestoneId);
         response.setStatus(HttpStatus.NO_CONTENT.value());
+    }
+
+    @GetMapping("/picker")
+    public List<MilestonePickerDTO> picker() {
+        return milestoneService.findAllPicker();
     }
 }
