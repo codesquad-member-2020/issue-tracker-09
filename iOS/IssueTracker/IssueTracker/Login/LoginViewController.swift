@@ -32,8 +32,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
         let scheme = "issuenine"
         let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { callbackURL, error in
             guard error == nil else {
-                let alertController = UIAlertController.errorAlert(message: error?.localizedDescription ?? "")
-                DispatchQueue.main.async { self.present(alertController, animated: true) }
+                DispatchQueue.main.async { self.present(UIAlertController(message: error?.localizedDescription ?? ""), animated: true) }
                 
                 return
             }
@@ -93,14 +92,13 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
         IssueTrackerNetworkImpl.shared
-        .request(AppleLogin(credential: appleIDCredential),
-                 providing: Endpoint(path: .appleLogin),
-                 method: "GET",
-                 headers: ["application/json": "Content-Type"])
+            .request(AppleLogin(credential: appleIDCredential),
+                     providing: Endpoint(path: .appleLogin),
+                     method: "GET",
+                     headers: ["application/json": "Content-Type"])
             .receive(subscriber: Subscribers.Sink(receiveCompletion: {
-                guard case .failure(let error) = $0 else { return }
-                let alertViewController = UIAlertController.errorAlert(message: error.message)
-                self.present(alertViewController,
+                guard case let .failure(error) = $0 else { return }
+                self.present(UIAlertController(message: error.message),
                              animated: true)
             }, receiveValue: { response in
                 guard let key = response.allHeaderFields["Authorization"] as? String else { return }

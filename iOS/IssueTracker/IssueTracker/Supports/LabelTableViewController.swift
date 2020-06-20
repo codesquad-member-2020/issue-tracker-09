@@ -39,9 +39,8 @@ final class LabelTableViewController: CategoryTableViewController {
                                        providing: endpoint)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: {
-                guard case .failure(let error) = $0 else { return }
-                let alertViewController = UIAlertController.errorAlert(message: error.message)
-                self.present(alertViewController,
+                guard case let .failure(error) = $0 else { return }
+                self.present(UIAlertController(message: error.message),
                              animated: true)
                 subscriber?.cancel()
             }) { self.dataSource.labels = $0 }

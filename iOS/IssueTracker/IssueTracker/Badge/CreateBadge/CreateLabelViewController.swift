@@ -52,14 +52,13 @@ final class CreateLabelViewController: CategoryFormViewController {
                                                method: "POST",
                                                headers: ["application/json":"Content-Type"])
             .sink(receiveCompletion: { [weak self] in
-                guard case .failure(let error) = $0 else { return }
-                let alertViewController = UIAlertController.errorAlert(message: error.message)
-                self?.present(alertViewController,
-                             animated: true)
+                guard case let .failure(error) = $0 else { return }
+                self?.present(UIAlertController(message: error.message),
+                              animated: true)
             }) { _ in
                 // MARK: ToDo 테이블 뷰 추가적인 작업 구현
         }
-            .store(in: &subscription)
+        .store(in: &subscription)
         dismiss(animated: true)
     }
     
