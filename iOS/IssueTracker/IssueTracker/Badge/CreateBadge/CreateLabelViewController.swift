@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Combine
 
 final class CreateLabelViewController: CategoryFormViewController {
     
     // MARK: - Properties
     private var colorView: ColorView!
+    var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -40,6 +42,23 @@ final class CreateLabelViewController: CategoryFormViewController {
     }
     
     @objc private func saveLabelContent() {
+        let hexColor = colorView.color?.hexString
+        let title = contentView.contentText.0
+        let subtitle = contentView.contentText.1
+        let postLabel = PostLabel(title: title,
+                                  contents: subtitle,
+                                  colorCode: hexColor!)
+        IssueTrackerNetworkImpl.shared.request(postLabel,
+                                               providing: Endpoint.init(path: .labels),
+                                               method: "POST",
+                                               headers: ["application/json":"Content-Type"])
+            .sink(receiveCompletion: {
+                guard case .failure(let error) = $0 else { return }
+                let alertViewController = UIAlertController.errorAlert(message: error.message)
+                self.present(alertViewController,
+                             animated: true)
+            }) { _ in }
+            .store(in: &subscription)
         dismiss(animated: true)
     }
     

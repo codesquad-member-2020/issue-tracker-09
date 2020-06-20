@@ -17,6 +17,7 @@ final class DetailFormContentView: UIView {
     var saveButton: SaveButton!
     var dismissButton: UIButton!
     var resetButton: UIButton!
+    var contentText: (String, String?)!
     var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
@@ -37,6 +38,13 @@ final class DetailFormContentView: UIView {
         contentView.subject
             .sink { [weak self] bool in
                 self?.saveButton.isEnabled = bool
+        }.store(in: &subscription)
+    }
+    
+    func temp() {
+        Publishers.CombineLatest(contentView.titleSubject, contentView.subtitleSubject)
+            .sink { title, subtitle in
+                self.contentText = (title, subtitle)
         }.store(in: &subscription)
     }
     
@@ -61,6 +69,7 @@ final class DetailFormContentView: UIView {
         configureSaveButton()
         configureContentView()
         bindViewModelToView()
+        temp()
     }
     
     private func configureDismissButton() {

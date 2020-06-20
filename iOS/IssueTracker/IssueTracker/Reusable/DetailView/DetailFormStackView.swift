@@ -21,6 +21,8 @@ final class DetailFormStackView: UIStackView {
     private var innerSubtitleTextField: UITextField!
     private var subtitleSeperatorLine: UIView!
     var subject: CurrentValueSubject<Bool, Never> = .init(false)
+    var titleSubject: CurrentValueSubject<String, Never> = .init("")
+    var subtitleSubject: CurrentValueSubject<String?, Never> = .init(nil)
     var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
@@ -44,6 +46,18 @@ final class DetailFormStackView: UIStackView {
         }.store(in: &subscription)
     }
     
+    func bindTextFieldtoSubject() {
+        innerTitleTextField.publisher(for: .editingChanged)
+            .sink { textField in
+                self.titleSubject.send(textField.text!)
+        }.store(in: &subscription)
+        
+        innerSubtitleTextField.publisher(for: .editingChanged)
+            .sink { textField in
+                self.subtitleSubject.send(textField.text!)
+        }.store(in: &subscription)
+    }
+    
     func apply(subtitle: String, placeHolder: String? = nil) {
         innerSubtitleLabel.text = subtitle
         innerSubtitleTextField.placeholder = placeHolder
@@ -61,6 +75,7 @@ final class DetailFormStackView: UIStackView {
         configureTitleView()
         configureSubtitleView()
         bindViewToViewModel()
+        bindTextFieldtoSubject()
     }
     
     private func configureTitleLabel(title: String? = nil, fontSize font: CGFloat) -> UILabel {
