@@ -42,22 +42,23 @@ final class CreateLabelViewController: CategoryFormViewController {
     }
     
     @objc private func saveLabelContent() {
-        let hexColor = colorView.color?.hexString
-        let title = contentView.contentText.0
-        let subtitle = contentView.contentText.1
+        guard let hexColor = colorView.color?.hexString,
+            let title = contentView.labelSubject.title else { return }
         let postLabel = PostLabel(title: title,
-                                  contents: subtitle,
-                                  colorCode: hexColor!)
+                                  contents: contentView.labelSubject.subtitle,
+                                  colorCode: hexColor)
         IssueTrackerNetworkImpl.shared.request(postLabel,
                                                providing: Endpoint.init(path: .labels),
                                                method: "POST",
                                                headers: ["application/json":"Content-Type"])
-            .sink(receiveCompletion: {
+            .sink(receiveCompletion: { [weak self] in
                 guard case .failure(let error) = $0 else { return }
                 let alertViewController = UIAlertController.errorAlert(message: error.message)
-                self.present(alertViewController,
+                self?.present(alertViewController,
                              animated: true)
-            }) { _ in }
+            }) { _ in
+                // MARK: ToDo 테이블 뷰 추가적인 작업 구현
+        }
             .store(in: &subscription)
         dismiss(animated: true)
     }
