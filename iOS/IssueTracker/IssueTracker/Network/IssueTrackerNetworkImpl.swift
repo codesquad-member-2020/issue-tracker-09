@@ -37,6 +37,7 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
             .eraseToAnyPublisher()
     }
     
+    // MARK: Existing
     func request<V: Encodable>(_ value: V, providing: RequestPorviding, method: String?, headers: [String: String]) ->  AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
         guard let data = try? encoder.encode(value) else {
             return Fail(error: .jsonEncodingError)
@@ -48,6 +49,27 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
                                                     return Fail(error: .urlRequestError)
                                                         .eraseToAnyPublisher()
         }
+        
+        return session.dataTaskPublisher(for: request)
+            .mapError { _ in IssueTrackerNetworkError.apiError }
+            .compactMap { $0.response as? HTTPURLResponse }
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: Refactoring
+    func request<V: Encodable>(_ value: V, providing: RequestPorviding, method: URLRequest.HTTPMethod, contentType: String?) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
+        guard let data = try? encoder.encode(value) else {
+            return Fail(error: .jsonEncodingError)
+                .eraseToAnyPublisher()
+        }
+        guard let url = providing.url else {
+            return Fail(error: .urlError)
+                .eraseToAnyPublisher()
+        }
+        let request = URLRequest(url: url,
+                                 method: method,
+                                 contentType: contentType,
+                                 body: data)
         
         return session.dataTaskPublisher(for: request)
             .mapError { _ in IssueTrackerNetworkError.apiError }

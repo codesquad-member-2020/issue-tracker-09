@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB58C190249F25E10067185A /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58C18F249F25E10067185A /* URLRequest.swift */; };
 		AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */; };
 		AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */; };
 		AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB58C18F249F25E10067185A /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewController.swift; sourceTree = "<group>"; };
 		AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormContentView.swift; sourceTree = "<group>"; };
 		AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormStackView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB58C18E249F25D00067185A /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				AB58C18F249F25E10067185A /* URLRequest.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		AB58CF18249246A6003A86AC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +218,7 @@
 		AE8CA35B249224450076507B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AB58C18E249F25D00067185A /* Foundation */,
 				AE8CA35E249224640076507B /* UIKit */,
 				AE8CA3502490E09F0076507B /* Combine */,
 			);
@@ -398,6 +409,7 @@
 				ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */,
 				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
 				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
+				AB58C190249F25E10067185A /* URLRequest.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
