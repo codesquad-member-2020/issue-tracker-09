@@ -3,14 +3,13 @@ package kr.codesquad.issuetracker09.web.milestone.controller;
 import kr.codesquad.issuetracker09.domain.Milestone;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
 import kr.codesquad.issuetracker09.service.MilestoneService;
-import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.MilestoneListDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.MilestonePickerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +25,7 @@ public class MilestoneController {
     }
 
     @GetMapping()
-    public List<Milestone> getAllMilestones() {
+    public List<MilestoneListDTO> getAllMilestones() {
         return milestoneService.findAll();
     }
 
@@ -43,12 +42,11 @@ public class MilestoneController {
         Optional<Milestone> originMileStone = milestoneService.findById(milestoneId);
         if (!originMileStone.isPresent()) {
             throw new NotFoundException("Milestone doesn't exist");
-        } else {
-            originMileStone.get().setTitle(milestone.getTitle());
-            originMileStone.get().setContents(milestone.getContents());
-            originMileStone.get().setDueOn(milestone.getDueOn());
-            milestoneService.save(originMileStone.get());
         }
+        originMileStone.get().setTitle(milestone.getTitle());
+        originMileStone.get().setContents(milestone.getContents());
+        originMileStone.get().setDueOn(milestone.getDueOn());
+        milestoneService.save(originMileStone.get());
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
 
