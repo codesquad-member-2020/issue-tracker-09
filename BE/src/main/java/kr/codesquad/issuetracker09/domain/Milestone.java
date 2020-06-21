@@ -1,5 +1,6 @@
 package kr.codesquad.issuetracker09.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,9 +27,19 @@ public class Milestone {
     @Column(name = "due_on")
     private LocalDate dueOn;
 
-    @Column(name = "number_of_open_issue")
-    private Integer numberOfOpenIssue;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @OneToMany(mappedBy = "milestone")
+    private List<Issue> issues = new ArrayList<>();
 
-    @Column(name = "number_of_closed_issue")
-    private Integer numberOfClosedIssue;
+    public Long getNumberOfOpenIssue() {
+        Long numberOfOpenMilestone = issues.stream()
+                .filter(Issue::isOpen).count();
+        return numberOfOpenMilestone;
+    }
+
+    public Long getNumberOfClosedIssue() {
+        Long numberOfOpenMilestone = issues.stream()
+                .filter(x -> !x.isOpen()).count();
+        return numberOfOpenMilestone;
+    }
 }
