@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,14 +30,14 @@ public class Milestone {
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
 
-    public Long getNumberOfOpenIssue() {
-        Long numberOfOpenMilestone = issues.stream()
+    public int getNumberOfOpenIssue() {
+        int numberOfOpenMilestone = (int) issues.stream()
                 .filter(Issue::isOpen).count();
         return numberOfOpenMilestone;
     }
 
-    public Long getNumberOfClosedIssue() {
-        Long numberOfOpenMilestone = issues.stream()
+    public int getNumberOfClosedIssue() {
+        int numberOfOpenMilestone = (int) issues.stream()
                 .filter(x -> !x.isOpen()).count();
         return numberOfOpenMilestone;
     }

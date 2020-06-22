@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class MockIssueController {
 
     @GetMapping("/{issue-id}/detail")
     public GetIssueDetailResponseDTO detail(@PathVariable(name = "issue-id") long issueId) {
-        log.debug("[*] get detaul - issueId : {}", issueId);
+        log.debug("[*] get detail - issueId : {}", issueId);
         new GetIssueDetailResponseDTO();
         GetIssueDetailResponseDTO issueDetail = GetIssueDetailResponseDTO.builder()
                 .issueId(1L)
@@ -166,13 +167,13 @@ public class MockIssueController {
                 .id(1L)
                 .author("poogle")
                 .contents("댓글 테스트1")
-                .created(LocalDate.parse("2020-06-20"))
+                .created(LocalDateTime.now())
                 .build());
         getCommentListResponseDTO.add(GetCommentListResponseDTO.builder()
                 .id(2L)
                 .author("solar")
                 .contents("댓글 테스트2")
-                .created(LocalDate.parse("2020-06-21"))
+                .created(LocalDateTime.now())
                 .build());
         return getCommentListResponseDTO;
     }

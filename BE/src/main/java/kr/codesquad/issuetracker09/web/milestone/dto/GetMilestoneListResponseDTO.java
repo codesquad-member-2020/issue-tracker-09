@@ -16,6 +16,6 @@ public class GetMilestoneListResponseDTO {
     private String title;
     private String contents;
     private LocalDate dueOn;
-    private Integer numberOfOpenIssue;
-    private Integer numberOfClosedIssue;
+    private int numberOfOpenIssue;
+    private int numberOfClosedIssue;
 }
