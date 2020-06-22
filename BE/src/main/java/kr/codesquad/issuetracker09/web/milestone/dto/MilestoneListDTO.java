@@ -1,21 +1,24 @@
 package kr.codesquad.issuetracker09.web.milestone.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@ToString
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetMilestoneListResponseDTO {
+public class MilestoneListDTO {
     private Long id;
     private String title;
     private String contents;
     private LocalDate dueOn;
-    private int numberOfOpenIssue;
-    private int numberOfClosedIssue;
+    private Long numberOfOpenIssue;
+    private Long numberOfClosedIssue;
+
 }
+
+

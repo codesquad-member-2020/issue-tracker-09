@@ -2,7 +2,6 @@ package kr.codesquad.issuetracker09.web.label.controller;
 
 import kr.codesquad.issuetracker09.domain.Label;
 import kr.codesquad.issuetracker09.service.LabelService;
-import kr.codesquad.issuetracker09.web.label.dto.PostRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
