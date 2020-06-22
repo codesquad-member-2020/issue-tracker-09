@@ -157,8 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				ABAF6E032492038A00E69418 /* BadgeLabel.swift */,
-				AEE597352498925100F5C622 /* SaveButton.swift */,
 				AB58CF19249246B4003A86AC /* DetailView */,
+				AEE597352498925100F5C622 /* SaveButton.swift */,
 				AB58CF18249246A6003A86AC /* TableView */,
 			);
 			path = Reusable;
@@ -178,10 +178,10 @@
 		AE5371232499F79C00269F6B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				ABAD309D249A007F00618753 /* Model */,
 				AE5371242499F7AB00269F6B /* Endpoint.swift */,
 				ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */,
 				ABAD309B2499FCE000618753 /* IssueTrackerNetworkImpl.swift */,
+				ABAD309D249A007F00618753 /* Model */,
 				AE84609024A0DA11008CF76B /* Usable.swift */,
 				AE84609224A0DACA008CF76B /* UsableImpl.swift */,
 			);
@@ -205,8 +205,8 @@
 		AE8CA33F248F75D00076507B /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				AE8CA340248F75DE0076507B /* LoginViewController.swift */,
 				AE8CA342248F77920076507B /* LoginButton.swift */,
+				AE8CA340248F75DE0076507B /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -285,8 +285,8 @@
 		AEE5973024988C5000F5C622 /* CreateBadge */ = {
 			isa = PBXGroup;
 			children = (
-				AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */,
 				AEE597372498952300F5C622 /* ColorView.swift */,
+				AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */,
 			);
 			path = CreateBadge;
 			sourceTree = "<group>";

@@ -18,7 +18,7 @@ struct UseCase: Usable {
     private init() { }
     
     // MARK: - Methods
-    func decode<D: Decodable>(_ type: D.Type, endpoint: RequestProviding, method: URLRequest.HTTPMethod) -> AnyPublisher<D, IssueTrackerNetworkError> {
+    func decode<D: Decodable>(_ type: D.Type, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<D, IssueTrackerNetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()
         }
@@ -32,7 +32,7 @@ struct UseCase: Usable {
             .eraseToAnyPublisher()
     }
     
-    func encode(endpoint: RequestProviding, method: URLRequest.HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
+    func encode(endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()
         }
@@ -45,7 +45,7 @@ struct UseCase: Usable {
             .eraseToAnyPublisher()
     }
     
-    func encode<E: Encodable>(_ data: E, endpoint: RequestProviding, method: URLRequest.HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
+    func encode<E: Encodable>(_ data: E, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()
         }
