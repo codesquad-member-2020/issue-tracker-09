@@ -1,12 +1,11 @@
 package kr.codesquad.issuetracker09.web.issue.controller;
 
-import kr.codesquad.issuetracker09.domain.Comment;
-import kr.codesquad.issuetracker09.domain.Issue;
-import kr.codesquad.issuetracker09.domain.Label;
-import kr.codesquad.issuetracker09.domain.Milestone;
+import kr.codesquad.issuetracker09.domain.*;
+import kr.codesquad.issuetracker09.service.AssigneeService;
 import kr.codesquad.issuetracker09.service.IssueLabelService;
 import kr.codesquad.issuetracker09.service.IssueService;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.GetAssigneeListResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.GetIssueDetailResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
@@ -28,10 +27,12 @@ public class IssueController {
 
     private IssueService issueService;
     private IssueLabelService issueLabelService;
+    private AssigneeService assigneeService;
 
-    public IssueController(IssueService issueService, IssueLabelService issueLabelService) {
+    public IssueController(IssueService issueService, IssueLabelService issueLabelService, AssigneeService assigneeService) {
         this.issueService = issueService;
         this.issueLabelService = issueLabelService;
+        this.assigneeService = assigneeService;
     }
 
     @GetMapping("/{issue-id}/detail")
@@ -45,6 +46,16 @@ public class IssueController {
                 .open(issue.isOpen())
                 .build();
 
+        List<GetAssigneeListResponseDTO> getAssigneeListResponseDTOS = new ArrayList<>();
+        List<Assignee> assignees = assigneeService.findAllAssigneeByIssueId(issueId);
+        for (Assignee assignee : assignees) {
+            getAssigneeListResponseDTOS.add(GetAssigneeListResponseDTO.builder()
+                    .userId(assignee.getUser().getId())
+                    .userName(assignee.getUser().getName())
+                    .build());
+        }
+        detail.setAssignees(getAssigneeListResponseDTOS);
+
         List<GetCommentListResponseDTO> comments = new ArrayList<>();
         for (Comment comment : issue.getComments()) {
             comments.add(GetCommentListResponseDTO.builder()
@@ -54,7 +65,6 @@ public class IssueController {
                     .created(comment.getCreated())
                     .build());
         }
-
         detail.setComments(comments);
 
         Milestone milestone = issue.getMilestone();
@@ -75,7 +85,6 @@ public class IssueController {
                     .colorCode(label.getColorCode())
                     .build());
         }
-
         detail.setLabels(labelDTOs);
         return detail;
     }
