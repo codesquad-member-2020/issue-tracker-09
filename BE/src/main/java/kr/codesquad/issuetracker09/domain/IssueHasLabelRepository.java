@@ -1,6 +1,5 @@
 package kr.codesquad.issuetracker09.domain;
 
-import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

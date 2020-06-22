@@ -88,7 +88,7 @@ public class MockIssueController {
     public void patchDeatil(@PathVariable(name = "issue-id") long issueId,
                             @RequestBody PatchDetailRequestDTO request,
                             HttpServletResponse response) {
-        log.debug("[*] put - issueId : {}, request : {}", issueId, request);
+        log.debug("[*] patch - issueId : {}, request : {}", issueId, request);
         response.setStatus(HttpStatus.OK.value());
     }
 

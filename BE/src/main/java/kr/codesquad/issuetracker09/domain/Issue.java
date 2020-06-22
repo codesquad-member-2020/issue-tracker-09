@@ -43,4 +43,8 @@ public class Issue {
 
     @OneToMany(mappedBy = "issue")
     private List<IssueHasLabel> issueHasLabelList = new ArrayList<>();
+
+    public void editMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }
