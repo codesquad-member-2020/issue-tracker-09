@@ -110,9 +110,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 let alertController = UIAlertController(message: error.message)
                 self.present(alertController,
                              animated: true)
-            }, receiveValue: { response in
+            }, receiveValue: { [weak self] response in
                 guard let key = response.allHeaderFields["Authorization"] as? String else { return }
-                self.saveUserInKeychain(key)
+                self?.saveUserInKeychain(key)
             }))
     }
     

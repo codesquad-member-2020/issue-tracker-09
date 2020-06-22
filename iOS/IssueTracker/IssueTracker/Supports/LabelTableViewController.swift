@@ -24,9 +24,9 @@ final class LabelTableViewController: CategoryTableViewController {
         tableView.dataSource = dataSource
         subscriber = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
-            .sink { _ in
-                self.fetch(provider: IssueTrackerNetworkImpl.shared,
-                           endpoint: Endpoint(path: .labels))
+            .sink { [weak self] _ in
+                self?.fetch(provider: IssueTrackerNetworkImpl.shared,
+                            endpoint: Endpoint(path: .labels))
         }
         bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
@@ -39,21 +39,23 @@ final class LabelTableViewController: CategoryTableViewController {
         subscriber = provider.requeset([Label].self,
                                        providing: endpoint)
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: {
+            .sink(receiveCompletion: { [weak self] in
+                subscriber?.cancel()
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
-                self.present(alertController,
-                             animated: true)
-                subscriber?.cancel()
-            }) { self.dataSource.labels = $0 }
+                self?.present(alertController,
+                              animated: true)
+            }) {
+                [weak self] in
+                self?.dataSource.labels = $0 }
     }
     
     private func bindViewModelToView() {
         var subscriber: AnyCancellable?
         subscriber = dataSource.$labels
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { _ in subscriber?.cancel() }) { _ in
-                self.tableView.reloadData()
+            .sink(receiveCompletion: { _ in subscriber?.cancel() }) { [weak self] _ in
+                self?.tableView.reloadData()
         }
     }
     
