@@ -12,46 +12,22 @@ import Combine
 
 struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     
+    // MARK: - Properties
     static var shared: IssueTrackerNetworkImpl = .init()
     var session: URLSession
     var encoder: JSONEncoder
     
+    // MARK: - Lifecycle
     init(session: URLSession = .shared, encoder: JSONEncoder = .init()) {
         self.session = session
         self.encoder = encoder
     }
     
-    func requeset<T>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError> where T : Decodable {
-        guard let url = providing.url else {
-            return Fail(error: .error("Invaild URL."))
-                .eraseToAnyPublisher()
-        }
-        var request = URLRequest(url: url)
-        request.addValue("Bearer " + KeychainItem.currentUserIdentifier, forHTTPHeaderField: "Authorization")
-        
-        return session.dataTaskPublisher(for: url)
-            .mapError { _ in IssueTrackerNetworkError.error("IssueTracker API Error.") }
-            .map { $0.data }
-            .decode(type: T.self, decoder: JSONDecoder())
-            .mapError { _ in .error("JSON Parsing Error.") }
-            .eraseToAnyPublisher()
-    }
-    
-    func request<V: Encodable>(_ value: V, providing: RequestPorviding, method: String?, headers: [String: String]) ->  AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
-        guard let data = try? encoder.encode(value) else {
-            return Fail(error: .error("Invaild Encode Data."))
-                .eraseToAnyPublisher()
-        }
-        guard let request = try? providing.request(method,
-                                                   data: data,
-                                                   headers: headers) else {
-                                                    return Fail(error: .error("Invaild URLRequest."))
-                                                        .eraseToAnyPublisher()
-        }
-        
-        return session.dataTaskPublisher(for: request)
-            .mapError { _ in IssueTrackerNetworkError.error("IssueTracker API Error.") }
-            .compactMap { $0.response as? HTTPURLResponse }
+    // MARK: - Methods
+    func request(request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), IssueTrackerNetworkError> {
+        session.dataTaskPublisher(for: request)
+            .mapError { _ in IssueTrackerNetworkError.apiError }
+            .map {  data, response in return (data, response) }
             .eraseToAnyPublisher()
     }
 }

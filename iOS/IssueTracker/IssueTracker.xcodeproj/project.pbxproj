@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB58C190249F25E10067185A /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58C18F249F25E10067185A /* URLRequest.swift */; };
 		AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */; };
 		AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */; };
 		AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */; };
@@ -21,7 +22,8 @@
 		ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* BadgeLabel.swift */; };
 		AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5371242499F7AB00269F6B /* Endpoint.swift */; };
 		AE537168249B80A000269F6B /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE537167249B80A000269F6B /* UIAlert.swift */; };
-		AE53716C249B96E700269F6B /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE53716B249B96E700269F6B /* UITabBarController.swift */; };
+		AE84609124A0DA11008CF76B /* Usable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609024A0DA11008CF76B /* Usable.swift */; };
+		AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609224A0DACA008CF76B /* UsableImpl.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
@@ -54,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB58C18F249F25E10067185A /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		AB58CF1A249246C6003A86AC /* CategoryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewController.swift; sourceTree = "<group>"; };
 		AB58CF1C249248BE003A86AC /* DetailFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormContentView.swift; sourceTree = "<group>"; };
 		AB6CA8BC2497731600FE8AE4 /* DetailFormStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFormStackView.swift; sourceTree = "<group>"; };
@@ -69,7 +72,8 @@
 		ABAF6E032492038A00E69418 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
 		AE5371242499F7AB00269F6B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AE537167249B80A000269F6B /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
-		AE53716B249B96E700269F6B /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
+		AE84609024A0DA11008CF76B /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
+		AE84609224A0DACA008CF76B /* UsableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableImpl.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
@@ -113,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB58C18E249F25D00067185A /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				AB58C18F249F25E10067185A /* URLRequest.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		AB58CF18249246A6003A86AC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,8 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				ABAF6E032492038A00E69418 /* BadgeLabel.swift */,
-				AEE597352498925100F5C622 /* SaveButton.swift */,
 				AB58CF19249246B4003A86AC /* DetailView */,
+				AEE597352498925100F5C622 /* SaveButton.swift */,
 				AB58CF18249246A6003A86AC /* TableView */,
 			);
 			path = Reusable;
@@ -166,10 +178,12 @@
 		AE5371232499F79C00269F6B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				ABAD309D249A007F00618753 /* Model */,
 				AE5371242499F7AB00269F6B /* Endpoint.swift */,
 				ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */,
 				ABAD309B2499FCE000618753 /* IssueTrackerNetworkImpl.swift */,
+				ABAD309D249A007F00618753 /* Model */,
+				AE84609024A0DA11008CF76B /* Usable.swift */,
+				AE84609224A0DACA008CF76B /* UsableImpl.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -191,8 +205,8 @@
 		AE8CA33F248F75D00076507B /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				AE8CA340248F75DE0076507B /* LoginViewController.swift */,
 				AE8CA342248F77920076507B /* LoginButton.swift */,
+				AE8CA340248F75DE0076507B /* LoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -210,6 +224,7 @@
 		AE8CA35B249224450076507B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AB58C18E249F25D00067185A /* Foundation */,
 				AE8CA35E249224640076507B /* UIKit */,
 				AE8CA3502490E09F0076507B /* Combine */,
 			);
@@ -221,7 +236,6 @@
 			children = (
 				AE8CA35C249224560076507B /* UIColor.swift */,
 				AE537167249B80A000269F6B /* UIAlert.swift */,
-				AE53716B249B96E700269F6B /* UITabBarController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -271,8 +285,8 @@
 		AEE5973024988C5000F5C622 /* CreateBadge */ = {
 			isa = PBXGroup;
 			children = (
-				AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */,
 				AEE597372498952300F5C622 /* ColorView.swift */,
+				AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */,
 			);
 			path = CreateBadge;
 			sourceTree = "<group>";
@@ -397,11 +411,13 @@
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
 				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,
 				ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */,
-				AE53716C249B96E700269F6B /* UITabBarController.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
 				ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */,
 				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
+				AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */,
 				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
+				AE84609124A0DA11008CF76B /* Usable.swift in Sources */,
+				AB58C190249F25E10067185A /* URLRequest.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
 				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,

@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        guard KeychainItem.currentUserIdentifier == "",
-            let rootViewController = window?.rootViewController as? UITabBarController else { return true }
+        guard !KeychainItem.currentUserIdentifier.isEmpty,
+            let rootViewController = window?.rootViewController as? LoginViewController else { return true }
         DispatchQueue.main.async {
-            rootViewController.presentLoginViewController()
+            rootViewController.presentTabBarController()
         }
-    
+        
         return true
     }
     

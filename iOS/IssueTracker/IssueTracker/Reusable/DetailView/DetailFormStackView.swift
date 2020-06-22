@@ -9,6 +9,8 @@
 import UIKit
 import Combine
 
+typealias LabelSubjects = (title: String?, subtitle: String?)
+
 final class DetailFormStackView: UIStackView {
     
     // MARK: - Properties
@@ -20,8 +22,9 @@ final class DetailFormStackView: UIStackView {
     private var innerSubtitleLabel: UILabel!
     private var innerSubtitleTextField: UITextField!
     private var subtitleSeperatorLine: UIView!
-    var subject: CurrentValueSubject<Bool, Never> = .init(false)
-    var subscription: Set<AnyCancellable> = .init()
+    @Published var innerTitleTextFieldIsEmpty: Bool = false
+    @Published var labelSubject: LabelSubjects = (title: nil, subtitle: nil)
+    private var subscriptions: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -37,13 +40,6 @@ final class DetailFormStackView: UIStackView {
     }
     
     // MARK: - Methods
-    func bindViewToViewModel() {
-        innerTitleTextField.publisher(for: .editingChanged)
-            .sink { [weak self] textField in
-                self?.subject.send(!(textField.text?.isEmpty ?? true))
-        }.store(in: &subscription)
-    }
-    
     func apply(subtitle: String, placeHolder: String? = nil) {
         innerSubtitleLabel.text = subtitle
         innerSubtitleTextField.placeholder = placeHolder
@@ -195,5 +191,32 @@ final class DetailFormStackView: UIStackView {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(1)
         }
+    }
+    // MARK: Bind
+    func bindViewToViewModel() {
+        validateInnerTitleTextField()
+        bindTextFieldtoSubject(textField: innerTitleTextField, type: true)
+        bindTextFieldtoSubject(textField: innerSubtitleTextField, type: false)
+    }
+    
+    func validateInnerTitleTextField() {
+        innerTitleTextField.publisher(for: .editingChanged)
+            .sink { [weak self] textField in
+                self?.innerTitleTextFieldIsEmpty = !(textField.text?.isEmpty ?? true)
+        }
+        .store(in: &subscriptions)
+    }
+    
+    
+    func bindTextFieldtoSubject(textField: UITextField, type: Bool) {
+        textField.publisher(for: .editingChanged)
+            .sink { [weak self] textField in
+                if type {
+                    self?.labelSubject.title = textField.text
+                } else {
+                    self?.labelSubject.subtitle = textField.text
+                }
+        }
+        .store(in: &subscriptions)
     }
 }

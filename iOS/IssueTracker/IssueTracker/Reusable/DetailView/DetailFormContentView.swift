@@ -17,6 +17,7 @@ final class DetailFormContentView: UIView {
     var saveButton: SaveButton!
     var dismissButton: UIButton!
     var resetButton: UIButton!
+    var labelSubject: LabelSubjects = (nil, nil)
     var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
@@ -33,13 +34,6 @@ final class DetailFormContentView: UIView {
     }
     
     // MARK: - Methods
-    func bindViewModelToView() {
-        contentView.subject
-            .sink { [weak self] bool in
-                self?.saveButton.isEnabled = bool
-        }.store(in: &subscription)
-    }
-    
     func apply(subtitle: String) {
         contentView.apply(subtitle: subtitle)
     }
@@ -60,7 +54,7 @@ final class DetailFormContentView: UIView {
         configureResetButton()
         configureSaveButton()
         configureContentView()
-        bindViewModelToView()
+        bind()
     }
     
     private func configureDismissButton() {
@@ -141,7 +135,28 @@ final class DetailFormContentView: UIView {
             make.top.equalTo(seperatorLine.snp.bottom).offset(16)
             make.bottom.equalTo(saveButton.snp.top).offset(-16)
             make.leading.trailing.equalToSuperview()
-            
         }
+    }
+    
+    // MARK: Bind
+    private func bind() {
+        bindViewToViewModel()
+        passDataViewToViewController()
+    }
+    
+    private func bindViewToViewModel() {
+        contentView.$innerTitleTextFieldIsEmpty
+            .sink { [weak self] selected in
+                self?.saveButton.isEnabled = selected
+        }
+        .store(in: &subscription)
+    }
+    
+    private func passDataViewToViewController() {
+        contentView.$labelSubject
+            .sink { [weak self] labelSubject in
+                self?.labelSubject = labelSubject
+        }
+        .store(in: &subscription)
     }
 }

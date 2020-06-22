@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Combine
 
 final class CreateLabelViewController: CategoryFormViewController {
     
     // MARK: - Properties
     private var colorView: ColorView!
+    var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -40,6 +42,23 @@ final class CreateLabelViewController: CategoryFormViewController {
     }
     
     @objc private func saveLabelContent() {
+        guard let hexColor = colorView.color?.hexString,
+            let title = contentView.labelSubject.title else { return }
+        let postLabel = PostLabel(title: title,
+                                  contents: contentView.labelSubject.subtitle,
+                                  colorCode: hexColor)
+        UseCase.shared
+            .encode(postLabel, endpoint: Endpoint(path: .labels()),
+                    method: .post)
+            .sink(receiveCompletion: { [weak self] in
+                guard case let .failure(error) = $0 else { return }
+                let alertController = UIAlertController(message: error.message)
+                self?.present(alertController,
+                              animated: true)
+            }) { _ in
+                // MARK: ToDo 테이블 뷰 추가적인 작업 구현
+        }
+        .store(in: &subscription)
         dismiss(animated: true)
     }
     

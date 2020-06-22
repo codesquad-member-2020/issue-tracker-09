@@ -10,10 +10,13 @@ import Foundation
 import AuthenticationServices
 
 struct AppleLogin: Codable {
+    
+    // MARK: - Properties
     let name: String?
     let social_id: String
     let email: String?
     
+    // MARK: - Lifecycle
     init(credential: ASAuthorizationAppleIDCredential) {
         name = credential.fullName?.nickname
         social_id = credential.user

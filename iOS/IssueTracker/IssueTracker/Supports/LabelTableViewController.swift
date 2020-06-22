@@ -12,53 +12,39 @@ import Combine
 final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
+    static let identifier: String = "LabelTableViewController"
     private let headerViewTitle: String = "Label"
     private let dataSource: LabelTableViewDataSource = .init()
     private var subscriptions: Set<AnyCancellable> = .init()
-    private var subscriber: AnyCancellable?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        subscriber = Timer.publish(every: 1, on: .main, in: .common)
+        Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
-            .sink { _ in
-                self.fetch(provider: IssueTrackerNetworkImpl.shared,
-                           endpoint: Endpoint(path: .labels))
-        }
+            .sink { [weak self] _ in
+                self?.fetch(provider: UseCase.shared ,
+                            endpoint: Endpoint(path: .labels()))
+        }.store(in: &subscriptions)
         bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
     }
     
     // MARK: - Methods
-    private func fetch(provider: IssueTrackerNetwork, endpoint: RequestPorviding) {
-        var subscriber: AnyCancellable?
-        subscriber = provider.requeset([Label].self,
-                                       providing: endpoint)
+    private func fetch(provider: Usable, endpoint: RequestProviding) {
+        provider.decode([Label].self,
+                        endpoint: endpoint,
+                        method: .get)
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: {
-                guard case .failure(let error) = $0 else { return }
-                let alertViewController = UIAlertController.errorAlert(message: error.message)
-                self.present(alertViewController,
-                             animated: true)
-                subscriber?.cancel()
-            }) { self.dataSource.labels = $0 }
-    }
-    
-    private func bindViewModelToView() {
-        var subscriber: AnyCancellable?
-        subscriber = dataSource.$labels
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { _ in subscriber?.cancel() }) { _ in
-                self.tableView.reloadData()
-        }
-    }
-    
-    @objc private func presentCreateLabelViewController() {
-        present(CreateLabelViewController(),
-                animated: true)
+            .sink(receiveCompletion: { [weak self] in
+                guard case let .failure(error) = $0 else { return }
+                let alertController = UIAlertController(message: error.message)
+                self?.present(alertController,
+                              animated: true)
+            }) { [weak self] in self?.dataSource.labels = $0 }
+            .store(in: &subscriptions)
     }
     
     // MARK: Delegate
@@ -70,5 +56,21 @@ final class LabelTableViewController: CategoryTableViewController {
                                         for: .touchUpInside)
         
         return headerView
+    }
+    
+    // MARK: Bind
+    private func bindViewModelToView() {
+        dataSource.$labels
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+        }
+        .store(in: &subscriptions)
+    }
+    
+    // MARK: Objc
+    @objc private func presentCreateLabelViewController() {
+        present(CreateLabelViewController(),
+                animated: true)
     }
 }
