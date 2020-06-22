@@ -18,6 +18,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     // MARK: - Properties
     private var authorizationButton: ASAuthorizationAppleIDButton!
     private var subscription: AnyCancellable?
+    private let tabbarControllerIdentifier: String = "MasterViewController"
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -51,7 +52,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     
     // MARK: - Methods
     func presentLabelTableViewController() {
-        guard let labelTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: LabelTableViewController.identifier) as? LabelTableViewController else { return }
+       let labelTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: tabbarControllerIdentifier)
         present(labelTableViewController
             ,animated: true)
     }
