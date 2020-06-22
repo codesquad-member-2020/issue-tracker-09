@@ -30,6 +30,7 @@ struct Endpoint: RequestPorviding {
         }
     }
     
+    // MARK: - Properties
     var url: URL? {
         var components = URLComponents()
         components.host = baseUrl
@@ -40,9 +41,10 @@ struct Endpoint: RequestPorviding {
     }
     static let githubLogin: URL? = URL(string: "https://github.com/login/oauth/authorize?client_id=1aad2658e941ef024da5&scope=user%20public_repo")
     private let baseUrl: String = "13.209.115.251"
+    private let scheme: String = "http"
     let path: Path
-    let scheme: String = "http"
     
+    // MARK: - Properties
     func request(_ method: String? = "GET", data: Data?, headers: [String: String]) throws -> URLRequest {
         guard let url = url else { throw IssueTrackerNetworkError.urlError }
         var request = URLRequest(url: url)

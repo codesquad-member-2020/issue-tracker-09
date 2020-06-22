@@ -11,7 +11,7 @@ import Combine
 
 final class ColorView: UIView {
     
-    // MARK: Properties
+    // MARK: - Properties
     private var titleLabel: UILabel!
     private var hexLabel: UILabel!
     private var colorPreView: UIView!
@@ -20,7 +20,7 @@ final class ColorView: UIView {
     @Published var color: UIColor?
     private var subscriber: AnyCancellable?
     
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
     override init(frame: CGRect) {
         color = UIColor.random
         super.init(frame: frame)
@@ -37,26 +37,13 @@ final class ColorView: UIView {
         bindViewModelToView()
     }
     
-    // MARK: Methods
+    // MARK: - Methods
     func resetColorView() {
         hexLabel.text = ""
         colorPreView.backgroundColor = .clear
     }
     
-    private func bindViewModelToView() {
-        subscriber = $color
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { [weak self] _ in
-                self?.subscriber?.cancel()
-            }) { [weak self] color in
-                guard let self = self else { return }
-                self.hexLabel.text = color?.hexString
-                UIView.animate(withDuration: 0.2) {
-                    self.colorPreView.backgroundColor = color
-                }
-        }
-    }
-    
+    // MARK: Configure
     private func configure() {
         configureTitleLabel()
         configureHexLabel()
@@ -102,6 +89,7 @@ final class ColorView: UIView {
         addSubview(sepertorLine)
     }
     
+    // MARK: Constraints
     private func makeConstraints() {
         makeConstraintsTitleLabel()
         makeConstraintsHexLabel()
@@ -151,6 +139,22 @@ final class ColorView: UIView {
         }
     }
     
+    // MARK: Bind
+    private func bindViewModelToView() {
+        subscriber = $color
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] _ in
+                self?.subscriber?.cancel()
+            }) { [weak self] color in
+                guard let self = self else { return }
+                self.hexLabel.text = color?.hexString
+                UIView.animate(withDuration: 0.2) {
+                    self.colorPreView.backgroundColor = color
+                }
+        }
+    }
+    
+    // MARK: Objc
     @objc private func generateRandomColor() {
         color = UIColor.random
     }

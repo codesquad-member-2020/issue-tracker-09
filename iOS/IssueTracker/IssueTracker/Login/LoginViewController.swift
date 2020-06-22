@@ -17,7 +17,6 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     
     // MARK: - Properties
     private var authorizationButton: ASAuthorizationAppleIDButton!
-    private var subscription: AnyCancellable?
     private let tabbarControllerIdentifier: String = "MasterViewController"
     
     // MARK: - Lifecycle

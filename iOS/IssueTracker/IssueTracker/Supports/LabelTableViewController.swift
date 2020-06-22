@@ -16,7 +16,6 @@ final class LabelTableViewController: CategoryTableViewController {
     private let headerViewTitle: String = "Label"
     private let dataSource: LabelTableViewDataSource = .init()
     private var subscriptions: Set<AnyCancellable> = .init()
-    private var subscriber: AnyCancellable?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -35,32 +34,16 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Methods
     private func fetch(provider: IssueTrackerNetwork, endpoint: RequestPorviding) {
-        var subscriber: AnyCancellable?
-        subscriber = provider.requeset([Label].self,
-                                       providing: endpoint)
+        provider.requeset([Label].self,
+                          providing: endpoint)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
-                subscriber?.cancel()
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) {
-                [weak self] in
-                self?.dataSource.labels = $0 }
-    }
-    
-    private func bindViewModelToView() {
-        dataSource.$labels
-            .receive(on: RunLoop.main)
-            .sink { [weak self] _ in
-                self?.tableView.reloadData()
-        }.store(in: &subscriptions)
-    }
-    
-    @objc private func presentCreateLabelViewController() {
-        present(CreateLabelViewController(),
-                animated: true)
+            }) { [weak self] in self?.dataSource.labels = $0 }
+            .store(in: &subscriptions)
     }
     
     // MARK: Delegate
@@ -72,5 +55,21 @@ final class LabelTableViewController: CategoryTableViewController {
                                         for: .touchUpInside)
         
         return headerView
+    }
+    
+    // MARK: Bind
+    private func bindViewModelToView() {
+        dataSource.$labels
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+        }
+        .store(in: &subscriptions)
+    }
+    
+    // MARK: Objc
+    @objc private func presentCreateLabelViewController() {
+        present(CreateLabelViewController(),
+                animated: true)
     }
 }
