@@ -12,15 +12,18 @@ import Combine
 
 struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     
+    // MARK: - Properties
     static var shared: IssueTrackerNetworkImpl = .init()
     var session: URLSession
     var encoder: JSONEncoder
     
+    // MARK: - Lifecycle
     init(session: URLSession = .shared, encoder: JSONEncoder = .init()) {
         self.session = session
         self.encoder = encoder
     }
     
+    // MARK: - Methods
     func requeset<T>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError> where T : Decodable {
         guard let url = providing.url else {
             return Fail(error: .urlError)

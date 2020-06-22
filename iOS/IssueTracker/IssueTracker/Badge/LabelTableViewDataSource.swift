@@ -10,9 +10,13 @@ import UIKit
 import Combine
 
 final class LabelTableViewDataSource: NSObject {
+    
+    // MARK: - Properties
     @Published var labels: [Label] = .init()
 }
 
+// MARK: - Extension
+// MARK: TableViewDataSource
 extension LabelTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return labels.count

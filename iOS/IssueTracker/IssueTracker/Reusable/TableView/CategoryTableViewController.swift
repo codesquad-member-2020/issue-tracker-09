@@ -17,14 +17,14 @@ class CategoryTableViewController: UITableViewController {
     }
     
     // MARK: - Methods
-    // MARK: DataSource
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TitleHeaderView.height
-    }
     
     func registerCell(anyClass: AnyClass, identifier: String) {
         tableView.register(anyClass.self,
                            forCellReuseIdentifier: identifier)
+    }
+    // MARK: DataSource
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return TitleHeaderView.height
     }
     
     // MARK: Configure
