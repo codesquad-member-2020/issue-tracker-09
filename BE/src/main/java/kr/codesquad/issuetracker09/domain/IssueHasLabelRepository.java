@@ -16,4 +16,7 @@ public interface IssueHasLabelRepository extends JpaRepository<IssueHasLabel, Lo
 
     @SQLDelete(sql = "DELETE FROM issue_has_label WHERE label_id = :id")
     void deleteByLabelId(@Param("id") Long labelId);
+
+    @SQLDelete(sql = "DELETE FROM issue_has_label WHERE issue_id = :id")
+    void deleteByIssueId(@Param("id") Long issueId);
 }
