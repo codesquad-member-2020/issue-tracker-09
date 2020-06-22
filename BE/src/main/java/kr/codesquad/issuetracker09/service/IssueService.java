@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -35,14 +34,15 @@ public class IssueService {
         log.debug("[*] editDetail - issueId : {}, request : {}", issueId, request);
         String targetKey = request.findNotNullField();
         log.debug("[*] targetKey : {}", targetKey);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new NotFoundException("Issue doesn't exist"));
         switch (targetKey) {
             case "assignee":
                 break;
             case "label":
-                labelUpdate(issueId, request.getLabel());
+                updateLabel(issue, request.getLabel());
                 break;
             case "milestone":
-                milestoneUpdate(issueId, request.getMilestone());
+                updateMilestone(issue, request.getMilestone());
                 break;
             default:
                 return false;
@@ -50,17 +50,15 @@ public class IssueService {
         return true;
     }
 
-    public void milestoneUpdate(Long issueId, Long milestoneId) {
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new NotFoundException("Issue doesn't exist"));
+    public void updateMilestone(Issue issue, Long milestoneId) {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new NotFoundException("Milestone doesn't exit"));
         issue.editMilestone(milestone);
         issueRepository.save(issue);
     }
 
-    public void labelUpdate(Long issueId, List<Long> labelIds) {
-        log.debug("[*] labelUpdate - issudId : {}, labelsIds : {}", issueId, labelIds);
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new NotFoundException("Issue doesn't exist"));
-        issueLabelService.deleteByIssueId(issueId);
+    public void updateLabel(Issue issue, List<Long> labelIds) {
+        log.debug("[*] labelUpdate - issudId : {}, labelsIds : {}", issue.getId(), labelIds);
+        issueLabelService.deleteByIssueId(issue.getId());
         for (Long labelId : labelIds) {
             Label label = labelRepository.findById(labelId).orElseThrow(() -> new NotFoundException("Label doesn't exist"));
             IssueHasLabel issueHasLabel = IssueHasLabel.builder()
