@@ -22,12 +22,12 @@ final class LabelTableViewController: CategoryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        subscriber = Timer.publish(every: 1, on: .main, in: .common)
+        Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 self?.fetch(provider: IssueTrackerNetworkImpl.shared,
                             endpoint: Endpoint(path: .labels))
-        }
+        }.store(in: &subscriptions)
         bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
@@ -51,12 +51,11 @@ final class LabelTableViewController: CategoryTableViewController {
     }
     
     private func bindViewModelToView() {
-        var subscriber: AnyCancellable?
-        subscriber = dataSource.$labels
+        dataSource.$labels
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { _ in subscriber?.cancel() }) { [weak self] _ in
+            .sink { [weak self] _ in
                 self?.tableView.reloadData()
-        }
+        }.store(in: &subscriptions)
     }
     
     @objc private func presentCreateLabelViewController() {
