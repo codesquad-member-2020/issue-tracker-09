@@ -35,6 +35,5 @@ enum IssueTrackerNetworkError: Error {
 protocol IssueTrackerNetwork {
     var session: URLSession { get }
     
-    func requeset<T: Decodable>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError>
-    func request<V: Encodable>(_ value: V, providing: RequestPorviding, method: String?, headers: [String: String]) ->  AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError>
+    func request(request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), IssueTrackerNetworkError>
 }

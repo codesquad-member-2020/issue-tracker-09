@@ -24,8 +24,8 @@ final class LabelTableViewController: CategoryTableViewController {
         Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                self?.fetch(provider: IssueTrackerNetworkImpl.shared,
-                            endpoint: Endpoint(path: .labels))
+                self?.fetch(provider: UseCase.shared ,
+                            endpoint: Endpoint(path: .labels()))
         }.store(in: &subscriptions)
         bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
@@ -33,9 +33,10 @@ final class LabelTableViewController: CategoryTableViewController {
     }
     
     // MARK: - Methods
-    private func fetch(provider: IssueTrackerNetwork, endpoint: RequestPorviding) {
-        provider.requeset([Label].self,
-                          providing: endpoint)
+    private func fetch(provider: Usable, endpoint: RequestProviding) {
+        provider.decode([Label].self,
+                        endpoint: endpoint,
+                        method: .get)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }

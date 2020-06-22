@@ -47,10 +47,9 @@ final class CreateLabelViewController: CategoryFormViewController {
         let postLabel = PostLabel(title: title,
                                   contents: contentView.labelSubject.subtitle,
                                   colorCode: hexColor)
-        IssueTrackerNetworkImpl.shared.request(postLabel,
-                                               providing: Endpoint.init(path: .labels),
-                                               method: "POST",
-                                               headers: ["application/json":"Content-Type"])
+        UseCase.shared
+            .encode(postLabel, endpoint: Endpoint(path: .labels()),
+                    method: .post)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)

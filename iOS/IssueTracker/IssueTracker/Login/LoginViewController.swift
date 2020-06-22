@@ -29,7 +29,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     @IBAction func githubLoginAction(_ sender: UIButton) {
         guard let authURL = Endpoint.githubLogin else { return }
         let scheme = "issuenine"
-        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { callbackURL, error in
+        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { [weak self] callbackURL, error in
             guard error == nil else {
                 let alertController = UIAlertController(message: error?.localizedDescription ?? "")
                 DispatchQueue.main.async { [weak self] in
@@ -42,16 +42,16 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
             guard let callbackURL = callbackURL else { return }
             let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
             guard let token = queryItems?.filter({ $0.name == "token" }).first?.value else { return }
-            self.saveUserInKeychain(token)
-            self.dismiss(animated: true)
+            self?.saveUserInKeychain(token)
+            self?.presentTabBarController()
         }
         session.presentationContextProvider = self
         session.start()
     }
     
     // MARK: - Methods
-    func presentLabelTableViewController() {
-       let labelTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: tabbarControllerIdentifier)
+    func presentTabBarController() {
+        let labelTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: tabbarControllerIdentifier)
         present(labelTableViewController
             ,animated: true)
     }
@@ -100,11 +100,10 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        IssueTrackerNetworkImpl.shared
-            .request(AppleLogin(credential: appleIDCredential),
-                     providing: Endpoint(path: .appleLogin),
-                     method: "GET",
-                     headers: ["application/json": "Content-Type"])
+        UseCase.shared
+            .encode(AppleLogin(credential: appleIDCredential),
+                    endpoint: Endpoint(path: .appleLogin),
+                    method: .get)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: {
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)

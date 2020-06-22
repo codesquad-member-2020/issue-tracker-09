@@ -24,59 +24,10 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     }
     
     // MARK: - Methods
-    func requeset<T>(_ type: T.Type, providing: RequestPorviding) -> AnyPublisher<T, IssueTrackerNetworkError> where T : Decodable {
-        guard let url = providing.url else {
-            return Fail(error: .urlError)
-                .eraseToAnyPublisher()
-        }
-        var request = URLRequest(url: url)
-        request.addValue("Bearer " + KeychainItem.currentUserIdentifier, forHTTPHeaderField: "Authorization")
-        
-        return session.dataTaskPublisher(for: request)
+    func request(request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), IssueTrackerNetworkError> {
+        session.dataTaskPublisher(for: request)
             .mapError { _ in IssueTrackerNetworkError.apiError }
-            .map { $0.data }
-            .decode(type: T.self, decoder: JSONDecoder())
-            .mapError { _ in .jsonDecodingError }
-            .eraseToAnyPublisher()
-    }
-    
-    // MARK: Existing
-    func request<V: Encodable>(_ value: V, providing: RequestPorviding, method: String?, headers: [String: String]) ->  AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
-        guard let data = try? encoder.encode(value) else {
-            return Fail(error: .jsonEncodingError)
-                .eraseToAnyPublisher()
-        }
-        guard let request = try? providing.request(method,
-                                                   data: data,
-                                                   headers: headers) else {
-                                                    return Fail(error: .urlRequestError)
-                                                        .eraseToAnyPublisher()
-        }
-        
-        return session.dataTaskPublisher(for: request)
-            .mapError { _ in IssueTrackerNetworkError.apiError }
-            .compactMap { $0.response as? HTTPURLResponse }
-            .eraseToAnyPublisher()
-    }
-    
-    // MARK: Refactoring
-    func request<V: Encodable>(_ value: V, providing: RequestPorviding, method: URLRequest.HTTPMethod, contentType: String?) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
-        guard let data = try? encoder.encode(value) else {
-            return Fail(error: .jsonEncodingError)
-                .eraseToAnyPublisher()
-        }
-        guard let url = providing.url else {
-            return Fail(error: .urlError)
-                .eraseToAnyPublisher()
-        }
-        let request = URLRequest(url: url,
-                                 method: method,
-                                 contentType: contentType,
-                                 body: data)
-        
-        return session.dataTaskPublisher(for: request)
-            .mapError { _ in IssueTrackerNetworkError.apiError }
-            .compactMap { $0.response as? HTTPURLResponse }
+            .map {  data, response in return (data, response) }
             .eraseToAnyPublisher()
     }
 }

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard !KeychainItem.currentUserIdentifier.isEmpty,
             let rootViewController = window?.rootViewController as? LoginViewController else { return true }
         DispatchQueue.main.async {
-            rootViewController.presentLabelTableViewController()
+            rootViewController.presentTabBarController()
         }
         
         return true
