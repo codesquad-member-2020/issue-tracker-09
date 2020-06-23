@@ -29,7 +29,4 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public static User insert(Long id, String name, Long socialId, String email) {
-        return new User(id, name, socialId, email);
-    }
 }
