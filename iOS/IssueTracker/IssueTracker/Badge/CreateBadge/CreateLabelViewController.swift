@@ -44,19 +44,28 @@ final class CreateLabelViewController: CategoryFormViewController {
     @objc private func saveLabelContent() {
         guard let hexColor = colorView.color?.hexString,
             let title = contentView.labelSubject.title else { return }
-        let postLabel = PostLabel(title: title,
-                                  contents: contentView.labelSubject.subtitle,
-                                  colorCode: hexColor)
+        let postLabel = Label(id: nil,
+                              title: title,
+                              contents: contentView.labelSubject.subtitle,
+                              colorCode: hexColor)
         UseCase.shared
-            .encode(postLabel, endpoint: Endpoint(path: .labels()),
+            .code(postLabel, endpoint: Endpoint(path: .labels()),
                     method: .post)
+            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) { _ in
-                // MARK: ToDo 테이블 뷰 추가적인 작업 구현
+            }) { data, response in
+                guard let label = data else { return }
+                if response?.statusCode == 422 {
+                    
+                } else {
+                    guard let superViewController = self.presentingViewController as? UITabBarController else { return }
+                    guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
+                    labelViewController.dataSource.labels.append(label)
+                }
         }
         .store(in: &subscription)
         dismiss(animated: true)

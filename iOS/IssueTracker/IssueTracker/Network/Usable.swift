@@ -34,4 +34,5 @@ protocol Usable {
     func decode<D: Decodable>(_ type: D.Type, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<D, IssueTrackerNetworkError>
     func encode(endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError>
     func encode<E: Encodable>(_ data: E, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError>
+    func code<C: Codable>(_ data: C, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<(data: C?, response: HTTPURLResponse?), IssueTrackerNetworkError>
 }
