@@ -4,21 +4,22 @@ import kr.codesquad.issuetracker09.domain.Comment;
 import kr.codesquad.issuetracker09.domain.Issue;
 import kr.codesquad.issuetracker09.domain.Label;
 import kr.codesquad.issuetracker09.domain.Milestone;
+import kr.codesquad.issuetracker09.service.CommentService;
 import kr.codesquad.issuetracker09.service.IssueLabelService;
 import kr.codesquad.issuetracker09.service.IssueService;
 import kr.codesquad.issuetracker09.service.LabelService;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
+import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.GetIssueDetailResponseDTO;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +31,13 @@ public class IssueController {
     private IssueService issueService;
     private IssueLabelService issueLabelService;
     private LabelService labelService;
+    private CommentService commentService;
 
-    public IssueController(IssueService issueService, IssueLabelService issueLabelService, LabelService labelService) {
+    public IssueController(IssueService issueService, IssueLabelService issueLabelService, LabelService labelService, CommentService commentService) {
         this.issueService = issueService;
         this.issueLabelService = issueLabelService;
         this.labelService = labelService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/{issue-id}/detail")
@@ -81,6 +84,15 @@ public class IssueController {
 
         detail.setLabels(labelDTOs);
         return detail;
+    }
+
+    @PostMapping("/{issue-id}/comments")
+    public void create(@PathVariable(name = "issue-id") Long issueId, @RequestBody PostRequestDTO commentDTO,
+                       @RequestAttribute("id") Long authorId, HttpServletResponse response) throws NotFound {
+        log.debug("[*] create - comment : {}", commentDTO);
+        log.debug("[*] create - authorId : {}", authorId);
+        commentService.save(issueId, authorId, commentDTO);
+        response.setStatus(HttpStatus.CREATED.value());
     }
 
 }
