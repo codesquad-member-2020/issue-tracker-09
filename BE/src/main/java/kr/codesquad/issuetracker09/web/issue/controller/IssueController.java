@@ -95,4 +95,12 @@ public class IssueController {
         response.setStatus(HttpStatus.CREATED.value());
     }
 
+    @PutMapping("/{issue-id}/comments/{comment-id}")
+    public void edit(@PathVariable(name = "issue-id") Long issueId, @PathVariable(name = "comment-id") Long commentId,
+                     @RequestBody PostRequestDTO commentDTO, @RequestAttribute("id") Long authorId,
+                     HttpServletResponse response) throws NotFound {
+        commentService.edit(issueId, authorId, commentId, commentDTO);
+        response.setStatus(HttpStatus.NO_CONTENT.value());
+    }
+
 }
