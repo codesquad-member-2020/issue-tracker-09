@@ -1,7 +1,10 @@
 INSERT INTO user (social_id, name, email)
 VALUES (123123, 'Solar', 'solar@gmail.com');
 INSERT INTO user (social_id, name, email)
-VALUES (321321, 'Poogle', 'poogle@gmail.com');
+VALUES (321321, 'sssss', 'ssss@gmail.com');
+INSERT INTO user (social_id, name, email)
+VALUES (58318786, 'Poogle', null);
+
 
 INSERT INTO label (title, color_code)
 VALUES ("TEAM", "#123aaa");
@@ -21,13 +24,6 @@ INSERT INTO issue (title, contents, created, open, is_deleted, user_id, mileston
 VALUES ("issue 1", "first issue blabla", "2020-06-18", TRUE, FALSE, 1, 1);
 INSERT INTO issue (title, contents, created, open, is_deleted, user_id, milestone_id)
 VALUES ("issue 2", "second issue blabla", "2020-06-18", TRUE, FALSE, 2, 2);
-
-INSERT INTO comment (contents, user_id, created, issue_id)
-VALUES ("Good!!", 2, "2020-06-19 13:01:23", 1);
-INSERT INTO comment (contents, user_id, created, issue_id)
-VALUES ("OKOK!!", 1, "2020-06-19 13:21:34", 1);
-INSERT INTO comment (contents, user_id, created, issue_id)
-VALUES ("Hi!!", 2, "2020-06-19 13:34:11", 1);
 
 INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 1);
 INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 2);
