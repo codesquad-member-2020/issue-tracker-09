@@ -1,5 +1,6 @@
 package kr.codesquad.issuetracker09.domain;
 
+import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,10 +38,19 @@ public class Issue {
     @JoinColumn(name = "USER_ID")
     private User author;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ISSUE_ID")
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue")
     private List<IssueHasLabel> issueHasLabelList = new ArrayList<>();
+
+    public void addComment(User user, PostRequestDTO commentDTO) {
+        Comment comment = new Comment.CommentBuilder()
+                .contents(commentDTO.getContents())
+                .author(user)
+                .created(LocalDateTime.now())
+                .build();
+        comments.add(comment);
+    }
 }
