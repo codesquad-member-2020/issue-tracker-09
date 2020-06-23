@@ -38,7 +38,7 @@ public class CommentService {
         issueRepository.save(issue);
     }
 
-    public void edit(Long issueId, Long authorId, Long commentId, PostRequestDTO commentDTO) throws NotFound {
+    public boolean edit(Long issueId, Long authorId, Long commentId, PostRequestDTO commentDTO) throws NotFound {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NotFound::new);
         if (commentDTO.getContents() == null) {
             throw new ValidationException("Contents can't be blank");
@@ -46,13 +46,21 @@ public class CommentService {
         List<Comment> commentList = issue.getComments();
 
         for (Comment comment : commentList) {
-
             if (comment.getId().equals(commentId)) {
+                if (!checkUser(comment, authorId)) {
+                    return false;
+                }
                 comment.setContents(commentDTO.getContents());
                 comment.setCreated(LocalDateTime.now());
                 break;
             }
         }
         issueRepository.save(issue);
+        return true;
+    }
+
+    private boolean checkUser(Comment comment, Long authorId) {
+        User author = comment.getAuthor();
+        return author.getId().equals(authorId);
     }
 }
