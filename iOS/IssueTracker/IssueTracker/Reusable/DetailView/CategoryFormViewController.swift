@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum FormStyle {
+    case edit(Label)
+    case save
+}
+
 class CategoryFormViewController: UIViewController {
     
     // MARK: - Properties
@@ -15,17 +20,29 @@ class CategoryFormViewController: UIViewController {
     var contentView: DetailFormContentView!
     
     // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configure()
+    init(style: FormStyle) {
+        super.init(nibName: nil,
+                   bundle: nil)
+        switch style {
+        case .save:
+            configure(title: nil, subtitle: nil)
+        case let .edit(label):
+            configure(title: label.title, subtitle: label.contents)
+        }
+        makeConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure(title: nil, subtitle: nil)
         makeConstraints()
     }
     
     // MARK: - Methods
     // MARK: Configure
-    private func configure() {
+    private func configure(title: String?, subtitle: String?) {
         configureDimmedView()
-        configureContentView()
+        configureContentView(title: title, subtitle: subtitle)
     }
 
     private func configureDimmedView() {
@@ -34,8 +51,8 @@ class CategoryFormViewController: UIViewController {
         view.addSubview(dimmedView)
     }
     
-    func configureContentView() {
-        contentView = DetailFormContentView()
+    func configureContentView(title: String?, subtitle: String?) {
+        contentView = DetailFormContentView(title: title, subtitle: subtitle)
         view.addSubview(contentView)
         contentView.dismissButton.addTarget(self,
                                             action: #selector(dismissContentView),

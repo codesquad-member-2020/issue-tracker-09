@@ -54,6 +54,11 @@ final class LabelTableViewController: CategoryTableViewController {
         return headerView
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = dataSource.labels[indexPath.row]
+        present(LabelFormViewController(style: .edit(item)), animated: true)
+    }
+    
     // MARK: Bind
     private func bindViewModelToView() {
         dataSource.$labels
@@ -66,7 +71,6 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: Objc
     @objc private func presentCreateLabelViewController() {
-        present(CreateLabelViewController(),
-                animated: true)
+        present(LabelFormViewController(style: .save), animated: true)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CreateLabelViewController.swift
+//  LabelFormViewController.swift
 //  IssueTracker
 //
 //  Created by Cloud on 2020/06/16.
@@ -9,15 +9,20 @@
 import UIKit
 import Combine
 
-final class CreateLabelViewController: CategoryFormViewController {
+final class LabelFormViewController: CategoryFormViewController {
     
     // MARK: - Properties
     private var colorView: ColorView!
     var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(style: FormStyle) {
+        super.init(style: style)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         configure()
     }
     
@@ -29,8 +34,8 @@ final class CreateLabelViewController: CategoryFormViewController {
         configureSaveButton()
     }
     
-    override func configureContentView() {
-        super.configureContentView()
+    override func configureContentView(title: String?, subtitle: String?) {
+        super.configureContentView(title: title, subtitle: subtitle)
         contentView.apply(subtitle: "설명")
         contentView.resetButton.addTarget(self,
                                           action: #selector(resetLabelContentView),
@@ -38,7 +43,9 @@ final class CreateLabelViewController: CategoryFormViewController {
     }
     
     private func configureSaveButton() {
-        contentView.saveButton.addTarget(self, action: #selector(saveLabelContent), for: .touchUpInside)
+        contentView.saveButton.addTarget(self,
+                                         action: #selector(saveLabelContent),
+                                         for: .touchUpInside)
     }
     
     @objc private func saveLabelContent() {

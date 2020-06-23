@@ -27,9 +27,9 @@ final class DetailFormStackView: UIStackView {
     private var subscriptions: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
+    init(title: String?, subtitle: String?) {
+        super.init(frame: .zero)
+        configure(title: title, subtitle: subtitle)
         makeConstraints()
     }
     
@@ -51,11 +51,11 @@ final class DetailFormStackView: UIStackView {
     }
     
     // MARK: Configure
-    private func configure() {
+    private func configure(title: String? = nil, subtitle: String? = nil) {
         axis = .vertical
         distribution = .fillEqually
-        configureTitleView()
-        configureSubtitleView()
+        configureTitleView(title: title)
+        configureSubtitleView(title: subtitle)
         bindViewToViewModel()
     }
     
@@ -67,8 +67,9 @@ final class DetailFormStackView: UIStackView {
         return label
     }
     
-    private func configureTextField(fontSize font: CGFloat) -> UITextField {
+    private func configureTextField(title: String?, fontSize font: CGFloat) -> UITextField {
         let textField = UITextField()
+        textField.text = title
         textField.font = .systemFont(ofSize: font)
         
         return textField
@@ -81,10 +82,10 @@ final class DetailFormStackView: UIStackView {
         return view
     }
     
-    private func configureTitleView() {
+    private func configureTitleView(title: String?) {
         titleView = UIView()
         configureInnerTitleLabel()
-        configureInnerTextField()
+        configureInnerTextField(title: title)
         configureTitleSeperatorLine()
         addArrangedSubview(titleView)
     }
@@ -94,8 +95,8 @@ final class DetailFormStackView: UIStackView {
         titleView.addSubview(innerTitleLabel)
     }
     
-    private func configureInnerTextField() {
-        innerTitleTextField = configureTextField(fontSize: 14)
+    private func configureInnerTextField(title: String?) {
+        innerTitleTextField = configureTextField(title: title, fontSize: 14)
         titleView.addSubview(innerTitleTextField)
     }
     
@@ -104,10 +105,10 @@ final class DetailFormStackView: UIStackView {
         titleView.addSubview(titleSeperatorLine)
     }
     
-    private func configureSubtitleView() {
+    private func configureSubtitleView(title: String?) {
         subTitleView = UIView()
         configureSubtitleLabel()
-        configureSubtitleTextField()
+        configureSubtitleTextField(title: title)
         configureSubtitleSeperatorLine()
         addArrangedSubview(subTitleView)
     }
@@ -117,8 +118,8 @@ final class DetailFormStackView: UIStackView {
         subTitleView.addSubview(innerSubtitleLabel)
     }
     
-    private func configureSubtitleTextField() {
-        innerSubtitleTextField = configureTextField(fontSize: 14)
+    private func configureSubtitleTextField(title: String?) {
+        innerSubtitleTextField = configureTextField(title: title, fontSize: 14)
         subTitleView.addSubview(innerSubtitleTextField)
     }
     

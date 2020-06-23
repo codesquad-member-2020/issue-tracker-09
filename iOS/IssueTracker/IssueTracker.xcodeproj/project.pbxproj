@@ -40,7 +40,7 @@
 		AEAEA99C248E0EE1005F4582 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99B248E0EE1005F4582 /* Assets.xcassets */; };
 		AEAEA99F248E0EE1005F4582 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */; };
 		AEAEA9AA248E0EE1005F4582 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA9A9248E0EE1005F4582 /* IssueTrackerTests.swift */; };
-		AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */; };
+		AEE5973224988C6600F5C622 /* LabelFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE5973124988C6600F5C622 /* LabelFormViewController.swift */; };
 		AEE597362498925100F5C622 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE597352498925100F5C622 /* SaveButton.swift */; };
 		AEE597382498952300F5C622 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE597372498952300F5C622 /* ColorView.swift */; };
 /* End PBXBuildFile section */
@@ -93,7 +93,7 @@
 		AEAEA9A5248E0EE1005F4582 /* IssueTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA9A9248E0EE1005F4582 /* IssueTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTests.swift; sourceTree = "<group>"; };
 		AEAEA9AB248E0EE1005F4582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLabelViewController.swift; sourceTree = "<group>"; };
+		AEE5973124988C6600F5C622 /* LabelFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelFormViewController.swift; sourceTree = "<group>"; };
 		AEE597352498925100F5C622 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		AEE597372498952300F5C622 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,7 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				AEE597372498952300F5C622 /* ColorView.swift */,
-				AEE5973124988C6600F5C622 /* CreateLabelViewController.swift */,
+				AEE5973124988C6600F5C622 /* LabelFormViewController.swift */,
 			);
 			path = CreateBadge;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 				AE84609124A0DA11008CF76B /* Usable.swift in Sources */,
 				AB58C190249F25E10067185A /* URLRequest.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
-				AEE5973224988C6600F5C622 /* CreateLabelViewController.swift in Sources */,
+				AEE5973224988C6600F5C622 /* LabelFormViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
 				ABAD309F249A008B00618753 /* Label.swift in Sources */,
