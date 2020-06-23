@@ -44,7 +44,7 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     private List<IssueHasLabel> issueHasLabels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "issue")
     private List<Assignee> assignees = new ArrayList<>();
 
     public void editMilestone(Milestone milestone) {
