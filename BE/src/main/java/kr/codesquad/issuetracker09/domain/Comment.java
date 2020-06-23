@@ -3,11 +3,11 @@ package kr.codesquad.issuetracker09.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ToString
 @Getter
