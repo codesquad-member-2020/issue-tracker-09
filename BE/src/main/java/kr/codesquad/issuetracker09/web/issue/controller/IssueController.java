@@ -106,4 +106,14 @@ public class IssueController {
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
 
+    @DeleteMapping("/{issue-id}/comments/{comment-id}")
+    public void delete(@PathVariable(name = "issue-id") Long issueId, @PathVariable(name = "comment-id") Long commentId,
+                       @RequestAttribute("id") Long authorId, HttpServletResponse response) throws NotFound {
+        if(!commentService.delete(issueId, authorId, commentId)) {
+            response.setStatus(HttpStatus.FORBIDDEN.value());
+            return;
+        }
+        response.setStatus(HttpStatus.NO_CONTENT.value());
+    }
+
 }
