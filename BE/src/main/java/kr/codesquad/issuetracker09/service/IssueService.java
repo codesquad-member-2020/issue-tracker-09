@@ -17,12 +17,17 @@ public class IssueService {
     private MilestoneRepository milestoneRepository;
     private LabelRepository labelRepository;
     private IssueLabelService issueLabelService;
+    private AssigneeService assigneeService;
+    private UserService userService;
 
-    public IssueService(IssueRepository issueRepository, MilestoneRepository milestoneRepository, LabelRepository labelRepository, IssueLabelService issueLabelService) {
+    public IssueService(IssueRepository issueRepository, MilestoneRepository milestoneRepository, LabelRepository labelRepository,
+                        IssueLabelService issueLabelService, AssigneeService assigneeService, UserService userService) {
         this.issueRepository = issueRepository;
         this.milestoneRepository = milestoneRepository;
         this.labelRepository = labelRepository;
         this.issueLabelService = issueLabelService;
+        this.assigneeService = assigneeService;
+        this.userService = userService;
     }
 
     public Issue findById(Long id) throws NotFound {
@@ -37,6 +42,7 @@ public class IssueService {
         Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new NotFoundException("Issue doesn't exist"));
         switch (targetKey) {
             case "assignee":
+                updateAssignee(issue, request.getAssignee());
                 break;
             case "label":
                 updateLabel(issue, request.getLabel());
@@ -57,7 +63,7 @@ public class IssueService {
     }
 
     public void updateLabel(Issue issue, List<Long> labelIds) {
-        log.debug("[*] labelUpdate - issudId : {}, labelsIds : {}", issue.getId(), labelIds);
+        log.debug("[*] update Label - issudId : {}, labelsIds : {}", issue.getId(), labelIds);
         issueLabelService.deleteByIssueId(issue.getId());
         for (Long labelId : labelIds) {
             Label label = labelRepository.findById(labelId).orElseThrow(() -> new NotFoundException("Label doesn't exist"));
@@ -66,6 +72,19 @@ public class IssueService {
                     .label(label)
                     .build();
             issueLabelService.save(issueHasLabel);
+        }
+    }
+
+    public void updateAssignee(Issue issue, List<Long> userIds) {
+        log.debug("[*] update Assignee - issudId : {}, assignees : {}", issue.getId(), userIds);
+        assigneeService.deleteByIssueId(issue.getId());
+        for (Long userId : userIds) {
+            User user = userService.findUser(userId);
+            Assignee assignee = Assignee.builder()
+                    .user(user)
+                    .issue(issue)
+                    .build();
+            assigneeService.save(assignee);
         }
     }
 }
