@@ -58,7 +58,7 @@ final class LabelTableViewController: CategoryTableViewController {
     private func bindViewModelToView() {
         dataSource.$labels
             .receive(on: RunLoop.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] lables in
                 self?.tableView.reloadData()
         }
         .store(in: &subscriptions)

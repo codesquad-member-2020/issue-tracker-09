@@ -13,7 +13,7 @@ final class LabelTableViewDataSource: NSObject {
     
     // MARK: - Properties
     @Published var labels: [Label] = .init()
-    var subscription: Set<AnyCancellable> = .init()
+    private var subscription: Set<AnyCancellable> = .init()
 }
 
 // MARK: - Extension
@@ -29,7 +29,7 @@ extension LabelTableViewDataSource: UITableViewDataSource {
         cell.apply(title: item.title,
                    description: item.contents ?? "",
                    backgroundColor: UIColor(hex: item.colorCode) ?? UIColor.white)
-
+        
         return cell
     }
     
@@ -37,16 +37,15 @@ extension LabelTableViewDataSource: UITableViewDataSource {
         if editingStyle == .delete {
             UseCase.shared.encode(endpoint: Endpoint.init(path: .labels(String(labels[indexPath.row].id!))), method: .delete)
                 .receive(on: RunLoop.main)
-                .sink(receiveCompletion: { _ in
-                    
-                }) { response in
-                    if response.statusCode == 404 {
-                        
-                    } else {
-                        self.labels.remove(at: indexPath.row)
-                        tableView.deleteRows(at: [indexPath], with: .fade)
+                .sink(receiveCompletion: { _ in return }) { [weak self] response in
+                    switch response.statusCode {
+                    case 400 ..< 500:
+                        break
+                    default:
+                        self?.labels.remove(at: indexPath.row)
                     }
-            }.store(in: &subscription)
+            }
+            .store(in: &subscription)
         }
     }
 }

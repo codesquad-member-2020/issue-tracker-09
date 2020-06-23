@@ -50,21 +50,25 @@ final class CreateLabelViewController: CategoryFormViewController {
                               colorCode: hexColor)
         UseCase.shared
             .code(postLabel, endpoint: Endpoint(path: .labels()),
-                    method: .post)
+                  method: .post)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) { data, response in
-                guard let label = data else { return }
-                if response?.statusCode == 422 {
-                    
-                } else {
-                    guard let superViewController = self.presentingViewController as? UITabBarController else { return }
+            }) { [weak self] data, response in
+                guard let label = data,
+                    let statusCode = response?.statusCode else { return }
+                switch statusCode {
+                case 200 ..< 300:
+                    guard let superViewController = self?.presentingViewController as? UITabBarController else { return }
                     guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
                     labelViewController.dataSource.labels.append(label)
+                default:
+                    let alert = UIAlertController(message: "")
+                    self?.present(alert,
+                            animated: true)
                 }
         }
         .store(in: &subscription)
