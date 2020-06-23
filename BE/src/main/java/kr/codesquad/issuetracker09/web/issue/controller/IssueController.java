@@ -99,7 +99,10 @@ public class IssueController {
     public void edit(@PathVariable(name = "issue-id") Long issueId, @PathVariable(name = "comment-id") Long commentId,
                      @RequestBody PostRequestDTO commentDTO, @RequestAttribute("id") Long authorId,
                      HttpServletResponse response) throws NotFound {
-        commentService.edit(issueId, authorId, commentId, commentDTO);
+        if (!commentService.edit(issueId, authorId, commentId, commentDTO)) {
+            response.setStatus(HttpStatus.FORBIDDEN.value());
+            return;
+        }
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
 
