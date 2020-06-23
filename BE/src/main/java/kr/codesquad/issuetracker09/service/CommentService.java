@@ -46,7 +46,9 @@ public class CommentService {
         List<Comment> commentList = issue.getComments();
 
         for (Comment comment : commentList) {
+
             if (comment.getId().equals(commentId)) {
+
                 if (!checkUser(comment, authorId)) {
                     return false;
                 }
@@ -58,6 +60,26 @@ public class CommentService {
         issueRepository.save(issue);
         return true;
     }
+
+    public boolean delete(Long issueId, Long authorId, Long commentId) throws NotFound {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(NotFound::new);
+        List<Comment> commentList = issue.getComments();
+
+        for (Comment comment : commentList) {
+
+            if (comment.getId().equals(commentId)) {
+
+                if (!checkUser(comment, authorId)) {
+                    return false;
+                }
+                commentList.remove(comment);
+                break;
+            }
+        }
+        issueRepository.save(issue);
+        return true;
+    }
+
 
     private boolean checkUser(Comment comment, Long authorId) {
         User author = comment.getAuthor();
