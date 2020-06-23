@@ -18,20 +18,20 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: - Lifecycle
     override init(style: FormStyle) {
         super.init(style: style)
-        configure()
+        configure(style: style)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        configure(style: nil)
     }
     
     // MARK: - Methods
     // MARK: Configure
-    private func configure() {
+    private func configure(style: FormStyle?) {
         colorView = ColorView()
         contentView.addArrangedSubview(colorView)
-        configureSaveButton()
+        addTartgetButton(style: style)
     }
     
     override func configureContentView(title: String?, subtitle: String?) {
@@ -42,21 +42,23 @@ final class LabelFormViewController: CategoryFormViewController {
                                           for: .touchUpInside)
     }
     
-    private func configureSaveButton() {
-        contentView.saveButton.addTarget(self,
-                                         action: #selector(saveLabelContent),
-                                         for: .touchUpInside)
+    private func addTartgetButton(style: FormStyle?) {
+        switch style {
+        case .save:
+            contentView.saveButton.addTarget(self,
+                                             action: #selector(saveLabelContent),
+                                             for: .touchUpInside)
+        default:
+            
+            contentView.saveButton.addTarget(self,
+                                             action: #selector(editLabelContent),
+                                             for: .touchUpInside)
+        }
     }
     
-    @objc private func saveLabelContent() {
-        guard let hexColor = colorView.color?.hexString,
-            let title = contentView.labelSubject.title else { return }
-        let postLabel = Label(id: nil,
-                              title: title,
-                              contents: contentView.labelSubject.subtitle,
-                              colorCode: hexColor)
+    func request(data: Label, method: HTTPMethod) {
         UseCase.shared
-            .code(postLabel, endpoint: Endpoint(path: .labels()),
+            .code(data, endpoint: Endpoint(path: .labels()),
                   method: .post)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
@@ -75,11 +77,24 @@ final class LabelFormViewController: CategoryFormViewController {
                 default:
                     let alert = UIAlertController(message: "")
                     self?.present(alert,
-                            animated: true)
+                                  animated: true)
                 }
         }
         .store(in: &subscription)
+    }
+    
+    @objc private func saveLabelContent() {
+        guard let hexColor = colorView.color?.hexString,
+            let title = contentView.labelSubject.title else { return }
+        let postLabel = Label(id: nil,
+                              title: title,
+                              contents: contentView.labelSubject.subtitle,
+                              colorCode: hexColor)
+        request(data: postLabel, method: .get)
         dismiss(animated: true)
+    }
+    
+    @objc private func editLabelContent() {
     }
     
     // MARK: Constraints
