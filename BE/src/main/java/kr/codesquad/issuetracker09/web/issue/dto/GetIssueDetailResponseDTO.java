@@ -18,9 +18,14 @@ public class GetIssueDetailResponseDTO {
     private String contents;
     private String author;
     private Boolean open;
+    private List<GetAssigneeListResponseDTO> assignees;
     private List<GetCommentListResponseDTO> comments;
     private List<GetLabelListResponseDTO> labels;
     private GetMilestoneListResponseDTO milestones;
+
+    public void setAssignees(List<GetAssigneeListResponseDTO> assignees) {
+        this.assignees = assignees;
+    }
 
     public void setComments(List<GetCommentListResponseDTO> comments) {
         this.comments = comments;

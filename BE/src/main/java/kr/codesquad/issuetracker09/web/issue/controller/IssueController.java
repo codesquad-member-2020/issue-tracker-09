@@ -1,24 +1,22 @@
 package kr.codesquad.issuetracker09.web.issue.controller;
 
-import kr.codesquad.issuetracker09.domain.Comment;
-import kr.codesquad.issuetracker09.domain.Issue;
-import kr.codesquad.issuetracker09.domain.Label;
-import kr.codesquad.issuetracker09.domain.Milestone;
+import kr.codesquad.issuetracker09.domain.*;
+import kr.codesquad.issuetracker09.service.AssigneeService;
 import kr.codesquad.issuetracker09.service.IssueLabelService;
 import kr.codesquad.issuetracker09.service.IssueService;
-import kr.codesquad.issuetracker09.service.LabelService;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.GetAssigneeListResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.GetIssueDetailResponseDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +27,12 @@ public class IssueController {
 
     private IssueService issueService;
     private IssueLabelService issueLabelService;
-    private LabelService labelService;
+    private AssigneeService assigneeService;
 
-    public IssueController(IssueService issueService, IssueLabelService issueLabelService, LabelService labelService) {
+    public IssueController(IssueService issueService, IssueLabelService issueLabelService, AssigneeService assigneeService) {
         this.issueService = issueService;
         this.issueLabelService = issueLabelService;
-        this.labelService = labelService;
+        this.assigneeService = assigneeService;
     }
 
     @GetMapping("/{issue-id}/detail")
@@ -48,6 +46,16 @@ public class IssueController {
                 .open(issue.isOpen())
                 .build();
 
+        List<GetAssigneeListResponseDTO> getAssigneeListResponseDTOS = new ArrayList<>();
+        List<Assignee> assignees = assigneeService.findAllAssigneeByIssueId(issueId);
+        for (Assignee assignee : assignees) {
+            getAssigneeListResponseDTOS.add(GetAssigneeListResponseDTO.builder()
+                    .userId(assignee.getUser().getId())
+                    .userName(assignee.getUser().getName())
+                    .build());
+        }
+        detail.setAssignees(getAssigneeListResponseDTOS);
+
         List<GetCommentListResponseDTO> comments = new ArrayList<>();
         for (Comment comment : issue.getComments()) {
             comments.add(GetCommentListResponseDTO.builder()
@@ -57,7 +65,6 @@ public class IssueController {
                     .created(comment.getCreated())
                     .build());
         }
-
         detail.setComments(comments);
 
         Milestone milestone = issue.getMilestone();
@@ -78,9 +85,19 @@ public class IssueController {
                     .colorCode(label.getColorCode())
                     .build());
         }
-
         detail.setLabels(labelDTOs);
         return detail;
+    }
+
+    @PatchMapping("/{issue-id}/detail")
+    public void editDetail(@PathVariable(name = "issue-id") Long issueId,
+                           @RequestBody PatchDetailRequestDTO request,
+                           HttpServletResponse response) {
+        log.debug("[*] patch - issueId : {}, request : {}", issueId, request);
+        if (issueService.editDetail(issueId, request)) {
+            response.setStatus(HttpStatus.OK.value());
+        }
+        //TODO : editDetail이 false(실패)인 경우 에러 처리
     }
 
 }
