@@ -12,16 +12,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Entity
-public class IssueHasLabel {
+public class Assignee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "issue_id")
-    private Issue issue;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "label_id")
-    private Label label;
+    @JoinColumn(name = "issue_id")
+    private Issue issue;
 }

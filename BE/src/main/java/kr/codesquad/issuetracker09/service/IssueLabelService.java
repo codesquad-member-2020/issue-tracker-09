@@ -1,9 +1,11 @@
 package kr.codesquad.issuetracker09.service;
 
+import kr.codesquad.issuetracker09.domain.IssueHasLabel;
 import kr.codesquad.issuetracker09.domain.IssueHasLabelRepository;
 import kr.codesquad.issuetracker09.domain.Label;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -16,5 +18,14 @@ public class IssueLabelService {
 
     public List<Label> findLabelsByIssueId(Long issueId) {
         return issueHasLabelRepository.findLabelByIssueId(issueId);
+    }
+
+    @Transactional
+    public void deleteByIssueId(Long issueId) {
+        issueHasLabelRepository.deleteByIssueId(issueId);
+    }
+
+    public void save(IssueHasLabel issueHasLabel) {
+        issueHasLabelRepository.save(issueHasLabel);
     }
 }

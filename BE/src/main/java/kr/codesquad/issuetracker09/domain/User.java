@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +31,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    public static User insert(Long id, String name, Long socialId, String email) {
-        return new User(id, name, socialId, email);
-    }
+    @OneToMany(mappedBy = "user")
+    private List<Assignee> assigneeList = new ArrayList<>();
 }
