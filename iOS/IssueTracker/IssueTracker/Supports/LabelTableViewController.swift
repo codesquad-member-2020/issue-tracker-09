@@ -14,19 +14,15 @@ final class LabelTableViewController: CategoryTableViewController {
     // MARK: - Properties
     static let identifier: String = "LabelTableViewController"
     private let headerViewTitle: String = "Label"
-    private let dataSource: LabelTableViewDataSource = .init()
     private var subscriptions: Set<AnyCancellable> = .init()
+    let dataSource: LabelTableViewDataSource = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        Timer.publish(every: 1, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                self?.fetch(provider: UseCase.shared ,
-                            endpoint: Endpoint(path: .labels()))
-        }.store(in: &subscriptions)
+        self.fetch(provider: UseCase.shared ,
+                   endpoint: Endpoint(path: .labels()))
         bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
