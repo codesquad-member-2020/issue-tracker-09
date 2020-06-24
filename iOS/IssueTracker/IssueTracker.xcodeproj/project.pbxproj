@@ -213,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				AE8CA3552490E2700076507B /* UITextField.swift */,
+				AE4D4CF624A34A8E006E62B6 /* ASWebAuthenticationPresentationContextProviding.swift */,
 			);
 			path = Combine;
 			sourceTree = "<group>";
@@ -232,7 +233,6 @@
 			children = (
 				AE8CA35C249224560076507B /* UIColor.swift */,
 				AE537167249B80A000269F6B /* UIAlert.swift */,
-				AE4D4CF624A34A8E006E62B6 /* ASWebAuthenticationPresentationContextProviding.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";

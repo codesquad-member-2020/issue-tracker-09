@@ -14,6 +14,7 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: - Properties
     private var colorView: ColorView!
     var subscription: Set<AnyCancellable> = .init()
+    var selectLabel: Label?
     
     // MARK: - Lifecycle
     override init(style: FormStyle) {
@@ -48,18 +49,28 @@ final class LabelFormViewController: CategoryFormViewController {
             contentView.saveButton.addTarget(self,
                                              action: #selector(saveLabelContent),
                                              for: .touchUpInside)
-        default:
-            
+        case let .edit(label):
+            selectLabel = label
             contentView.saveButton.addTarget(self,
                                              action: #selector(editLabelContent),
                                              for: .touchUpInside)
+        default:
+            return
         }
     }
     
-    func request(data: Label, method: HTTPMethod) {
+    func request(data2: Label, method: HTTPMethod) {
+        var path: Endpoint.Path?
+        switch method {
+        case .post:
+            path = .labels()
+        default:
+            path = .labels(String(data2.id ?? 0))
+        }
+        
         UseCase.shared
-            .code(data, endpoint: Endpoint(path: .labels()),
-                  method: .post)
+            .code(data2, endpoint: Endpoint(path: path ?? .labels()),
+                  method: method)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
@@ -67,13 +78,25 @@ final class LabelFormViewController: CategoryFormViewController {
                 self?.present(alertController,
                               animated: true)
             }) { [weak self] data, response in
-                guard let label = data,
-                    let statusCode = response?.statusCode else { return }
+                guard let statusCode = response?.statusCode else { return }
                 switch statusCode {
                 case 200 ..< 300:
                     guard let superViewController = self?.presentingViewController as? UITabBarController else { return }
                     guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
-                    labelViewController.dataSource.labels.append(label)
+                    switch method {
+                    case .post:
+                        labelViewController.dataSource.labels.append(data2)
+                    default:
+                        
+                        for (index, label) in labelViewController.dataSource.labels.enumerated() {
+                            if label.id == data2.id {
+                                labelViewController.dataSource.labels.remove(at: index)
+                                
+                                labelViewController.dataSource.labels.insert(data2, at: index)
+                            }
+                        }
+                    }
+                    
                 default:
                     let alert = UIAlertController(message: "")
                     self?.present(alert,
@@ -90,11 +113,15 @@ final class LabelFormViewController: CategoryFormViewController {
                               title: title,
                               contents: contentView.labelSubject.subtitle,
                               colorCode: hexColor)
-        request(data: postLabel, method: .get)
+        request(data2: postLabel, method: .post)
         dismiss(animated: true)
     }
     
     @objc private func editLabelContent() {
+        guard let label = selectLabel else { return }
+        request(data2: label,
+                method: .put)
+        dismiss(animated: true)
     }
     
     // MARK: Constraints

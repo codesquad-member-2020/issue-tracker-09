@@ -30,7 +30,6 @@ final class DetailFormStackView: UIStackView {
     init(title: String?, subtitle: String?) {
         innerTitleTextFieldIsEmpty = !(title?.isEmpty ?? false)
         super.init(frame: .zero)
-        
         configure(title: title, subtitle: subtitle)
         makeConstraints()
     }
