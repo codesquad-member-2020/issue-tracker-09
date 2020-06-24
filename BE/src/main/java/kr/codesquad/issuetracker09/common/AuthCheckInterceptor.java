@@ -30,7 +30,7 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
         String jwt = request.getHeader(HEADER_AUTH);
 
         if (jwt != null) {
-            Long socialId = jwtService.parseJwt(jwt).getSocialId();
+            String socialId = jwtService.parseJwt(jwt).getSocialId();
             log.debug("[*] socialId : {}", socialId);
             User user = userRepository.findUserBySocialId(socialId).orElseThrow(NotFound::new);
             log.debug("[*] user : {}", user);

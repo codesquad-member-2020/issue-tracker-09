@@ -4,9 +4,9 @@ import kr.codesquad.issuetracker09.domain.User;
 import kr.codesquad.issuetracker09.service.JwtService;
 import kr.codesquad.issuetracker09.service.OAuthService;
 import kr.codesquad.issuetracker09.service.UserService;
+import kr.codesquad.issuetracker09.web.login.dto.PostRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 public class LoginController {
@@ -42,14 +43,15 @@ public class LoginController {
     }
 
     @PostMapping("/applelogin")
-    public ResponseEntity<String> appleLogin(@RequestBody User user) {
-        log.debug("[*] Apple user info : {}", user);
+    public void appleLogin(@RequestBody PostRequestDTO postRequestDTO, HttpServletResponse response) {
+        Map<String, Object> payloads = jwtService.getTokenPayload(postRequestDTO.getJwtToken());
+        if (!jwtService.checkAppleValidation(payloads)) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return;
+        }
+        User user = jwtService.parseAppleJwt(payloads);
+        log.debug("[*] user : {}", user);
         userService.insertOrUpdateUser(user);
-        String jwt = jwtService.buildJwt(user);
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.setBearerAuth(jwt);
-        return ResponseEntity.ok()
-                .headers(responseHeaders)
-                .body("login");
+        response.setStatus(HttpStatus.OK.value());
     }
 }

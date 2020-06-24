@@ -31,7 +31,7 @@ public class OAuthService {
     }
 
     public GithubToken getAccessToken(String code) {
-        MultiValueMap<String ,String> headers = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         Map<String, String> header = new HashMap<>();
         header.put("Accept", "application/json");
         headers.setAll(header);
@@ -55,7 +55,7 @@ public class OAuthService {
         if (response.getStatusCode() == HttpStatus.OK) {
             JsonNode jsonNode = objectMapper.readTree(response.getBody());
             return User.builder()
-                    .socialId(jsonNode.required("id").asLong())
+                    .socialId(jsonNode.required("id").asText())
                     .name(jsonNode.required("name").asText())
                     .email(jsonNode.required("email").asText())
                     .build();
