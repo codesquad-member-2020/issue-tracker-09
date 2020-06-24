@@ -28,9 +28,7 @@
 		AE8CA343248F77920076507B /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA342248F77920076507B /* LoginButton.swift */; };
 		AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA344248F7D4B0076507B /* Dependency.swift */; };
 		AE8CA348248F7D6E0076507B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AE8CA347248F7D6E0076507B /* SnapKit */; };
-		AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3512490E0C60076507B /* UIControlSubscription.swift */; };
-		AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3532490E2150076507B /* UIControlPublisher.swift */; };
-		AE8CA3562490E2700076507B /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3552490E2700076507B /* UIControl.swift */; };
+		AE8CA3562490E2700076507B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA3552490E2700076507B /* UITextField.swift */; };
 		AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* TitleHeaderView.swift */; };
 		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AE8CA35D249224560076507B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35C249224560076507B /* UIColor.swift */; };
@@ -77,9 +75,7 @@
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AE8CA342248F77920076507B /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AE8CA344248F7D4B0076507B /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
-		AE8CA3512490E0C60076507B /* UIControlSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlSubscription.swift; path = IssueTracker/Supports/UIControlSubscription.swift; sourceTree = SOURCE_ROOT; };
-		AE8CA3532490E2150076507B /* UIControlPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControlPublisher.swift; path = IssueTracker/Supports/UIControlPublisher.swift; sourceTree = SOURCE_ROOT; };
-		AE8CA3552490E2700076507B /* UIControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControl.swift; path = IssueTracker/Supports/UIControl.swift; sourceTree = SOURCE_ROOT; };
+		AE8CA3552490E2700076507B /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UITextField.swift; path = IssueTracker/Supports/UITextField.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35724920F6E0076507B /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TitleHeaderView.swift; path = IssueTracker/Reusable/TableView/TitleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35924921E1B0076507B /* LabelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelTableViewController.swift; path = IssueTracker/Supports/LabelTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35C249224560076507B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = IssueTracker/Supports/Extension/UIKit/UIColor.swift; sourceTree = SOURCE_ROOT; };
@@ -214,9 +210,7 @@
 		AE8CA3502490E09F0076507B /* Combine */ = {
 			isa = PBXGroup;
 			children = (
-				AE8CA3512490E0C60076507B /* UIControlSubscription.swift */,
-				AE8CA3552490E2700076507B /* UIControl.swift */,
-				AE8CA3532490E2150076507B /* UIControlPublisher.swift */,
+				AE8CA3552490E2700076507B /* UITextField.swift */,
 			);
 			path = Combine;
 			sourceTree = "<group>";
@@ -401,12 +395,11 @@
 				AE537168249B80A000269F6B /* UIAlert.swift in Sources */,
 				AB58CF1B249246C6003A86AC /* CategoryFormViewController.swift in Sources */,
 				AE8CA345248F7D4B0076507B /* Dependency.swift in Sources */,
-				AE8CA3562490E2700076507B /* UIControl.swift in Sources */,
+				AE8CA3562490E2700076507B /* UITextField.swift in Sources */,
 				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
 				ABAD30A1249A00F600618753 /* LabelTableViewDataSource.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
 				ABAD30A5249B6D6F00618753 /* AppleLogin.swift in Sources */,
-				AE8CA3522490E0C60076507B /* UIControlSubscription.swift in Sources */,
 				ABAD309C2499FCE000618753 /* IssueTrackerNetworkImpl.swift in Sources */,
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
 				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,
@@ -426,7 +419,6 @@
 				AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */,
 				AEE597362498925100F5C622 /* SaveButton.swift in Sources */,
 				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
-				AE8CA3542490E2150076507B /* UIControlPublisher.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
 				AEE597382498952300F5C622 /* ColorView.swift in Sources */,
 			);
