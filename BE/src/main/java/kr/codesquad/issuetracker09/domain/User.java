@@ -26,7 +26,7 @@ public class User {
 
     @JsonProperty("social_id")
     @Column(name = "social_id")
-    private Long socialId;
+    private String socialId;
 
     @Column(name = "email")
     private String email;
