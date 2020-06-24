@@ -18,6 +18,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     // MARK: - Properties
     private var authorizationButton: ASAuthorizationAppleIDButton!
     private let tabbarControllerIdentifier: String = "MasterViewController"
+    private var subscriptions: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -29,24 +30,20 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     @IBAction func githubLoginAction(_ sender: UIButton) {
         guard let authURL = Endpoint.githubLogin else { return }
         let scheme = "issuenine"
-        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: scheme) { [weak self] callbackURL, error in
-            guard error == nil else {
-                let alertController = UIAlertController(message: error?.localizedDescription ?? "")
-                DispatchQueue.main.async { [weak self] in
-                    self?.present(alertController,
-                                  animated: true)
-                }
-                
-                return
-            }
-            guard let callbackURL = callbackURL else { return }
-            let queryItems = URLComponents(string: callbackURL.absoluteString)?.queryItems
-            guard let token = queryItems?.filter({ $0.name == "token" }).first?.value else { return }
-            self?.saveUserInKeychain(token)
-            self?.presentTabBarController()
+        ASWebAuthenticationSession.publisher(self,
+                                             url: authURL,
+                                             scheme: scheme)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self]  in
+                guard case let .failure(error) = $0 else { return }
+                let alertController = UIAlertController(message: error.localizedDescription)
+                self?.present(alertController,
+                              animated: true)
+            }) { [weak self] token in
+                self?.saveUserInKeychain(token)
+                self?.presentTabBarController()
         }
-        session.presentationContextProvider = self
-        session.start()
+        .store(in: &subscriptions)
     }
     
     // MARK: - Methods
