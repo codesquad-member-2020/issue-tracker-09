@@ -10,7 +10,7 @@ import UIKit
 import AuthenticationServices
 import Combine
 
-final class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
+final class LoginViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var signinGitHubButton: UIButton!
@@ -19,6 +19,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     private var authorizationButton: ASAuthorizationAppleIDButton!
     private let tabbarControllerIdentifier: String = "MasterViewController"
     private var subscriptions: Set<AnyCancellable> = .init()
+    private var loginManager: LoginManager!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -28,22 +29,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     }
     
     @IBAction func githubLoginAction(_ sender: UIButton) {
-        guard let authURL = Endpoint.githubLogin else { return }
-        let scheme = "issuenine"
-        ASWebAuthenticationSession.publisher(self,
-                                             url: authURL,
-                                             scheme: scheme)
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { [weak self]  in
-                guard case let .failure(error) = $0 else { return }
-                let alertController = UIAlertController(message: error.localizedDescription)
-                self?.present(alertController,
-                              animated: true)
-            }) { [weak self] token in
-                self?.saveUserInKeychain(token)
-                self?.presentTabBarController()
-        }
-        .store(in: &subscriptions)
+        loginManager.requestGithubLoginToken()
     }
     
     // MARK: - Methods
@@ -56,6 +42,7 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     // MARK: Configure
     private func configure() {
         configureAppleLoginButton()
+        loginManager = LoginManager(viewController: self)
     }
     
     private func configureAppleLoginButton() {
@@ -81,57 +68,26 @@ final class LoginViewController: UIViewController, ASWebAuthenticationPresentati
     }
     
     @objc private func handleAuthorizationAppleIDButtonPress() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        let authorizationController = ASAuthorizationController(authorizationRequests: [loginManager.authorizationRequests])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
 }
 
+
 // MARK: - Extension
 // MARK: ASAuthorizationControllerDelegate
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        UseCase.shared
-            .encode(AppleLogin(credential: appleIDCredential),
-                    endpoint: Endpoint(path: .appleLogin),
-                    method: .get)
-            .receive(subscriber: Subscribers.Sink(receiveCompletion: {
-                guard case let .failure(error) = $0 else { return }
-                let alertController = UIAlertController(message: error.message)
-                self.present(alertController,
-                             animated: true)
-            }, receiveValue: { [weak self] response in
-                guard let key = response.allHeaderFields["Authorization"] as? String else { return }
-                self?.saveUserInKeychain(key)
-            }))
-    }
-    
-    private func saveUserInKeychain(_ userIdentifier: String) {
-        do {
-            try KeychainItem(service: KeychainItem.service,
-                             account: KeychainItem.account).saveItem(userIdentifier)
-        } catch {
-            let alertController = UIAlertController(message: "Unable to save userIdentifier to keychain.")
-            present(alertController,
-                    animated: true)
-        }
+        loginManager.requestAppleLoginToken(credential: appleIDCredential)
     }
 }
 
 // MARK: ASAuthorizationControllerPresentationContextProviding
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        guard let window = view.window else { return UIWindow() }
-        return window
-    }
-    
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         guard let window = view.window else { return UIWindow() }
         return window
     }
