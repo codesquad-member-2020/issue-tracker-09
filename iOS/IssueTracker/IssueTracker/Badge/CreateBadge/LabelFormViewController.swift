@@ -59,17 +59,17 @@ final class LabelFormViewController: CategoryFormViewController {
         }
     }
     
-    func request(data2: Label, method: HTTPMethod) {
+    func request(label: Label, method: HTTPMethod) {
         var path: Endpoint.Path?
         switch method {
         case .post:
             path = .labels()
         default:
-            path = .labels(String(data2.id ?? 0))
+            path = .labels(String(label.id ?? 0))
         }
         
         UseCase.shared
-            .code(data2, endpoint: Endpoint(path: path ?? .labels()),
+            .code(label, endpoint: Endpoint(path: path ?? .labels()),
                   method: method)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
@@ -85,14 +85,14 @@ final class LabelFormViewController: CategoryFormViewController {
                     guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
                     switch method {
                     case .post:
-                        labelViewController.dataSource.labels.append(data2)
+                        labelViewController.dataSource.labels.append(label)
                     default:
                         
                         for (index, label) in labelViewController.dataSource.labels.enumerated() {
-                            if label.id == data2.id {
+                            if label.id == label.id {
                                 labelViewController.dataSource.labels.remove(at: index)
                                 
-                                labelViewController.dataSource.labels.insert(data2, at: index)
+                                labelViewController.dataSource.labels.insert(label, at: index)
                             }
                         }
                     }
@@ -113,13 +113,19 @@ final class LabelFormViewController: CategoryFormViewController {
                               title: title,
                               contents: contentView.labelSubject.subtitle,
                               colorCode: hexColor)
-        request(data2: postLabel, method: .post)
+        request(label: postLabel,
+                method: .post)
         dismiss(animated: true)
     }
     
     @objc private func editLabelContent() {
-        guard let label = selectLabel else { return }
-        request(data2: label,
+        guard let hexColor = colorView.color?.hexString,
+            let title = contentView.labelSubject.title else { return }
+        let putLabel = Label(id: selectLabel?.id,
+                              title: title,
+                              contents: contentView.labelSubject.subtitle,
+                              colorCode: hexColor)
+        request(label: putLabel,
                 method: .put)
         dismiss(animated: true)
     }
