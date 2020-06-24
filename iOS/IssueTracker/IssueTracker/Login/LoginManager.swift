@@ -29,18 +29,27 @@ class LoginManager: NSObject {
     
     // MARK: - Method
     func requestAppleLoginToken(credential: ASAuthorizationAppleIDCredential) {
+        guard let token = String(data: credential.identityToken!,
+                                 encoding: .utf8) else { return }
         UseCase.shared
-            .encode(AppleLogin(credential: credential),
+            .encode(AppleLogin(token: token),
                     endpoint: Endpoint(path: .appleLogin),
-                    method: .get)
+                    method: .post)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.viewController?.present(alertController,
                                              animated: true)
                 }, receiveValue: { [weak self] response in
-                    guard let key = response.allHeaderFields["Authorization"] as? String else { return }
-                    try? self?.saveUserInKeychain(key)
+                    print(response.statusCode)
+                    if response.statusCode == 200 {
+                        try? self?.saveUserInKeychain(token)
+                        self?.viewController?.presentTabBarController()
+                    } else {
+                        let alertController = UIAlertController(message: "유효하지 않은 Apple ID 입니다.")
+                        self?.viewController?.present(alertController,
+                                                     animated: true)
+                    }
             }))
     }
     
