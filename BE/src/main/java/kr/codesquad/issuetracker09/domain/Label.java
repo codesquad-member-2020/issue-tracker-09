@@ -27,6 +27,7 @@ public class Label {
     @Column(name="color_code")
     private String colorCode;
 
+    @Builder.Default
     @JsonIgnore
     @OneToMany(mappedBy = "label")
     private List<IssueHasLabel> issueHasLabelList = new ArrayList<>();

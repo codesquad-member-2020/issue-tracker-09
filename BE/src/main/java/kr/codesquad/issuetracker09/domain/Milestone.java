@@ -26,6 +26,7 @@ public class Milestone {
     @Column(name = "due_on")
     private LocalDate dueOn;
 
+    @Builder.Default
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
