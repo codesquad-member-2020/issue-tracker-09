@@ -30,7 +30,7 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: - Methods
     // MARK: Configure
     private func configure(style: FormStyle?) {
-        colorView = ColorView()
+        colorView = ColorView(style: style!)
         contentView.addArrangedSubview(colorView)
         addTartgetButton(style: style)
     }
