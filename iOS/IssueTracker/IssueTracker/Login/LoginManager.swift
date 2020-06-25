@@ -29,8 +29,8 @@ class LoginManager: NSObject {
     
     // MARK: - Method
     func requestAppleLoginToken(credential: ASAuthorizationAppleIDCredential) {
-        guard let token = String(data: credential.identityToken!,
-                                 encoding: .utf8) else { return }
+        guard let tokenData = credential.identityToken,
+            let token = String(data: tokenData, encoding: .utf8) else { return }
         UseCase.shared
             .encode(AppleLogin(token: token),
                     endpoint: Endpoint(path: .appleLogin),
@@ -39,18 +39,9 @@ class LoginManager: NSObject {
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.viewController?.present(alertController,
-                                             animated: true)
+                                              animated: true)
                 }, receiveValue: { [weak self] response in
-                    print(response.statusCode)
-                    if response.statusCode == 200 {
-                        try? self?.saveUserInKeychain(token)
-                        UserDefaults.standard.set("apple", forKey: "loginType")
-                        self?.viewController?.presentTabBarController()
-                    } else {
-                        let alertController = UIAlertController(message: "유효하지 않은 Apple ID 입니다.")
-                        self?.viewController?.present(alertController,
-                                                     animated: true)
-                    }
+                    self?.checkResponseStatus(statusCode: response.statusCode, token: token)
             }))
     }
     
@@ -65,7 +56,7 @@ class LoginManager: NSObject {
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.localizedDescription)
                 self?.viewController?.present(alertController,
-                                             animated: true)
+                                              animated: true)
             }) { [weak self] token in
                 try? self?.saveUserInKeychain(token)
                 UserDefaults.standard.set("github", forKey: "loginType")
@@ -76,6 +67,19 @@ class LoginManager: NSObject {
     private func saveUserInKeychain(_ userIdentifier: String) throws {
         try KeychainItem(service: KeychainItem.service,
                          account: KeychainItem.account).saveItem(userIdentifier)
+    }
+    
+    private func checkResponseStatus(statusCode: Int, token: String) {
+        switch statusCode {
+        case 200 ..< 300:
+            try? saveUserInKeychain(token)
+            UserDefaults.standard.set("apple", forKey: "loginType")
+            viewController?.presentTabBarController()
+        default:
+            let alertController = UIAlertController(message: "유효하지 않은 Apple ID 입니다.")
+            viewController?.present(alertController,
+                                    animated: true)
+        }
     }
 }
 

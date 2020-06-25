@@ -21,14 +21,8 @@ final class ColorView: UIView {
     private var subscriber: AnyCancellable?
     
     // MARK: - Lifecycle
-    init(style: FormStyle) {
-        switch style {
-        case .save:
-            color = UIColor.random
-        case let .edit(label):
-            color = UIColor(hex: label.colorCode)
-        }
-        
+    init(color: UIColor?) {
+        self.color = color
         super.init(frame: .zero)
         configure()
         makeConstraints()
