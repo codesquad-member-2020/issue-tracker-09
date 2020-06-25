@@ -44,6 +44,7 @@ class LoginManager: NSObject {
                     print(response.statusCode)
                     if response.statusCode == 200 {
                         try? self?.saveUserInKeychain(token)
+                        UserDefaults.standard.set("apple", forKey: "loginType")
                         self?.viewController?.presentTabBarController()
                     } else {
                         let alertController = UIAlertController(message: "유효하지 않은 Apple ID 입니다.")
@@ -67,6 +68,7 @@ class LoginManager: NSObject {
                                              animated: true)
             }) { [weak self] token in
                 try? self?.saveUserInKeychain(token)
+                UserDefaults.standard.set("github", forKey: "loginType")
                 self?.viewController?.presentTabBarController()
         }
     }
