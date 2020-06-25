@@ -31,7 +31,7 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String loginType = request.getHeader(LOGIN_TYPE);
         String jwt = request.getHeader(HEADER_AUTH);
-        if (jwt == null) {
+        if (jwt == null | loginType == null) {
             throw AuthorizationException.emptyToken();
         }
         String socialId;
