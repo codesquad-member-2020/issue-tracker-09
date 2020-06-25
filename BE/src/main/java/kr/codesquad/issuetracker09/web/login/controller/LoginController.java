@@ -38,6 +38,7 @@ public class LoginController {
         User user = oAuthService.getSocialUser(code);
         userService.insertOrUpdateUser(user);
         String jwt = jwtService.buildJwt(user);
+        log.debug("[*] jwt: {}", jwt);
         response.sendRedirect("issuenine://oauth?token=" + jwt);
         return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).body("redirect");
     }

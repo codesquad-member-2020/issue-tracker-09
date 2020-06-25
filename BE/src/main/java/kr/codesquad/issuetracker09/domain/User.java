@@ -31,6 +31,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Assignee> assigneeList = new ArrayList<>();
 }

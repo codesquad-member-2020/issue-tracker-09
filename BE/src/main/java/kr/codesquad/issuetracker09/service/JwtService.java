@@ -40,7 +40,7 @@ public class JwtService {
                 .compact();
     }
 
-    public User parseJwt(String jwt) {
+    public User parseGithubJwt(String jwt) {
         jwt = jwt.replace("Bearer ", "");
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -49,9 +49,7 @@ public class JwtService {
                 .getBody();
         Long id = claims.get("id", Long.class);
         String name = (String) claims.get("name");
-        log.debug("[*] name: {}", name);
         String socialId = (String) claims.get("socialId");
-        log.debug("[*] socialId: {}", socialId);
         String email = (String) claims.get("email");
         return User.builder()
                 .id(id)
@@ -80,8 +78,6 @@ public class JwtService {
     public boolean checkAppleValidation(Map<String, Object> payloads) {
         String registeredKey = (String) payloads.get("iss");
         String account = (String) payloads.get("aud");
-        log.debug("[*] keyCheck: {}", registeredKey.equals(APPLE_KEY));
-        log.debug("[*] idCheck: {}", account.equals(APPLE_ID));
         return (registeredKey.equals(APPLE_KEY) && account.equals(APPLE_ID));
     }
 
@@ -101,13 +97,9 @@ public class JwtService {
     }
 
     public User parseAppleJwt(Map<String, Object> payloads) {
-        log.debug("[*] claims: {}", payloads);
         String socialId = (String) payloads.get("sub");
-        log.debug("[*] socialId: {}", socialId);
         String email = (String) payloads.get("email");
-        log.debug("[*] email: {}", email);
         String name = email.substring(0, email.indexOf("@"));
-        log.debug("[*] name: {}", name);
         return User.builder()
                 .name(name)
                 .socialId(socialId)
