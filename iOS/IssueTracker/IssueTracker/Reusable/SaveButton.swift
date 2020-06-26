@@ -40,8 +40,6 @@ final class SaveButton: UIButton {
         backgroundColor = .black
         setTitleColor(.white,
                       for: .normal)
-        setTitle("save",
-                 for: .normal)
         titleLabel?.font = .boldSystemFont(ofSize: 16)
     }
 }
