@@ -37,28 +37,46 @@ final class LabelFormViewController: CategoryFormViewController {
         }
     }
     
-    private func checkStatusCode(method: HTTPMethod, label: Label, statusCode: Int) {
+    private func request(label: Label, method: HTTPMethod) {
+        UseCase.shared
+            .code(label,
+                  endpoint: Endpoint(path: generatePath(method: method, identity: label.id)),
+                  method: method)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] in
+                guard case let .failure(error) = $0 else { return }
+                let alertController = UIAlertController(message: error.message)
+                self?.present(alertController,
+                              animated: true)
+            }) { [weak self] data, response in
+                guard let statusCode = response?.statusCode else { return }
+                self?.checkStatusCode(statusCode, method: method, label: label)
+        }
+        .store(in: &subscription)
+    }
+    
+    
+    private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, label: Label) {
         switch statusCode {
         case 200 ..< 300:
             guard let superViewController = self.presentingViewController as? UITabBarController else { return }
             guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
-            checkHTTPMethod(viewController: labelViewController, method: method, label: label)
-            
+            checkHTTPMethod(viewController: labelViewController, method: method, updateLabel: label)
         default:
-            let alert = UIAlertController(message: "")
+            let alert = UIAlertController(message: "Network Error")
             present(alert,
                     animated: true)
         }
     }
     
-    private func checkHTTPMethod(viewController: LabelTableViewController, method: HTTPMethod, label: Label) {
+    private func checkHTTPMethod(viewController: LabelTableViewController, method: HTTPMethod, updateLabel: Label) {
         switch method {
         case .post:
-            viewController.dataSource.labels.append(label)
+            viewController.dataSource.labels.append(updateLabel)
         default:
             for (index, label) in viewController.dataSource.labels.enumerated() {
-                _ = label.id == label.id ? viewController.dataSource.labels.remove(at: index) : nil
-                label.id == label.id ? viewController.dataSource.labels.insert(label, at: index) : nil
+                _ = updateLabel.id == label.id ? viewController.dataSource.labels.remove(at: index) : nil
+                updateLabel.id == label.id ? viewController.dataSource.labels.insert(updateLabel, at: index) : nil
             }
         }
     }
@@ -102,23 +120,6 @@ final class LabelFormViewController: CategoryFormViewController {
         default:
             return
         }
-    }
-    
-    private func request(label: Label, method: HTTPMethod) {
-        UseCase.shared
-            .code(label, endpoint: Endpoint(path: generatePath(method: method, identity: label.id)),
-                  method: method)
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { [weak self] in
-                guard case let .failure(error) = $0 else { return }
-                let alertController = UIAlertController(message: error.message)
-                self?.present(alertController,
-                              animated: true)
-            }) { [weak self] data, response in
-                guard let statusCode = response?.statusCode else { return }
-                self?.checkStatusCode(method: method, label: label, statusCode: statusCode)
-        }
-        .store(in: &subscription)
     }
     
     // MARK: Constraints
