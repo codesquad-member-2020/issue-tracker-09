@@ -15,12 +15,10 @@ struct IssueTrackerNetworkImpl: IssueTrackerNetwork {
     // MARK: - Properties
     static var shared: IssueTrackerNetworkImpl = .init()
     var session: URLSession
-    var encoder: JSONEncoder
     
     // MARK: - Lifecycle
-    init(session: URLSession = .shared, encoder: JSONEncoder = .init()) {
+    init(session: URLSession = .shared) {
         self.session = session
-        self.encoder = encoder
     }
     
     // MARK: - Methods

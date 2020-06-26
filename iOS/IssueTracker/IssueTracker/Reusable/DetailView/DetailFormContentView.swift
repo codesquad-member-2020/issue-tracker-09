@@ -21,15 +21,17 @@ final class DetailFormContentView: UIView {
     var subscription: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
+    init(title: String?, subtitle: String?) {
+        super.init(frame: .zero)
+        configure(title: title,
+                  subtitle: subtitle)
         makeConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        configure(title: nil,
+                  subtitle: nil)
         makeConstraints()
     }
     
@@ -47,13 +49,14 @@ final class DetailFormContentView: UIView {
     }
     
     // MARK: Configure
-    private func configure() {
+    private func configure(title: String?, subtitle: String?) {
         backgroundColor = .systemBackground
         configureDismissButton()
         configureSeperatorLine()
         configureResetButton()
         configureSaveButton()
-        configureContentView()
+        configureContentView(title: title,
+                             subtitle: subtitle)
         bind()
     }
     
@@ -86,8 +89,9 @@ final class DetailFormContentView: UIView {
         addSubview(saveButton)
     }
     
-    private func configureContentView() {
-        contentView = DetailFormStackView()
+    private func configureContentView(title: String?, subtitle: String?) {
+        contentView = DetailFormStackView(title: title,
+                                          subtitle: subtitle)
         addSubview(contentView)
     }
     

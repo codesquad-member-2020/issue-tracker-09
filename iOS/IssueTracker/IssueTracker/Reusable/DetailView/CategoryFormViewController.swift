@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum FormStyle {
+    case edit(Label)
+    case save
+}
+
 class CategoryFormViewController: UIViewController {
     
     // MARK: - Properties
@@ -15,27 +20,46 @@ class CategoryFormViewController: UIViewController {
     var contentView: DetailFormContentView!
     
     // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configure()
+    init(style: FormStyle) {
+        super.init(nibName: nil,
+                   bundle: nil)
+        checkStyle(style)
+        makeConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        checkStyle(nil)
         makeConstraints()
     }
     
     // MARK: - Methods
-    // MARK: Configure
-    private func configure() {
-        configureDimmedView()
-        configureContentView()
+    func checkStyle(_ style: FormStyle?) {
+        guard let style = style else { return }
+        switch style {
+        case .save:
+            configure(title: nil,
+                      subtitle: nil)
+        case let .edit(label):
+            configure(title: label.title,
+                      subtitle: label.contents)
+        }
     }
-
+    // MARK: Configure
+    private func configure(title: String?, subtitle: String?) {
+        configureDimmedView()
+        configureContentView(title: title, subtitle: subtitle)
+    }
+    
     private func configureDimmedView() {
         dimmedView = UIView()
         dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.66)
         view.addSubview(dimmedView)
     }
     
-    func configureContentView() {
-        contentView = DetailFormContentView()
+    func configureContentView(title: String?, subtitle: String?) {
+        contentView = DetailFormContentView(title: title,
+                                            subtitle: subtitle)
         view.addSubview(contentView)
         contentView.dismissButton.addTarget(self,
                                             action: #selector(dismissContentView),

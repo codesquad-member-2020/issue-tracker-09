@@ -14,19 +14,15 @@ final class LabelTableViewController: CategoryTableViewController {
     // MARK: - Properties
     static let identifier: String = "LabelTableViewController"
     private let headerViewTitle: String = "Label"
-    private let dataSource: LabelTableViewDataSource = .init()
     private var subscriptions: Set<AnyCancellable> = .init()
+    let dataSource: LabelTableViewDataSource = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        Timer.publish(every: 1, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                self?.fetch(provider: UseCase.shared ,
-                            endpoint: Endpoint(path: .labels()))
-        }.store(in: &subscriptions)
+        self.fetch(provider: UseCase.shared ,
+                   endpoint: Endpoint(path: .labels()))
         bindViewModelToView()
         registerCell(anyClass: LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
@@ -58,11 +54,17 @@ final class LabelTableViewController: CategoryTableViewController {
         return headerView
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = dataSource.labels[indexPath.row]
+        present(LabelFormViewController(style: .edit(item)),
+                animated: true)
+    }
+    
     // MARK: Bind
     private func bindViewModelToView() {
         dataSource.$labels
             .receive(on: RunLoop.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] lables in
                 self?.tableView.reloadData()
         }
         .store(in: &subscriptions)
@@ -70,7 +72,6 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: Objc
     @objc private func presentCreateLabelViewController() {
-        present(CreateLabelViewController(),
-                animated: true)
+        present(LabelFormViewController(style: .save), animated: true)
     }
 }
