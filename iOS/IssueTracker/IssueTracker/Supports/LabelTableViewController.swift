@@ -56,7 +56,8 @@ final class LabelTableViewController: CategoryTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataSource.labels[indexPath.row]
-        present(LabelFormViewController(style: .edit(item)), animated: true)
+        present(LabelFormViewController(style: .edit(item)),
+                animated: true)
     }
     
     // MARK: Bind

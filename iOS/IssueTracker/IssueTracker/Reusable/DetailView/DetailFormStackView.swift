@@ -23,12 +23,13 @@ final class DetailFormStackView: UIStackView {
     private var innerSubtitleTextField: UITextField!
     private var subtitleSeperatorLine: UIView!
     @Published var innerTitleTextFieldIsEmpty: Bool
-    @Published var labelSubject: LabelSubjects = (title: nil, subtitle: nil)
+    @Published var labelSubject: LabelSubjects
     private var subscriptions: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
         innerTitleTextFieldIsEmpty = !(title?.isEmpty ?? false)
+        labelSubject = (title: title, subtitle: subtitle)
         super.init(frame: .zero)
         configure(title: title, subtitle: subtitle)
         makeConstraints()
@@ -36,6 +37,7 @@ final class DetailFormStackView: UIStackView {
     
     required init(coder: NSCoder) {
         innerTitleTextFieldIsEmpty = false
+        labelSubject = (title: nil, subtitle: nil)
         super.init(coder: coder)
         configure()
         makeConstraints()

@@ -23,13 +23,15 @@ final class DetailFormContentView: UIView {
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
         super.init(frame: .zero)
-        configure(title: title, subtitle: subtitle)
+        configure(title: title,
+                  subtitle: subtitle)
         makeConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure(title: nil, subtitle: nil)
+        configure(title: nil,
+                  subtitle: nil)
         makeConstraints()
     }
     
@@ -53,7 +55,8 @@ final class DetailFormContentView: UIView {
         configureSeperatorLine()
         configureResetButton()
         configureSaveButton()
-        configureContentView(title: title, subtitle: subtitle)
+        configureContentView(title: title,
+                             subtitle: subtitle)
         bind()
     }
     
@@ -87,7 +90,8 @@ final class DetailFormContentView: UIView {
     }
     
     private func configureContentView(title: String?, subtitle: String?) {
-        contentView = DetailFormStackView(title: title, subtitle: subtitle)
+        contentView = DetailFormStackView(title: title,
+                                          subtitle: subtitle)
         addSubview(contentView)
     }
     
