@@ -122,6 +122,11 @@ public class IssueService {
             criteriaQuery.where(cb.equal(issue.get("author"), user));
         }
 
+        if (filterDTO.getAssignee() != null) {
+            User user = userService.findUser(filterDTO.getAssignee());
+            query.where(cb.equal(issueAssignee.get("user"), user));
+        }
+
         List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
         return resultIssue;
     }
