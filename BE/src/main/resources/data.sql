@@ -41,6 +41,10 @@ VALUES ("Hi!!", 2, "2020-06-19 13:34:11", 1);
 INSERT INTO comment (contents, user_id, created, issue_id)
 VALUES ("HaHa!!", 1, "2020-06-22 16:21:34", 2);
 INSERT INTO comment (contents, user_id, created, issue_id)
+VALUES ("Hellooooo!!", 3, "2020-06-22 16:21:34", 1);
+INSERT INTO comment (contents, user_id, created, issue_id)
+VALUES ("Hellooooo!!", 3, "2020-06-22 16:21:34", 2);
+INSERT INTO comment (contents, user_id, created, issue_id)
 VALUES ("Hellooooo!!", 3, "2020-06-22 16:21:34", 3);
 INSERT INTO comment (contents, user_id, created, issue_id)
 VALUES ("Haaaaaa!!", 4, "2020-06-22 16:21:34", 3);
@@ -57,4 +61,5 @@ INSERT INTO assignee (issue_id, user_id) VALUES (1, 3);
 INSERT INTO assignee (issue_id, user_id) VALUES (2, 2);
 INSERT INTO assignee (issue_id, user_id) VALUES (2, 3);
 INSERT INTO assignee (issue_id, user_id) VALUES (3, 3);
+INSERT INTO assignee (issue_id, user_id) VALUES (3, 4);
 INSERT INTO assignee (issue_id, user_id) VALUES (4, 4);
