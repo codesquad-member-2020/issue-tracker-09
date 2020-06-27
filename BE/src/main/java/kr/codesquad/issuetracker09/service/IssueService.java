@@ -109,7 +109,6 @@ public class IssueService {
         //중복 조건 저장
         List<Predicate> predicates = new ArrayList<>();
 
-        // 조건 1 - is : open or closed
         if (filterDTO.isClosed()) {
             predicates.add(cb.equal(issue.get("open"), false));
         }
@@ -128,6 +127,12 @@ public class IssueService {
             Join<Issue, Assignee> issueAssignee = issue.join("assignees", JoinType.LEFT);
             User user = userService.findUser(filterDTO.getAssignee());
             predicates.add(cb.equal(issueAssignee.get("user"), user));
+        }
+
+        if (filterDTO.getCommentedBy() != null) {
+            Join<Issue, Comment> issueComment = issue.join("comments", JoinType.LEFT);
+            User user = userService.findUser(filterDTO.getCommentedBy());
+            predicates.add(cb.equal(issueComment.get("author"), user));
         }
 
         criteriaQuery.select(issue).where(predicates.toArray(new Predicate[]{}));
