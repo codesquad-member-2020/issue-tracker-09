@@ -117,6 +117,11 @@ public class IssueService {
             criteriaQuery.where(cb.equal(issue.get("open"), true));
         }
 
+        if (filterDTO.getAuthor() != null) {
+            User user = userService.findUser(filterDTO.getAuthor());
+            criteriaQuery.where(cb.equal(issue.get("author"), user));
+        }
+
         List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
         return resultIssue;
     }
