@@ -19,7 +19,7 @@ import java.util.List;
 public class IssueService {
     private static final Logger log = LoggerFactory.getLogger(IssueService.class);
     private IssueRepository issueRepository;
-    private MilestoneRepository milestoneRepository;
+    private MilestoneService milestoneService;
     private LabelRepository labelRepository;
     private IssueLabelService issueLabelService;
     private AssigneeService assigneeService;
@@ -28,10 +28,10 @@ public class IssueService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public IssueService(IssueRepository issueRepository, MilestoneRepository milestoneRepository, LabelRepository labelRepository,
+    public IssueService(IssueRepository issueRepository, MilestoneService milestoneService, LabelRepository labelRepository,
                         IssueLabelService issueLabelService, AssigneeService assigneeService, UserService userService) {
         this.issueRepository = issueRepository;
-        this.milestoneRepository = milestoneRepository;
+        this.milestoneService = milestoneService;
         this.labelRepository = labelRepository;
         this.issueLabelService = issueLabelService;
         this.assigneeService = assigneeService;
@@ -65,7 +65,7 @@ public class IssueService {
     }
 
     public void updateMilestone(Issue issue, Long milestoneId) {
-        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new NotFoundException("Milestone doesn't exit"));
+        Milestone milestone = milestoneService.findById(milestoneId);
         issue.editMilestone(milestone);
         issueRepository.save(issue);
     }
@@ -133,6 +133,11 @@ public class IssueService {
             Join<Issue, Comment> issueComment = issue.join("comments", JoinType.LEFT);
             User user = userService.findUser(filterDTO.getCommentedBy());
             predicates.add(cb.equal(issueComment.get("author"), user));
+        }
+
+        if (filterDTO.getMilestone() != null) {
+            Milestone milestone = milestoneService.findById(filterDTO.getMilestone());
+            predicates.add(cb.equal(issue.get("milestone"), milestone));
         }
 
         criteriaQuery.select(issue).where(predicates.toArray(new Predicate[]{}));

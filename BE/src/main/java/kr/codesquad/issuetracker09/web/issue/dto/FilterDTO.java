@@ -15,7 +15,7 @@ public class FilterDTO {
     private Long assignee;
     private Long commentedBy;
     private List<Long> labels;
-    private List<Long> milestones;
+    private Long milestone;
 
     public boolean isClosed() {
         return is != null && is.equals("closed");

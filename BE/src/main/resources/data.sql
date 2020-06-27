@@ -30,7 +30,7 @@ VALUES ("issue 3", "333 issue blabla", "2020-06-22 05:14:22", FALSE, FALSE, 1, 2
 INSERT INTO issue (title, contents, created, open, is_deleted, user_id, milestone_id)
 VALUES ("issue 4", "444 issue blabla", "2020-06-22 06:14:22", TRUE, FALSE, 1, 2);
 INSERT INTO issue (title, contents, created, open, is_deleted, user_id, milestone_id)
-VALUES ("issue 5", "555 issue blabla", "2020-06-22 05:14:22", TRUE, FALSE, 2, 2);
+VALUES ("issue 5", "555 issue blabla", "2020-06-22 05:14:22", TRUE, FALSE, 2, 3);
 
 INSERT INTO comment (contents, user_id, created, issue_id)
 VALUES ("Good!!", 2, "2020-06-19 13:01:23", 1);
