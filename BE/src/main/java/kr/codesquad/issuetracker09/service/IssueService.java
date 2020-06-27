@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -105,28 +106,31 @@ public class IssueService {
 
         //쿼리 생성
         CriteriaQuery<Issue> criteriaQuery = query.select(issue);
-        // Join - Issue, Assignee
-        Join<Issue, Assignee> issueAssignee = issue.join("assignees", JoinType.INNER);
+        //중복 조건 저장
+        List<Predicate> predicates = new ArrayList<>();
 
         // 조건 1 - is : open or closed
         if (filterDTO.isClosed()) {
-            criteriaQuery.where(cb.equal(issue.get("open"), false));
+            predicates.add(cb.equal(issue.get("open"), false));
         }
 
         if (filterDTO.isOpened()) {
-            criteriaQuery.where(cb.equal(issue.get("open"), true));
+            predicates.add(cb.equal(issue.get("open"), true));
         }
 
         if (filterDTO.getAuthor() != null) {
             User user = userService.findUser(filterDTO.getAuthor());
-            criteriaQuery.where(cb.equal(issue.get("author"), user));
+            predicates.add(cb.equal(issue.get("author"), user));
         }
 
         if (filterDTO.getAssignee() != null) {
+            // Join - Issue, Assignee
+            Join<Issue, Assignee> issueAssignee = issue.join("assignees", JoinType.LEFT);
             User user = userService.findUser(filterDTO.getAssignee());
-            query.where(cb.equal(issueAssignee.get("user"), user));
+            predicates.add(cb.equal(issueAssignee.get("user"), user));
         }
 
+        criteriaQuery.select(issue).where(predicates.toArray(new Predicate[]{}));
         List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
         return resultIssue;
     }
