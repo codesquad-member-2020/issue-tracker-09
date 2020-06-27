@@ -2,12 +2,16 @@ package kr.codesquad.issuetracker09.service;
 
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
+import kr.codesquad.issuetracker09.web.issue.dto.FilterDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Service
@@ -19,6 +23,9 @@ public class IssueService {
     private IssueLabelService issueLabelService;
     private AssigneeService assigneeService;
     private UserService userService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public IssueService(IssueRepository issueRepository, MilestoneRepository milestoneRepository, LabelRepository labelRepository,
                         IssueLabelService issueLabelService, AssigneeService assigneeService, UserService userService) {
@@ -86,5 +93,31 @@ public class IssueService {
                     .build();
             assigneeService.save(assignee);
         }
+    }
+
+    public List<Issue> getIssueByFilter(FilterDTO filterDTO) {
+        // Criteria 사용 준비
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Issue> query = cb.createQuery(Issue.class);
+
+        // 루트 클래스 (조회를 시작할 클래스)
+        Root<Issue> issue = query.from(Issue.class);
+
+        //쿼리 생성
+        CriteriaQuery<Issue> criteriaQuery = query.select(issue);
+        // Join - Issue, Assignee
+        Join<Issue, Assignee> issueAssignee = issue.join("assignees", JoinType.INNER);
+
+        // 조건 1 - is : open or closed
+        if (filterDTO.isClosed()) {
+            criteriaQuery.where(cb.equal(issue.get("open"), false));
+        }
+
+        if (filterDTO.isOpened()) {
+            criteriaQuery.where(cb.equal(issue.get("open"), true));
+        }
+
+        List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
+        return resultIssue;
     }
 }
