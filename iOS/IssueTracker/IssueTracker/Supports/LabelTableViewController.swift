@@ -24,7 +24,7 @@ final class LabelTableViewController: CategoryTableViewController {
         self.fetch(provider: UseCase.shared ,
                    endpoint: Endpoint(path: .labels()))
         bindViewModelToView()
-        registerCell(anyClass: LabelTableViewCell.self,
+        registerCell(LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
     }
     

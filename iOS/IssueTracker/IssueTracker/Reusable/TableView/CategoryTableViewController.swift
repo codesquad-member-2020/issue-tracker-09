@@ -18,7 +18,7 @@ class CategoryTableViewController: UITableViewController {
     
     // MARK: - Methods
     
-    func registerCell(anyClass: AnyClass, identifier: String) {
+    func registerCell(_ anyClass: AnyClass, identifier: String) {
         tableView.register(anyClass.self,
                            forCellReuseIdentifier: identifier)
     }

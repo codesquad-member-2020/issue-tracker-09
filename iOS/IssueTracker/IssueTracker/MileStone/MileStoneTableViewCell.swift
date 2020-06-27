@@ -10,4 +10,5 @@ import UIKit
 
 final class MileStoneTableViewCell: UITableViewCell {
     
+    static let identifier: String = "MileStoneTableViewCell"
 }
