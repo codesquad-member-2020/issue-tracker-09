@@ -34,8 +34,11 @@ extension LabelTableViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            UseCase.shared.encode(endpoint: Endpoint.init(path: .labels(String(labels[indexPath.row].id!))), method: .delete)
+        guard editingStyle == .delete,
+            let id = labels[indexPath.row].id else { return }
+            UseCase.shared
+                .encode(endpoint: Endpoint.init(path: .labels(String(id))),
+                        method: .delete)
                 .receive(on: RunLoop.main)
                 .sink(receiveCompletion: { _ in return }) { [weak self] response in
                     switch response.statusCode {
@@ -46,6 +49,5 @@ extension LabelTableViewDataSource: UITableViewDataSource {
                     }
             }
             .store(in: &subscription)
-        }
     }
 }
