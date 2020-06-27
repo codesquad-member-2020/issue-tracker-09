@@ -173,15 +173,15 @@
 			path = Reusable;
 			sourceTree = "<group>";
 		};
-		ABAF6DFE2491FE7200E69418 /* Badge */ = {
+		ABAF6DFE2491FE7200E69418 /* Label */ = {
 			isa = PBXGroup;
 			children = (
-				AEE5973024988C5000F5C622 /* CreateBadge */,
+				AEE5973024988C5000F5C622 /* CreateLabel */,
 				ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */,
 				AE8CA35924921E1B0076507B /* LabelTableViewController.swift */,
 				ABAD30A0249A00F600618753 /* LabelTableViewDataSource.swift */,
 			);
-			path = Badge;
+			path = Label;
 			sourceTree = "<group>";
 		};
 		AE5371232499F79C00269F6B /* Network */ = {
@@ -280,15 +280,15 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				AE9F1F2224A706ED00582899 /* MileStone */,
+				ABAF6DFE2491FE7200E69418 /* Label */,
 				ABAD30A3249B66FF00618753 /* IssueTracker.entitlements */,
+				AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */,
+				AE8CA33F248F75D00076507B /* Login */,
+				AEAEA995248E0EDF005F4582 /* Main.storyboard */,
+				AE9F1F2224A706ED00582899 /* MileStone */,
 				AE5371232499F79C00269F6B /* Network */,
 				ABAF6DF92491F8E600E69418 /* Reusable */,
-				ABAF6DFE2491FE7200E69418 /* Badge */,
-				AE8CA33F248F75D00076507B /* Login */,
 				AE8CA33E248F755F0076507B /* Supports */,
-				AEAEA995248E0EDF005F4582 /* Main.storyboard */,
-				AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -302,13 +302,13 @@
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
 		};
-		AEE5973024988C5000F5C622 /* CreateBadge */ = {
+		AEE5973024988C5000F5C622 /* CreateLabel */ = {
 			isa = PBXGroup;
 			children = (
 				AEE597372498952300F5C622 /* ColorView.swift */,
 				AEE5973124988C6600F5C622 /* LabelFormViewController.swift */,
 			);
-			path = CreateBadge;
+			path = CreateLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
