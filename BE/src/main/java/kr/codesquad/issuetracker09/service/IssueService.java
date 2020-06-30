@@ -140,6 +140,15 @@ public class IssueService {
             predicates.add(cb.equal(issue.get("milestone"), milestone));
         }
 
+        if (filterDTO.getLabels() != null) {
+            List<Long> labelIds = filterDTO.getLabels();
+            List<Long> issueIds = issueLabelService.findAllIssueIdByLabelIds(labelIds);
+
+            Expression<Long> parentExpression = issue.get("id");
+            Predicate parentPredicate = parentExpression.in(issueIds);
+            predicates.add(parentPredicate);
+        }
+
         criteriaQuery.select(issue).where(predicates.toArray(new Predicate[]{}));
         List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
         return resultIssue;

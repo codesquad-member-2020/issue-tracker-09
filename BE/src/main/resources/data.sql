@@ -54,6 +54,10 @@ INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 2);
 INSERT INTO issue_has_label (issue_id, label_id) VALUES (1, 3);
 INSERT INTO issue_has_label (issue_id, label_id) VALUES (2, 2);
 INSERT INTO issue_has_label (issue_id, label_id) VALUES (2, 3);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (3, 3);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (4, 2);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (5, 1);
+INSERT INTO issue_has_label (issue_id, label_id) VALUES (5, 2);
 
 INSERT INTO assignee (issue_id, user_id) VALUES (1, 1);
 INSERT INTO assignee (issue_id, user_id) VALUES (1, 2);
@@ -63,3 +67,5 @@ INSERT INTO assignee (issue_id, user_id) VALUES (2, 3);
 INSERT INTO assignee (issue_id, user_id) VALUES (3, 3);
 INSERT INTO assignee (issue_id, user_id) VALUES (3, 4);
 INSERT INTO assignee (issue_id, user_id) VALUES (4, 4);
+
+INSERT INTO user (name, social_id) VALUES ('Solar', '35985636');
