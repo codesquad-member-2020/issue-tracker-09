@@ -20,6 +20,7 @@
 		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
 		ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* BadgeLabel.swift */; };
+		AE307D7A24AB23B5003177EF /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE307D7924AB23B5003177EF /* UILabel.swift */; };
 		AE4D4CF724A34A8E006E62B6 /* ASWebAuthenticationPresentationContextProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D4CF624A34A8E006E62B6 /* ASWebAuthenticationPresentationContextProviding.swift */; };
 		AE4D4CFB24A3C071006E62B6 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D4CFA24A3C071006E62B6 /* LoginManager.swift */; };
 		AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5371242499F7AB00269F6B /* Endpoint.swift */; };
@@ -74,6 +75,7 @@
 		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		ABAF6E032492038A00E69418 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		AE307D7924AB23B5003177EF /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		AE4D4CF624A34A8E006E62B6 /* ASWebAuthenticationPresentationContextProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthenticationPresentationContextProviding.swift; sourceTree = "<group>"; };
 		AE4D4CFA24A3C071006E62B6 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AE5371242499F7AB00269F6B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				AE8CA35C249224560076507B /* UIColor.swift */,
 				AE537167249B80A000269F6B /* UIAlert.swift */,
+				AE307D7924AB23B5003177EF /* UILabel.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				AE84609124A0DA11008CF76B /* Usable.swift in Sources */,
 				AB58C190249F25E10067185A /* URLRequest.swift in Sources */,
 				AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */,
+				AE307D7A24AB23B5003177EF /* UILabel.swift in Sources */,
 				AEE5973224988C6600F5C622 /* LabelFormViewController.swift in Sources */,
 				AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */,
 				AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */,
