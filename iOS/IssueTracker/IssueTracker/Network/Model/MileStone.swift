@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct MileStone: Codable {
+protocol MileStoneInforamationable {
+    var title: String { get }
+    var contents: String? { get }
+    var dueOn: String? { get }
+}
+
+struct MileStone: Codable, MileStoneInforamationable {
     let id: Int?
     let title: String
     let contents: String?
@@ -16,3 +22,5 @@ struct MileStone: Codable {
     let numberOfOpenIssue: Int?
     let numberOfClosedIssue: Int?
 }
+
+
