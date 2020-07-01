@@ -25,6 +25,7 @@
 		AE4D4CFB24A3C071006E62B6 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D4CFA24A3C071006E62B6 /* LoginManager.swift */; };
 		AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5371242499F7AB00269F6B /* Endpoint.swift */; };
 		AE537168249B80A000269F6B /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE537167249B80A000269F6B /* UIAlert.swift */; };
+		AE5F012624AC7F5B00D6C82E /* MileStoneInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */; };
 		AE84609124A0DA11008CF76B /* Usable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609024A0DA11008CF76B /* Usable.swift */; };
 		AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609224A0DACA008CF76B /* UsableImpl.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
@@ -80,6 +81,7 @@
 		AE4D4CFA24A3C071006E62B6 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AE5371242499F7AB00269F6B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AE537167249B80A000269F6B /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
+		AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneInformationView.swift; sourceTree = "<group>"; };
 		AE84609024A0DA11008CF76B /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
 		AE84609224A0DACA008CF76B /* UsableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableImpl.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */,
 				AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */,
 				AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */,
+				AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */,
 			);
 			path = MileStone;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */,
 				ABAD30A1249A00F600618753 /* LabelTableViewDataSource.swift in Sources */,
 				ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */,
+				AE5F012624AC7F5B00D6C82E /* MileStoneInformationView.swift in Sources */,
 				ABAD30A5249B6D6F00618753 /* AppleLogin.swift in Sources */,
 				AE9F1F2624A7072200582899 /* MileStoneTableViewCell.swift in Sources */,
 				ABAD309C2499FCE000618753 /* IssueTrackerNetworkImpl.swift in Sources */,
