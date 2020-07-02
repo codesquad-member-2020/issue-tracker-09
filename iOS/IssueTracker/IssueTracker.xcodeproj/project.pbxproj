@@ -26,6 +26,7 @@
 		AE5371252499F7AB00269F6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5371242499F7AB00269F6B /* Endpoint.swift */; };
 		AE537168249B80A000269F6B /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE537167249B80A000269F6B /* UIAlert.swift */; };
 		AE5F012624AC7F5B00D6C82E /* MileStoneInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */; };
+		AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */; };
 		AE84609124A0DA11008CF76B /* Usable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609024A0DA11008CF76B /* Usable.swift */; };
 		AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609224A0DACA008CF76B /* UsableImpl.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
@@ -82,6 +83,7 @@
 		AE5371242499F7AB00269F6B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AE537167249B80A000269F6B /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
 		AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneInformationView.swift; sourceTree = "<group>"; };
+		AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneProgressView.swift; sourceTree = "<group>"; };
 		AE84609024A0DA11008CF76B /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
 		AE84609224A0DACA008CF76B /* UsableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableImpl.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */,
 				AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */,
 				AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */,
+				AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */,
 				AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */,
 			);
 			path = MileStone;
@@ -442,6 +445,7 @@
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
 				ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */,
 				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
+				AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */,
 				AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */,
 				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
 				AE84609124A0DA11008CF76B /* Usable.swift in Sources */,
