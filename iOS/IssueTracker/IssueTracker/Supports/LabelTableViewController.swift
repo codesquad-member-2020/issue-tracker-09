@@ -21,7 +21,6 @@ final class LabelTableViewController: CategoryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        tableView.tableFooterView = .init()
         self.fetch(provider: UseCase.shared ,
                    endpoint: Endpoint(path: .labels()))
         bindViewModelToView()
