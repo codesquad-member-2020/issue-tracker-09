@@ -27,6 +27,7 @@
 		AE537168249B80A000269F6B /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE537167249B80A000269F6B /* UIAlert.swift */; };
 		AE5F012624AC7F5B00D6C82E /* MileStoneInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */; };
 		AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */; };
+		AE5F012A24AE02DF00D6C82E /* PercentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */; };
 		AE84609124A0DA11008CF76B /* Usable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609024A0DA11008CF76B /* Usable.swift */; };
 		AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609224A0DACA008CF76B /* UsableImpl.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
@@ -84,6 +85,7 @@
 		AE537167249B80A000269F6B /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
 		AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneInformationView.swift; sourceTree = "<group>"; };
 		AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneProgressView.swift; sourceTree = "<group>"; };
+		AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentCalculator.swift; sourceTree = "<group>"; };
 		AE84609024A0DA11008CF76B /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
 		AE84609224A0DACA008CF76B /* UsableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableImpl.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */,
 				AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */,
 				AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */,
+				AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */,
 				AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */,
 			);
 			path = MileStone;
@@ -465,6 +468,7 @@
 				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
 				AEE597382498952300F5C622 /* ColorView.swift in Sources */,
+				AE5F012A24AE02DF00D6C82E /* PercentCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

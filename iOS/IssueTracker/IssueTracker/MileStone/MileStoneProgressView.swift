@@ -37,8 +37,9 @@ final class MileStoneProgressView: UIView {
                 
                 return
         }
-        let rate = closedIssue / openIssue
-        progressLabel.text = String(rate) + "%"
+        let percentage = PercentCalculator(openIssue: openIssue,
+            closedIssue: closedIssue).progressRate
+        progressLabel.text = String(percentage) + "%"
         openIssueLabel.text = String(openIssue) + "open"
         closedIssueLabel.text = String(closedIssue) + "closed"
     }
