@@ -14,7 +14,12 @@ protocol MileStoneInforamationable {
     var dueOn: String? { get }
 }
 
-struct MileStone: Codable, MileStoneInforamationable {
+protocol MileStoneProgressable {
+    var numberOfOpenIssue: Int? { get }
+    var numberOfClosedIssue: Int? { get }
+}
+
+struct MileStone: Codable, MileStoneInforamationable, MileStoneProgressable {
     let id: Int?
     let title: String
     let contents: String?
@@ -22,5 +27,3 @@ struct MileStone: Codable, MileStoneInforamationable {
     let numberOfOpenIssue: Int?
     let numberOfClosedIssue: Int?
 }
-
-
