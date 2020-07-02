@@ -43,7 +43,7 @@ final class MileStoneInformationView: UIView {
     }
     
     private func configureBadgeLabel() {
-        badgeLabel = BadgeLabel(font: .boldSystemFont(ofSize: 13),
+        badgeLabel = BadgeLabel(font: .boldSystemFont(ofSize: 15),
                                 textColor: .systemGray)
         badgeLabel.apply(borderColor: UIColor.systemGray.cgColor,
                          borderWidth: 1)

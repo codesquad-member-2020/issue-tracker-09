@@ -30,20 +30,13 @@ final class MileStoneTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     func apply(mileStone: MileStone) {
-        apply(information: mileStone)
-        apply(progress: mileStone)
-    }
-    
-    private func apply(information: MileStoneInforamationable) {
-        informationView.apply(information)
-    }
-    
-    private func apply(progress: MileStoneProgressable) {
-        progressView.apply(progress)
+        informationView.apply(mileStone)
+        progressView.apply(mileStone)
     }
     
     // MARK: Configure
     private func configure() {
+        selectionStyle = .none
         configureInformationView()
         configureProgressView()
     }
@@ -66,17 +59,18 @@ final class MileStoneTableViewCell: UITableViewCell {
     
     private func makeConstraintsInformationView() {
         informationView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
+            make.leading.equalToSuperview().inset(24)
             make.trailing.equalTo(progressView.snp.leading).inset(12)
             make.centerY.equalToSuperview()
-            make.top.equalToSuperview().inset(8)
+            make.top.equalToSuperview().inset(12)
         }
     }
     
     private func makeConstraintsProgressView() {
         progressView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(12)
-            make.top.bottom.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(24)
+            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().inset(12)
         }
     }
 }

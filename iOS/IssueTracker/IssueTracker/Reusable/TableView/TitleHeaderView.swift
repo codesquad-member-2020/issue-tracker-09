@@ -14,6 +14,7 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
     static let identifier: String = "ReusableHeaderView"
     static let height: CGFloat = 100
     private var titleLabel: UILabel!
+    private var separatorView: UIView!
     var addButton: UIButton!
     
     // MARK: - Lifecycle
@@ -39,6 +40,7 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
         tintColor = .white
         configureTitleLabel()
         configureAddButton()
+        configureSeparatorView()
     }
     
     private func configureTitleLabel() {
@@ -55,10 +57,18 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
         addSubview(addButton)
     }
     
+    private func configureSeparatorView() {
+        separatorView = UIView()
+        separatorView.backgroundColor = .separator
+        separatorView.alpha = 0.4
+        addSubview(separatorView)
+    }
+    
     // MARK: Constraints
     private func makeConstraints() {
         makeConstraintsTitleLabel()
         makeConstraintsAddButton()
+        makeConstraintsSeparatorView()
     }
     
     private func makeConstraintsTitleLabel() {
@@ -73,6 +83,13 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
             make.trailing.equalToSuperview().inset(4)
             make.width.equalTo(addButton.snp.height)
             make.width.equalTo(32)
+        }
+    }
+    
+    private func makeConstraintsSeparatorView() {
+        separatorView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
 }
