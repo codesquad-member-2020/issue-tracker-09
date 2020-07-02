@@ -29,7 +29,9 @@ class CategoryTableViewController: UITableViewController {
     
     // MARK: Configure
     private func configure() {
+        tableView.tableFooterView = .init()
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorInset = .zero
         registerHeaderView()
     }
     
