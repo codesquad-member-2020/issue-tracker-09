@@ -19,6 +19,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
         super.viewDidLoad()
         registerCell(MileStoneTableViewCell.self,
                      identifier: MileStoneTableViewCell.identifier)
+        tableView.tableFooterView = .init()
         tableView.dataSource = dataSource
     }
     
