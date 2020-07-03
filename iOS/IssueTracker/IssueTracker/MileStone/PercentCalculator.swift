@@ -13,6 +13,7 @@ struct PercentCalculator {
     //MARK: - Properties
     var progressRate: Int {
         let total = Double(openIssue) + Double(closedIssue)
+        guard closedIssue != 0 else { return 0 }
         
         return Int(Double(closedIssue) / total * 100)
     }
