@@ -21,7 +21,7 @@ final class LabelTableViewController: CategoryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        self.fetch(provider: UseCase.shared ,
+        self.fetch(provider: UseCase.shared,
                    endpoint: Endpoint(path: .labels()))
         bindViewModelToView()
         registerCell(LabelTableViewCell.self,
@@ -30,7 +30,8 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Methods
     private func fetch(provider: Usable, endpoint: RequestProviding) {
-        provider.decode([Label].self,
+        provider
+            .decode([Label].self,
                         endpoint: endpoint,
                         method: .get)
             .receive(on: RunLoop.main)

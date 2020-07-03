@@ -10,8 +10,10 @@ import Combine
 import AuthenticationServices
 
 extension ASWebAuthenticationSession {
-    static func publisher(_ viewController: ASWebAuthenticationPresentationContextProviding, url: URL, scheme: String?) -> TokenPublisher {
-        return TokenPublisher(viewController, url: url, scheme: scheme)
+    static func publisher(_ provider: ASWebAuthenticationPresentationContextProviding, url: URL, scheme: String?) -> TokenPublisher {
+        return TokenPublisher(provider,
+                              url: url,
+                              scheme: scheme)
     }
     
     // MARK: - Publisher
@@ -24,11 +26,11 @@ extension ASWebAuthenticationSession {
         // MARK: - Properties
         let url: URL
         let scheme: String?
-        let viewController: ASWebAuthenticationPresentationContextProviding
+        let provider: ASWebAuthenticationPresentationContextProviding
         
         // MARK: - Lifecycle
-        init(_ viewController: ASWebAuthenticationPresentationContextProviding, url: URL, scheme: String?) {
-            self.viewController = viewController
+        init(_ provider: ASWebAuthenticationPresentationContextProviding, url: URL, scheme: String?) {
+            self.provider = provider
             self.url = url
             self.scheme = scheme
         }
@@ -36,7 +38,7 @@ extension ASWebAuthenticationSession {
         // MARK: - Method
         func receive<S>(subscriber: S) where S : Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
             let subscription = TokenSubscription(subscriber,
-                                                 presenting: viewController,
+                                                 presenting: provider,
                                                  url: url,
                                                  callbackURLScheme: scheme)
             subscriber.receive(subscription: subscription)
@@ -54,9 +56,11 @@ extension ASWebAuthenticationSession {
         private var subscriber: S?
         
         // MARK: - Lifecycle
-        init(_ subscriber: S, presenting viewController: ASWebAuthenticationPresentationContextProviding, url: URL, callbackURLScheme scheme : String?) {
+        init(_ subscriber: S, presenting provider: ASWebAuthenticationPresentationContextProviding, url: URL, callbackURLScheme scheme : String?) {
             self.subscriber = subscriber
-            sendRequest(viewController, url: url, callbackURLScheme: scheme)
+            sendRequest(provider,
+                        url: url,
+                        callbackURLScheme: scheme)
         }
         
         // MARK: - Method
@@ -66,7 +70,7 @@ extension ASWebAuthenticationSession {
             subscriber = nil
         }
         
-        private func sendRequest(_ viewController: ASWebAuthenticationPresentationContextProviding, url: URL, callbackURLScheme scheme: String?) {
+        private func sendRequest(_ provider: ASWebAuthenticationPresentationContextProviding, url: URL, callbackURLScheme scheme: String?) {
             let session = ASWebAuthenticationSession(url: url, callbackURLScheme: scheme) { url, error in
                 if let error = error {
                     self.subscriber?.receive(completion: .failure(error))
@@ -77,7 +81,7 @@ extension ASWebAuthenticationSession {
                 _ = self.subscriber?.receive(token)
                 self.subscriber?.receive(completion: .finished)
             }
-            session.presentationContextProvider = viewController
+            session.presentationContextProvider = provider
             session.start()
         }
     }

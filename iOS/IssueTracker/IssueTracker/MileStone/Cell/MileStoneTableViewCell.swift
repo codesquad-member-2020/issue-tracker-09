@@ -29,7 +29,7 @@ final class MileStoneTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func apply(mileStone: MileStone) {
+    func apply(_ mileStone: MileStone) {
         informationView.apply(mileStone)
         progressView.apply(mileStone)
     }

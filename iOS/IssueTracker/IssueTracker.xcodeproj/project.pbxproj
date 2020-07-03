@@ -205,6 +205,17 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		AE66FB9624AF6B46000E66B8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */,
+				AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */,
+				AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */,
+				AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		AE8CA33E248F755F0076507B /* Supports */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,12 +272,9 @@
 		AE9F1F2224A706ED00582899 /* MileStone */ = {
 			isa = PBXGroup;
 			children = (
+				AE66FB9624AF6B46000E66B8 /* Cell */,
 				AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */,
-				AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */,
 				AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */,
-				AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */,
-				AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */,
-				AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */,
 			);
 			path = MileStone;
 			sourceTree = "<group>";
