@@ -22,7 +22,9 @@ extension MileStoneTableViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MileStoneTableViewCell.identifier, for: indexPath) as? MileStoneTableViewCell else { return UITableViewCell() }
-
+        let milestone = mileStones[indexPath.row]
+        cell.apply(milestone)
+        
         return cell
     }
 }
