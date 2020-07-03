@@ -54,6 +54,8 @@ final class MileStoneProgressView: UIView {
     private func configureProgressLabel() {
         progressLabel = UILabel(font: .boldSystemFont(ofSize: 11),
                                 textColor: .systemGreen)
+        progressLabel.setContentHuggingPriority(.fittingSizeLevel,
+                                                for: .vertical)
         progressLabel.textAlignment = .right
         addSubview(progressLabel)
     }
