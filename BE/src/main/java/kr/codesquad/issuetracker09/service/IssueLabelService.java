@@ -28,4 +28,8 @@ public class IssueLabelService {
     public void save(IssueHasLabel issueHasLabel) {
         issueHasLabelRepository.save(issueHasLabel);
     }
+
+    public List<Long> findAllIssueIdByLabelIds(List<Long> labelIds) {
+        return issueHasLabelRepository.findIssueIdsInLabelIds(labelIds, (long) labelIds.size());
+    }
 }

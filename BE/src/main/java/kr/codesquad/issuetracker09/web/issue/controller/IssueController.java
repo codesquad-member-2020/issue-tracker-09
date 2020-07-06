@@ -3,10 +3,8 @@ package kr.codesquad.issuetracker09.web.issue.controller;
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.service.*;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.GetAssigneeListResponseDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.*;
 import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.GetIssueDetailResponseDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
@@ -101,6 +99,38 @@ public class IssueController {
             response.setStatus(HttpStatus.OK.value());
         }
         //TODO : editDetail이 false(실패)인 경우 에러 처리
+    }
+
+    @GetMapping("/filter")
+    public List<GetIssueListResponseDTO> filter(FilterDTO filterDTO) {
+        log.debug("[*] filter : {}", filterDTO);
+        List<Issue> issues = issueService.getIssueByFilter(filterDTO);
+        List<GetIssueListResponseDTO> getIssueListResponseDTOList = new ArrayList<>();
+        for (Issue issue : issues) {
+            GetIssueListResponseDTO getIssueListResponseDTO = GetIssueListResponseDTO.builder()
+                    .issueId(issue.getId())
+                    .title(issue.getTitle())
+                    .contents(issue.getContents())
+                    .build();
+
+            List<GetLabelListResponseDTO> labelDTOList = new ArrayList<>();
+            List<Label> labels = issueLabelService.findLabelsByIssueId(issue.getId());
+            for (Label label : labels) {
+                labelDTOList.add(GetLabelListResponseDTO.builder()
+                        .title(label.getTitle())
+                        .colorCode(label.getColorCode())
+                        .build());
+            }
+            getIssueListResponseDTO.setLabels(labelDTOList);
+
+            GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder()
+                    .title(issue.getMilestone().getTitle()).build();
+            getIssueListResponseDTO.setMilestone(milestone);
+
+            getIssueListResponseDTOList.add(getIssueListResponseDTO);
+        }
+
+        return getIssueListResponseDTOList;
     }
 
     @PostMapping("/{issue-id}/comments")
