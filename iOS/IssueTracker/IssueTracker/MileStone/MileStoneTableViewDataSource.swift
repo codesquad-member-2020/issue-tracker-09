@@ -10,7 +10,7 @@ import UIKit
 
 final class MileStoneTableViewDataSource: NSObject {
     // MARK: - Properties
-    @Published var mileStones:[MileStone] = .init()
+    @Published var mileStones:[DeficientMileStone] = .init()
 }
 
 // MARK: - Extension
@@ -22,8 +22,11 @@ extension MileStoneTableViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MileStoneTableViewCell.identifier, for: indexPath) as? MileStoneTableViewCell else { return UITableViewCell() }
-        let milestone = mileStones[indexPath.row]
-        cell.apply(milestone)
+        let item = mileStones[indexPath.row]
+        let progressRate = ProgressRateCalculator.shared
+            .apply(open: item.numberOfOpenIssue,
+                   closed: item.numberOfClosedIssue)
+        cell.apply(MileStone(milestone: item, progressRate: progressRate))
         
         return cell
     }

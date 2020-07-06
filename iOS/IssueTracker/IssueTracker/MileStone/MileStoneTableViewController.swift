@@ -30,7 +30,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     // MARK: - Methods
     private func fetch(provider: Usable, endpoint: RequestProviding) {
         provider
-            .decode([MileStone].self,
+            .decode([DeficientMileStone].self,
                     endpoint: endpoint,
                     method: .get)
             .sink(receiveCompletion: { [weak self] in
