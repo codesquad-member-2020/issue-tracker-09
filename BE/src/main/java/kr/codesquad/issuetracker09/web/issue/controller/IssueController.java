@@ -3,8 +3,8 @@ package kr.codesquad.issuetracker09.web.issue.controller;
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.service.*;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.*;
 import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.*;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
@@ -34,6 +34,11 @@ public class IssueController {
         this.labelService = labelService;
         this.commentService = commentService;
         this.assigneeService = assigneeService;
+    }
+
+    @GetMapping("")
+    public List<GetIssueListResponseDTO> getAllIssues() {
+        return issueService.issueListResponseDTOList(issueService.findAllIssues());
     }
 
     @GetMapping("/{issue-id}/detail")
@@ -105,32 +110,7 @@ public class IssueController {
     public List<GetIssueListResponseDTO> filter(FilterDTO filterDTO) {
         log.debug("[*] filter : {}", filterDTO);
         List<Issue> issues = issueService.getIssueByFilter(filterDTO);
-        List<GetIssueListResponseDTO> getIssueListResponseDTOList = new ArrayList<>();
-        for (Issue issue : issues) {
-            GetIssueListResponseDTO getIssueListResponseDTO = GetIssueListResponseDTO.builder()
-                    .issueId(issue.getId())
-                    .title(issue.getTitle())
-                    .contents(issue.getContents())
-                    .build();
-
-            List<GetLabelListResponseDTO> labelDTOList = new ArrayList<>();
-            List<Label> labels = issueLabelService.findLabelsByIssueId(issue.getId());
-            for (Label label : labels) {
-                labelDTOList.add(GetLabelListResponseDTO.builder()
-                        .title(label.getTitle())
-                        .colorCode(label.getColorCode())
-                        .build());
-            }
-            getIssueListResponseDTO.setLabels(labelDTOList);
-
-            GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder()
-                    .title(issue.getMilestone().getTitle()).build();
-            getIssueListResponseDTO.setMilestone(milestone);
-
-            getIssueListResponseDTOList.add(getIssueListResponseDTO);
-        }
-
-        return getIssueListResponseDTOList;
+        return issueService.issueListResponseDTOList(issues);
     }
 
     @PostMapping("/{issue-id}/comments")
@@ -156,7 +136,7 @@ public class IssueController {
     @DeleteMapping("/{issue-id}/comments/{comment-id}")
     public void delete(@PathVariable(name = "issue-id") Long issueId, @PathVariable(name = "comment-id") Long commentId,
                        @RequestAttribute("id") Long authorId, HttpServletResponse response) throws NotFound {
-        if(!commentService.delete(issueId, authorId, commentId)) {
+        if (!commentService.delete(issueId, authorId, commentId)) {
             response.setStatus(HttpStatus.FORBIDDEN.value());
             return;
         }
