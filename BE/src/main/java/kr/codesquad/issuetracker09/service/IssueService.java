@@ -3,7 +3,10 @@ package kr.codesquad.issuetracker09.service;
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
 import kr.codesquad.issuetracker09.web.issue.dto.FilterDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.GetIssueListResponseDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
+import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +39,37 @@ public class IssueService {
         this.issueLabelService = issueLabelService;
         this.assigneeService = assigneeService;
         this.userService = userService;
+    }
+
+    public List<GetIssueListResponseDTO> issueListResponseDTOList(List<Issue> issues) {
+        List<GetIssueListResponseDTO> getIssueListResponseDTOList = new ArrayList<>();
+        for (Issue issue : issues) {
+            GetIssueListResponseDTO getIssueListResponseDTO = GetIssueListResponseDTO.builder()
+                    .issueId(issue.getId())
+                    .contents(issue.getContents())
+                    .title(issue.getTitle())
+                    .build();
+            List<GetLabelListResponseDTO> labelDTOList = new ArrayList<>();
+            List<Label> labels = issueLabelService.findLabelsByIssueId(issue.getId());
+            for (Label label : labels) {
+                labelDTOList.add(GetLabelListResponseDTO.builder()
+                        .title(label.getTitle())
+                        .colorCode(label.getColorCode())
+                        .build());
+            }
+            getIssueListResponseDTO.setLabels(labelDTOList);
+
+            GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder()
+                    .title(issue.getMilestone().getTitle()).build();
+            getIssueListResponseDTO.setMilestone(milestone);
+            getIssueListResponseDTOList.add(getIssueListResponseDTO);
+        }
+
+        return getIssueListResponseDTOList;
+    }
+
+    public List<Issue> findAllIssues() {
+        return new ArrayList<>(issueRepository.findAll());
     }
 
     public Issue findById(Long id) throws NotFound {
