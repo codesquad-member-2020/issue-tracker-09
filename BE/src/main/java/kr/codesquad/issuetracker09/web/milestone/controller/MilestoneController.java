@@ -39,23 +39,17 @@ public class MilestoneController {
     @PutMapping("/{milestone-id}")
     public void edit(@PathVariable(name = "milestone-id") Long milestoneId, @RequestBody Milestone milestone, HttpServletResponse response) {
         log.debug("[*] edit - milestoneId: {}", milestone);
-        Optional<Milestone> originMileStone = milestoneService.findById(milestoneId);
-        if (!originMileStone.isPresent()) {
-            throw new NotFoundException("Milestone doesn't exist");
-        }
-        originMileStone.get().setTitle(milestone.getTitle());
-        originMileStone.get().setContents(milestone.getContents());
-        originMileStone.get().setDueOn(milestone.getDueOn());
-        milestoneService.save(originMileStone.get());
+        Milestone originMileStone = milestoneService.findById(milestoneId);
+        originMileStone.setTitle(milestone.getTitle());
+        originMileStone.setContents(milestone.getContents());
+        originMileStone.setDueOn(milestone.getDueOn());
+        milestoneService.save(originMileStone);
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
 
     @DeleteMapping("/{milestone-id}")
     public void delete(@PathVariable(name = "milestone-id") Long milestoneId, HttpServletResponse response) {
         log.debug("[*] delete - milestoneId: {}", milestoneId);
-        if (!milestoneService.findById(milestoneId).isPresent()) {
-            throw new NotFoundException("Milestone doesn't exist");
-        }
         milestoneService.delete(milestoneId);
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }

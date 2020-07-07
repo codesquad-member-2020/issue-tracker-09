@@ -2,6 +2,7 @@ package kr.codesquad.issuetracker09.service;
 
 import kr.codesquad.issuetracker09.domain.Milestone;
 import kr.codesquad.issuetracker09.domain.MilestoneRepository;
+import kr.codesquad.issuetracker09.exception.NotFoundException;
 import kr.codesquad.issuetracker09.exception.ValidationException;
 import kr.codesquad.issuetracker09.web.milestone.dto.MilestoneListDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.MilestonePickerDTO;
@@ -45,8 +46,8 @@ public class MilestoneService {
         return milestoneRepository.save(milestone);
     }
 
-    public Optional<Milestone> findById(Long milestoneId) {
-        return milestoneRepository.findById(milestoneId);
+    public Milestone findById(Long milestoneId) {
+        return milestoneRepository.findById(milestoneId).orElseThrow(() -> new NotFoundException("Milestone doesn't exist"));
     }
 
     public void delete(Long milestoneId) {
