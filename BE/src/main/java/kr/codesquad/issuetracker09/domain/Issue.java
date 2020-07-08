@@ -1,7 +1,9 @@
 package kr.codesquad.issuetracker09.domain;
 
-import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import kr.codesquad.issuetracker09.web.comment.dto.PostCommentRequestDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +26,7 @@ public class Issue {
 
     private String contents;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
 
     private boolean open;
@@ -52,7 +56,7 @@ public class Issue {
         this.milestone = milestone;
     }
 
-    public void addComment(User user, PostRequestDTO commentDTO) {
+    public void addComment(User user, PostCommentRequestDTO commentDTO) {
         Comment comment = new Comment.CommentBuilder()
                 .contents(commentDTO.getContents())
                 .author(user)
