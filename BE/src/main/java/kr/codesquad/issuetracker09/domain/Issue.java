@@ -2,16 +2,14 @@ package kr.codesquad.issuetracker09.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.codesquad.issuetracker09.web.comment.dto.PostCommentRequestDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 @Builder
 @Getter
 @AllArgsConstructor

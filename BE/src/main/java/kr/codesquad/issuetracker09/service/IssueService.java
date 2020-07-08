@@ -89,7 +89,7 @@ public class IssueService {
         return issue;
     }
 
-    public void save(PostIssueRequestDTO issueDTO, Long authorId) throws NotFound {
+    public void save(PostIssueRequestDTO issueDTO, Long authorId) {
         LocalDateTime now = LocalDateTime.now();
 
         if (issueDTO.getTitle() == null) {
@@ -103,6 +103,16 @@ public class IssueService {
                 .created(now)
                 .open(true)
                 .build();
+        issueRepository.save(issue);
+    }
+
+    public void edit(Long issueId, PostIssueRequestDTO issueDTO) {
+        if (issueDTO.getTitle() == null) {
+            throw new ValidationException("Title can't be blank");
+        }
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new NotFoundException("Issue doesn't exist"));
+        issue.setTitle(issueDTO.getTitle());
+        issue.setContents(issueDTO.getContents());
         issueRepository.save(issue);
     }
 
