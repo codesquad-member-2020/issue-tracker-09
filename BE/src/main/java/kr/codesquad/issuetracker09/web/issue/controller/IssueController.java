@@ -48,8 +48,15 @@ public class IssueController {
         response.setStatus(HttpStatus.CREATED.value());
     }
 
+    @PutMapping("/{issue-id}")
+    public void edit(@PathVariable(name = "issue-id") Long issueId, @RequestBody PostIssueRequestDTO request,
+                     HttpServletResponse response) throws NotFound {
+        issueService.edit(issueId, request);
+        response.setStatus(HttpStatus.OK.value());
+    }
+
     @GetMapping("/{issue-id}/detail")
-    public GetIssueDetailResponseDTO detail(@PathVariable(name = "issue-id") long issueId) throws NotFound {
+    public GetIssueDetailResponseDTO detail(@PathVariable(name = "issue-id") Long issueId) throws NotFound {
         Issue issue = issueService.findById(issueId);
         GetIssueDetailResponseDTO detail = GetIssueDetailResponseDTO.builder()
                 .issueId(issueId)
