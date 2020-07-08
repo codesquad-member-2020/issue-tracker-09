@@ -50,8 +50,15 @@ public class IssueController {
 
     @PutMapping("/{issue-id}")
     public void edit(@PathVariable(name = "issue-id") Long issueId, @RequestBody PostIssueRequestDTO request,
-                     HttpServletResponse response) throws NotFound {
+                     HttpServletResponse response) {
         issueService.edit(issueId, request);
+        response.setStatus(HttpStatus.OK.value());
+    }
+
+    @PatchMapping("")
+    public void open(@RequestBody PatchCloseIssueRequestDTO request,
+                     HttpServletResponse response) throws NotFound {
+        issueService.change(request);
         response.setStatus(HttpStatus.OK.value());
     }
 
