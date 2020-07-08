@@ -3,7 +3,7 @@ package kr.codesquad.issuetracker09.web.issue.controller;
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.service.*;
 import kr.codesquad.issuetracker09.web.comment.dto.GetCommentListResponseDTO;
-import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
+import kr.codesquad.issuetracker09.web.comment.dto.PostCommentRequestDTO;
 import kr.codesquad.issuetracker09.web.issue.dto.*;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
@@ -39,6 +39,13 @@ public class IssueController {
     @GetMapping("")
     public List<GetIssueListResponseDTO> getAllIssues() {
         return issueService.issueListResponseDTOList(issueService.findAllIssues());
+    }
+
+    @PostMapping("")
+    public void create(@RequestBody PostIssueRequestDTO request, @RequestAttribute("id") Long authorId,
+                       HttpServletResponse response) throws NotFound {
+        issueService.save(request, authorId);
+        response.setStatus(HttpStatus.CREATED.value());
     }
 
     @GetMapping("/{issue-id}/detail")
@@ -114,7 +121,7 @@ public class IssueController {
     }
 
     @PostMapping("/{issue-id}/comments")
-    public void create(@PathVariable(name = "issue-id") Long issueId, @RequestBody PostRequestDTO commentDTO,
+    public void create(@PathVariable(name = "issue-id") Long issueId, @RequestBody PostCommentRequestDTO commentDTO,
                        @RequestAttribute("id") Long authorId, HttpServletResponse response) throws NotFound {
         log.debug("[*] create - comment : {}", commentDTO);
         log.debug("[*] create - authorId : {}", authorId);
@@ -124,7 +131,7 @@ public class IssueController {
 
     @PutMapping("/{issue-id}/comments/{comment-id}")
     public void edit(@PathVariable(name = "issue-id") Long issueId, @PathVariable(name = "comment-id") Long commentId,
-                     @RequestBody PostRequestDTO commentDTO, @RequestAttribute("id") Long authorId,
+                     @RequestBody PostCommentRequestDTO commentDTO, @RequestAttribute("id") Long authorId,
                      HttpServletResponse response) throws NotFound {
         if (!commentService.edit(issueId, authorId, commentId, commentDTO)) {
             response.setStatus(HttpStatus.FORBIDDEN.value());
