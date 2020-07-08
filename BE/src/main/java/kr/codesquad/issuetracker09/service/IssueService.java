@@ -3,10 +3,7 @@ package kr.codesquad.issuetracker09.service;
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
 import kr.codesquad.issuetracker09.exception.ValidationException;
-import kr.codesquad.issuetracker09.web.issue.dto.FilterDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.GetIssueListResponseDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PostIssueRequestDTO;
+import kr.codesquad.issuetracker09.web.issue.dto.*;
 import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
 import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
@@ -225,5 +222,13 @@ public class IssueService {
         criteriaQuery.select(issue).where(predicates.toArray(new Predicate[]{}));
         List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
         return resultIssue;
+    }
+
+    public void change(PatchCloseIssueRequestDTO request) throws NotFound {
+        List<Long> issueList = new ArrayList<>(request.getIdList());
+        for (Long issueId : issueList) {
+            findById(issueId).setOpen(request.getOpen());
+            issueRepository.save(findById(issueId));
+        }
     }
 }
