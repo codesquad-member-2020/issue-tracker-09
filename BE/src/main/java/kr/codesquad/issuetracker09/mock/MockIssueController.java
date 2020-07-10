@@ -23,7 +23,7 @@ public class MockIssueController {
     private static final Logger log = LoggerFactory.getLogger(MockIssueController.class);
 
     @PostMapping
-    public void create(@RequestBody PostRequestDTO request, HttpServletResponse response) {
+    public void create(@RequestBody PostIssueRequestDTO request, HttpServletResponse response) {
         log.debug("[*] create - request : {}", request);
         response.setStatus(HttpStatus.OK.value());
     }
@@ -79,7 +79,7 @@ public class MockIssueController {
 
     @PutMapping("/{issue-id}")
     public void edit(@PathVariable(name = "issue-id") long issueId,
-            @RequestBody PostRequestDTO request, HttpServletResponse response) {
+                     @RequestBody PostIssueRequestDTO request, HttpServletResponse response) {
         log.debug("[*] patch - issueId : {}, request : {}", issueId, request);
         response.setStatus(HttpStatus.OK.value());
     }
@@ -179,13 +179,13 @@ public class MockIssueController {
     }
 
     @PostMapping("/{issue-id}/comments")
-    public void create(@PathVariable(name = "issue-id") long issueId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
+    public void create(@PathVariable(name = "issue-id") long issueId, @RequestBody PostIssueRequestDTO request, HttpServletResponse response) {
         log.debug("[*] create - issueId : {}, request : {}", issueId, request);
         response.setStatus(HttpStatus.OK.value());
     }
 
     @PutMapping("/{issue-id}/comments/{comment-id}")
-    public void edit(@PathVariable(name = "issue-id") long issueId, @PathVariable(name = "comment-id") long commentId, @RequestBody PostRequestDTO request, HttpServletResponse response) {
+    public void edit(@PathVariable(name = "issue-id") long issueId, @PathVariable(name = "comment-id") long commentId, @RequestBody PostIssueRequestDTO request, HttpServletResponse response) {
         log.debug("[*] edit - issueId : {}, commentId : {}, request : {}", commentId, issueId, request);
         response.setStatus(HttpStatus.OK.value());
     }

@@ -2,7 +2,7 @@ package kr.codesquad.issuetracker09.web.issue.dto;
 
 import java.time.LocalDate;
 
-public class PostRequestDTO {
+public class PostIssueRequestDTO {
     private String title;
     private String contents;
 
@@ -37,19 +37,19 @@ public class PostRequestDTO {
             return this;
         }
 
-        public PostRequestDTO build() {
-            return new PostRequestDTO(this);
+        public PostIssueRequestDTO build() {
+            return new PostIssueRequestDTO(this);
         }
     }
 
-    private PostRequestDTO(Builder builder) {
+    private PostIssueRequestDTO(Builder builder) {
         title = builder.title;
         contents = builder.contents;
     }
 
-    public PostRequestDTO() {}
+    public PostIssueRequestDTO() {}
 
-    public PostRequestDTO(String title, String contents) {
+    public PostIssueRequestDTO(String title, String contents) {
         this.title = title;
         this.contents = contents;
     }

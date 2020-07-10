@@ -5,7 +5,7 @@ import kr.codesquad.issuetracker09.domain.Issue;
 import kr.codesquad.issuetracker09.domain.IssueRepository;
 import kr.codesquad.issuetracker09.domain.User;
 import kr.codesquad.issuetracker09.exception.ValidationException;
-import kr.codesquad.issuetracker09.web.comment.dto.PostRequestDTO;
+import kr.codesquad.issuetracker09.web.comment.dto.PostCommentRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class CommentService {
         this.userService = userService;
     }
 
-    public void save(Long issueId, Long authorId, PostRequestDTO commentDTO) throws NotFound {
+    public void save(Long issueId, Long authorId, PostCommentRequestDTO commentDTO) throws NotFound {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NotFound::new);
         if (commentDTO.getContents() == null) {
             throw new ValidationException("Contents can't be blank");
@@ -38,7 +38,7 @@ public class CommentService {
         issueRepository.save(issue);
     }
 
-    public boolean edit(Long issueId, Long authorId, Long commentId, PostRequestDTO commentDTO) throws NotFound {
+    public boolean edit(Long issueId, Long authorId, Long commentId, PostCommentRequestDTO commentDTO) throws NotFound {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NotFound::new);
         if (commentDTO.getContents() == null) {
             throw new ValidationException("Contents can't be blank");
