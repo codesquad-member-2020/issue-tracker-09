@@ -64,7 +64,7 @@ public class IssueService {
                 getIssueListResponseDTO.setLabels(null);
             }
 
-            if (issueRepository.findMilestoneIdByIssueId(issue.getId()) != null) {
+            if (issue.getMilestone() != null) {
                 GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder()
                         .title(issue.getMilestone().getTitle()).build();
                 getIssueListResponseDTO.setMilestone(milestone);
