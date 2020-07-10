@@ -15,16 +15,20 @@ protocol RequestProviding {
 struct Endpoint: RequestProviding {
 
     enum Path: CustomStringConvertible {
-        case labels(String? = nil)
         case appleLogin
+        case labels(String? = nil)
+        case mileStone(String? = nil)
         
         var description: String {
             switch self {
-            case let .labels(msg):
-                guard let msg = msg else { return "/api/labels" }
-                return "/api/labels/\(msg)"
-            case .appleLogin:
-                return "/api/applelogin"
+                case .appleLogin:
+                    return "/api/applelogin"
+            case let .labels(identifier):
+                guard let identifier = identifier else { return "/api/labels" }
+                return "/api/labels/\(identifier)"
+            case let .mileStone(identifier):
+                guard let identifier = identifier else { return "/api/milestones" }
+                return "/api/labels/\(identifier)"
             }
         }
     }

@@ -21,9 +21,9 @@ final class ColorView: UIView {
     private var subscriber: AnyCancellable?
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        color = UIColor.random
-        super.init(frame: frame)
+    init(color: UIColor?) {
+        self.color = color
+        super.init(frame: .zero)
         configure()
         makeConstraints()
         bindViewModelToView()

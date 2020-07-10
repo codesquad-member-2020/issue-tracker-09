@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostRequestDTO {
+public class PostCommentRequestDTO {
     private Long issueId;
     private String contents;
 }

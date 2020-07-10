@@ -68,6 +68,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="SCF-pU-x9Z" kind="relationship" relationship="viewControllers" id="XXC-e2-zJj"/>
+                        <segue destination="xB0-7a-qgd" kind="relationship" relationship="viewControllers" id="hGp-4I-oRq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSD-ai-lcn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -91,7 +92,26 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDA-yO-Wh3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="808"/>
+            <point key="canvasLocation" x="1048" y="808"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="IiU-zG-pdL">
+            <objects>
+                <tableViewController id="xB0-7a-qgd" customClass="MileStoneTableViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uCb-Sa-62F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="xB0-7a-qgd" id="QtY-cR-uHg"/>
+                            <outlet property="delegate" destination="xB0-7a-qgd" id="H9m-AV-gvl"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="GNf-um-JK1"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lF1-MH-k4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829" y="808"/>
         </scene>
     </scenes>
     <resources>

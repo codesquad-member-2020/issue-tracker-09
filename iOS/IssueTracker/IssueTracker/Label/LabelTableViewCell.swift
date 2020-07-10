@@ -44,15 +44,16 @@ final class LabelTableViewCell: UITableViewCell {
     }
     
     private func configureLabel() {
-        label = BadgeLabel()
-        label.font = .boldSystemFont(ofSize: 13)
+        label = BadgeLabel(font: .boldSystemFont(ofSize: 13),
+                           textColor: .black)
+        label.setContentHuggingPriority(.required,
+                                        for: .vertical)
         addSubview(label)
     }
     
     private func configureLabelDescription() {
-        labelDescription = UILabel()
-        labelDescription.font = .systemFont(ofSize: 17)
-        labelDescription.textColor = .systemGray
+        labelDescription = UILabel(font: .systemFont(ofSize: 17),
+                                   textColor: .systemGray)
         addSubview(labelDescription)
     }
     

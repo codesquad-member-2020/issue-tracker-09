@@ -2,8 +2,10 @@ package kr.codesquad.issuetracker09.service;
 
 import kr.codesquad.issuetracker09.domain.*;
 import kr.codesquad.issuetracker09.exception.NotFoundException;
-import kr.codesquad.issuetracker09.web.issue.dto.FilterDTO;
-import kr.codesquad.issuetracker09.web.issue.dto.PatchDetailRequestDTO;
+import kr.codesquad.issuetracker09.exception.ValidationException;
+import kr.codesquad.issuetracker09.web.issue.dto.*;
+import kr.codesquad.issuetracker09.web.label.dto.GetLabelListResponseDTO;
+import kr.codesquad.issuetracker09.web.milestone.dto.GetMilestoneListResponseDTO;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +41,76 @@ public class IssueService {
         this.userService = userService;
     }
 
+    public List<GetIssueListResponseDTO> issueListResponseDTOList(List<Issue> issues) {
+        List<GetIssueListResponseDTO> getIssueListResponseDTOList = new ArrayList<>();
+        for (Issue issue : issues) {
+            GetIssueListResponseDTO getIssueListResponseDTO = GetIssueListResponseDTO.builder()
+                    .issueId(issue.getId())
+                    .contents(issue.getContents())
+                    .title(issue.getTitle())
+                    .build();
+            List<GetLabelListResponseDTO> labelDTOList = new ArrayList<>();
+            List<Label> labels = issueLabelService.findLabelsByIssueId(issue.getId());
+
+            if (labels != null) {
+                for (Label label : labels) {
+                    labelDTOList.add(GetLabelListResponseDTO.builder()
+                            .title(label.getTitle())
+                            .colorCode(label.getColorCode())
+                            .build());
+                }
+                getIssueListResponseDTO.setLabels(labelDTOList);
+            } else {
+                getIssueListResponseDTO.setLabels(null);
+            }
+
+            if (issue.getMilestone() != null) {
+                GetMilestoneListResponseDTO milestone = GetMilestoneListResponseDTO.builder()
+                        .title(issue.getMilestone().getTitle()).build();
+                getIssueListResponseDTO.setMilestone(milestone);
+            } else {
+                getIssueListResponseDTO.setMilestone(null);
+            }
+            getIssueListResponseDTOList.add(getIssueListResponseDTO);
+        }
+
+        return getIssueListResponseDTOList;
+    }
+
+    public List<Issue> findAllIssues() {
+        return new ArrayList<>(issueRepository.findAll());
+    }
+
     public Issue findById(Long id) throws NotFound {
         Issue issue = issueRepository.findById(id).orElseThrow(NotFound::new);
         return issue;
+    }
+
+    public void save(PostIssueRequestDTO issueDTO, Long authorId) {
+        LocalDateTime now = LocalDateTime.now();
+
+        if (issueDTO.getTitle() == null) {
+            throw new ValidationException("Title can't be blank");
+        }
+
+        Issue issue = Issue.builder()
+                .title(issueDTO.getTitle())
+                .contents(issueDTO.getContents())
+                .author(userService.findUser(authorId))
+                .created(now)
+                .open(true)
+                .build();
+        issueRepository.save(issue);
+    }
+
+    public void edit(Long issueId, PostIssueRequestDTO issueDTO) {
+        if (issueDTO.getTitle() == null) {
+            throw new ValidationException("Title can't be blank");
+        }
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new NotFoundException("Issue doesn't exist"));
+        issue.setTitle(issueDTO.getTitle());
+        issue.setContents(issueDTO.getContents());
+        issueRepository.save(issue);
     }
 
     public boolean editDetail(Long issueId, PatchDetailRequestDTO request) {
@@ -152,5 +222,13 @@ public class IssueService {
         criteriaQuery.select(issue).where(predicates.toArray(new Predicate[]{}));
         List<Issue> resultIssue = entityManager.createQuery(criteriaQuery).getResultList();
         return resultIssue;
+    }
+
+    public void changeOpenStatus(PatchCloseIssueRequestDTO request) throws NotFound {
+        List<Long> issueList = new ArrayList<>(request.getIdList());
+        for (Long issueId : issueList) {
+            findById(issueId).setOpen(request.getOpen());
+            issueRepository.save(findById(issueId));
+        }
     }
 }

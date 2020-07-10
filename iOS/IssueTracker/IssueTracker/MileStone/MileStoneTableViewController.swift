@@ -1,47 +1,47 @@
 //
-//  LabelTableViewController.swift
+//  MileStoneTableViewController.swift
 //  IssueTracker
 //
-//  Created by Cloud on 2020/06/11.
+//  Created by Cloud on 2020/06/27.
 //  Copyright © 2020 Cloud. All rights reserved.
 //
 
 import UIKit
 import Combine
 
-final class LabelTableViewController: CategoryTableViewController {
+final class MileStoneTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
-    static let identifier: String = "LabelTableViewController"
-    private let headerViewTitle: String = "Label"
+    private let headerViewTitle: String = "MileStone"
     private var subscriptions: Set<AnyCancellable> = .init()
-    let dataSource: LabelTableViewDataSource = .init()
+    let dataSource: MileStoneTableViewDataSource = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerCell(MileStoneTableViewCell.self,
+                     identifier: MileStoneTableViewCell.identifier)
         tableView.dataSource = dataSource
-        self.fetch(provider: UseCase.shared,
-                   endpoint: Endpoint(path: .labels()))
+        fetch(provider: UseCase.shared,
+              endpoint: Endpoint(path: .mileStone()))
         bindViewModelToView()
-        registerCell(LabelTableViewCell.self,
-                     identifier: LabelTableViewCell.identifier)
     }
     
     // MARK: - Methods
     private func fetch(provider: Usable, endpoint: RequestProviding) {
         provider
-            .decode([Label].self,
-                        endpoint: endpoint,
-                        method: .get)
-            .receive(on: RunLoop.main)
+            .decode([MileStone].self,
+                    endpoint: endpoint,
+                    method: .get)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) { [weak self] in self?.dataSource.labels = $0 }
-            .store(in: &subscriptions)
+            }) { [weak self] mileStones in
+                self?.dataSource.mileStones = mileStones
+        }
+        .store(in: &subscriptions)
     }
     
     // MARK: Delegate
@@ -49,30 +49,24 @@ final class LabelTableViewController: CategoryTableViewController {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeaderView.identifier) as? TitleHeaderView
         headerView?.apply(title: headerViewTitle)
         headerView?.addButton.addTarget(self,
-                                        action: #selector(presentCreateLabelViewController),
+                                        action: #selector(presentCreateMileStoneViewController),
                                         for: .touchUpInside)
         
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = dataSource.labels[indexPath.row]
-        present(LabelFormViewController(style: .edit(item)),
-                animated: true)
-    }
-    
     // MARK: Bind
     private func bindViewModelToView() {
-        dataSource.$labels
+        dataSource.$mileStones
             .receive(on: RunLoop.main)
-            .sink { [weak self] lables in
+            .sink { [weak self] _ in
                 self?.tableView.reloadData()
         }
         .store(in: &subscriptions)
     }
     
     // MARK: Objc
-    @objc private func presentCreateLabelViewController() {
-        present(LabelFormViewController(style: .save), animated: true)
+    @objc func presentCreateMileStoneViewController() {
+        // MARK: - Todo 생성 기능 구현
     }
 }
