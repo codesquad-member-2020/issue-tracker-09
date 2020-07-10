@@ -224,7 +224,7 @@ public class IssueService {
         return resultIssue;
     }
 
-    public void change(PatchCloseIssueRequestDTO request) throws NotFound {
+    public void changeOpenStatus(PatchCloseIssueRequestDTO request) throws NotFound {
         List<Long> issueList = new ArrayList<>(request.getIdList());
         for (Long issueId : issueList) {
             findById(issueId).setOpen(request.getOpen());

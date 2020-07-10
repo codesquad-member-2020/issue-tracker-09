@@ -58,7 +58,7 @@ public class IssueController {
     @PatchMapping("")
     public void open(@RequestBody PatchCloseIssueRequestDTO request,
                      HttpServletResponse response) throws NotFound {
-        issueService.change(request);
+        issueService.changeOpenStatus(request);
         response.setStatus(HttpStatus.OK.value());
     }
 
