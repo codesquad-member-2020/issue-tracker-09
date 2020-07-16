@@ -31,7 +31,6 @@ final class MileStoneFormViewController: CategoryFormViewController {
     override func configureContentView(title: String?, subtitle: String?) {
         super.configureContentView(title: title,
                                    subtitle: subtitle)
-        contentView.apply(subtitle: "완료\n날짜")
         contentView.resetButton.addTarget(self,
                                           action: #selector(resetMileStoneContentView),
                                           for: .touchUpInside)

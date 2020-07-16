@@ -101,7 +101,6 @@ final class LabelFormViewController: CategoryFormViewController {
     override func configureContentView(title: String?, subtitle: String?) {
         super.configureContentView(title: title,
                                    subtitle: subtitle)
-        contentView.apply(subtitle: "설명")
         contentView.resetButton.addTarget(self,
                                           action: #selector(resetLabelContentView),
                                           for: .touchUpInside)

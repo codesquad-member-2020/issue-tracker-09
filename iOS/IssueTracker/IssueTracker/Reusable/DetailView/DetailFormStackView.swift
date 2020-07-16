@@ -97,12 +97,14 @@ final class DetailFormStackView: UIStackView {
     }
     
     private func configureInnerTitleLabel() {
-        innerTitleLabel = configureTitleLabel(title: "제목", fontSize: 14)
+        innerTitleLabel = configureTitleLabel(title: "제목",
+                                              fontSize: 14)
         titleView.addSubview(innerTitleLabel)
     }
     
     private func configureInnerTextField(title: String?) {
-        innerTitleTextField = configureTextField(title: title, fontSize: 14)
+        innerTitleTextField = configureTextField(title: title,
+                                                 fontSize: 14)
         titleView.addSubview(innerTitleTextField)
     }
     
@@ -120,13 +122,15 @@ final class DetailFormStackView: UIStackView {
     }
     
     private func configureSubtitleLabel() {
-        innerSubtitleLabel = configureTitleLabel(fontSize: 14)
+        innerSubtitleLabel = configureTitleLabel(title: "설명",
+                                                 fontSize: 14)
         innerSubtitleLabel.numberOfLines = 0
         subTitleView.addSubview(innerSubtitleLabel)
     }
     
     private func configureSubtitleTextField(title: String?) {
-        innerSubtitleTextField = configureTextField(title: title, fontSize: 14)
+        innerSubtitleTextField = configureTextField(title: title,
+                                                    fontSize: 14)
         subTitleView.addSubview(innerSubtitleTextField)
     }
     

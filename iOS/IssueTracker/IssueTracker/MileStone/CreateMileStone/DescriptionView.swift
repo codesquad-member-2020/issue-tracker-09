@@ -40,13 +40,15 @@ final class DescriptionView: UIView {
     private func configureTitleLabel() {
         titleLabel = UILabel(font: .systemFont(ofSize: 14),
                              textColor: .black)
-        titleLabel.text = "설명"
+        titleLabel.numberOfLines = 0
+        titleLabel.text = "완료\n날짜"
         addSubview(titleLabel)
     }
     
     private func configureTextField() {
         textField = UITextField()
         textField.font = .systemFont(ofSize: 14)
+        textField.placeholder = "YY.mm.dd"
         addSubview(textField)
     }
     
