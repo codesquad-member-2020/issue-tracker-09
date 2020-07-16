@@ -29,9 +29,11 @@ final class DetailFormStackView: UIStackView {
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
         innerTitleTextFieldIsEmpty = !(title?.isEmpty ?? false)
-        labelSubject = (title: title, subtitle: subtitle)
+        labelSubject = (title: title,
+                        subtitle: subtitle)
         super.init(frame: .zero)
-        configure(title: title, subtitle: subtitle)
+        configure(title: title,
+                  subtitle: subtitle)
         makeConstraints()
     }
     
@@ -119,6 +121,7 @@ final class DetailFormStackView: UIStackView {
     
     private func configureSubtitleLabel() {
         innerSubtitleLabel = configureTitleLabel(fontSize: 14)
+        innerSubtitleLabel.numberOfLines = 0
         subTitleView.addSubview(innerSubtitleLabel)
     }
     
@@ -177,7 +180,7 @@ final class DetailFormStackView: UIStackView {
     private func makeConstraintsInnerSubtitleLabel() {
         innerSubtitleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(24)
-            make.width.equalTo(innerSubtitleLabel.snp.height)
+            make.width.equalTo(innerTitleLabel.snp.width)
             make.centerY.equalToSuperview()
         }
     }
