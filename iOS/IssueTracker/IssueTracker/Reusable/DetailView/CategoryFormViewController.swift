@@ -24,6 +24,7 @@ class CategoryFormViewController: UIViewController {
         super.init(nibName: nil,
                    bundle: nil)
         checkStyle(style)
+        setTitle(style)
         makeConstraints()
     }
     
@@ -45,6 +46,20 @@ class CategoryFormViewController: UIViewController {
                       subtitle: label.contents)
         }
     }
+    
+    func setTitle(_ style: FormStyle) {
+        switch style {
+        case .save:
+            contentView.saveButton
+                .setTitle("save",
+                          for: .normal)
+        case .edit(_):
+            contentView.saveButton
+            .setTitle("edit",
+                      for: .normal)
+        }
+    }
+    
     // MARK: Configure
     private func configure(title: String?, subtitle: String?) {
         configureDimmedView()

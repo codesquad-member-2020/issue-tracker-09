@@ -96,7 +96,6 @@ final class LabelFormViewController: CategoryFormViewController {
         colorView = ColorView(color: generateColor(style: style))
         contentView.addArrangedSubview(colorView)
         addTartgetButton(style)
-        setTitle(style)
     }
     
     override func configureContentView(title: String?, subtitle: String?) {
@@ -121,19 +120,6 @@ final class LabelFormViewController: CategoryFormViewController {
                                              for: .touchUpInside)
         default:
             return
-        }
-    }
-    
-    private func setTitle(_ style: FormStyle) {
-        switch style {
-        case .save:
-            contentView.saveButton
-                .setTitle("save",
-                          for: .normal)
-        case .edit(_):
-            contentView.saveButton
-            .setTitle("edit",
-                      for: .normal)
         }
     }
     
