@@ -13,7 +13,7 @@ final class DescriptionView: UIView {
     // MARK: - Properties
     private var titleLabel: UILabel!
     private var textField: UITextField!
-    private var sepertorLine: UIView!
+    private var separtorLine: UIView!
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -34,23 +34,33 @@ final class DescriptionView: UIView {
     private func configure() {
         configureTitleLabel()
         configureTextField()
+        configureSepartorLine()
     }
     
     private func configureTitleLabel() {
         titleLabel = UILabel(font: .systemFont(ofSize: 14),
                              textColor: .black)
+        titleLabel.text = "설명"
         addSubview(titleLabel)
     }
     
     private func configureTextField() {
         textField = UITextField()
+        textField.font = .systemFont(ofSize: 14)
         addSubview(textField)
+    }
+    
+    private func configureSepartorLine() {
+        separtorLine = UIView()
+        separtorLine.backgroundColor = .lightGray
+        addSubview(separtorLine)
     }
     
     // MARK: Constraints
     private func makeConstraints() {
         makeConstraintsTitleLabel()
         makeConstraintsTextField()
+        makeConstraintsSeparatorLine()
     }
     
     private func makeConstraintsTitleLabel() {
@@ -63,9 +73,17 @@ final class DescriptionView: UIView {
     
     private func makeConstraintsTextField() {
         textField.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel.snp.trailing).inset(24)
-            make.trailing.centerY.equalToSuperview()
-            make.top.equalToSuperview().inset(4)
+            make.leading.equalTo(titleLabel.snp.trailing).inset(-16)
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+        }
+    }
+    
+    private func makeConstraintsSeparatorLine() {
+        separtorLine.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(1)
         }
     }
 }
