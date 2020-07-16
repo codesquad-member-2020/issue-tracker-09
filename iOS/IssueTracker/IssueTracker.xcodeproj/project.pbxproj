@@ -38,6 +38,7 @@
 		AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* TitleHeaderView.swift */; };
 		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AE8CA35D249224560076507B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35C249224560076507B /* UIColor.swift */; };
+		AE97099324C016F3001434EF /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97099224C016F3001434EF /* DescriptionView.swift */; };
 		AE9F1F2124A705F900582899 /* MileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2024A705F900582899 /* MileStone.swift */; };
 		AE9F1F2424A7070300582899 /* MileStoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */; };
 		AE9F1F2624A7072200582899 /* MileStoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */; };
@@ -95,6 +96,7 @@
 		AE8CA35724920F6E0076507B /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TitleHeaderView.swift; path = IssueTracker/Reusable/TableView/TitleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35924921E1B0076507B /* LabelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelTableViewController.swift; path = IssueTracker/Supports/LabelTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35C249224560076507B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = IssueTracker/Supports/Extension/UIKit/UIColor.swift; sourceTree = SOURCE_ROOT; };
+		AE97099224C016F3001434EF /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		AE9F1F2024A705F900582899 /* MileStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStone.swift; sourceTree = "<group>"; };
 		AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewController.swift; sourceTree = "<group>"; };
 		AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewCell.swift; sourceTree = "<group>"; };
@@ -268,9 +270,18 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		AE97099124C015E3001434EF /* CreateMileStone */ = {
+			isa = PBXGroup;
+			children = (
+				AE97099224C016F3001434EF /* DescriptionView.swift */,
+			);
+			path = CreateMileStone;
+			sourceTree = "<group>";
+		};
 		AE9F1F2224A706ED00582899 /* MileStone */ = {
 			isa = PBXGroup;
 			children = (
+				AE97099124C015E3001434EF /* CreateMileStone */,
 				AE66FB9624AF6B46000E66B8 /* Cell */,
 				AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */,
 				AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */,
@@ -477,6 +488,7 @@
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
 				AEE597382498952300F5C622 /* ColorView.swift in Sources */,
 				AE5F012A24AE02DF00D6C82E /* ProgressRateCalculator.swift in Sources */,
+				AE97099324C016F3001434EF /* DescriptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
