@@ -20,7 +20,7 @@ protocol MileStoneProgressable {
     var progressRate: Int { get }
 }
 
-struct DeficientMileStone: Codable {
+struct DeficientMileStone: Codable, MileStoneInforamationable {
     let id: Int?
     let title: String
     let contents: String?

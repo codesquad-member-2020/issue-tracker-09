@@ -9,7 +9,8 @@
 import UIKit
 
 enum FormStyle {
-    case edit(Label)
+    case editLabel(Label)
+    case editMileStone(MileStoneInforamationable)
     case save
 }
 
@@ -38,12 +39,12 @@ class CategoryFormViewController: UIViewController {
     func checkStyle(_ style: FormStyle?) {
         guard let style = style else { return }
         switch style {
-        case .save:
-            configure(title: nil,
-                      subtitle: nil)
-        case let .edit(label):
+        case let .editLabel(label):
             configure(title: label.title,
                       subtitle: label.contents)
+        default:
+            configure(title: nil,
+                      subtitle: nil)
         }
     }
     
@@ -53,10 +54,10 @@ class CategoryFormViewController: UIViewController {
             contentView.saveButton
                 .setTitle("save",
                           for: .normal)
-        case .edit(_):
+        default:
             contentView.saveButton
-            .setTitle("edit",
-                      for: .normal)
+                .setTitle("edit",
+                          for: .normal)
         }
     }
     

@@ -30,10 +30,10 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: - Methods
     private func generateColor(style: FormStyle) -> UIColor? {
         switch style {
-        case .save:
-            return UIColor.random
-        case let .edit(label):
+        case let .editLabel(label):
             return UIColor(hex: label.colorCode)
+        default:
+            return UIColor.random
         }
     }
     
@@ -113,7 +113,7 @@ final class LabelFormViewController: CategoryFormViewController {
             contentView.saveButton.addTarget(self,
                                              action: #selector(saveLabelContent),
                                              for: .touchUpInside)
-        case let .edit(label):
+        case let .editLabel(label):
             selectLabel = label
             contentView.saveButton.addTarget(self,
                                              action: #selector(editLabelContent),
