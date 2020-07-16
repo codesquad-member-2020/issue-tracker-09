@@ -15,7 +15,7 @@ final class ColorView: UIView {
     private var titleLabel: UILabel!
     private var hexLabel: UILabel!
     private var colorPreView: UIView!
-    private var sepertorLine: UIView!
+    private var separtorLine: UIView!
     var generateButton: UIButton!
     @Published var color: UIColor?
     private var subscriber: AnyCancellable?
@@ -84,9 +84,9 @@ final class ColorView: UIView {
     }
     
     private func configureSepertorLine() {
-        sepertorLine = UIView()
-        sepertorLine.backgroundColor = .lightGray
-        addSubview(sepertorLine)
+        separtorLine = UIView()
+        separtorLine.backgroundColor = .lightGray
+        addSubview(separtorLine)
     }
     
     // MARK: Constraints
@@ -95,7 +95,7 @@ final class ColorView: UIView {
         makeConstraintsHexLabel()
         makeConstraintsColorPreView()
         makeConstraintsGenerateButton()
-        makeConstraintsSeperatorLine()
+        makeConstraintsSeparatorLine()
     }
     
     private func makeConstraintsTitleLabel() {
@@ -131,8 +131,8 @@ final class ColorView: UIView {
         }
     }
     
-    private func makeConstraintsSeperatorLine() {
-        sepertorLine.snp.makeConstraints { make in
+    private func makeConstraintsSeparatorLine() {
+        separtorLine.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(1)
