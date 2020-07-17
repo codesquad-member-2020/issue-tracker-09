@@ -53,7 +53,7 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
         addButton = UIButton()
         addButton
             .setImage(UIImage(systemName: "plus"),
-                           for: .normal)
+                      for: .normal)
         addButton.tintColor = .systemBlue
         addSubview(addButton)
     }
