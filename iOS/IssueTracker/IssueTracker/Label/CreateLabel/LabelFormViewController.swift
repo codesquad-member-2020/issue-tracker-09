@@ -69,8 +69,7 @@ final class LabelFormViewController: CategoryFormViewController {
     private func checkHTTPMethod(_ viewController: LabelTableViewController, method: HTTPMethod, updateLabel: Label) {
         switch method {
         case .post:
-            viewController.dataSource.labels
-                .append(updateLabel)
+            viewController.fetchLabels()
         default:
             for (index, label) in viewController.dataSource.labels.enumerated() {
                 _ = updateLabel.id == label.id ? viewController.dataSource.labels.remove(at: index) : nil

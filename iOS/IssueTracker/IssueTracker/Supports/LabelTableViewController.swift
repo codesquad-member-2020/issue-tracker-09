@@ -28,7 +28,7 @@ final class LabelTableViewController: CategoryTableViewController {
     }
     
     // MARK: - Methods
-    private func fetchLabels() {
+    func fetchLabels() {
         UseCase.shared
             .decode([Label].self,
                     endpoint: Endpoint(path: .labels()),
