@@ -39,7 +39,8 @@ final class ColorView: UIView {
     
     // MARK: - Methods
     func resetColorView() {
-        hexLabel.text?.removeAll()
+        hexLabel.text?
+            .removeAll()
         colorPreView.backgroundColor = .clear
     }
     
@@ -53,15 +54,15 @@ final class ColorView: UIView {
     }
     
     private func configureTitleLabel() {
-        titleLabel = UILabel()
+        titleLabel = UILabel(font: .systemFont(ofSize: 14),
+                             textColor: .black)
         titleLabel.text = "색상"
-        titleLabel.font = .systemFont(ofSize: 14)
         addSubview(titleLabel)
     }
     
     private func configureHexLabel() {
-        hexLabel = UILabel()
-        hexLabel.font = .systemFont(ofSize: 14)
+        hexLabel = UILabel(font: .systemFont(ofSize: 14),
+                           textColor: .black)
         hexLabel.textAlignment = .center
         addSubview(hexLabel)
     }
