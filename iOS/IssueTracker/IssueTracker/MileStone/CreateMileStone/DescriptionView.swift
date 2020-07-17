@@ -48,7 +48,7 @@ final class DescriptionView: UIView {
     private func configureTextField() {
         textField = UITextField()
         textField.font = .systemFont(ofSize: 14)
-        textField.placeholder = "YY.mm.dd"
+        textField.placeholder = "YY-mm-dd"
         addSubview(textField)
     }
     

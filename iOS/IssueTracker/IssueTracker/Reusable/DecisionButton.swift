@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SaveButton: UIButton {
+final class DecisionButton: UIButton {
     
     // MARK: - Properties
     override var intrinsicContentSize: CGSize {

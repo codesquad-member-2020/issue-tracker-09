@@ -19,8 +19,9 @@ class CategoryTableViewController: UITableViewController {
     // MARK: - Methods
     
     func registerCell(_ anyClass: AnyClass, identifier: String) {
-        tableView.register(anyClass.self,
-                           forCellReuseIdentifier: identifier)
+        tableView
+            .register(anyClass.self,
+                      forCellReuseIdentifier: identifier)
     }
     // MARK: DataSource
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -36,7 +37,8 @@ class CategoryTableViewController: UITableViewController {
     }
     
     private func registerHeaderView() {
-        tableView.register(TitleHeaderView.self,
-                           forHeaderFooterViewReuseIdentifier: TitleHeaderView.identifier)
+        tableView
+            .register(TitleHeaderView.self,
+                      forHeaderFooterViewReuseIdentifier: TitleHeaderView.identifier)
     }
 }

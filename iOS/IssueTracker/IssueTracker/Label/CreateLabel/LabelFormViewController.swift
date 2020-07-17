@@ -13,12 +13,12 @@ final class LabelFormViewController: CategoryFormViewController {
     
     // MARK: - Properties
     private var colorView: ColorView!
-    var subscription: Set<AnyCancellable> = .init()
-    var selectLabel: Label?
+    private var subscriptions: Set<AnyCancellable> = .init()
+    private var selectLabel: Label?
     
     // MARK: - Lifecycle
-    override init(style: FormStyle) {
-        super.init(style: style)
+    override init(_ style: FormStyle) {
+        super.init(style)
         configure(style: style)
     }
     
@@ -37,6 +37,15 @@ final class LabelFormViewController: CategoryFormViewController {
         }
     }
     
+    private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
+        switch method {
+        case .post:
+            return .labels()
+        default:
+            return .labels(String(identity ?? 0))
+        }
+    }
+    
     private func request(label: Label, method: HTTPMethod) {
         UseCase.shared
             .code(label,
@@ -50,29 +59,17 @@ final class LabelFormViewController: CategoryFormViewController {
                               animated: true)
             }) { [weak self] data, response in
                 guard let statusCode = response?.statusCode else { return }
-                self?.checkStatusCode(statusCode, method: method, label: label)
+                self?.checkStatusCode(statusCode,
+                                      method: method,
+                                      label: label)
         }
-        .store(in: &subscription)
+        .store(in: &subscriptions)
     }
     
-    
-    private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, label: Label) {
-        switch statusCode {
-        case 200 ..< 300:
-            guard let superViewController = self.presentingViewController as? UITabBarController else { return }
-            guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
-            checkHTTPMethod(viewController: labelViewController, method: method, updateLabel: label)
-        default:
-            let alert = UIAlertController(message: "Network Error")
-            present(alert,
-                    animated: true)
-        }
-    }
-    
-    private func checkHTTPMethod(viewController: LabelTableViewController, method: HTTPMethod, updateLabel: Label) {
+    private func checkHTTPMethod(_ viewController: LabelTableViewController, method: HTTPMethod, updateLabel: Label) {
         switch method {
         case .post:
-            viewController.dataSource.labels.append(updateLabel)
+            viewController.fetchLabels()
         default:
             for (index, label) in viewController.dataSource.labels.enumerated() {
                 _ = updateLabel.id == label.id ? viewController.dataSource.labels.remove(at: index) : nil
@@ -81,45 +78,57 @@ final class LabelFormViewController: CategoryFormViewController {
         }
     }
     
-    private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
-        switch method {
-        case .post:
-            return .labels()
+    private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, label: Label) {
+        switch statusCode {
+        case 200 ..< 300:
+            guard let superViewController = self.presentingViewController as? UITabBarController,
+                let labelViewController = superViewController.selectedViewController as? LabelTableViewController else { return }
+            checkHTTPMethod(labelViewController,
+                            method: method,
+                            updateLabel: label)
         default:
-            return .labels(String(identity ?? 0))
+            let alert = UIAlertController(message: "Network Error")
+            present(alert,
+                    animated: true)
+        }
+    }
+    
+    private func addTartgetButton(_ style: FormStyle?) {
+        switch style {
+        case let .editLabel(label):
+            selectLabel = label
+            contentView.saveButton
+                .addTarget(self,
+                           action: #selector(editLabelContent),
+                           for: .touchUpInside)
+        default:
+            contentView.saveButton
+                .addTarget(self,
+                           action: #selector(saveLabelContent),
+                           for: .touchUpInside)
         }
     }
     
     // MARK: Configure
     private func configure(style: FormStyle?) {
         guard let style = style else { return }
-        colorView = ColorView(color: generateColor(style: style))
-        contentView.addArrangedSubview(colorView)
+        configureColorView(style)
         addTartgetButton(style)
     }
     
     override func configureContentView(title: String?, subtitle: String?) {
         super.configureContentView(title: title,
                                    subtitle: subtitle)
-        contentView.resetButton.addTarget(self,
-                                          action: #selector(resetLabelContentView),
-                                          for: .touchUpInside)
+        contentView.resetButton
+            .addTarget(self,
+                       action: #selector(resetLabelContentView),
+                       for: .touchUpInside)
     }
     
-    private func addTartgetButton(_ style: FormStyle?) {
-        switch style {
-        case .save:
-            contentView.saveButton.addTarget(self,
-                                             action: #selector(saveLabelContent),
-                                             for: .touchUpInside)
-        case let .editLabel(label):
-            selectLabel = label
-            contentView.saveButton.addTarget(self,
-                                             action: #selector(editLabelContent),
-                                             for: .touchUpInside)
-        default:
-            return
-        }
+    func configureColorView(_ style: FormStyle) {
+        colorView = ColorView(color: generateColor(style: style))
+        contentView
+            .addArrangedSubview(colorView)
     }
     
     // MARK: Constraints
@@ -134,11 +143,11 @@ final class LabelFormViewController: CategoryFormViewController {
     @objc private func saveLabelContent() {
         guard let hexColor = colorView.color?.hexString,
             let title = contentView.labelSubject.title else { return }
-        let postLabel = Label(id: nil,
-                              title: title,
-                              contents: contentView.labelSubject.subtitle,
-                              colorCode: hexColor)
-        request(label: postLabel,
+        let label = Label(id: nil,
+                          title: title,
+                          contents: contentView.labelSubject.subtitle,
+                          colorCode: hexColor)
+        request(label: label,
                 method: .post)
         dismiss(animated: true)
     }
@@ -146,11 +155,11 @@ final class LabelFormViewController: CategoryFormViewController {
     @objc private func editLabelContent() {
         guard let hexColor = colorView.color?.hexString,
             let title = contentView.labelSubject.title else { return }
-        let putLabel = Label(id: selectLabel?.id,
-                             title: title,
-                             contents: contentView.labelSubject.subtitle,
-                             colorCode: hexColor)
-        request(label: putLabel,
+        let label = Label(id: selectLabel?.id,
+                          title: title,
+                          contents: contentView.labelSubject.subtitle,
+                          colorCode: hexColor)
+        request(label: label,
                 method: .put)
         dismiss(animated: true)
     }

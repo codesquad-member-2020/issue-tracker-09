@@ -29,12 +29,14 @@ final class LoginViewController: UIViewController {
     }
     
     @IBAction func githubLoginAction(_ sender: UIButton) {
-        loginManager.requestGithubLoginToken()
+        loginManager
+            .requestGithubLoginToken()
     }
     
     // MARK: - Methods
     func presentTabBarController() {
-        let labelTableViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: tabbarControllerIdentifier)
+        let labelTableViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(identifier: tabbarControllerIdentifier)
         present(labelTableViewController
             ,animated: true)
     }
@@ -47,10 +49,12 @@ final class LoginViewController: UIViewController {
     
     private func configureAppleLoginButton() {
         authorizationButton = ASAuthorizationAppleIDButton()
-        authorizationButton.addTarget(self,
-                                      action: #selector(handleAuthorizationAppleIDButtonPress),
-                                      for: .touchUpInside)
-        view.addSubview(authorizationButton)
+        authorizationButton
+            .addTarget(self,
+                       action: #selector(handleAuthorizationAppleIDButtonPress),
+                       for: .touchUpInside)
+        view
+            .addSubview(authorizationButton)
     }
     
     // MARK: Constraints
@@ -67,11 +71,12 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: Objc
     @objc private func handleAuthorizationAppleIDButtonPress() {
         let authorizationController = ASAuthorizationController(authorizationRequests: [loginManager.authorizationRequests])
         authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
+        authorizationController
+            .performRequests()
     }
 }
 
@@ -83,13 +88,5 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
         loginManager
             .requestAppleLoginToken(credential: appleIDCredential)
-    }
-}
-
-// MARK: ASAuthorizationControllerPresentationContextProviding
-extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        guard let window = view.window else { return UIWindow() }
-        return window
     }
 }

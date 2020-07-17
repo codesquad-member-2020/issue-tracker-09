@@ -19,19 +19,18 @@ final class MileStoneTableViewController: CategoryTableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = dataSource
         registerCell(MileStoneTableViewCell.self,
                      identifier: MileStoneTableViewCell.identifier)
-        tableView.dataSource = dataSource
-        fetch(provider: UseCase.shared,
-              endpoint: Endpoint(path: .mileStone()))
+        fetchMileStones()
         bindViewModelToView()
     }
     
     // MARK: - Methods
-    private func fetch(provider: Usable, endpoint: RequestProviding) {
-        provider
+    private func fetchMileStones() {
+        UseCase.shared
             .decode([DeficientMileStone].self,
-                    endpoint: endpoint,
+                    endpoint: Endpoint(path: .mileStone()),
                     method: .get)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
@@ -67,7 +66,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     
     // MARK: Objc
     @objc func presentCreateMileStoneViewController() {
-        present(MileStoneFormViewController(style: .save),
+        present(MileStoneFormViewController(.save),
                 animated: true)
     }
 }

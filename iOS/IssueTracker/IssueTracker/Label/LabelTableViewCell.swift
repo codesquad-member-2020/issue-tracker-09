@@ -29,7 +29,7 @@ final class LabelTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func apply(title: String, description: String, backgroundColor: UIColor) {
+    func apply(title: String, description: String?, backgroundColor: UIColor) {
         label.text = title
         label.backgroundColor = backgroundColor
         labelDescription.text = description
@@ -37,17 +37,18 @@ final class LabelTableViewCell: UITableViewCell {
     
     // MARK: Configure
     private func configure() {
-        configureLabel()
-        configureLabelDescription()
         selectionStyle = .none
         accessoryType = .disclosureIndicator
+        configureLabel()
+        configureLabelDescription()
     }
     
     private func configureLabel() {
         label = BadgeLabel(font: .boldSystemFont(ofSize: 13),
                            textColor: .black)
-        label.setContentHuggingPriority(.required,
-                                        for: .vertical)
+        label
+            .setContentHuggingPriority(.required,
+                                       for: .vertical)
         addSubview(label)
     }
     

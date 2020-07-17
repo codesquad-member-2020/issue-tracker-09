@@ -13,7 +13,8 @@ extension UIAlertController {
         self.init(title: "Error",
                   message: message,
                   preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "close", style: .cancel)
+        let cancel = UIAlertAction(title: "close",
+                                   style: .cancel)
         addAction(cancel)
     }
 }

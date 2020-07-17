@@ -45,9 +45,11 @@ final class MileStoneInformationView: UIView {
     private func configureBadgeLabel() {
         badgeLabel = BadgeLabel(font: .boldSystemFont(ofSize: 15),
                                 textColor: .systemGray)
-        badgeLabel.setContentHuggingPriority(.required,
+        badgeLabel
+            .setContentHuggingPriority(.required,
                                              for: .vertical)
-        badgeLabel.apply(borderColor: UIColor.systemGray.cgColor,
+        badgeLabel
+            .apply(borderColor: UIColor.systemGray.cgColor,
                          borderWidth: 1)
         addSubview(badgeLabel)
     }
