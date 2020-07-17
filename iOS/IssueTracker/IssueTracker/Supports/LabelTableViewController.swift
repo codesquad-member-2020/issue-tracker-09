@@ -21,10 +21,11 @@ final class LabelTableViewController: CategoryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        fetchLabels()
-        bindViewModelToView()
         registerCell(LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
+        fetchLabels()
+        bindViewModelToView()
+        
     }
     
     // MARK: - Methods
