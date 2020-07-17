@@ -21,7 +21,7 @@ class CategoryFormViewController: UIViewController {
     var contentView: DetailFormContentView!
     
     // MARK: - Lifecycle
-    init(style: FormStyle) {
+    init(_ style: FormStyle) {
         super.init(nibName: nil,
                    bundle: nil)
         checkStyle(style)
@@ -64,7 +64,8 @@ class CategoryFormViewController: UIViewController {
     // MARK: Configure
     private func configure(title: String?, subtitle: String?) {
         configureDimmedView()
-        configureContentView(title: title, subtitle: subtitle)
+        configureContentView(title: title,
+                             subtitle: subtitle)
     }
     
     private func configureDimmedView() {

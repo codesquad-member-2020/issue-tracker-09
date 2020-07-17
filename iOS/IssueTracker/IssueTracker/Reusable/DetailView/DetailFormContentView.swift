@@ -14,11 +14,11 @@ final class DetailFormContentView: UIView {
     // MARK: - Properties
     private var seperatorLine: UIView!
     private var contentView: DetailFormStackView!
-    var saveButton: SaveButton!
+    private var subscriptions: Set<AnyCancellable> = .init()
+    var saveButton: DecisionButton!
     var dismissButton: UIButton!
     var resetButton: UIButton!
-    var labelSubject: LabelSubjects = (nil, nil)
-    var subscription: Set<AnyCancellable> = .init()
+    var labelSubject: dataSubjects = (nil, nil)
     
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
@@ -37,11 +37,13 @@ final class DetailFormContentView: UIView {
     
     // MARK: - Methods    
     func addArrangedSubview(_ view: UIView) {
-        contentView.addArrangedSubview(view)
+        contentView
+            .addArrangedSubview(view)
     }
     
     func resetContentView() {
-        contentView.resetDetailForm()
+        contentView
+            .resetDetailForm()
     }
     
     // MARK: Configure
@@ -59,7 +61,8 @@ final class DetailFormContentView: UIView {
     private func configureDismissButton() {
         dismissButton = UIButton()
         dismissButton.tintColor = .black
-        dismissButton.setImage(UIImage(systemName: "xmark"),
+        dismissButton
+            .setImage(UIImage(systemName: "xmark"),
                                for: .normal)
         addSubview(dismissButton)
     }
@@ -72,16 +75,18 @@ final class DetailFormContentView: UIView {
     
     private func configureResetButton() {
         resetButton = UIButton()
-        resetButton.setTitleColor(.systemGray,
+        resetButton
+            .setTitleColor(.systemGray,
                                   for: .normal)
-        resetButton.setTitle("reset",
+        resetButton
+            .setTitle("reset",
                              for: .normal)
         resetButton.titleLabel?.font = .systemFont(ofSize: 13)
         addSubview(resetButton)
     }
     
     private func configureSaveButton() {
-        saveButton = SaveButton()
+        saveButton = DecisionButton()
         addSubview(saveButton)
     }
     
@@ -110,7 +115,7 @@ final class DetailFormContentView: UIView {
     
     private func makeConstraintsSeperatorLine() {
         seperatorLine.snp.makeConstraints { make in
-            make.top.equalTo(dismissButton.snp.bottom).offset(8)
+            make.top.equalTo(dismissButton.snp.bottom).inset(-8)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
@@ -132,8 +137,8 @@ final class DetailFormContentView: UIView {
     
     private func makeConstratinsContentView() {
         contentView.snp.makeConstraints { make in
-            make.top.equalTo(seperatorLine.snp.bottom).offset(16)
-            make.bottom.equalTo(saveButton.snp.top).offset(-16)
+            make.top.equalTo(seperatorLine.snp.bottom).inset(-16)
+            make.bottom.equalTo(saveButton.snp.top).inset(-16)
             make.leading.trailing.equalToSuperview()
         }
     }
@@ -149,7 +154,7 @@ final class DetailFormContentView: UIView {
             .sink { [weak self] selected in
                 self?.saveButton.isEnabled = selected
         }
-        .store(in: &subscription)
+        .store(in: &subscriptions)
     }
     
     private func passDataViewToViewController() {
@@ -157,6 +162,6 @@ final class DetailFormContentView: UIView {
             .sink { [weak self] labelSubject in
                 self?.labelSubject = labelSubject
         }
-        .store(in: &subscription)
+        .store(in: &subscriptions)
     }
 }

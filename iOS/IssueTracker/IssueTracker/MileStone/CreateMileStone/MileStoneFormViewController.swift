@@ -17,8 +17,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
     private var selectMileStone: DeficientMileStone?
     
     // MARK: - Lifecycle
-    override init(style: FormStyle) {
-        super.init(style: style)
+    override init(_ style: FormStyle) {
+        super.init(style)
         configure(style)
     }
     

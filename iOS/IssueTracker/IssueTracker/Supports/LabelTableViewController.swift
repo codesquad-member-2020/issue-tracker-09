@@ -61,7 +61,7 @@ final class LabelTableViewController: CategoryTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataSource.labels[indexPath.row]
-        present(LabelFormViewController(style: .editLabel(item)),
+        present(LabelFormViewController(.editLabel(item)),
                 animated: true)
     }
     
@@ -77,6 +77,6 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: Objc
     @objc private func presentCreateLabelViewController() {
-        present(LabelFormViewController(style: .save), animated: true)
+        present(LabelFormViewController(.save), animated: true)
     }
 }

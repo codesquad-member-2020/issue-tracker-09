@@ -17,8 +17,8 @@ final class LabelFormViewController: CategoryFormViewController {
     private var selectLabel: Label?
     
     // MARK: - Lifecycle
-    override init(style: FormStyle) {
-        super.init(style: style)
+    override init(_ style: FormStyle) {
+        super.init(style)
         configure(style: style)
     }
     

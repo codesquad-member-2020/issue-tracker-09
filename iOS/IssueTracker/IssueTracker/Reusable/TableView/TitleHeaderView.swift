@@ -44,14 +44,15 @@ final class TitleHeaderView: UITableViewHeaderFooterView {
     }
     
     private func configureTitleLabel() {
-        titleLabel = UILabel()
-        titleLabel.font = .boldSystemFont(ofSize: 32)
+        titleLabel = UILabel(font: .boldSystemFont(ofSize: 32),
+                             textColor: .black)
         addSubview(titleLabel)
     }
     
     private func configureAddButton() {
         addButton = UIButton()
-        addButton.setImage(UIImage(systemName: "plus"),
+        addButton
+            .setImage(UIImage(systemName: "plus"),
                            for: .normal)
         addButton.tintColor = .systemBlue
         addSubview(addButton)

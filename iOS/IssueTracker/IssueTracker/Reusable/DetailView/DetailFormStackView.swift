@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-typealias LabelSubjects = (title: String?, subtitle: String?)
+typealias dataSubjects = (title: String?, subtitle: String?)
 
 final class DetailFormStackView: UIStackView {
     
@@ -22,9 +22,9 @@ final class DetailFormStackView: UIStackView {
     private var innerSubtitleLabel: UILabel!
     private var innerSubtitleTextField: UITextField!
     private var subtitleSeperatorLine: UIView!
-    @Published var innerTitleTextFieldIsEmpty: Bool
-    @Published var labelSubject: LabelSubjects
     private var subscriptions: Set<AnyCancellable> = .init()
+    @Published var innerTitleTextFieldIsEmpty: Bool
+    @Published var labelSubject: dataSubjects
     
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
@@ -39,7 +39,8 @@ final class DetailFormStackView: UIStackView {
     
     required init(coder: NSCoder) {
         innerTitleTextFieldIsEmpty = false
-        labelSubject = (title: nil, subtitle: nil)
+        labelSubject = (title: nil,
+                        subtitle: nil)
         super.init(coder: coder)
         configure()
         makeConstraints()
@@ -52,8 +53,8 @@ final class DetailFormStackView: UIStackView {
     }
     
     func resetDetailForm() {
-        innerTitleTextField.text = ""
-        innerSubtitleTextField.text = ""
+        innerTitleTextField.text?.removeAll()
+        innerSubtitleTextField.text?.removeAll()
     }
     
     // MARK: Configure
@@ -66,9 +67,9 @@ final class DetailFormStackView: UIStackView {
     }
     
     private func configureTitleLabel(title: String? = nil, fontSize font: CGFloat) -> UILabel {
-        let label = UILabel()
+        let label = UILabel(font: .systemFont(ofSize: font),
+                            textColor: .black)
         label.text = title
-        label.font = .systemFont(ofSize: font)
         
         return label
     }
