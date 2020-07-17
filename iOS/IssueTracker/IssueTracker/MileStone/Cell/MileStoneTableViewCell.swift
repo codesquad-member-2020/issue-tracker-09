@@ -30,8 +30,10 @@ final class MileStoneTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     func apply(_ mileStone: MileStone) {
-        informationView.apply(mileStone)
-        progressView.apply(mileStone)
+        informationView
+            .apply(mileStone)
+        progressView
+            .apply(mileStone)
     }
     
     // MARK: Configure
