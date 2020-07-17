@@ -112,9 +112,7 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: Configure
     private func configure(style: FormStyle?) {
         guard let style = style else { return }
-        colorView = ColorView(color: generateColor(style: style))
-        contentView
-            .addArrangedSubview(colorView)
+        configureColorView(style)
         addTartgetButton(style)
     }
     
@@ -125,6 +123,12 @@ final class LabelFormViewController: CategoryFormViewController {
             .addTarget(self,
                        action: #selector(resetLabelContentView),
                        for: .touchUpInside)
+    }
+    
+    func configureColorView(_ style: FormStyle) {
+        colorView = ColorView(color: generateColor(style: style))
+        contentView
+            .addArrangedSubview(colorView)
     }
     
     // MARK: Constraints

@@ -28,6 +28,15 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     // MARK: - Methods
+    private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
+        switch method {
+        case .post:
+            return .mileStone()
+        default:
+            return .mileStone(String(identity ?? 0))
+        }
+    }
+    
     private func request(_ mileStone: DeficientMileStone, method: HTTPMethod) {
         UseCase.shared
             .code(mileStone,
@@ -48,6 +57,18 @@ final class MileStoneFormViewController: CategoryFormViewController {
         .store(in: &subscriptions)
     }
     
+    private func checkHTTPMethod(viewController: MileStoneTableViewController, method: HTTPMethod, updateMileStone: DeficientMileStone) {
+        switch method {
+        case .post:
+            viewController.dataSource.mileStones.append(updateMileStone)
+        default:
+            for (index, mileStone) in viewController.dataSource.mileStones.enumerated() {
+                _ = updateMileStone.id == mileStone.id ? viewController.dataSource.mileStones.remove(at: index) : nil
+                updateMileStone.id == mileStone.id ? viewController.dataSource.mileStones.insert(updateMileStone, at: index) : nil
+            }
+        }
+    }
+    
     private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, mileStone: DeficientMileStone) {
         switch statusCode {
         case 200 ..< 300:
@@ -65,39 +86,18 @@ final class MileStoneFormViewController: CategoryFormViewController {
         }
     }
     
-    private func checkHTTPMethod(viewController: MileStoneTableViewController, method: HTTPMethod, updateMileStone: DeficientMileStone) {
-        switch method {
-        case .post:
-            viewController.dataSource.mileStones.append(updateMileStone)
-        default:
-            for (index, mileStone) in viewController.dataSource.mileStones.enumerated() {
-                _ = updateMileStone.id == mileStone.id ? viewController.dataSource.mileStones.remove(at: index) : nil
-                updateMileStone.id == mileStone.id ? viewController.dataSource.mileStones.insert(updateMileStone, at: index) : nil
-            }
-        }
-    }
-    
-    private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
-        switch method {
-        case .post:
-            return .mileStone()
-        default:
-            return .mileStone(String(identity ?? 0))
-        }
-    }
-    
     private func addTargetButton(_ style: FormStyle?) {
         switch style {
         case let .editMileStone(mileStone):
             selectMileStone = mileStone
             contentView.saveButton
                 .addTarget(self,
-                           action: #selector(editLabelContent),
+                           action: #selector(editMileStoneContent),
                            for: .touchUpInside)
         default:
             contentView.saveButton
                 .addTarget(self,
-                           action: #selector(saveLabelContent),
+                           action: #selector(saveMileStoneContent),
                            for: .touchUpInside)
         }
     }
@@ -119,7 +119,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
     
     private func configureDescriptionView() {
         descriptionView = DescriptionView()
-        contentView.addArrangedSubview(descriptionView)
+        contentView
+            .addArrangedSubview(descriptionView)
     }
     
     // MARK: Constraints
@@ -131,7 +132,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     // MARK: Objc
-    @objc private func saveLabelContent() {
+    @objc private func saveMileStoneContent() {
         guard let title = contentView.labelSubject.title else { return }
         let mileStone = DeficientMileStone(id: nil,
                                            title: title,
@@ -144,7 +145,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
         dismiss(animated: true)
     }
     
-    @objc private func editLabelContent() {
+    @objc private func editMileStoneContent() {
         guard let title = contentView.labelSubject.title else { return }
         let mileStone = DeficientMileStone(id: nil,
                                            title: title,
@@ -158,6 +159,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     @objc private func resetMileStoneContentView() {
-        contentView.resetContentView()
+        contentView
+            .resetContentView()
     }
 }
