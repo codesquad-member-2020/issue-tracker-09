@@ -14,8 +14,10 @@ class LoginManager: NSObject {
     
     // MARK: - Properties
     var authorizationRequests: ASAuthorizationAppleIDRequest {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email]
+        let request = ASAuthorizationAppleIDProvider()
+            .createRequest()
+        request.requestedScopes = [.fullName,
+                                   .email]
         
         return request
     }
