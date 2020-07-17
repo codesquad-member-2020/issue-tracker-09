@@ -67,6 +67,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     
     // MARK: Objc
     @objc func presentCreateMileStoneViewController() {
-        present(MileStoneFormViewController(style: .save), animated: true)
+        present(MileStoneFormViewController(style: .save),
+                animated: true)
     }
 }
