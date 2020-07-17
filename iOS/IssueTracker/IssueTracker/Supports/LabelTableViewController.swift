@@ -21,36 +21,39 @@ final class LabelTableViewController: CategoryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        self.fetch(provider: UseCase.shared,
-                   endpoint: Endpoint(path: .labels()))
+        fetchLabels()
         bindViewModelToView()
         registerCell(LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
     }
     
     // MARK: - Methods
-    private func fetch(provider: Usable, endpoint: RequestProviding) {
-        provider
+    private func fetchLabels() {
+        UseCase.shared
             .decode([Label].self,
-                        endpoint: endpoint,
-                        method: .get)
+                    endpoint: Endpoint(path: .labels()),
+                    method: .get)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) { [weak self] in self?.dataSource.labels = $0 }
-            .store(in: &subscriptions)
+            }) { [weak self] lables in
+                self?.dataSource.labels = lables
+        }
+        .store(in: &subscriptions)
     }
     
     // MARK: Delegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeaderView.identifier) as? TitleHeaderView
-        headerView?.apply(title: headerViewTitle)
-        headerView?.addButton.addTarget(self,
-                                        action: #selector(presentCreateLabelViewController),
-                                        for: .touchUpInside)
+        headerView?
+            .apply(title: headerViewTitle)
+        headerView?.addButton
+            .addTarget(self,
+                       action: #selector(presentCreateLabelViewController),
+                       for: .touchUpInside)
         
         return headerView
     }
