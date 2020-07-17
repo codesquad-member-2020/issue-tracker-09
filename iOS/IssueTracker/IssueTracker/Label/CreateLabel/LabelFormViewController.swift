@@ -82,8 +82,8 @@ final class LabelFormViewController: CategoryFormViewController {
     private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, label: Label) {
         switch statusCode {
         case 200 ..< 300:
-            guard let superViewController = self.presentingViewController as? UITabBarController else { return }
-            guard let labelViewController = superViewController.customizableViewControllers?.first as? LabelTableViewController else { return }
+            guard let superViewController = self.presentingViewController as? UITabBarController,
+                let labelViewController = superViewController.selectedViewController as? LabelTableViewController else { return }
             checkHTTPMethod(labelViewController,
                             method: method,
                             updateLabel: label)
