@@ -10,7 +10,7 @@ import UIKit
 
 enum FormStyle {
     case editLabel(Label)
-    case editMileStone(MileStoneInforamationable)
+    case editMileStone(DeficientMileStone)
     case save
 }
 
@@ -77,9 +77,10 @@ class CategoryFormViewController: UIViewController {
         contentView = DetailFormContentView(title: title,
                                             subtitle: subtitle)
         view.addSubview(contentView)
-        contentView.dismissButton.addTarget(self,
-                                            action: #selector(dismissContentView),
-                                            for: .touchUpInside)
+        contentView.dismissButton
+            .addTarget(self,
+                       action: #selector(dismissContentView),
+                       for: .touchUpInside)
     }
     
     // MARK: Constraints
