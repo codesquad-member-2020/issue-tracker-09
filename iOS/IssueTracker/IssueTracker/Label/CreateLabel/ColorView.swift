@@ -16,9 +16,9 @@ final class ColorView: UIView {
     private var hexLabel: UILabel!
     private var colorPreView: UIView!
     private var separtorLine: UIView!
-    var generateButton: UIButton!
-    @Published var color: UIColor?
+    private var generateButton: UIButton!
     private var subscriber: AnyCancellable?
+    @Published var color: UIColor?
     
     // MARK: - Lifecycle
     init(color: UIColor?) {
@@ -39,7 +39,7 @@ final class ColorView: UIView {
     
     // MARK: - Methods
     func resetColorView() {
-        hexLabel.text = ""
+        hexLabel.text?.removeAll()
         colorPreView.backgroundColor = .clear
     }
     
@@ -74,12 +74,14 @@ final class ColorView: UIView {
     
     private func configureGenerateButton() {
         generateButton = UIButton()
-        generateButton.setImage(UIImage(systemName: "arrow.clockwise"),
-                                for: .normal)
+        generateButton
+            .setImage(UIImage(systemName: "arrow.clockwise"),
+                      for: .normal)
         generateButton.tintColor = .black
-        generateButton.addTarget(self,
-                                 action: #selector(generateRandomColor),
-                                 for: .touchUpInside)
+        generateButton
+            .addTarget(self,
+                       action: #selector(generateRandomColor),
+                       for: .touchUpInside)
         addSubview(generateButton)
     }
     
