@@ -35,11 +35,7 @@ final class DetailFormContentView: UIView {
         makeConstraints()
     }
     
-    // MARK: - Methods
-    func apply(subtitle: String) {
-        contentView.apply(subtitle: subtitle)
-    }
-    
+    // MARK: - Methods    
     func addArrangedSubview(_ view: UIView) {
         contentView.addArrangedSubview(view)
     }

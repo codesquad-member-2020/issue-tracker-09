@@ -30,7 +30,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     // MARK: - Methods
     private func fetch(provider: Usable, endpoint: RequestProviding) {
         provider
-            .decode([MileStone].self,
+            .decode([DeficientMileStone].self,
                     endpoint: endpoint,
                     method: .get)
             .sink(receiveCompletion: { [weak self] in
@@ -67,6 +67,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     
     // MARK: Objc
     @objc func presentCreateMileStoneViewController() {
-        // MARK: - Todo 생성 기능 구현
+        present(MileStoneFormViewController(style: .save),
+                animated: true)
     }
 }

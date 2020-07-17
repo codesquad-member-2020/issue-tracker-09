@@ -27,7 +27,7 @@
 		AE537168249B80A000269F6B /* UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE537167249B80A000269F6B /* UIAlert.swift */; };
 		AE5F012624AC7F5B00D6C82E /* MileStoneInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */; };
 		AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */; };
-		AE5F012A24AE02DF00D6C82E /* PercentCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */; };
+		AE5F012A24AE02DF00D6C82E /* ProgressRateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */; };
 		AE84609124A0DA11008CF76B /* Usable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609024A0DA11008CF76B /* Usable.swift */; };
 		AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609224A0DACA008CF76B /* UsableImpl.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
@@ -38,6 +38,8 @@
 		AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35724920F6E0076507B /* TitleHeaderView.swift */; };
 		AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35924921E1B0076507B /* LabelTableViewController.swift */; };
 		AE8CA35D249224560076507B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA35C249224560076507B /* UIColor.swift */; };
+		AE97099324C016F3001434EF /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97099224C016F3001434EF /* DescriptionView.swift */; };
+		AE97099524C0196B001434EF /* MileStoneFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97099424C0196B001434EF /* MileStoneFormViewController.swift */; };
 		AE9F1F2124A705F900582899 /* MileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2024A705F900582899 /* MileStone.swift */; };
 		AE9F1F2424A7070300582899 /* MileStoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */; };
 		AE9F1F2624A7072200582899 /* MileStoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */; };
@@ -85,7 +87,7 @@
 		AE537167249B80A000269F6B /* UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlert.swift; sourceTree = "<group>"; };
 		AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneInformationView.swift; sourceTree = "<group>"; };
 		AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneProgressView.swift; sourceTree = "<group>"; };
-		AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentCalculator.swift; sourceTree = "<group>"; };
+		AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRateCalculator.swift; sourceTree = "<group>"; };
 		AE84609024A0DA11008CF76B /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
 		AE84609224A0DACA008CF76B /* UsableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableImpl.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,8 @@
 		AE8CA35724920F6E0076507B /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TitleHeaderView.swift; path = IssueTracker/Reusable/TableView/TitleHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35924921E1B0076507B /* LabelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelTableViewController.swift; path = IssueTracker/Supports/LabelTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		AE8CA35C249224560076507B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = IssueTracker/Supports/Extension/UIKit/UIColor.swift; sourceTree = SOURCE_ROOT; };
+		AE97099224C016F3001434EF /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		AE97099424C0196B001434EF /* MileStoneFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneFormViewController.swift; sourceTree = "<group>"; };
 		AE9F1F2024A705F900582899 /* MileStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStone.swift; sourceTree = "<group>"; };
 		AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewController.swift; sourceTree = "<group>"; };
 		AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewCell.swift; sourceTree = "<group>"; };
@@ -211,7 +215,6 @@
 				AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */,
 				AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */,
 				AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */,
-				AE5F012924AE02DF00D6C82E /* PercentCalculator.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -269,11 +272,22 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		AE97099124C015E3001434EF /* CreateMileStone */ = {
+			isa = PBXGroup;
+			children = (
+				AE97099224C016F3001434EF /* DescriptionView.swift */,
+				AE97099424C0196B001434EF /* MileStoneFormViewController.swift */,
+			);
+			path = CreateMileStone;
+			sourceTree = "<group>";
+		};
 		AE9F1F2224A706ED00582899 /* MileStone */ = {
 			isa = PBXGroup;
 			children = (
+				AE97099124C015E3001434EF /* CreateMileStone */,
 				AE66FB9624AF6B46000E66B8 /* Cell */,
 				AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */,
+				AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */,
 				AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */,
 			);
 			path = MileStone;
@@ -458,6 +472,7 @@
 				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
 				AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */,
 				AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */,
+				AE97099524C0196B001434EF /* MileStoneFormViewController.swift in Sources */,
 				AE8CA35A24921E1B0076507B /* LabelTableViewController.swift in Sources */,
 				AE84609124A0DA11008CF76B /* Usable.swift in Sources */,
 				AB58C190249F25E10067185A /* URLRequest.swift in Sources */,
@@ -476,7 +491,8 @@
 				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
 				AEE597382498952300F5C622 /* ColorView.swift in Sources */,
-				AE5F012A24AE02DF00D6C82E /* PercentCalculator.swift in Sources */,
+				AE5F012A24AE02DF00D6C82E /* ProgressRateCalculator.swift in Sources */,
+				AE97099324C016F3001434EF /* DescriptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,10 +30,10 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: - Methods
     private func generateColor(style: FormStyle) -> UIColor? {
         switch style {
-        case .save:
-            return UIColor.random
-        case let .edit(label):
+        case let .editLabel(label):
             return UIColor(hex: label.colorCode)
+        default:
+            return UIColor.random
         }
     }
     
@@ -96,13 +96,11 @@ final class LabelFormViewController: CategoryFormViewController {
         colorView = ColorView(color: generateColor(style: style))
         contentView.addArrangedSubview(colorView)
         addTartgetButton(style)
-        setTitle(style)
     }
     
     override func configureContentView(title: String?, subtitle: String?) {
         super.configureContentView(title: title,
                                    subtitle: subtitle)
-        contentView.apply(subtitle: "설명")
         contentView.resetButton.addTarget(self,
                                           action: #selector(resetLabelContentView),
                                           for: .touchUpInside)
@@ -114,26 +112,13 @@ final class LabelFormViewController: CategoryFormViewController {
             contentView.saveButton.addTarget(self,
                                              action: #selector(saveLabelContent),
                                              for: .touchUpInside)
-        case let .edit(label):
+        case let .editLabel(label):
             selectLabel = label
             contentView.saveButton.addTarget(self,
                                              action: #selector(editLabelContent),
                                              for: .touchUpInside)
         default:
             return
-        }
-    }
-    
-    private func setTitle(_ style: FormStyle) {
-        switch style {
-        case .save:
-            contentView.saveButton
-                .setTitle("save",
-                          for: .normal)
-        case .edit(_):
-            contentView.saveButton
-            .setTitle("edit",
-                      for: .normal)
         }
     }
     

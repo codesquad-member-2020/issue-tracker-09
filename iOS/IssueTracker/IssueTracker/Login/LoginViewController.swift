@@ -81,7 +81,8 @@ final class LoginViewController: UIViewController {
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        loginManager.requestAppleLoginToken(credential: appleIDCredential)
+        loginManager
+            .requestAppleLoginToken(credential: appleIDCredential)
     }
 }
 

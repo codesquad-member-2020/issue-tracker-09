@@ -9,7 +9,8 @@
 import UIKit
 
 enum FormStyle {
-    case edit(Label)
+    case editLabel(Label)
+    case editMileStone(DeficientMileStone)
     case save
 }
 
@@ -24,6 +25,7 @@ class CategoryFormViewController: UIViewController {
         super.init(nibName: nil,
                    bundle: nil)
         checkStyle(style)
+        setTitle(style)
         makeConstraints()
     }
     
@@ -37,14 +39,28 @@ class CategoryFormViewController: UIViewController {
     func checkStyle(_ style: FormStyle?) {
         guard let style = style else { return }
         switch style {
-        case .save:
-            configure(title: nil,
-                      subtitle: nil)
-        case let .edit(label):
+        case let .editLabel(label):
             configure(title: label.title,
                       subtitle: label.contents)
+        default:
+            configure(title: nil,
+                      subtitle: nil)
         }
     }
+    
+    func setTitle(_ style: FormStyle) {
+        switch style {
+        case .save:
+            contentView.saveButton
+                .setTitle("save",
+                          for: .normal)
+        default:
+            contentView.saveButton
+                .setTitle("edit",
+                          for: .normal)
+        }
+    }
+    
     // MARK: Configure
     private func configure(title: String?, subtitle: String?) {
         configureDimmedView()
@@ -61,9 +77,10 @@ class CategoryFormViewController: UIViewController {
         contentView = DetailFormContentView(title: title,
                                             subtitle: subtitle)
         view.addSubview(contentView)
-        contentView.dismissButton.addTarget(self,
-                                            action: #selector(dismissContentView),
-                                            for: .touchUpInside)
+        contentView.dismissButton
+            .addTarget(self,
+                       action: #selector(dismissContentView),
+                       for: .touchUpInside)
     }
     
     // MARK: Constraints

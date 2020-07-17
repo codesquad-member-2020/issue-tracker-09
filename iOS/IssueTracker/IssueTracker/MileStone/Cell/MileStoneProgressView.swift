@@ -30,18 +30,9 @@ final class MileStoneProgressView: UIView {
     
     // MARK: - Method
     func apply(_ progress: MileStoneProgressable) {
-        guard let openIssue = progress.numberOfOpenIssue,
-            let closedIssue = progress.numberOfClosedIssue else {
-                openIssueLabel.text = "open"
-                closedIssueLabel.text = "closed"
-                
-                return
-        }
-        let percentage = PercentCalculator(openIssue: openIssue,
-            closedIssue: closedIssue).progressRate
-        progressLabel.text = String(percentage) + "%"
-        openIssueLabel.text = String(openIssue) + "open"
-        closedIssueLabel.text = String(closedIssue) + "closed"
+        progressLabel.text = String(progress.progressRate) + "%"
+        openIssueLabel.text = String(progress.numberOfOpenIssue) + "open"
+        closedIssueLabel.text = String(progress.numberOfClosedIssue) + "closed"
     }
     
     // MARK: Configure
