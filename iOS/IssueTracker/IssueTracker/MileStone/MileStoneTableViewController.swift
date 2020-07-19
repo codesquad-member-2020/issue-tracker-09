@@ -56,7 +56,6 @@ final class MileStoneTableViewController: CategoryTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let item = viewModel.itemIdentifier(for: indexPath) else { return }
         present(MileStoneFormViewController(.editMileStone(item)),
-                animated: true)
     }
     
     // MARK: Bind
