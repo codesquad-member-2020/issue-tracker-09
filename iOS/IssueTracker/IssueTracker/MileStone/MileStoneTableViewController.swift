@@ -54,6 +54,12 @@ final class MileStoneTableViewController: CategoryTableViewController {
         return headerView
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let mileStone = dataSource.mileStones[indexPath.row]
+        present(MileStoneFormViewController(.editMileStone(mileStone)),
+                animated: true)
+    }
+    
     // MARK: Bind
     private func bindViewModelToView() {
         dataSource.$mileStones
