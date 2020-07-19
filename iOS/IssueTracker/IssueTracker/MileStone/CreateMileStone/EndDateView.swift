@@ -1,5 +1,5 @@
 //
-//  DescriptionView.swift
+//  EndDateView.swift
 //  IssueTracker
 //
 //  Created by Cloud on 2020/07/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DescriptionView: UIView {
+final class EndDateView: UIView {
     
     // MARK: - Properties
     private var titleLabel: UILabel!
@@ -16,24 +16,24 @@ final class DescriptionView: UIView {
     private var separtorLine: UIView!
     
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
+    init(_ mileStone: MileStoneInforamationable?) {
+        super.init(frame: .zero)
+        configure(mileStone)
         makeConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configure()
+        configure(nil)
         makeConstraints()
     }
     
     // MARK: - Methods
     
     // MARK: Configure
-    private func configure() {
+    private func configure(_ mileStone: MileStoneInforamationable?) {
         configureTitleLabel()
-        configureTextField()
+        configureTextField(mileStone?.dueOn)
         configureSepartorLine()
     }
     
@@ -45,10 +45,11 @@ final class DescriptionView: UIView {
         addSubview(titleLabel)
     }
     
-    private func configureTextField() {
+    private func configureTextField(_ text: String?) {
         textField = UITextField()
         textField.font = .systemFont(ofSize: 14)
         textField.placeholder = "YY-mm-dd"
+        textField.text = text
         addSubview(textField)
     }
     

@@ -12,7 +12,7 @@ import Combine
 final class MileStoneFormViewController: CategoryFormViewController {
     
     // MARK: - Properties
-    private var descriptionView: DescriptionView!
+    private var descriptionView: EndDateView!
     private var subscriptions: Set<AnyCancellable> = .init()
     private var selectMileStone: DeficientMileStone?
     
@@ -28,6 +28,15 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     // MARK: - Methods
+    private func generateData(style: FormStyle) -> DeficientMileStone? {
+        switch style {
+        case let .editMileStone(mileStone):
+            return mileStone
+        default:
+            return nil
+        }
+    }
+    
     private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
         switch method {
         case .post:
@@ -104,7 +113,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
     
     // MARK: Configure
     private func configure(_ style: FormStyle?) {
-        configureDescriptionView()
+        guard let style = style else { return }
+        configureDescriptionView(style)
         addTargetButton(style)
     }
     
@@ -117,8 +127,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
                        for: .touchUpInside)
     }
     
-    private func configureDescriptionView() {
-        descriptionView = DescriptionView()
+    private func configureDescriptionView(_ style: FormStyle) {
+        descriptionView = EndDateView(generateData(style: style))
         contentView
             .addArrangedSubview(descriptionView)
     }
