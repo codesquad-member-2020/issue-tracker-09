@@ -47,8 +47,8 @@ final class LabelFormViewController: CategoryFormViewController {
     }
     
     private func request(label: Label, method: HTTPMethod) {
-        UseCase.shared
-            .code(label,
+        NetworkPublisher.shared
+            .fetch(label,
                   endpoint: Endpoint(path: generatePath(method: method, identity: label.id)),
                   method: method)
             .receive(on: RunLoop.main)
@@ -57,7 +57,7 @@ final class LabelFormViewController: CategoryFormViewController {
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) { [weak self] data, response in
+            }) { [weak self] _, response in
                 guard let statusCode = response?.statusCode else { return }
                 self?.checkStatusCode(statusCode,
                                       method: method,

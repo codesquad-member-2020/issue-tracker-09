@@ -28,10 +28,11 @@ final class MileStoneTableViewController: CategoryTableViewController {
     
     // MARK: - Methods
     func fetchMileStones() {
-        UseCase.shared
-            .decode([DeficientMileStone].self,
-                    endpoint: Endpoint(path: .mileStone()),
-                    method: .get)
+        NetworkPublisher.shared
+            .fetch([DeficientMileStone].self,
+                   endpoint: Endpoint(path: .mileStone()),
+                   method: .get)
+            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
