@@ -31,7 +31,8 @@ final class LabelFormViewController: CategoryFormViewController {
     private func generateColor(style: FormStyle) -> UIColor? {
         switch style {
         case let .editLabel(label):
-            return UIColor(hex: label.colorCode)
+            guard let colorCode = label.colorCode else { return UIColor.random }
+            return UIColor(hex: colorCode)
         default:
             return UIColor.random
         }

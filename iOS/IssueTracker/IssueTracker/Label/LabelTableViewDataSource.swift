@@ -26,10 +26,11 @@ extension LabelTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier, for: indexPath) as? LabelTableViewCell else { return LabelTableViewCell() }
         let item = labels[indexPath.row]
+        guard let colorCode = item.colorCode else { return cell }
         cell
             .apply(title: item.title,
                    description: item.contents,
-                   backgroundColor: UIColor(hex: item.colorCode) ?? UIColor.white)
+                   backgroundColor: UIColor(hex: colorCode))
         
         return cell
     }
