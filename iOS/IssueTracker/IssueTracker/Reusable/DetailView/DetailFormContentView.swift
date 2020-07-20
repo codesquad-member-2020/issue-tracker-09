@@ -18,7 +18,10 @@ final class DetailFormContentView: UIView {
     var saveButton: DecisionButton!
     var dismissButton: UIButton!
     var resetButton: UIButton!
-    var labelSubject: dataSubjects = (nil, nil)
+    var dataSubjects: dataSubjects = (nil, nil)
+    var labelWidth: CGFloat {
+        return contentView.labelWidth
+    }
     
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
@@ -160,7 +163,7 @@ final class DetailFormContentView: UIView {
     private func passDataViewToViewController() {
         contentView.$labelSubject
             .sink { [weak self] labelSubject in
-                self?.labelSubject = labelSubject
+                self?.dataSubjects = labelSubject
         }
         .store(in: &subscriptions)
     }

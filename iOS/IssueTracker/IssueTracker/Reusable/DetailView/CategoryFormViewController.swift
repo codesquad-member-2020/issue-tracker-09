@@ -19,6 +19,9 @@ class CategoryFormViewController: UIViewController {
     // MARK: - Properties
     private var dimmedView: UIView!
     var contentView: DetailFormContentView!
+    var labelWidth: CGFloat {
+        return contentView.labelWidth
+    }
     
     // MARK: - Lifecycle
     init(_ style: FormStyle) {

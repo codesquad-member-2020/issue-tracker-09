@@ -35,8 +35,8 @@ class LoginManager: NSObject {
             let token = String(data: tokenData, encoding: .utf8) else { return }
         NetworkPublisher.shared
             .request(AppleLogin(token: token),
-                    endpoint: Endpoint(path: .appleLogin),
-                    method: .post)
+                     endpoint: Endpoint(path: .appleLogin),
+                     method: .post)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
                 let alertController = UIAlertController(message: error.message)
@@ -79,8 +79,9 @@ class LoginManager: NSObject {
             viewController?.presentTabBarController()
         default:
             let alertController = UIAlertController(message: "유효하지 않은 Apple ID 입니다.")
-            viewController?.present(alertController,
-                                    animated: true)
+            viewController?
+                .present(alertController,
+                         animated: true)
         }
     }
 }

@@ -143,10 +143,10 @@ final class LabelFormViewController: CategoryFormViewController {
     // MARK: Objc
     @objc private func saveLabelContent() {
         guard let hexColor = colorView.color?.hexString,
-            let title = contentView.labelSubject.title else { return }
+            let title = contentView.dataSubjects.title else { return }
         let label = Label(id: nil,
                           title: title,
-                          contents: contentView.labelSubject.subtitle,
+                          contents: contentView.dataSubjects.subtitle,
                           colorCode: hexColor)
         request(label: label,
                 method: .post)
@@ -155,10 +155,10 @@ final class LabelFormViewController: CategoryFormViewController {
     
     @objc private func editLabelContent() {
         guard let hexColor = colorView.color?.hexString,
-            let title = contentView.labelSubject.title else { return }
+            let title = contentView.dataSubjects.title else { return }
         let label = Label(id: selectLabel?.id,
                           title: title,
-                          contents: contentView.labelSubject.subtitle,
+                          contents: contentView.dataSubjects.subtitle,
                           colorCode: hexColor)
         request(label: label,
                 method: .put)

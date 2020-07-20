@@ -126,7 +126,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     private func configureEndDateView(_ style: FormStyle) {
-        endDateView = EndDateView(generateData(style: style))
+        endDateView = EndDateView(generateData(style: style),
+                                  labelWidth: contentView.labelWidth)
         contentView
             .addArrangedSubview(endDateView)
     }
@@ -142,10 +143,10 @@ final class MileStoneFormViewController: CategoryFormViewController {
     // MARK: Objc
     @objc private func saveMileStoneContent() {
         guard let dueOn = endDateView.dueOn,
-            let title = contentView.labelSubject.title else { return }
+            let title = contentView.dataSubjects.title else { return }
         let mileStone = DeficientMileStone(id: nil,
                                            title: title,
-                                           contents: contentView.labelSubject.subtitle,
+                                           contents: contentView.dataSubjects.subtitle,
                                            dueOn: dueOn,
                                            numberOfOpenIssue: 0,
                                            numberOfClosedIssue: 0)
@@ -156,11 +157,11 @@ final class MileStoneFormViewController: CategoryFormViewController {
     
     @objc private func editMileStoneContent() {
         guard let dueOn = endDateView.dueOn,
-            let title = contentView.labelSubject.title else { return }
+            let title = contentView.dataSubjects.title else { return }
         
         let mileStone = DeficientMileStone(id: selectMileStone?.id,
                                            title: title,
-                                           contents: contentView.labelSubject.subtitle,
+                                           contents: contentView.dataSubjects.subtitle,
                                            dueOn: dueOn,
                                            numberOfOpenIssue: selectMileStone?.numberOfOpenIssue ?? 0,
                                            numberOfClosedIssue: selectMileStone?.numberOfClosedIssue ?? 0)
