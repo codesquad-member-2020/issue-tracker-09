@@ -32,8 +32,8 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Methods
     func fetchLabels() {
-        UseCase.shared
-            .decode([Label].self,
+        NetworkPublisher.shared
+            .fetch([Label].self,
                     endpoint: Endpoint(path: .labels()),
                     method: .get)
             .receive(on: RunLoop.main)

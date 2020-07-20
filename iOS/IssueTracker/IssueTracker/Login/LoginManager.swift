@@ -33,8 +33,8 @@ class LoginManager: NSObject {
     func requestAppleLoginToken(credential: ASAuthorizationAppleIDCredential) {
         guard let tokenData = credential.identityToken,
             let token = String(data: tokenData, encoding: .utf8) else { return }
-        UseCase.shared
-            .encode(AppleLogin(token: token),
+        NetworkPublisher.shared
+            .request(AppleLogin(token: token),
                     endpoint: Endpoint(path: .appleLogin),
                     method: .post)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
