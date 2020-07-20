@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Combine
 
 final class MileStoneTableViewDataSource: NSObject {
     // MARK: - Properties
+    private var subscription: AnyCancellable?
     @Published var mileStones:[DeficientMileStone] = .init()
 }
 
@@ -29,5 +31,21 @@ extension MileStoneTableViewDataSource: UITableViewDataSource {
         cell.apply(MileStone(milestone: item, progressRate: progressRate))
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete,
+            let id = mileStones[indexPath.row].id else { return }
+        subscription = NetworkPublisher.shared
+            .request(endpoint: Endpoint(path: .mileStone(String(id))), method: .delete)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in }) { [weak self] response in
+                switch response.statusCode {
+                case 400 ..< 500:
+                    break
+                default:
+                    self?.mileStones.remove(at: indexPath.row)
+                }
+        }
     }
 }
