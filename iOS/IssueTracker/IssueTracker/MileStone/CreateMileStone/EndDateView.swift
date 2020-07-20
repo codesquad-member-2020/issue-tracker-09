@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 final class EndDateView: UIView {
     
@@ -14,21 +15,29 @@ final class EndDateView: UIView {
     private var titleLabel: UILabel!
     private var textField: UITextField!
     private var separtorLine: UIView!
+    private var subscription: AnyCancellable?
+    @Published var dueOn: String?
     
     // MARK: - Lifecycle
     init(_ mileStone: MileStoneInforamationable?) {
         super.init(frame: .zero)
         configure(mileStone)
         makeConstraints()
+        bindViewToViewModel()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure(nil)
         makeConstraints()
+        bindViewToViewModel()
     }
     
     // MARK: - Methods
+    func resetEndDateView() {
+        dueOn?.removeAll()
+        textField.text?.removeAll()
+    }
     
     // MARK: Configure
     private func configure(_ mileStone: MileStoneInforamationable?) {
@@ -87,6 +96,14 @@ final class EndDateView: UIView {
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(1)
+        }
+    }
+    
+    // MARK: Bind
+    private func bindViewToViewModel() {
+        subscription = textField.publisher(for: .editingChanged)
+            .sink { [weak self] textField in
+                self?.dueOn = textField.text
         }
     }
 }
