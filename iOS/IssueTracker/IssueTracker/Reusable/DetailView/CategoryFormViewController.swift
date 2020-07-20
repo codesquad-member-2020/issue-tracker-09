@@ -39,12 +39,15 @@ class CategoryFormViewController: UIViewController {
     func checkStyle(_ style: FormStyle?) {
         guard let style = style else { return }
         switch style {
+        case .save:
+            configure(title: nil,
+                      subtitle: nil)
         case let .editLabel(label):
             configure(title: label.title,
                       subtitle: label.contents)
-        default:
-            configure(title: nil,
-                      subtitle: nil)
+        case let .editMileStone(mileStone):
+            configure(title: mileStone.title,
+                      subtitle: mileStone.contents)
         }
     }
     
