@@ -12,7 +12,7 @@ import Combine
 final class LabelTableViewDataSource: NSObject {
     
     // MARK: - Properties
-    private var subscription: Set<AnyCancellable> = .init()
+    private var subscription: AnyCancellable?
     @Published var labels: [Label] = .init()
 }
 
@@ -38,7 +38,7 @@ extension LabelTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete,
             let id = labels[indexPath.row].id else { return }
-        NetworkPublisher.shared
+        subscription = NetworkPublisher.shared
             .request(endpoint: Endpoint.init(path: .labels(String(id))),
                     method: .delete)
             .receive(on: RunLoop.main)
@@ -50,6 +50,6 @@ extension LabelTableViewDataSource: UITableViewDataSource {
                     self?.labels.remove(at: indexPath.row)
                 }
         }
-        .store(in: &subscription)
+        
     }
 }

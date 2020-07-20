@@ -19,17 +19,17 @@ final class EndDateView: UIView {
     @Published var dueOn: String?
     
     // MARK: - Lifecycle
-    init(_ mileStone: MileStoneInforamationable?) {
+    init(_ mileStone: MileStoneInforamationable?, labelWidth: CGFloat) {
         super.init(frame: .zero)
         configure(mileStone)
-        makeConstraints()
+        makeConstraints(labelWidth)
         bindViewToViewModel()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure(nil)
-        makeConstraints()
+        makeConstraints(.zero)
         bindViewToViewModel()
     }
     
@@ -69,16 +69,16 @@ final class EndDateView: UIView {
     }
     
     // MARK: Constraints
-    private func makeConstraints() {
-        makeConstraintsTitleLabel()
+    private func makeConstraints(_ labelWidth: CGFloat) {
+        makeConstraintsTitleLabel(labelWidth)
         makeConstraintsTextField()
         makeConstraintsSeparatorLine()
     }
     
-    private func makeConstraintsTitleLabel() {
+    private func makeConstraintsTitleLabel(_ size: CGFloat) {
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(24)
-            make.width.equalTo(titleLabel.snp.height)
+            make.width.equalTo(size)
             make.centerY.equalToSuperview()
         }
     }

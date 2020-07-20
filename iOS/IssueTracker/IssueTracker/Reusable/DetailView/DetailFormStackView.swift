@@ -25,6 +25,9 @@ final class DetailFormStackView: UIStackView {
     private var subscriptions: Set<AnyCancellable> = .init()
     @Published var innerTitleTextFieldIsEmpty: Bool
     @Published var labelSubject: dataSubjects
+    var labelWidth: CGFloat {
+        return innerTitleLabel.intrinsicContentSize.width
+    }
     
     // MARK: - Lifecycle
     init(title: String?, subtitle: String?) {
@@ -60,7 +63,7 @@ final class DetailFormStackView: UIStackView {
     // MARK: Configure
     private func configure(title: String? = nil, subtitle: String? = nil) {
         axis = .vertical
-        distribution = .fillEqually
+        distribution = .fillProportionally
         configureTitleView(title: title)
         configureSubtitleView(title: subtitle)
         bindViewToViewModel()
