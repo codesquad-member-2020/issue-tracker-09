@@ -29,7 +29,7 @@ final class LabelTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func apply(title: String, description: String?, backgroundColor: UIColor) {
+    func apply(title: String, description: String?, backgroundColor: UIColor?) {
         label.text = title
         label.backgroundColor = backgroundColor
         labelDescription.text = description
