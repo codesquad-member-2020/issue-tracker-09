@@ -12,7 +12,6 @@ import Combine
 final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
-    static let identifier: String = "LabelTableViewController"
     private let headerViewTitle: String = "Label"
     private var subscriptions: Set<AnyCancellable> = .init()
     let dataSource: LabelTableViewDataSource = .init()
@@ -25,13 +24,12 @@ final class LabelTableViewController: CategoryTableViewController {
                      identifier: LabelTableViewCell.identifier)
         fetchLabels()
         bindViewModelToView()
-        
     }
     
     // MARK: - Methods
     func fetchLabels() {
-        UseCase.shared
-            .decode([Label].self,
+        NetworkPublisher.shared
+            .fetch([Label].self,
                     endpoint: Endpoint(path: .labels()),
                     method: .get)
             .receive(on: RunLoop.main)

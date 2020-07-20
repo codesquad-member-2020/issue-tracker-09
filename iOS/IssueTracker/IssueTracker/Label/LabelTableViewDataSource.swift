@@ -37,8 +37,8 @@ extension LabelTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete,
             let id = labels[indexPath.row].id else { return }
-        UseCase.shared
-            .encode(endpoint: Endpoint.init(path: .labels(String(id))),
+        NetworkPublisher.shared
+            .request(endpoint: Endpoint.init(path: .labels(String(id))),
                     method: .delete)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { _ in return }) { [weak self] response in

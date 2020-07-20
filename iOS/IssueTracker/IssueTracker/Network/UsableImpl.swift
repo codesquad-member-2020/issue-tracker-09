@@ -9,17 +9,17 @@
 import Foundation
 import Combine
 
-struct UseCase: Usable {
+struct NetworkPublisher: Usable {
     
     // MARK: - Properties
-    static let shared: UseCase = .init()
+    static let shared: NetworkPublisher = .init()
     private let decoder: JSONDecoder = .init()
     
     // MARK: - Lifecycle
     private init() { }
     
     // MARK: - Methods
-    func decode<D: Decodable>(_ type: D.Type, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<D, IssueTrackerNetworkError> {
+    func fetch<D: Decodable>(_ type: D.Type, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<D, IssueTrackerNetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()
         }
@@ -33,7 +33,7 @@ struct UseCase: Usable {
             .eraseToAnyPublisher()
     }
     
-    func encode(endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
+    func request(endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()
         }
@@ -46,7 +46,7 @@ struct UseCase: Usable {
             .eraseToAnyPublisher()
     }
     
-    func encode<E: Encodable>(_ data: E, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
+    func request<E: Encodable>(_ data: E, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, IssueTrackerNetworkError> {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()
         }
@@ -63,7 +63,7 @@ struct UseCase: Usable {
             .eraseToAnyPublisher()
     }
     
-    func code<C>(_ data: C, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<(data: C?, response: HTTPURLResponse?), IssueTrackerNetworkError> where C : Decodable,
+    func fetch<C>(_ data: C, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<(data: C?, response: HTTPURLResponse?), IssueTrackerNetworkError> where C : Decodable,
     C: Encodable {
         guard let url = endpoint.url else {
             return Fail(error: IssueTrackerNetworkError.urlError).eraseToAnyPublisher()

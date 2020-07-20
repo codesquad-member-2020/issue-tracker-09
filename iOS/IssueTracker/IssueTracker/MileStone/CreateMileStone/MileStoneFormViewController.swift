@@ -47,8 +47,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     private func request(_ mileStone: DeficientMileStone, method: HTTPMethod) {
-        UseCase.shared
-            .code(mileStone,
+        NetworkPublisher.shared
+            .fetch(mileStone,
                   endpoint: Endpoint(path: generatePath(method: method, identity: mileStone.id)),
                   method: method)
             .receive(on: RunLoop.main)
@@ -57,7 +57,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
                 let alertController = UIAlertController(message: error.message)
                 self?.present(alertController,
                               animated: true)
-            }) { [weak self] data, response in
+            }) { [weak self] _, response in
                 guard let statusCode = response?.statusCode else { return }
                 self?.checkStatusCode(statusCode,
                                       method: method,
@@ -88,10 +88,8 @@ final class MileStoneFormViewController: CategoryFormViewController {
                             updateMileStone: mileStone)
         default:
             let alert = UIAlertController(message: "Network Error")
-            DispatchQueue.main.async {
                 self.present(alert,
                              animated: true)
-            }
         }
     }
     
@@ -114,7 +112,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
     // MARK: Configure
     private func configure(_ style: FormStyle?) {
         guard let style = style else { return }
-        configureDescriptionView(style)
+        configureEndDateView(style)
         addTargetButton(style)
     }
     
@@ -127,7 +125,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
                        for: .touchUpInside)
     }
     
-    private func configureDescriptionView(_ style: FormStyle) {
+    private func configureEndDateView(_ style: FormStyle) {
         endDateView = EndDateView(generateData(style: style))
         contentView
             .addArrangedSubview(endDateView)
