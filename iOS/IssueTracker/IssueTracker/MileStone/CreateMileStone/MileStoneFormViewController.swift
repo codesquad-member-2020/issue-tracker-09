@@ -12,7 +12,7 @@ import Combine
 final class MileStoneFormViewController: CategoryFormViewController {
     
     // MARK: - Properties
-    private var descriptionView: EndDateView!
+    private var endDateView: EndDateView!
     private var subscriptions: Set<AnyCancellable> = .init()
     private var selectMileStone: DeficientMileStone?
     
@@ -69,7 +69,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
     private func checkHTTPMethod(viewController: MileStoneTableViewController, method: HTTPMethod, updateMileStone: DeficientMileStone) {
         switch method {
         case .post:
-            viewController.viewModel.mileStones.append(updateMileStone)
+            viewController.fetchMileStones()
         default:
             for (index, mileStone) in viewController.viewModel.mileStones.enumerated() {
                 _ = updateMileStone.id == mileStone.id ? viewController.viewModel.mileStones.remove(at: index) : nil
@@ -90,7 +90,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
             let alert = UIAlertController(message: "Network Error")
             DispatchQueue.main.async {
                 self.present(alert,
-                        animated: true)
+                             animated: true)
             }
         }
     }
@@ -128,9 +128,9 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     private func configureDescriptionView(_ style: FormStyle) {
-        descriptionView = EndDateView(generateData(style: style))
+        endDateView = EndDateView(generateData(style: style))
         contentView
-            .addArrangedSubview(descriptionView)
+            .addArrangedSubview(endDateView)
     }
     
     // MARK: Constraints
@@ -143,11 +143,12 @@ final class MileStoneFormViewController: CategoryFormViewController {
     
     // MARK: Objc
     @objc private func saveMileStoneContent() {
-        guard let title = contentView.labelSubject.title else { return }
+        guard let dueOn = endDateView.dueOn,
+            let title = contentView.labelSubject.title else { return }
         let mileStone = DeficientMileStone(id: nil,
                                            title: title,
                                            contents: contentView.labelSubject.subtitle,
-                                           dueOn: "2020-08-06",
+                                           dueOn: dueOn,
                                            numberOfOpenIssue: 0,
                                            numberOfClosedIssue: 0)
         request(mileStone,
@@ -156,13 +157,15 @@ final class MileStoneFormViewController: CategoryFormViewController {
     }
     
     @objc private func editMileStoneContent() {
-        guard let title = contentView.labelSubject.title else { return }
-        let mileStone = DeficientMileStone(id: nil,
+        guard let dueOn = endDateView.dueOn,
+            let title = contentView.labelSubject.title else { return }
+        
+        let mileStone = DeficientMileStone(id: selectMileStone?.id,
                                            title: title,
                                            contents: contentView.labelSubject.subtitle,
-                                           dueOn: "2020-08-06",
-                                           numberOfOpenIssue: 0,
-                                           numberOfClosedIssue: 0)
+                                           dueOn: dueOn,
+                                           numberOfOpenIssue: selectMileStone?.numberOfOpenIssue ?? 0,
+                                           numberOfClosedIssue: selectMileStone?.numberOfClosedIssue ?? 0)
         request(mileStone,
                 method: .put)
         dismiss(animated: true)
@@ -171,5 +174,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
     @objc private func resetMileStoneContentView() {
         contentView
             .resetContentView()
+        endDateView
+        .resetEndDateView()
     }
 }
