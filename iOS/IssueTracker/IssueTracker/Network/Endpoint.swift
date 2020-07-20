@@ -28,7 +28,7 @@ struct Endpoint: RequestProviding {
                 return "/api/labels/\(identifier)"
             case let .mileStone(identifier):
                 guard let identifier = identifier else { return "/api/milestones" }
-                return "/api/labels/\(identifier)"
+                return "/api/milestones/\(identifier)"
             }
         }
     }
