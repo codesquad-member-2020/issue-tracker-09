@@ -27,7 +27,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     }
     
     // MARK: - Methods
-    private func fetchMileStones() {
+    func fetchMileStones() {
         UseCase.shared
             .decode([DeficientMileStone].self,
                     endpoint: Endpoint(path: .mileStone()),
