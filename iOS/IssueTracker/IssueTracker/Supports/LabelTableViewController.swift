@@ -9,6 +9,10 @@
 import UIKit
 import Combine
 
+enum Section {
+    case main
+}
+
 final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
