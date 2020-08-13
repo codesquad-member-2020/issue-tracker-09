@@ -27,7 +27,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     
     // MARK: - Methods
     func fetchMileStones() {
-        NetworkPublisher.shared
+        UseCase.shared
             .fetch([DeficientMileStone].self,
                    endpoint: Endpoint(path: .mileStone()),
                    method: .get)

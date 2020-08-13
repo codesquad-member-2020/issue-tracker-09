@@ -33,7 +33,7 @@ class LoginManager: NSObject {
     func requestAppleLoginToken(credential: ASAuthorizationAppleIDCredential) {
         guard let tokenData = credential.identityToken,
             let token = String(data: tokenData, encoding: .utf8) else { return }
-        NetworkPublisher.shared
+        UseCase.shared
             .request(AppleLogin(token: token),
                      endpoint: Endpoint(path: .appleLogin),
                      method: .post)

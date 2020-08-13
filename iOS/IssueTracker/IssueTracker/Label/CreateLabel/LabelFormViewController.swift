@@ -48,7 +48,7 @@ final class LabelFormViewController: CategoryFormViewController {
     }
     
     private func request(label: Label, method: HTTPMethod) {
-        NetworkPublisher.shared
+        UseCase.shared
             .fetch(label,
                   endpoint: Endpoint(path: generatePath(method: method, identity: label.id)),
                   method: method)

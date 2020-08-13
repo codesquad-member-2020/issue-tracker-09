@@ -8,14 +8,6 @@
 
 import UIKit
 
-//
-//  LabelTableViewDataSource.swift
-//  IssueTracker
-//
-//  Created by 임승혁 on 2020/06/17.
-//  Copyright © 2020 Cloud. All rights reserved.
-//
-
 import UIKit
 import Combine
 
@@ -62,8 +54,8 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
         guard editingStyle == .delete,
             let id = mileStones[indexPath.row].id else { return }
         cancellable = UseCase.shared
-            .encode(endpoint: Endpoint.init(path: .labels(String(id))),
-                    method: .delete)
+            .request(endpoint: Endpoint.init(path: .labels(String(id))),
+                     method: .delete)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] _ in
                 self?.cancellable?

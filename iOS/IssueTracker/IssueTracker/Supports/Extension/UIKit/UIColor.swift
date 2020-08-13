@@ -58,16 +58,17 @@ extension UIColor {
                alpha: &alpha)
         
         return String(format: "#%02X%02X%02X",
-                     (Int)(red * UIColor.colorPalette),
-                     (Int)(green * UIColor.colorPalette),
-                     (Int)(blue * UIColor.colorPalette))
+                      (Int)(red * UIColor.colorPalette),
+                      (Int)(green * UIColor.colorPalette),
+                      (Int)(blue * UIColor.colorPalette))
     }
     static let mask: Int = 0x000000FF
     static let colorPalette: CGFloat = 255.0
     
-    convenience init?(hex: String, alpha: CGFloat = 1) {
+    convenience init?(hex: String?, alpha: CGFloat = 1) {
         var color: UInt64 = 0
-        guard hex.hasPrefix("#") else { return nil }
+        guard  let hex = hex,
+            hex.hasPrefix("#") else { return nil }
         let hexColor = String(hex.dropFirst())
         guard hexColor.count == 6 else { return nil }
         let scanner = Scanner(string: hexColor)

@@ -9,10 +9,10 @@
 import Foundation
 import Combine
 
-struct NetworkPublisher: Usable {
+struct UseCase: Usable {
     
     // MARK: - Properties
-    static let shared: NetworkPublisher = .init()
+    static let shared: UseCase = .init()
     private let decoder: JSONDecoder = .init()
     
     // MARK: - Lifecycle

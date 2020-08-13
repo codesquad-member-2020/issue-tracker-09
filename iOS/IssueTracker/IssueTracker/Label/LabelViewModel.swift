@@ -50,8 +50,8 @@ final class LabelViewModel: UITableViewDiffableDataSource<Section, Label> {
         guard editingStyle == .delete,
             let id = labels[indexPath.row].id else { return }
         cancellable = UseCase.shared
-            .encode(endpoint: Endpoint.init(path: .labels(String(id))),
-                    method: .delete)
+            .request(endpoint: Endpoint.init(path: .labels(String(id))),
+                     method: .delete)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] _ in
                 self?.cancellable?
