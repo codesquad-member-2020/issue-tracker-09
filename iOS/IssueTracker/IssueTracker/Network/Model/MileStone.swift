@@ -20,13 +20,22 @@ protocol MileStoneProgressable {
     var progressRate: Int { get }
 }
 
-struct DeficientMileStone: Codable, MileStoneInforamationable {
+struct DeficientMileStone: Codable, Hashable, MileStoneInforamationable {
     let id: Int?
     let title: String
     let contents: String?
     let dueOn: String?
     let numberOfOpenIssue: Int
     let numberOfClosedIssue: Int
+    
+    static func ==(lhs: DeficientMileStone, rhs: DeficientMileStone) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher
+            .combine(id)
+    }
 }
 
 struct MileStone: MileStoneInforamationable, MileStoneProgressable {

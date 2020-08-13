@@ -43,7 +43,7 @@
 		AE9F1F2124A705F900582899 /* MileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2024A705F900582899 /* MileStone.swift */; };
 		AE9F1F2424A7070300582899 /* MileStoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */; };
 		AE9F1F2624A7072200582899 /* MileStoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */; };
-		AE9F1F2824A7074400582899 /* MileStoneTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */; };
+		AE9F1F2824A7074400582899 /* MileStoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F1F2724A7074400582899 /* MileStoneViewModel.swift */; };
 		AEAEA990248E0EDF005F4582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */; };
 		AEAEA997248E0EDF005F4582 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA995248E0EDF005F4582 /* Main.storyboard */; };
 		AEAEA99A248E0EDF005F4582 /* IssueTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */; };
@@ -102,7 +102,7 @@
 		AE9F1F2024A705F900582899 /* MileStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStone.swift; sourceTree = "<group>"; };
 		AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewController.swift; sourceTree = "<group>"; };
 		AE9F1F2524A7072200582899 /* MileStoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewCell.swift; sourceTree = "<group>"; };
-		AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewDataSource.swift; sourceTree = "<group>"; };
+		AE9F1F2724A7074400582899 /* MileStoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneViewModel.swift; sourceTree = "<group>"; };
 		AEAEA98C248E0EDF005F4582 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAEA98F248E0EDF005F4582 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEAEA996248E0EDF005F4582 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 				AE66FB9624AF6B46000E66B8 /* Cell */,
 				AE9F1F2324A7070300582899 /* MileStoneTableViewController.swift */,
 				AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */,
-				AE9F1F2724A7074400582899 /* MileStoneTableViewDataSource.swift */,
+				AE9F1F2724A7074400582899 /* MileStoneViewModel.swift */,
 			);
 			path = MileStone;
 			sourceTree = "<group>";
@@ -465,7 +465,7 @@
 				ABAD309C2499FCE000618753 /* IssueTrackerNetworkImpl.swift in Sources */,
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
 				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,
-				AE9F1F2824A7074400582899 /* MileStoneTableViewDataSource.swift in Sources */,
+				AE9F1F2824A7074400582899 /* MileStoneViewModel.swift in Sources */,
 				ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
 				ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */,

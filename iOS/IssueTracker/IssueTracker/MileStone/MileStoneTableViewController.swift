@@ -14,12 +14,11 @@ final class MileStoneTableViewController: CategoryTableViewController {
     // MARK: - Properties
     private let headerViewTitle: String = "MileStone"
     private var subscriptions: Set<AnyCancellable> = .init()
-    let dataSource: MileStoneTableViewDataSource = .init()
+    lazy var viewModel: MileStoneViewModel = .init(self.tableView)
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = dataSource
         registerCell(MileStoneTableViewCell.self,
                      identifier: MileStoneTableViewCell.identifier)
         fetchMileStones()
@@ -38,7 +37,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
                 self?.present(alertController,
                               animated: true)
             }) { [weak self] mileStones in
-                self?.dataSource.mileStones = mileStones
+                self?.viewModel.mileStones = mileStones
         }
         .store(in: &subscriptions)
     }
@@ -54,12 +53,19 @@ final class MileStoneTableViewController: CategoryTableViewController {
         return headerView
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = viewModel.itemIdentifier(for: indexPath) else { return }
+        present(MileStoneFormViewController(.editMileStone(item)),
+                animated: true)
+    }
+    
     // MARK: Bind
     private func bindViewModelToView() {
-        dataSource.$mileStones
+        viewModel.$mileStones
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                self?.tableView.reloadData()
+                self?.viewModel
+                    .applySnapshot()
         }
         .store(in: &subscriptions)
     }

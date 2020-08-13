@@ -60,11 +60,11 @@ final class MileStoneFormViewController: CategoryFormViewController {
     private func checkHTTPMethod(viewController: MileStoneTableViewController, method: HTTPMethod, updateMileStone: DeficientMileStone) {
         switch method {
         case .post:
-            viewController.dataSource.mileStones.append(updateMileStone)
+            viewController.viewModel.mileStones.append(updateMileStone)
         default:
-            for (index, mileStone) in viewController.dataSource.mileStones.enumerated() {
-                _ = updateMileStone.id == mileStone.id ? viewController.dataSource.mileStones.remove(at: index) : nil
-                updateMileStone.id == mileStone.id ? viewController.dataSource.mileStones.insert(updateMileStone, at: index) : nil
+            for (index, mileStone) in viewController.viewModel.mileStones.enumerated() {
+                _ = updateMileStone.id == mileStone.id ? viewController.viewModel.mileStones.remove(at: index) : nil
+                updateMileStone.id == mileStone.id ? viewController.viewModel.mileStones.insert(updateMileStone, at: index) : nil
             }
         }
     }
