@@ -17,7 +17,7 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
     static let identifier: String = "LabelTableViewController"
-    lazy var dataSource: LabelViewModel = LabelViewModel(self.tableView)
+    lazy var viewModel: LabelViewModel = LabelViewModel(self.tableView)
     private let headerViewTitle: String = "Label"
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -43,7 +43,7 @@ final class LabelTableViewController: CategoryTableViewController {
                 self?.present(alertController,
                               animated: true)
             }) { [weak self] lables in
-                self?.dataSource.labels = lables
+                self?.viewModel.labels = lables
         }
         .store(in: &cancellables)
     }
@@ -62,17 +62,17 @@ final class LabelTableViewController: CategoryTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        guard let item = viewModel.itemIdentifier(for: indexPath) else { return }
         present(LabelFormViewController(.editLabel(item)),
                 animated: true)
     }
     
     // MARK: Bind
     private func bindViewModelToView() {
-        dataSource.$labels
+        viewModel.$labels
             .receive(on: RunLoop.main)
             .sink { [weak self] lables in
-                self?.dataSource
+                self?.viewModel
                     .applySnapshot()
         }
         .store(in: &cancellables)

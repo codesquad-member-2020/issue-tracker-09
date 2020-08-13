@@ -71,9 +71,9 @@ final class LabelFormViewController: CategoryFormViewController {
         case .post:
             viewController.fetchLabels()
         default:
-            for (index, label) in viewController.dataSource.labels.enumerated() {
-                _ = updateLabel.id == label.id ? viewController.dataSource.labels.remove(at: index) : nil
-                updateLabel.id == label.id ? viewController.dataSource.labels.insert(updateLabel, at: index) : nil
+            for (index, label) in viewController.viewModel.labels.enumerated() {
+                _ = updateLabel.id == label.id ? viewController.viewModel.labels.remove(at: index) : nil
+                updateLabel.id == label.id ? viewController.viewModel.labels.insert(updateLabel, at: index) : nil
             }
         }
     }
