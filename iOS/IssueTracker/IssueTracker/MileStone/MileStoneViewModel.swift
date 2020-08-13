@@ -54,7 +54,7 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
         guard editingStyle == .delete,
             let id = mileStones[indexPath.row].id else { return }
         cancellable = UseCase.shared
-            .request(endpoint: Endpoint.init(path: .labels(String(id))),
+            .request(endpoint: Endpoint.init(path: .mileStone(String(id))),
                      method: .delete)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] _ in
