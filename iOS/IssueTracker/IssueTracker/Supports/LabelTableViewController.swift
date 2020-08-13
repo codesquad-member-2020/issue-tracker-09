@@ -17,10 +17,9 @@ final class LabelTableViewController: CategoryTableViewController {
     
     // MARK: - Properties
     static let identifier: String = "LabelTableViewController"
-    lazy var dataSource: LabelTableViewDifferDataSource = LabelTableViewDifferDataSource(self.tableView)
+    lazy var dataSource: LabelViewModel = LabelViewModel(self.tableView)
     private let headerViewTitle: String = "Label"
-    private var subscriptions: Set<AnyCancellable> = .init()
-    
+    private var cancellables: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,7 +45,7 @@ final class LabelTableViewController: CategoryTableViewController {
             }) { [weak self] lables in
                 self?.dataSource.labels = lables
         }
-        .store(in: &subscriptions)
+        .store(in: &cancellables)
     }
     
     // MARK: Delegate
@@ -63,7 +62,7 @@ final class LabelTableViewController: CategoryTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let item = dataSource.dataSource.itemIdentifier(for: indexPath) else { return }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         present(LabelFormViewController(.editLabel(item)),
                 animated: true)
     }
@@ -76,7 +75,7 @@ final class LabelTableViewController: CategoryTableViewController {
                 self?.dataSource
                     .applySnapshot()
         }
-        .store(in: &subscriptions)
+        .store(in: &cancellables)
     }
     
     // MARK: Objc
