@@ -49,7 +49,7 @@ final class LabelFormViewController: CategoryFormViewController {
     
     private func request(label: Label, method: HTTPMethod) {
         UseCase.shared
-            .fetch(label,
+            .fetch(data: label,
                   endpoint: Endpoint(path: generatePath(method: method, identity: label.id)),
                   method: method)
             .receive(on: RunLoop.main)
