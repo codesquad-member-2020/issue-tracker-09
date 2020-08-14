@@ -35,6 +35,16 @@ struct DeficientMileStone: Codable, Hashable, MileStoneInforamationable {
     func hash(into hasher: inout Hasher) {
         hasher
             .combine(id)
+        hasher
+            .combine(title)
+        hasher
+            .combine(contents)
+        hasher
+            .combine(dueOn)
+        hasher
+            .combine(numberOfOpenIssue)
+        hasher
+            .combine(numberOfClosedIssue)
     }
 }
 
