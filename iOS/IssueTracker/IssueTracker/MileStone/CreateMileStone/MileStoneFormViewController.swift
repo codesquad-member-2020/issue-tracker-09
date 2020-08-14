@@ -48,7 +48,7 @@ final class MileStoneFormViewController: CategoryFormViewController {
     
     private func request(_ mileStone: DeficientMileStone, method: HTTPMethod) {
         UseCase.shared
-            .fetch(mileStone,
+            .fetch(data: mileStone,
                   endpoint: Endpoint(path: generatePath(method: method, identity: mileStone.id)),
                   method: method)
             .receive(on: RunLoop.main)
