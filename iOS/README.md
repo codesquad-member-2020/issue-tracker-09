@@ -1,18 +1,18 @@
 # 구현 화면
 
-## OAuth 로그인
+### OAuth 로그인
 
 ![IssueTrackerOAuth](https://user-images.githubusercontent.com/48466830/90402059-dc7e2100-e0d9-11ea-888c-4c42030e51b8.gif)
 
-## Label 생성
+### Label 생성
 
 ![IssueTrackerCreateLabel](https://user-images.githubusercontent.com/48466830/90402043-d720d680-e0d9-11ea-8d32-0cd965f5e1d4.gif)
 
-## MileStone 편집
+### MileStone 편집
 
 ![IssueTrackerEditMileStone](https://user-images.githubusercontent.com/48466830/90402053-db4cf400-e0d9-11ea-8e24-706b507c9510.gif)
 
-## 셀 삭제
+### 셀 삭제
 
 ![IssueTrackerDeleteItems](https://user-images.githubusercontent.com/48466830/90402052-dab45d80-e0d9-11ea-8420-6d12416ea399.gif)
 
