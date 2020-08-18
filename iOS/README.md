@@ -20,7 +20,31 @@
 
 # 트러블 슈팅
 
+- 메모리 이슈
 
+  <img width="260" alt="Screen Shot 2020-08-18 at 18 59 50" src="https://user-images.githubusercontent.com/48466830/90526592-8bd6f880-e1ab-11ea-946d-f01486909048.png">
+
+  Debug Memory Graph를 확인한 결과, 메모리 관련 이슈가 발생했었습니다 해당 이슈를 해결하기 위해서 Set<AnyCancellable>이 언제 해제 되는지 확인하던 중, 클로저에서 self를 강하게 참조하고 있는 코드를 확인했었습니다. 모든 참조를 weak self로 변경하면서 해당 이슈를 해결했습니다.
+
+- IntrinsicContentSize
+
+  <img width="208" alt="Screen Shot 2020-08-18 at 23 11 52" src="https://user-images.githubusercontent.com/48466830/90526624-96918d80-e1ab-11ea-8d82-afb31df5f87e.png">
+
+  Debug View Hierarchy를 확인한 결과, 오토레이아웃을 잘못 설정해서 문제가 발생했었습니다.
+
+  해당 뷰들이 세로 영역에서 동일한 우선순위를 갖고 있어서 발생한 문제였기 때문에 우선순위 값을 변경하면서 해결했습니다.
+
+- 레이블 크기가 같지 않던 문제
+
+  <img width="564" alt="Screen Shot 2020-08-18 at 19 29 34" src="https://user-images.githubusercontent.com/48466830/90526635-98f3e780-e1ab-11ea-98d7-9344fa89e95e.png">
+
+  마지막 뷰의 경우에 위에 뷰와 다른 시점에서 생성되기 때문에 같은 제약사항을 부여해도, 크기가 다르게 설정되었습니다. 프레임값을 가져와서 사용하려고 했지만 올바른 접근이 아니었고, intrinsicContentSize를 사용해서 해결했습니다.
+
+- UITableView Animation
+
+  처음에는 테이블 뷰와 모델을 바인딩할 때, reloadData()를 사용해서 구현했습니다. 모델이 갱신되면 테이블 뷰에 애니메이션이 없이 그냥 갱신만 됐습니다.
+
+  추후 WWDC 영상을 보면서 UITableViewDiffableDataSource에 대해 공부를 하고, 테이블 뷰에 적용했습니다.
 
 # iOS 협업 규칙
 
