@@ -37,6 +37,7 @@ final class LoginViewController: UIViewController {
     func presentTabBarController() {
         let labelTableViewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(identifier: tabbarControllerIdentifier)
+        labelTableViewController.modalPresentationStyle = .fullScreen
         present(labelTableViewController
             ,animated: true)
     }
