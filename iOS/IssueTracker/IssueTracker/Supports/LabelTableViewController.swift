@@ -70,10 +70,6 @@ final class LabelTableViewController: UITableViewController, Categorable {
                 animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TitleHeaderView.height
-    }
-    
     // MARK: Bind
     private func bindViewModelToView() {
         viewModel.$labels
