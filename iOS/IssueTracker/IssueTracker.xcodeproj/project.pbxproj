@@ -148,7 +148,6 @@
 		AB58CF18249246A6003A86AC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				ABAF6DFC2491F99300E69418 /* Categorable.swift */,
 				AE8CA35724920F6E0076507B /* TitleHeaderView.swift */,
 			);
 			path = TableView;
@@ -314,6 +313,7 @@
 		AEAEA98E248E0EDF005F4582 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				AEC005CE24FBB7BF001D69BE /* Protocols */,
 				ABAF6DFE2491FE7200E69418 /* Label */,
 				ABAD30A3249B66FF00618753 /* IssueTracker.entitlements */,
 				AEAEA998248E0EDF005F4582 /* IssueTracker.xcdatamodeld */,
@@ -334,6 +334,14 @@
 				AEAEA9AB248E0EE1005F4582 /* Info.plist */,
 			);
 			path = IssueTrackerTests;
+			sourceTree = "<group>";
+		};
+		AEC005CE24FBB7BF001D69BE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				ABAF6DFC2491F99300E69418 /* Categorable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		AEE5973024988C5000F5C622 /* CreateLabel */ = {
