@@ -70,11 +70,11 @@ final class LabelFormViewController: CategoryFormViewController {
     private func checkHTTPMethod(_ viewController: LabelTableViewController, method: HTTPMethod, updateLabel: Label) {
         switch method {
         case .post:
-            viewController.fetchLabels()
+            viewController.fetch(endpoint: Endpoint(path: .labels()))
         default:
-            for (index, label) in viewController.viewModel.labels.enumerated() {
-                _ = updateLabel.id == label.id ? viewController.viewModel.labels.remove(at: index) : nil
-                updateLabel.id == label.id ? viewController.viewModel.labels.insert(updateLabel, at: index) : nil
+            for (index, label) in viewController.viewModel.items.enumerated() {
+                _ = updateLabel.id == label.id ? viewController.viewModel.items.remove(at: index) : nil
+                updateLabel.id == label.id ? viewController.viewModel.items.insert(updateLabel, at: index) : nil
             }
         }
     }
