@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol RequestProviding {
-    var url: URL? { get }
-}
-
 struct Endpoint: RequestProviding {
 
     enum Path: CustomStringConvertible {
@@ -43,7 +39,7 @@ struct Endpoint: RequestProviding {
         return components.url
     }
     static let githubLogin: URL? = URL(string: "https://github.com/login/oauth/authorize?client_id=1aad2658e941ef024da5&scope=user%20public_repo")
-    private let baseUrl: String = "3.34.100.178"
-    private let scheme: String = "http"
-    let path: Path
+    var baseUrl: String = "3.34.100.178"
+    var scheme: String = "http"
+    var path: Path
 }
