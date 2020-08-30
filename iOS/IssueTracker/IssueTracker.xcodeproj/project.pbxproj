@@ -17,7 +17,7 @@
 		ABAD30A1249A00F600618753 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD30A0249A00F600618753 /* LabelViewModel.swift */; };
 		ABAD30A5249B6D6F00618753 /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD30A4249B6D6F00618753 /* AppleLogin.swift */; };
 		ABAF6DF12490CFEA00E69418 /* KeyChainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */; };
-		ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */; };
+		ABAF6DFD2491F99300E69418 /* Categorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFC2491F99300E69418 /* Categorable.swift */; };
 		ABAF6E002491FEAD00E69418 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */; };
 		ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAF6E032492038A00E69418 /* BadgeLabel.swift */; };
 		AE307D7A24AB23B5003177EF /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE307D7924AB23B5003177EF /* UILabel.swift */; };
@@ -77,7 +77,7 @@
 		ABAD30A3249B66FF00618753 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		ABAD30A4249B6D6F00618753 /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
 		ABAF6DF02490CFEA00E69418 /* KeyChainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainItem.swift; sourceTree = "<group>"; };
-		ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		ABAF6DFC2491F99300E69418 /* Categorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categorable.swift; sourceTree = "<group>"; };
 		ABAF6DFF2491FEAD00E69418 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		ABAF6E032492038A00E69418 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
 		AE307D7924AB23B5003177EF /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		AB58CF18249246A6003A86AC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				ABAF6DFC2491F99300E69418 /* CategoryTableViewController.swift */,
+				ABAF6DFC2491F99300E69418 /* Categorable.swift */,
 				AE8CA35724920F6E0076507B /* TitleHeaderView.swift */,
 			);
 			path = TableView;
@@ -468,7 +468,7 @@
 				AE9F1F2824A7074400582899 /* MileStoneViewModel.swift in Sources */,
 				ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
-				ABAF6DFD2491F99300E69418 /* CategoryTableViewController.swift in Sources */,
+				ABAF6DFD2491F99300E69418 /* Categorable.swift in Sources */,
 				AE8CA35824920F6E0076507B /* TitleHeaderView.swift in Sources */,
 				AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */,
 				AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */,

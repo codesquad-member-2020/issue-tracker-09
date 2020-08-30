@@ -13,7 +13,7 @@ enum Section {
     case main
 }
 
-final class LabelTableViewController: CategoryTableViewController {
+final class LabelTableViewController: UITableViewController, Categorable {
     
     // MARK: - Properties
     static let identifier: String = "LabelTableViewController"
@@ -24,11 +24,14 @@ final class LabelTableViewController: CategoryTableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
         registerCell(LabelTableViewCell.self,
                      identifier: LabelTableViewCell.identifier)
         fetchLabels()
         bindViewModelToView()
     }
+    
+
     
     // MARK: - Methods
     func fetchLabels() {
@@ -57,7 +60,7 @@ final class LabelTableViewController: CategoryTableViewController {
             .addTarget(self,
                        action: #selector(presentCreateLabelViewController),
                        for: .touchUpInside)
-        
+        headerView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: TitleHeaderView.height)
         return headerView
     }
     

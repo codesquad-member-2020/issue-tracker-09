@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-final class MileStoneTableViewController: CategoryTableViewController {
+final class MileStoneTableViewController: UITableViewController, Categorable {
     
     // MARK: - Properties
     private let headerViewTitle: String = "MileStone"
@@ -19,6 +19,7 @@ final class MileStoneTableViewController: CategoryTableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
         registerCell(MileStoneTableViewCell.self,
                      identifier: MileStoneTableViewCell.identifier)
         fetchMileStones()
