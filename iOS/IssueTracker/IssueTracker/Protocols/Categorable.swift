@@ -9,7 +9,7 @@
 import UIKit
 
 protocol Categorable {
-    var tableView: UITableView! { get set }
+    var tableView: UITableView! { get }
 }
 
 extension Categorable {
