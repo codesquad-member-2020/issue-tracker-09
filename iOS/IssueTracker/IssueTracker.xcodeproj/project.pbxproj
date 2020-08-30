@@ -51,6 +51,7 @@
 		AEAEA99F248E0EE1005F4582 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA99D248E0EE1005F4582 /* LaunchScreen.storyboard */; };
 		AEAEA9AA248E0EE1005F4582 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA9A9248E0EE1005F4582 /* IssueTrackerTests.swift */; };
 		AEC005D124FBB871001D69BE /* RequestProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC005D024FBB871001D69BE /* RequestProviding.swift */; };
+		AEC005D324FBB94F001D69BE /* Controllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC005D224FBB94F001D69BE /* Controllable.swift */; };
 		AEC005D524FBB9BB001D69BE /* Modelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC005D424FBB9BB001D69BE /* Modelable.swift */; };
 		AEE5973224988C6600F5C622 /* LabelFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE5973124988C6600F5C622 /* LabelFormViewController.swift */; };
 		AEE597362498925100F5C622 /* DecisionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE597352498925100F5C622 /* DecisionButton.swift */; };
@@ -116,6 +117,7 @@
 		AEAEA9A9248E0EE1005F4582 /* IssueTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTests.swift; sourceTree = "<group>"; };
 		AEAEA9AB248E0EE1005F4582 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEC005D024FBB871001D69BE /* RequestProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProviding.swift; sourceTree = "<group>"; };
+		AEC005D224FBB94F001D69BE /* Controllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controllable.swift; sourceTree = "<group>"; };
 		AEC005D424FBB9BB001D69BE /* Modelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modelable.swift; sourceTree = "<group>"; };
 		AEE5973124988C6600F5C622 /* LabelFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelFormViewController.swift; sourceTree = "<group>"; };
 		AEE597352498925100F5C622 /* DecisionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionButton.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			children = (
 				ABAF6DFC2491F99300E69418 /* Categorable.swift */,
 				AEC005D424FBB9BB001D69BE /* Modelable.swift */,
+				AEC005D224FBB94F001D69BE /* Controllable.swift */,
 				AEC005D024FBB871001D69BE /* RequestProviding.swift */,
 				ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */,
 				AE84609024A0DA11008CF76B /* Usable.swift */,
@@ -479,6 +482,7 @@
 				ABAD309C2499FCE000618753 /* IssueTrackerNetworkImpl.swift in Sources */,
 				AE8CA35D249224560076507B /* UIColor.swift in Sources */,
 				AB58CF1D249248BE003A86AC /* DetailFormContentView.swift in Sources */,
+				AEC005D324FBB94F001D69BE /* Controllable.swift in Sources */,
 				AE9F1F2824A7074400582899 /* MileStoneViewModel.swift in Sources */,
 				ABAF6E042492038A00E69418 /* BadgeLabel.swift in Sources */,
 				AE8CA343248F77920076507B /* LoginButton.swift in Sources */,
