@@ -11,7 +11,6 @@ import Combine
 
 protocol Controllable: class {
     associatedtype ViewModel: Modelable
-    static var identifier: String { get }
     var headerViewTitle: String { get }
     var viewModel: ViewModel { get set }
     var cancellables: Set<AnyCancellable> { get set }

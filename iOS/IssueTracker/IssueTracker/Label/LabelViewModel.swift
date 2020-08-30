@@ -9,11 +9,12 @@
 import UIKit
 import Combine
 
-final class LabelViewModel: UITableViewDiffableDataSource<Section, Label> {
+
+final class LabelViewModel: UITableViewDiffableDataSource<Section, Label>, Modelable {
     
     // MARK: - Properties
-    private var cancellable: AnyCancellable?
-    @Published var labels: [Label] = .init()
+    @Published var items: [Label] = .init()
+    var cancellable: AnyCancellable?
     
     // MARK: - Lifecycle
     init(_ tableView: UITableView) {
@@ -36,7 +37,7 @@ final class LabelViewModel: UITableViewDiffableDataSource<Section, Label> {
         snapshot
             .appendSections([.main])
         snapshot
-            .appendItems(labels)
+            .appendItems(items)
         apply(snapshot,
               animatingDifferences: animatingDifferences)
     }
@@ -48,7 +49,7 @@ final class LabelViewModel: UITableViewDiffableDataSource<Section, Label> {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete,
-            let id = labels[indexPath.row].id else { return }
+            let id = items[indexPath.row].id else { return }
         cancellable = UseCase.shared
             .request(endpoint: Endpoint.init(path: .labels(String(id))),
                      method: .delete)
@@ -60,7 +61,7 @@ final class LabelViewModel: UITableViewDiffableDataSource<Section, Label> {
                         case 400 ..< 500:
                             break
                         default:
-                            self?.labels.remove(at: indexPath.row)
+                            self?.items.remove(at: indexPath.row)
                         }
         }
     }
