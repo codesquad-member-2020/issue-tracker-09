@@ -11,11 +11,11 @@ import UIKit
 import UIKit
 import Combine
 
-final class MileStoneViewModel: UITableViewDiffableDataSource<Section, DeficientMileStone> {
+final class MileStoneViewModel: UITableViewDiffableDataSource<Section, DeficientMileStone>, Modelable {
     
     // MARK: - Properties
-    private var cancellable: AnyCancellable?
-    @Published var mileStones:[DeficientMileStone] = .init()
+    @Published var items:[DeficientMileStone] = .init()
+    var cancellable: AnyCancellable?
     
     // MARK: - Lifecycle
     init(_ tableView: UITableView) {
@@ -34,17 +34,7 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
         }
     }
     
-    // MARK: - Methods
-    func applySnapshot(_ animatingDifferences: Bool = true) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DeficientMileStone>()
-        snapshot
-            .appendSections([.main])
-        snapshot
-            .appendItems(mileStones)
-        apply(snapshot,
-              animatingDifferences: animatingDifferences)
-    }
-    
+    // MARK: - Methods    
     // MARK: TableView
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -52,7 +42,7 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete,
-            let id = mileStones[indexPath.row].id else { return }
+            let id = items[indexPath.row].id else { return }
         cancellable = UseCase.shared
             .request(endpoint: Endpoint.init(path: .mileStone(String(id))),
                      method: .delete)
@@ -64,7 +54,7 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
                         case 400 ..< 500:
                             break
                         default:
-                            self?.mileStones.remove(at: indexPath.row)
+                            self?.items.remove(at: indexPath.row)
                         }
         }
     }

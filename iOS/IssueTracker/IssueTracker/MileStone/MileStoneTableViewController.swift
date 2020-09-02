@@ -9,12 +9,13 @@
 import UIKit
 import Combine
 
-final class MileStoneTableViewController: UITableViewController, Categorable {
+final class MileStoneTableViewController: UITableViewController, Categorable, Controllable {
     
     // MARK: - Properties
-    private let headerViewTitle: String = "MileStone"
-    private var subscriptions: Set<AnyCancellable> = .init()
-    lazy var viewModel: MileStoneViewModel = .init(self.tableView)
+    lazy var viewModel: MileStoneViewModel =
+        .init(self.tableView)
+    var headerViewTitle: String = "MileStone"
+    var cancellables: Set<AnyCancellable> = .init()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -22,28 +23,11 @@ final class MileStoneTableViewController: UITableViewController, Categorable {
         configure()
         registerCell(MileStoneTableViewCell.self,
                      identifier: MileStoneTableViewCell.identifier)
-        fetchMileStones()
+        fetch(endpoint: Endpoint(path: .mileStone()))
         bindViewModelToView()
     }
     
     // MARK: - Methods
-    func fetchMileStones() {
-        UseCase.shared
-            .fetch(type: [DeficientMileStone].self,
-                   endpoint: Endpoint(path: .mileStone()),
-                   method: .get)
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { [weak self] in
-                guard case let .failure(error) = $0 else { return }
-                let alertController = UIAlertController(message: error.message)
-                self?.present(alertController,
-                              animated: true)
-            }) { [weak self] mileStones in
-                self?.viewModel.mileStones = mileStones
-        }
-        .store(in: &subscriptions)
-    }
-    
     // MARK: Delegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeaderView.identifier) as? TitleHeaderView
@@ -63,13 +47,13 @@ final class MileStoneTableViewController: UITableViewController, Categorable {
     
     // MARK: Bind
     private func bindViewModelToView() {
-        viewModel.$mileStones
+        viewModel.$items
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 self?.viewModel
-                    .applySnapshot()
+                    .applySnapshot(self?.viewModel)
         }
-        .store(in: &subscriptions)
+        .store(in: &cancellables)
     }
     
     // MARK: Objc

@@ -16,7 +16,7 @@ enum Section {
 final class LabelTableViewController: UITableViewController, Categorable, Controllable {
     
     // MARK: - Properties
-    lazy var viewModel: LabelViewModel = LabelViewModel(self.tableView)
+    lazy var viewModel: LabelViewModel = .init(self.tableView)
     var headerViewTitle: String = "Label"
     var cancellables: Set<AnyCancellable> = .init()
     
@@ -56,7 +56,7 @@ final class LabelTableViewController: UITableViewController, Categorable, Contro
             .receive(on: RunLoop.main)
             .sink { [weak self] lables in
                 self?.viewModel
-                    .applySnapshot()
+                    .applySnapshot(self?.viewModel)
         }
         .store(in: &cancellables)
     }

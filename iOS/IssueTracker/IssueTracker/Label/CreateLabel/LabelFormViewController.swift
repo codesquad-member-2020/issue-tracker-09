@@ -9,12 +9,12 @@
 import UIKit
 import Combine
 
-final class LabelFormViewController: CategoryFormViewController {
+final class LabelFormViewController: CategoryFormViewController, FormControllable {
     
     // MARK: - Properties
     private var colorView: ColorView!
-    private var subscriptions: Set<AnyCancellable> = .init()
-    private var selectLabel: Label?
+    var cancellables: Set<AnyCancellable> = .init()
+    var selectItem: Label?
     
     // MARK: - Lifecycle
     override init(_ style: FormStyle) {
@@ -38,66 +38,10 @@ final class LabelFormViewController: CategoryFormViewController {
         }
     }
     
-    private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
-        switch method {
-        case .post:
-            return .labels()
-        default:
-            return .labels(String(identity ?? 0))
-        }
-    }
-    
-    private func request(label: Label, method: HTTPMethod) {
-        UseCase.shared
-            .fetch(data: label,
-                  endpoint: Endpoint(path: generatePath(method: method, identity: label.id)),
-                  method: method)
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { [weak self] in
-                guard case let .failure(error) = $0 else { return }
-                let alertController = UIAlertController(message: error.message)
-                self?.present(alertController,
-                              animated: true)
-            }) { [weak self] _, response in
-                guard let statusCode = response?.statusCode else { return }
-                self?.checkStatusCode(statusCode,
-                                      method: method,
-                                      label: label)
-        }
-        .store(in: &subscriptions)
-    }
-    
-    private func checkHTTPMethod(_ viewController: LabelTableViewController, method: HTTPMethod, updateLabel: Label) {
-        switch method {
-        case .post:
-            viewController.fetch(endpoint: Endpoint(path: .labels()))
-        default:
-            for (index, label) in viewController.viewModel.items.enumerated() {
-                _ = updateLabel.id == label.id ? viewController.viewModel.items.remove(at: index) : nil
-                updateLabel.id == label.id ? viewController.viewModel.items.insert(updateLabel, at: index) : nil
-            }
-        }
-    }
-    
-    private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, label: Label) {
-        switch statusCode {
-        case 200 ..< 300:
-            guard let superViewController = self.presentingViewController as? UITabBarController,
-                let labelViewController = superViewController.selectedViewController as? LabelTableViewController else { return }
-            checkHTTPMethod(labelViewController,
-                            method: method,
-                            updateLabel: label)
-        default:
-            let alert = UIAlertController(message: "Network Error")
-            present(alert,
-                    animated: true)
-        }
-    }
-    
     private func addTartgetButton(_ style: FormStyle?) {
         switch style {
         case let .editLabel(label):
-            selectLabel = label
+            selectItem = label
             contentView.saveButton
                 .addTarget(self,
                            action: #selector(editLabelContent),
@@ -148,20 +92,24 @@ final class LabelFormViewController: CategoryFormViewController {
                           title: title,
                           contents: contentView.dataSubjects.subtitle,
                           colorCode: hexColor)
-        request(label: label,
-                method: .post)
+        guard let controllable = presentingViewController?.presentingViewController as? LabelTableViewController else { return }
+        request(controllable: controllable,
+                item: label,
+                method: .get)
         dismiss(animated: true)
     }
     
     @objc private func editLabelContent() {
         guard let hexColor = colorView.color?.hexString,
             let title = contentView.dataSubjects.title else { return }
-        let label = Label(id: selectLabel?.id,
+        let label = Label(id: selectItem?.id,
                           title: title,
                           contents: contentView.dataSubjects.subtitle,
                           colorCode: hexColor)
-        request(label: label,
-                method: .put)
+        guard let viewController = presentingViewController?.presentingViewController as? LabelTableViewController else { return }
+        request(controllable: viewController,
+                item: label,
+                method: .post)
         dismiss(animated: true)
     }
     

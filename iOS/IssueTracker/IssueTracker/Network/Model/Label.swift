@@ -8,8 +8,12 @@
 
 import Foundation
 
-struct Label: Codable, Hashable {
-    let id: Int?
+protocol Identifierable {
+    var id: Int? { get set }
+}
+
+struct Label: Hashable, Codable, Identifierable {
+    var id: Int?
     let title: String
     let contents: String?
     let colorCode: String?
