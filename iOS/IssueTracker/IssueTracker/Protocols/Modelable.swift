@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 protocol Modelable {
-    associatedtype Item: Hashable, Codable
+    associatedtype Item: Hashable, Codable, Identifierable
     var items: [Item] { get set }
     var cancellable: AnyCancellable? { get set }
     func applySnapshot(_ animatingDifferences: Bool)
