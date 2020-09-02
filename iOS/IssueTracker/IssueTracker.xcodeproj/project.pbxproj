@@ -28,6 +28,7 @@
 		AE5F012624AC7F5B00D6C82E /* MileStoneInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */; };
 		AE5F012824ADDC8F00D6C82E /* MileStoneProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */; };
 		AE5F012A24AE02DF00D6C82E /* ProgressRateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */; };
+		AE6FA16824FF9B5400B5855E /* FormControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6FA16724FF9B5400B5855E /* FormControllable.swift */; };
 		AE84609124A0DA11008CF76B /* Usable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609024A0DA11008CF76B /* Usable.swift */; };
 		AE84609324A0DACA008CF76B /* UsableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84609224A0DACA008CF76B /* UsableImpl.swift */; };
 		AE8CA341248F75DE0076507B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8CA340248F75DE0076507B /* LoginViewController.swift */; };
@@ -91,6 +92,7 @@
 		AE5F012524AC7F5B00D6C82E /* MileStoneInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneInformationView.swift; sourceTree = "<group>"; };
 		AE5F012724ADDC8F00D6C82E /* MileStoneProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneProgressView.swift; sourceTree = "<group>"; };
 		AE5F012924AE02DF00D6C82E /* ProgressRateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRateCalculator.swift; sourceTree = "<group>"; };
+		AE6FA16724FF9B5400B5855E /* FormControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormControllable.swift; sourceTree = "<group>"; };
 		AE84609024A0DA11008CF76B /* Usable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usable.swift; sourceTree = "<group>"; };
 		AE84609224A0DACA008CF76B /* UsableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableImpl.swift; sourceTree = "<group>"; };
 		AE8CA340248F75DE0076507B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				ABAF6DFC2491F99300E69418 /* Categorable.swift */,
 				AEC005D424FBB9BB001D69BE /* Modelable.swift */,
 				AEC005D224FBB94F001D69BE /* Controllable.swift */,
+				AE6FA16724FF9B5400B5855E /* FormControllable.swift */,
 				AEC005D024FBB871001D69BE /* RequestProviding.swift */,
 				ABAD30992499FBC100618753 /* IssueTrackerNetwork.swift */,
 				AE84609024A0DA11008CF76B /* Usable.swift */,
@@ -509,6 +512,7 @@
 				AEE597362498925100F5C622 /* DecisionButton.swift in Sources */,
 				ABAD309A2499FBC100618753 /* IssueTrackerNetwork.swift in Sources */,
 				AB6CA8BD2497731600FE8AE4 /* DetailFormStackView.swift in Sources */,
+				AE6FA16824FF9B5400B5855E /* FormControllable.swift in Sources */,
 				AEE597382498952300F5C622 /* ColorView.swift in Sources */,
 				AE5F012A24AE02DF00D6C82E /* ProgressRateCalculator.swift in Sources */,
 				AE97099324C016F3001434EF /* EndDateView.swift in Sources */,
