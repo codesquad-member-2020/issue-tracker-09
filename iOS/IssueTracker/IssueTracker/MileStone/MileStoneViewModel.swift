@@ -34,17 +34,7 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
         }
     }
     
-    // MARK: - Methods
-    func applySnapshot(_ animatingDifferences: Bool = true) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DeficientMileStone>()
-        snapshot
-            .appendSections([.main])
-        snapshot
-            .appendItems(items)
-        apply(snapshot,
-              animatingDifferences: animatingDifferences)
-    }
-    
+    // MARK: - Methods    
     // MARK: TableView
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

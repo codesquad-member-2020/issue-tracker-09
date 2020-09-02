@@ -51,7 +51,7 @@ final class MileStoneTableViewController: UITableViewController, Categorable, Co
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 self?.viewModel
-                    .applySnapshot()
+                    .applySnapshot(self?.viewModel)
         }
         .store(in: &cancellables)
     }

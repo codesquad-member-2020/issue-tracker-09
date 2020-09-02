@@ -56,7 +56,7 @@ final class LabelTableViewController: UITableViewController, Categorable, Contro
             .receive(on: RunLoop.main)
             .sink { [weak self] lables in
                 self?.viewModel
-                    .applySnapshot()
+                    .applySnapshot(self?.viewModel)
         }
         .store(in: &cancellables)
     }
