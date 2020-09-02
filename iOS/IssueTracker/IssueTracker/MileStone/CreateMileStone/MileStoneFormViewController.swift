@@ -9,12 +9,12 @@
 import UIKit
 import Combine
 
-final class MileStoneFormViewController: CategoryFormViewController {
+final class MileStoneFormViewController: CategoryFormViewController, FormControllable {
     
     // MARK: - Properties
     private var endDateView: EndDateView!
-    private var subscriptions: Set<AnyCancellable> = .init()
-    private var selectMileStone: DeficientMileStone?
+    var cancellables: Set<AnyCancellable> = .init()
+    var selectItem: DeficientMileStone?
     
     // MARK: - Lifecycle
     override init(_ style: FormStyle) {
@@ -37,66 +37,10 @@ final class MileStoneFormViewController: CategoryFormViewController {
         }
     }
     
-    private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
-        switch method {
-        case .post:
-            return .mileStone()
-        default:
-            return .mileStone(String(identity ?? 0))
-        }
-    }
-    
-    private func request(_ mileStone: DeficientMileStone, method: HTTPMethod) {
-        UseCase.shared
-            .fetch(data: mileStone,
-                  endpoint: Endpoint(path: generatePath(method: method, identity: mileStone.id)),
-                  method: method)
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { [weak self] in
-                guard case let .failure(error) = $0 else { return }
-                let alertController = UIAlertController(message: error.message)
-                self?.present(alertController,
-                              animated: true)
-            }) { [weak self] _, response in
-                guard let statusCode = response?.statusCode else { return }
-                self?.checkStatusCode(statusCode,
-                                      method: method,
-                                      mileStone: mileStone)
-        }
-        .store(in: &subscriptions)
-    }
-    
-    private func checkHTTPMethod(viewController: MileStoneTableViewController, method: HTTPMethod, updateMileStone: DeficientMileStone) {
-        switch method {
-        case .post:
-            viewController.fetchMileStones()
-        default:
-            for (index, mileStone) in viewController.viewModel.mileStones.enumerated() {
-                _ = updateMileStone.id == mileStone.id ? viewController.viewModel.mileStones.remove(at: index) : nil
-                updateMileStone.id == mileStone.id ? viewController.viewModel.mileStones.insert(updateMileStone, at: index) : nil
-            }
-        }
-    }
-    
-    private func checkStatusCode(_ statusCode: Int, method: HTTPMethod, mileStone: DeficientMileStone) {
-        switch statusCode {
-        case 200 ..< 300:
-            guard let superViewController = self.presentingViewController as? UITabBarController else { return }
-            guard let labelViewController = superViewController.selectedViewController as? MileStoneTableViewController else { return }
-            checkHTTPMethod(viewController: labelViewController,
-                            method: method,
-                            updateMileStone: mileStone)
-        default:
-            let alert = UIAlertController(message: "Network Error")
-                self.present(alert,
-                             animated: true)
-        }
-    }
-    
     private func addTargetButton(_ style: FormStyle?) {
         switch style {
         case let .editMileStone(mileStone):
-            selectMileStone = mileStone
+            selectItem = mileStone
             contentView.saveButton
                 .addTarget(self,
                            action: #selector(editMileStoneContent),
@@ -150,8 +94,10 @@ final class MileStoneFormViewController: CategoryFormViewController {
                                            dueOn: dueOn,
                                            numberOfOpenIssue: 0,
                                            numberOfClosedIssue: 0)
-        request(mileStone,
-                method: .post)
+        guard let controllable = presentingViewController?.presentingViewController as? MileStoneTableViewController else { return }
+        request(controllable: controllable,
+                item: mileStone,
+                method: .get)
         dismiss(animated: true)
     }
     
@@ -159,14 +105,16 @@ final class MileStoneFormViewController: CategoryFormViewController {
         guard let dueOn = endDateView.dueOn,
             let title = contentView.dataSubjects.title else { return }
         
-        let mileStone = DeficientMileStone(id: selectMileStone?.id,
+        let mileStone = DeficientMileStone(id: selectItem?.id,
                                            title: title,
                                            contents: contentView.dataSubjects.subtitle,
                                            dueOn: dueOn,
-                                           numberOfOpenIssue: selectMileStone?.numberOfOpenIssue ?? 0,
-                                           numberOfClosedIssue: selectMileStone?.numberOfClosedIssue ?? 0)
-        request(mileStone,
-                method: .put)
+                                           numberOfOpenIssue: selectItem?.numberOfOpenIssue ?? 0,
+                                           numberOfClosedIssue: selectItem?.numberOfClosedIssue ?? 0)
+        guard let controllable = presentingViewController?.presentingViewController as? MileStoneTableViewController else { return }
+        request(controllable: controllable,
+                item: mileStone,
+                method: .post)
         dismiss(animated: true)
     }
     
@@ -174,6 +122,6 @@ final class MileStoneFormViewController: CategoryFormViewController {
         contentView
             .resetContentView()
         endDateView
-        .resetEndDateView()
+            .resetEndDateView()
     }
 }
