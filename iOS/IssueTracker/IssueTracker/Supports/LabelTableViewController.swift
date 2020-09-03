@@ -16,7 +16,7 @@ enum Section {
 final class LabelTableViewController: UITableViewController, Categorable, Controllable {
     
     // MARK: - Properties
-    lazy var viewModel: LabelViewModel = .init(self.tableView)
+    lazy var viewModel: LabelViewModel = .init(tableView)
     var headerViewTitle: String = "Label"
     var cancellables: Set<AnyCancellable> = .init()
     
@@ -40,7 +40,10 @@ final class LabelTableViewController: UITableViewController, Categorable, Contro
             .addTarget(self,
                        action: #selector(presentCreateLabelViewController),
                        for: .touchUpInside)
-        headerView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: TitleHeaderView.height)
+        
+        headerView?.frame = CGRect(origin: .zero,
+                                   size: .init(width: view.frame.width, height: TitleHeaderView.height))
+        
         return headerView
     }
     

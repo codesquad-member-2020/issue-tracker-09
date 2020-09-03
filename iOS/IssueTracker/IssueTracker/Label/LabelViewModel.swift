@@ -51,7 +51,8 @@ final class LabelViewModel: UITableViewDiffableDataSource<Section, Label>, Model
                         case 400 ..< 500:
                             break
                         default:
-                            self?.items.remove(at: indexPath.row)
+                            self?.items
+                                .remove(at: indexPath.row)
                         }
         }
     }

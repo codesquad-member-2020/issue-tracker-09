@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 protocol Modelable {
-    associatedtype Item: Hashable, Codable, Identifierable
+    associatedtype Item: Codable, Identifierable
     var items: [Item] { get set }
     var cancellable: AnyCancellable? { get set }
 }
