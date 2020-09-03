@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 protocol FormControllable: NSObject {
-    associatedtype Item: Hashable, Codable, Identifierable
+    associatedtype Item: Codable, Identifierable
     var cancellables: Set<AnyCancellable> { get set }
     var selectItem: Item? { get set }
 }
@@ -40,13 +40,13 @@ extension FormControllable where Self: UIViewController {
     private func generatePath(method: HTTPMethod, identity: Int?) -> Endpoint.Path {
         switch method {
         case .post:
-            guard let _ = selectItem as? Label else {
+            guard selectItem is Label else {
                 return .mileStone()
             }
             
             return .labels()
         default:
-            guard let _ = selectItem as? Label else {
+            guard selectItem is Label else {
                 return .mileStone(String(identity ?? 0))
             }
             
@@ -57,18 +57,22 @@ extension FormControllable where Self: UIViewController {
     private func checkHTTPMethod<C>(controllable: C, method: HTTPMethod, updateItem: Item) where C: Controllable, C: UIViewController, Item == C.ViewModel.Item {
         switch method {
         case .post:
-            guard let _ = selectItem as? Label else {
+            guard selectItem is Label else {
                 controllable
                     .fetch(endpoint: Endpoint(path: .mileStone()))
                 
                 return
             }
+            
             controllable
                 .fetch(endpoint: Endpoint(path: .labels()))
         default:
             for (index, item) in controllable.viewModel.items.enumerated() {
-                _ = updateItem.id == item.id ? controllable.viewModel.items.remove(at: index) : nil
-                updateItem.id == item.id ? controllable.viewModel.items.insert(updateItem, at: index) : nil
+                guard updateItem.id == item.id else { return }
+                controllable.viewModel.items
+                    .remove(at: index)
+                controllable.viewModel.items
+                    .insert(updateItem, at: index)
             }
         }
     }
