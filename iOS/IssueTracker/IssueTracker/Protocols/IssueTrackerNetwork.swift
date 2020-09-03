@@ -34,6 +34,5 @@ enum IssueTrackerNetworkError: Error {
 
 protocol IssueTrackerNetwork {
     var session: URLSession { get }
-    
     func request(request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), IssueTrackerNetworkError>
 }

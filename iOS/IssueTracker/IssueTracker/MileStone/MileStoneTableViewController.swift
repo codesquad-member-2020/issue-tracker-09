@@ -12,8 +12,7 @@ import Combine
 final class MileStoneTableViewController: UITableViewController, Categorable, Controllable {
     
     // MARK: - Properties
-    lazy var viewModel: MileStoneViewModel =
-        .init(self.tableView)
+    lazy var viewModel: MileStoneViewModel = .init(tableView)
     var headerViewTitle: String = "MileStone"
     var cancellables: Set<AnyCancellable> = .init()
     
@@ -31,10 +30,12 @@ final class MileStoneTableViewController: UITableViewController, Categorable, Co
     // MARK: Delegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeaderView.identifier) as? TitleHeaderView
-        headerView?.apply(title: headerViewTitle)
-        headerView?.addButton.addTarget(self,
-                                        action: #selector(presentCreateMileStoneViewController),
-                                        for: .touchUpInside)
+        headerView?
+            .apply(title: headerViewTitle)
+        headerView?.addButton
+            .addTarget(self,
+                       action: #selector(presentCreateMileStoneViewController),
+                       for: .touchUpInside)
         
         return headerView
     }
