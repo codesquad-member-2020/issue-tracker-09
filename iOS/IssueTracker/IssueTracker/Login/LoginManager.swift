@@ -48,8 +48,8 @@ class LoginManager: NSObject {
     }
     
     func requestGithubLoginToken() {
-        guard let authURL = Endpoint.githubLogin else { return }
-        let scheme = "issuenine"
+        guard let authURL = Endpoint(path: .githubLogin).url else { return }
+        let scheme = "issue"
         subscription = ASWebAuthenticationSession.publisher(self,
                                                             url: authURL,
                                                             scheme: scheme)
