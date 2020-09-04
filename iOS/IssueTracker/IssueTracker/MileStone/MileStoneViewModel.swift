@@ -24,8 +24,8 @@ final class MileStoneViewModel: UITableViewDiffableDataSource<Section, Deficient
                 .dequeueReusableCell(withIdentifier: MileStoneTableViewCell.identifier,
                                      for: indexPath) as? MileStoneTableViewCell
             let progressRate = ProgressRateCalculator.shared
-                .apply(open: mileStone.numberOfOpenIssue,
-                       closed: mileStone.numberOfClosedIssue)
+                .apply(open: mileStone.openIssueCount,
+                       closed: mileStone.closedIssueCount)
             cell?
                 .apply(MileStone(milestone: mileStone,
                                  progressRate: progressRate))

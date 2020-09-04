@@ -47,9 +47,10 @@ class CategoryFormViewController: UIViewController {
                       subtitle: nil)
         case let .editLabel(label):
             configure(title: label.title,
+                      subtitle: label.description)
         case let .editMileStone(mileStone):
             configure(title: mileStone.title,
-                      subtitle: mileStone.contents)
+                      subtitle: mileStone.description)
         }
     }
     

@@ -42,7 +42,7 @@ final class EndDateView: UIView {
     // MARK: Configure
     private func configure(_ mileStone: MileStoneInforamationable?) {
         configureTitleLabel()
-        configureTextField(mileStone?.dueOn)
+        configureTextField(mileStone?.dueDate)
         configureSepartorLine()
     }
     

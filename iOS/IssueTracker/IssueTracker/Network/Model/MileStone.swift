@@ -10,23 +10,26 @@ import Foundation
 
 protocol MileStoneInforamationable {
     var title: String { get }
-    var contents: String? { get }
-    var dueOn: String? { get }
+    var description: String? { get }
+    var dueDate: String? { get }
 }
 
 protocol MileStoneProgressable {
-    var numberOfOpenIssue: Int { get }
-    var numberOfClosedIssue: Int { get }
+    var openIssueCount: Int { get }
+    var closedIssueCount: Int { get }
     var progressRate: Int { get }
 }
 
 struct DeficientMileStone: Codable, MileStoneInforamationable, Identifierable {
     var id: Int?
     let title: String
-    let contents: String?
-    let dueOn: String?
-    let numberOfOpenIssue: Int
-    let numberOfClosedIssue: Int
+    let description: String?
+    let dueDate: String?
+    let lastUpdatedDate: String
+    let openIssueCount: Int
+    let closedIssueCount: Int
+    let completeRatio: Double
+    let opened: Bool
     
     func hash(into hasher: inout Hasher) {
         hasher
@@ -34,32 +37,32 @@ struct DeficientMileStone: Codable, MileStoneInforamationable, Identifierable {
         hasher
             .combine(title)
         hasher
-            .combine(contents)
+            .combine(description)
         hasher
-            .combine(dueOn)
+            .combine(dueDate)
         hasher
-            .combine(numberOfOpenIssue)
+            .combine(openIssueCount)
         hasher
-            .combine(numberOfClosedIssue)
+            .combine(closedIssueCount)
     }
 }
 
 struct MileStone: MileStoneInforamationable, MileStoneProgressable {
     let id: Int?
     let title: String
-    let contents: String?
-    let dueOn: String?
-    let numberOfOpenIssue: Int
-    let numberOfClosedIssue: Int
+    let description: String?
+    let dueDate: String?
+    let openIssueCount: Int
+    let closedIssueCount: Int
     let progressRate: Int
     
     init(milestone: DeficientMileStone, progressRate: Int) {
         id = milestone.id
         title = milestone.title
-        contents = milestone.contents
-        dueOn = milestone.dueOn
-        numberOfOpenIssue = milestone.numberOfOpenIssue
-        numberOfClosedIssue = milestone.numberOfClosedIssue
+        description = milestone.description
+        dueDate = milestone.dueDate
+        openIssueCount = milestone.openIssueCount
+        closedIssueCount = milestone.closedIssueCount
         self.progressRate = progressRate
     }
 }
