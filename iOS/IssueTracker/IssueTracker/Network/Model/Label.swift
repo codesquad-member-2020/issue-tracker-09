@@ -11,8 +11,9 @@ import Foundation
 struct Label: Codable, Identifierable {
     var id: Int?
     let title: String
-    let contents: String?
-    let colorCode: String?
+    let description: String?
+    let color: String?
+    let openedIssueCount: Int
     
     func hash(into hasher: inout Hasher) {
         hasher
@@ -20,8 +21,8 @@ struct Label: Codable, Identifierable {
         hasher
             .combine(title)
         hasher
-            .combine(contents)
+            .combine(description)
         hasher
-            .combine(colorCode)
+            .combine(color)
     }
 }

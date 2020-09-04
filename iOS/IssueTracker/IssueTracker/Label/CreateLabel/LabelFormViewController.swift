@@ -31,7 +31,7 @@ final class LabelFormViewController: CategoryFormViewController, FormControllabl
     private func generateColor(style: FormStyle) -> UIColor? {
         switch style {
         case let .editLabel(label):
-            guard let colorCode = label.colorCode else { return UIColor.random }
+            guard let colorCode = label.color else { return UIColor.random }
             return UIColor(hex: colorCode)
         default:
             return UIColor.random
@@ -90,8 +90,9 @@ final class LabelFormViewController: CategoryFormViewController, FormControllabl
             let title = contentView.dataSubjects.title else { return }
         let label = Label(id: nil,
                           title: title,
-                          contents: contentView.dataSubjects.subtitle,
-                          colorCode: hexColor)
+                          description: contentView.dataSubjects.subtitle,
+                          color: hexColor,
+                          openedIssueCount: .zero)
         guard let controllable = presentingViewController?.presentingViewController as? LabelTableViewController else { return }
         request(controllable: controllable,
                 item: label,
@@ -104,8 +105,9 @@ final class LabelFormViewController: CategoryFormViewController, FormControllabl
             let title = contentView.dataSubjects.title else { return }
         let label = Label(id: selectItem?.id,
                           title: title,
-                          contents: contentView.dataSubjects.subtitle,
-                          colorCode: hexColor)
+                          description: contentView.dataSubjects.subtitle,
+                          color: hexColor,
+                          openedIssueCount: .zero)
         guard let viewController = presentingViewController?.presentingViewController as? LabelTableViewController else { return }
         request(controllable: viewController,
                 item: label,
