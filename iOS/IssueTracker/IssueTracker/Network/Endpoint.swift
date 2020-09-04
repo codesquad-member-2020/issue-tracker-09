@@ -9,16 +9,19 @@
 import Foundation
 
 struct Endpoint: RequestProviding {
-
+    
     enum Path: CustomStringConvertible {
+        case githubLogin
         case appleLogin
         case labels(String? = nil)
         case mileStone(String? = nil)
         
         var description: String {
             switch self {
-                case .appleLogin:
-                    return "/api/applelogin"
+            case .githubLogin:
+                return "/api/login"
+            case .appleLogin:
+                return "/api/applelogin"
             case let .labels(identifier):
                 guard let identifier = identifier else { return "/api/labels" }
                 return "/api/labels/\(identifier)"
@@ -35,11 +38,10 @@ struct Endpoint: RequestProviding {
         components.host = baseUrl
         components.scheme = scheme
         components.path = path.description
-
+        
         return components.url
     }
-    static let githubLogin: URL? = URL(string: "https://github.com/login/oauth/authorize?client_id=1aad2658e941ef024da5&scope=user%20public_repo")
-    var baseUrl: String = "3.34.100.178"
+    var baseUrl: String = "13.124.148.192"
     var scheme: String = "http"
     var path: Path
 }

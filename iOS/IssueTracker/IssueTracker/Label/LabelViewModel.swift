@@ -24,8 +24,8 @@ final class LabelViewModel: UITableViewDiffableDataSource<Section, Label>, Model
                                      for: indexPath) as? LabelTableViewCell
             cell?
                 .apply(title: label.title,
-                       description: label.contents,
-                       backgroundColor: UIColor(hex: label.colorCode) ?? UIColor.white)
+                       description: label.description,
+                       backgroundColor: UIColor(hex: label.color) ?? UIColor.white)
             
             return cell
         }

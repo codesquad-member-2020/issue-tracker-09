@@ -90,10 +90,13 @@ final class MileStoneFormViewController: CategoryFormViewController, FormControl
             let title = contentView.dataSubjects.title else { return }
         let mileStone = DeficientMileStone(id: nil,
                                            title: title,
-                                           contents: contentView.dataSubjects.subtitle,
-                                           dueOn: dueOn,
-                                           numberOfOpenIssue: 0,
-                                           numberOfClosedIssue: 0)
+                                           description: contentView.dataSubjects.subtitle,
+                                           dueDate: dueOn,
+                                           lastUpdatedDate: "",
+                                           openIssueCount: .zero,
+                                           closedIssueCount: .zero,
+                                           completeRatio: .zero,
+                                           opened: true)
         guard let controllable = presentingViewController?.presentingViewController as? MileStoneTableViewController else { return }
         request(controllable: controllable,
                 item: mileStone,
@@ -103,14 +106,18 @@ final class MileStoneFormViewController: CategoryFormViewController, FormControl
     
     @objc private func editMileStoneContent() {
         guard let dueOn = endDateView.dueOn,
-            let title = contentView.dataSubjects.title else { return }
-        
-        let mileStone = DeficientMileStone(id: selectItem?.id,
+            let title = contentView.dataSubjects.title,
+            let item = selectItem else { return }
+        let totalIssue = Double(item.openIssueCount + item.closedIssueCount)
+        let mileStone = DeficientMileStone(id: item.id,
                                            title: title,
-                                           contents: contentView.dataSubjects.subtitle,
-                                           dueOn: dueOn,
-                                           numberOfOpenIssue: selectItem?.numberOfOpenIssue ?? 0,
-                                           numberOfClosedIssue: selectItem?.numberOfClosedIssue ?? 0)
+                                           description: contentView.dataSubjects.subtitle,
+                                           dueDate: dueOn,
+                                           lastUpdatedDate: "",
+                                           openIssueCount: item.openIssueCount,
+                                           closedIssueCount: item.closedIssueCount,
+                                           completeRatio: Double(item.openIssueCount) / totalIssue,
+                                           opened: true)
         guard let controllable = presentingViewController?.presentingViewController as? MileStoneTableViewController else { return }
         request(controllable: controllable,
                 item: mileStone,

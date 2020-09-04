@@ -31,8 +31,8 @@ final class MileStoneInformationView: UIView {
     // MARK: - Methods
     func apply(_ information: MileStoneInforamationable) {
         badgeLabel.text = information.title
-        descriptionLabel.text = information.contents
-        deadLineLabel.text = information.dueOn
+        descriptionLabel.text = information.description
+        deadLineLabel.text = information.dueDate
     }
     
     // MARK: Configure

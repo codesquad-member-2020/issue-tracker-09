@@ -31,8 +31,8 @@ final class MileStoneProgressView: UIView {
     // MARK: - Method
     func apply(_ progress: MileStoneProgressable) {
         progressLabel.text = String(progress.progressRate) + "%"
-        openIssueLabel.text = String(progress.numberOfOpenIssue) + "open"
-        closedIssueLabel.text = String(progress.numberOfClosedIssue) + "closed"
+        openIssueLabel.text = String(progress.openIssueCount) + "open"
+        closedIssueLabel.text = String(progress.closedIssueCount) + "closed"
     }
     
     // MARK: Configure
